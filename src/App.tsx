@@ -168,6 +168,21 @@ export function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const scrollToSection = (id: string) => {
+    setThreeDotsMenuOpen(false);
+    setActiveTab(id);
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 70;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const triggerConfetti = () => {
     confetti({
       particleCount: 100,
@@ -368,46 +383,31 @@ export function App() {
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 <button 
-                  onClick={() => {
-                    setThreeDotsMenuOpen(false);
-                    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-                  }} 
+                  onClick={() => scrollToSection('services')} 
                   style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
                 >
                   🛠️ All 12 Core Services
                 </button>
                 <button 
-                  onClick={() => {
-                    setThreeDotsMenuOpen(false);
-                    document.getElementById('trending')?.scrollIntoView({ behavior: 'smooth' });
-                  }} 
+                  onClick={() => scrollToSection('trending')} 
                   style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
                 >
                   🔥 Trending Upgrades
                 </button>
                 <button 
-                  onClick={() => {
-                    setThreeDotsMenuOpen(false);
-                    document.getElementById('packages')?.scrollIntoView({ behavior: 'smooth' });
-                  }} 
+                  onClick={() => scrollToSection('packages')} 
                   style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
                 >
                   📦 3D Plumbing Packages
                 </button>
                 <button 
-                  onClick={() => {
-                    setThreeDotsMenuOpen(false);
-                    document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' });
-                  }} 
+                  onClick={() => scrollToSection('why-us')} 
                   style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
                 >
                   🛡️ Why Choose Us
                 </button>
                 <button 
-                  onClick={() => {
-                    setThreeDotsMenuOpen(false);
-                    document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' });
-                  }} 
+                  onClick={() => scrollToSection('reviews')} 
                   style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
                 >
                   ⭐ Customer Reviews
@@ -1001,8 +1001,8 @@ export function App() {
         </button>
 
         <button 
-          onClick={() => { setActiveTab('Services'); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}
-          style={{ background: 'none', border: 'none', color: activeTab === 'Services' ? '#6E42E5' : '#757575', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
+          onClick={() => scrollToSection('services')}
+          style={{ background: 'none', border: 'none', color: activeTab === 'services' ? '#6E42E5' : '#757575', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
         >
           <Wrench size={18} />
           <span style={{ fontSize: '0.62rem', marginTop: 2, fontWeight: 700 }}>Services</span>
