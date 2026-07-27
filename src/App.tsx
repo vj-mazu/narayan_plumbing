@@ -175,15 +175,20 @@ export function App() {
     <div style={{ minHeight: '100vh', backgroundColor: '#F5F5F7', color: '#101010', position: 'relative', fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif' }}>
       
       {/* --- URBAN COMPANY APP STYLE SPLASH LOADING SCREEN --- */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {loading && (
           <motion.div
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.5 } }}
+            exit={{ opacity: 0, transition: { duration: 0.4 } }}
             style={{
               position: 'fixed',
-              inset: 0,
-              zIndex: 99999,
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100vw',
+              height: '100vh',
+              zIndex: 999999,
               backgroundColor: '#FFFFFF',
               display: 'flex',
               flexDirection: 'column',
@@ -194,35 +199,35 @@ export function App() {
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.4 }}
               style={{ textAlign: 'center' }}
             >
               <div 
                 style={{
-                  width: 84,
-                  height: 84,
-                  borderRadius: 24,
-                  backgroundColor: '#000000',
+                  width: 76,
+                  height: 76,
+                  borderRadius: 22,
+                  backgroundColor: '#101010',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  margin: '0 auto 20px auto',
-                  boxShadow: '0 12px 30px rgba(0,0,0,0.15)'
+                  margin: '0 auto 16px auto',
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.12)'
                 }}
               >
-                <Wrench size={42} color="#FFFFFF" />
+                <Wrench size={38} color="#FFFFFF" />
               </div>
               
-              <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#101010', letterSpacing: '-0.5px', margin: 0 }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#101010', letterSpacing: '-0.5px', margin: 0 }}>
                 NARAYAN <span style={{ color: '#6E42E5' }}>PLUMBING</span>
               </h2>
-              <p style={{ fontSize: '0.85rem', color: '#757575', marginTop: 4, fontWeight: 500 }}>
+              <p style={{ fontSize: '0.82rem', color: '#757575', marginTop: 4, fontWeight: 500 }}>
                 Expert Plumbing Services at Home
               </p>
             </motion.div>
 
             {/* Urban Company purple loading line */}
-            <div style={{ width: 220, height: 4, borderRadius: 2, backgroundColor: '#E0E0E0', marginTop: 36, overflow: 'hidden', position: 'relative' }}>
+            <div style={{ width: 200, height: 4, borderRadius: 2, backgroundColor: '#E0E0E0', marginTop: 32, overflow: 'hidden', position: 'relative' }}>
               <motion.div
                 initial={{ x: '-100%' }}
                 animate={{ x: '100%' }}
