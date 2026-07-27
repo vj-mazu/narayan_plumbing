@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Phone, Calendar, ShieldCheck, Clock, Award, Star, CheckCircle, Wrench, 
   Droplet, Sparkles, MapPin, ChevronRight, X, User, AlertTriangle, 
-  Flame, Home, Grid, Tag, Image as ImageIcon, MessageSquare, ArrowUpRight, Search, ThumbsUp, Menu
+  Flame, Home, Grid, Tag, Image as ImageIcon, MessageSquare, ArrowUpRight, Search, ThumbsUp, Menu,
+  Percent, ChevronDown, Check, Zap, Shield, ArrowRight, ShoppingBag
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -11,34 +12,29 @@ import confetti from 'canvas-confetti';
 const PHONE_NUMBER = "9606157745";
 const PHONE_DISPLAY = "+91 96061 57745";
 
-const TOP_ANNOUNCEMENTS = [
-  { icon: Clock, text: "30 Min Doorstep Service" },
-  { icon: ShieldCheck, text: "Verified & Experienced Plumbers" },
-  { icon: Award, text: "Upfront Pricing" },
-  { icon: ShieldCheck, text: "No Hidden Charges" }
+// Urban Company Style Category Grid (6 Quick Action Apps)
+const UC_CATEGORIES = [
+  { id: "tap", name: "Tap Repair", icon: "🚰", price: "₹149", rating: "4.8 (12k)" },
+  { id: "toilet", name: "WC & Toilet", icon: "🚽", price: "₹349", rating: "4.9 (18k)" },
+  { id: "pipe", name: "Leakage Repair", icon: "🔧", price: "₹199", rating: "4.8 (22k)" },
+  { id: "drain", name: "Drain Unblock", icon: "🌪️", price: "₹399", rating: "4.7 (15k)" },
+  { id: "geyser", name: "Geyser Service", icon: "♨️", price: "₹349", rating: "4.9 (14k)" },
+  { id: "tank", name: "Tank Cleaning", icon: "🛢️", price: "₹699", rating: "4.8 (9k)" }
 ];
 
-const TRUST_BADGES = [
-  { label: "30 Minutes", sub: "Doorstep Service", icon: "⏱️" },
-  { label: "Verified & Trained", sub: "Plumbers", icon: "🛡️" },
-  { label: "Upfront", sub: "Pricing", icon: "₹" },
-  { label: "100%", sub: "Satisfaction Guaranteed", icon: "👍" }
-];
-
-// 12 Exact Core Services matching Poster with blue 3D icons & descriptions
 const CORE_SERVICES = [
-  { id: "tap", name: "Tap Installation & Repair", icon: "🚰", desc: "Leaking taps, mixer replacement, cartridge repair & fitting.", price: "₹149" },
-  { id: "shower", name: "Shower Installation & Repair", icon: "🚿", desc: "Wall mixer, rain showerhead, pressure boosting & repair.", price: "₹249" },
-  { id: "toilet", name: "Toilet (WC) Installation & Repair", icon: "🚽", desc: "Flush tank leak repair, western/commode installation & gasket.", price: "₹349" },
-  { id: "basin", name: "Wash Basin Installation & Repair", icon: "🧼", desc: "Pedestal basin, counter basin & bottle trap replacement.", price: "₹299" },
-  { id: "kitchen", name: "Kitchen Sink Installation & Repair", icon: "🥣", desc: "Sink clogged drain, waste pipe replacement & coupling.", price: "₹249" },
-  { id: "pipe-leak", name: "Pipe Leak Repair", icon: "🔧", desc: "Concealed wall leaks, joint sealing & copper/CPVC patching.", price: "₹199" },
-  { id: "pipe-inst", name: "Pipe Installation & Replacement", icon: "🔩", desc: "New water pipeline layout, CPVC/UPVC fitting & line extension.", price: "₹499" },
-  { id: "drain", name: "Drain Blockage Cleaning", icon: "🌪️", desc: "High-pressure drain jetting, floor trap unblocking & snake line.", price: "₹399" },
-  { id: "tank", name: "Water Tank Installation", icon: "🛢️", desc: "Overhead tank fitting, auto-cut valve, float valve & clean tank.", price: "₹699" },
-  { id: "geyser", name: "Geyser Installation & Repair", icon: "♨️", desc: "Thermostat repair, heating element, inlet connection & mounting.", price: "₹349" },
-  { id: "bath-plumb", name: "Bathroom Plumbing Services", icon: "🛀", desc: "Complete sanitaryware overhaul, diverters & fittings.", price: "₹599" },
-  { id: "emergency", name: "Emergency Plumbing Service", icon: "🚨", desc: "24/7 Priority burst pipe, main valve leak & midnight emergency.", price: "₹499" }
+  { id: "tap", name: "Tap Installation & Repair", icon: "🚰", desc: "Leaking taps, mixer replacement, cartridge repair & fitting.", price: "₹149", rating: "4.8 ★" },
+  { id: "shower", name: "Shower Installation & Repair", icon: "🚿", desc: "Wall mixer, rain showerhead, pressure boosting & repair.", price: "₹249", rating: "4.9 ★" },
+  { id: "toilet", name: "Toilet (WC) Installation & Repair", icon: "🚽", desc: "Flush tank leak repair, western/commode installation & gasket.", price: "₹349", rating: "4.8 ★" },
+  { id: "basin", name: "Wash Basin Installation & Repair", icon: "🧼", desc: "Pedestal basin, counter basin & bottle trap replacement.", price: "₹299", rating: "4.7 ★" },
+  { id: "kitchen", name: "Kitchen Sink Installation & Repair", icon: "🥣", desc: "Sink clogged drain, waste pipe replacement & coupling.", price: "₹249", rating: "4.9 ★" },
+  { id: "pipe-leak", name: "Pipe Leak Repair", icon: "🔧", desc: "Concealed wall leaks, joint sealing & copper/CPVC patching.", price: "₹199", rating: "4.9 ★" },
+  { id: "pipe-inst", name: "Pipe Installation & Replacement", icon: "🔩", desc: "New water pipeline layout, CPVC/UPVC fitting & line extension.", price: "₹499", rating: "4.8 ★" },
+  { id: "drain", name: "Drain Blockage Cleaning", icon: "🌪️", desc: "High-pressure drain jetting, floor trap unblocking & snake line.", price: "₹399", rating: "4.8 ★" },
+  { id: "tank", name: "Water Tank Installation & Clean", icon: "🛢️", desc: "Overhead tank fitting, auto-cut valve, float valve & clean tank.", price: "₹699", rating: "4.9 ★" },
+  { id: "geyser", name: "Geyser Installation & Repair", icon: "♨️", desc: "Thermostat repair, heating element, inlet connection & mounting.", price: "₹349", rating: "4.9 ★" },
+  { id: "bath-plumb", name: "Bathroom Plumbing Services", icon: "🛀", desc: "Complete sanitaryware overhaul, diverters & fittings.", price: "₹599", rating: "4.8 ★" },
+  { id: "emergency", name: "Emergency Plumbing Service", icon: "🚨", desc: "24/7 Priority burst pipe, main valve leak & midnight emergency.", price: "₹499", rating: "5.0 ★" }
 ];
 
 const TRENDING_SERVICES = [
@@ -95,7 +91,7 @@ const PACKAGES = [
 ];
 
 const WHY_CHOOSE = [
-  { title: "30 Minutes Doorstep Service", desc: "GPS tracked local plumbers stationed nearby for rapid response.", icon: "🛵" },
+  { title: "30 Minutes Doorstep Service", desc: "GPS tracked local plumbers stationed nearby for rapid response.", icon: "⚡" },
   { title: "Verified & Trained Experts", desc: "Background checked professionals with 5+ years hand-on experience.", icon: "🛡️" },
   { title: "Transparent Upfront Pricing", desc: "Rate card approval before starting work. Zero hidden surprise fees.", icon: "🏷️" },
   { title: "Genuine Parts & Quality Work", desc: "Original ISI-certified fittings from top brands (Jaquar, Astral, Supreme).", icon: "🧰" },
@@ -124,6 +120,7 @@ export function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [cartCount, setCartCount] = useState(0);
 
   // Booking Form State
   const [formData, setFormData] = useState({
@@ -138,7 +135,7 @@ export function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2200);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -155,6 +152,7 @@ export function App() {
       setSelectedService(serviceName);
       setFormData(prev => ({ ...prev, service: serviceName }));
     }
+    setCartCount(prev => prev + 1);
     setBookingModalOpen(true);
   };
 
@@ -173,555 +171,398 @@ export function App() {
     s.desc.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const firstWord = "NARAYAN".split("");
-  const secondWord = "PLUMBING".split("");
-
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#071329', color: '#FFFFFF', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#F5F5F7', color: '#101010', position: 'relative', fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif' }}>
       
-      {/* --- LETTER BY LETTER PRELOADER ANIMATION --- */}
+      {/* --- URBAN COMPANY APP STYLE SPLASH LOADING SCREEN --- */}
       <AnimatePresence>
         {loading && (
           <motion.div
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.05, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }}
+            exit={{ opacity: 0, transition: { duration: 0.5 } }}
             style={{
               position: 'fixed',
               inset: 0,
               zIndex: 99999,
-              backgroundColor: '#071329',
+              backgroundColor: '#FFFFFF',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
-              color: '#FFFFFF'
+              justifyContent: 'center'
             }}
           >
-            <div style={{ textAlign: 'center', position: 'relative', padding: '0 20px' }}>
-              
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: 140 }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                style={{ height: 2, backgroundColor: '#FF5A1F', margin: '0 auto 20px auto' }}
-              />
-
-              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(2.5rem, 7vw, 4.5rem)', fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.25em', display: 'flex', justifyContent: 'center' }}>
-                {firstWord.map((char, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 50, rotateX: 90 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </div>
-
-              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(2rem, 6vw, 3.8rem)', fontWeight: 900, color: '#FF5A1F', letterSpacing: '0.3em', display: 'flex', justifyContent: 'center', marginTop: 4 }}>
-                {secondWord.map((char, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 50, rotateX: 90 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 + index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.1 }}
-                style={{ fontSize: 'clamp(0.9rem, 2vw, 1.2rem)', color: '#00D4FF', letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 16, fontWeight: 700 }}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              style={{ textAlign: 'center' }}
+            >
+              <div 
+                style={{
+                  width: 84,
+                  height: 84,
+                  borderRadius: 24,
+                  backgroundColor: '#000000',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto 20px auto',
+                  boxShadow: '0 12px 30px rgba(0,0,0,0.15)'
+                }}
               >
-                EXPERT PLUMBERS • ON TIME. EVERY TIME.
-              </motion.p>
+                <Wrench size={42} color="#FFFFFF" />
+              </div>
+              
+              <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#101010', letterSpacing: '-0.5px', margin: 0 }}>
+                NARAYAN <span style={{ color: '#6E42E5' }}>PLUMBING</span>
+              </h2>
+              <p style={{ fontSize: '0.85rem', color: '#757575', marginTop: 4, fontWeight: 500 }}>
+                Expert Plumbing Services at Home
+              </p>
+            </motion.div>
 
+            {/* Urban Company purple loading line */}
+            <div style={{ width: 220, height: 4, borderRadius: 2, backgroundColor: '#E0E0E0', marginTop: 36, overflow: 'hidden', position: 'relative' }}>
               <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: 90 }}
-                transition={{ duration: 1, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
-                style={{ height: 2, backgroundColor: '#00D4FF', margin: '20px auto 0 auto' }}
+                initial={{ x: '-100%' }}
+                animate={{ x: '100%' }}
+                transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
+                style={{ width: '50%', height: '100%', backgroundColor: '#6E42E5', borderRadius: 2 }}
               />
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* --- TOP TICKER ANNOUNCEMENT BAR --- */}
-      <div style={{ backgroundColor: '#050D1D', color: '#FFFFFF', padding: '8px 0', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ display: 'flex', gap: 24, alignItems: 'center', width: '100%', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-            {TOP_ANNOUNCEMENTS.map((item, idx) => {
-              const IconComp = item.icon;
-              return (
-                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.78rem', fontWeight: 600, color: '#E2E8F0' }}>
-                  <IconComp size={14} color="#FF5A1F" />
-                  <span>{item.text}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* --- HEADER NAVBAR MATCHING POSTER --- */}
-      <header className="glass-header" style={{ position: 'sticky', top: 0, zIndex: 100, padding: '12px 24px', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      {/* --- URBAN COMPANY NATIVE APP TOP HEADER (LOCATION & SEARCH) --- */}
+      <header 
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000,
+          backgroundColor: '#FFFFFF',
+          borderBottom: '1px solid #E0E0E0',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.04)'
+        }}
+      >
+        {/* Location & Profile Top Bar */}
+        <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 1200, margin: '0 auto' }}>
           
-          {/* Brand Logo & Tagline */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <motion.div 
-              whileHover={{ rotate: 15 }}
-              style={{
-                width: 48,
-                height: 48,
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #FF5A1F, #E0480E)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 4px 15px rgba(255, 90, 31, 0.5)'
-              }}
-            >
-              <Wrench size={26} color="#FFFFFF" />
-            </motion.div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ width: 38, height: 38, borderRadius: 12, backgroundColor: '#101010', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Wrench size={20} />
+            </div>
 
             <div>
-              <h1 style={{ fontSize: '1.35rem', fontWeight: 900, letterSpacing: '-0.3px', margin: 0, lineHeight: 1.1, color: '#FFFFFF' }}>
-                NARAYAN
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: '#757575', fontWeight: 600 }}>
+                <MapPin size={12} color="#6E42E5" />
+                <span>BANGALORE</span>
+                <ChevronDown size={12} />
+              </div>
+              <h1 style={{ fontSize: '0.98rem', fontWeight: 800, color: '#101010', margin: 0, lineHeight: 1.1 }}>
+                Narayan Plumbing Services
               </h1>
-              <span style={{ fontSize: '0.72rem', color: '#FF5A1F', fontWeight: 800, letterSpacing: '1px', display: 'block' }}>
-                PLUMBING SERVICES
-              </span>
-              <span style={{ fontSize: '0.62rem', color: '#94A3B8', display: 'block' }}>
-                Expert Plumbers. On Time. Every Time.
-              </span>
             </div>
           </div>
 
-          {/* Desktop Nav Links */}
-          <nav className="desktop-nav" style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
-            <a href="#home" style={{ color: '#FFFFFF', textDecoration: 'none', fontWeight: 700, fontSize: '0.88rem' }}>Home</a>
-            <a href="#services" style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600, fontSize: '0.88rem' }}>Services</a>
-            <a href="#trending" style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600, fontSize: '0.88rem' }}>Trending</a>
-            <a href="#packages" style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600, fontSize: '0.88rem' }}>Packages</a>
-            <a href="#why-us" style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600, fontSize: '0.88rem' }}>Why Us</a>
-            <a href="#reviews" style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600, fontSize: '0.88rem' }}>Reviews</a>
-            <a href="#faqs" style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600, fontSize: '0.88rem' }}>FAQs</a>
-          </nav>
-
-          {/* Call & CTA Header Section */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <a 
               href={`tel:${PHONE_NUMBER}`}
               style={{
+                backgroundColor: '#F5F5F7',
+                color: '#101010',
+                padding: '8px 14px',
+                borderRadius: 20,
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontSize: '0.8rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 8,
-                textDecoration: 'none',
-                color: '#FFFFFF',
-                background: 'rgba(255, 255, 255, 0.08)',
-                padding: '8px 16px',
-                borderRadius: 30,
-                border: '1px solid rgba(255,255,255,0.15)'
+                gap: 6
               }}
             >
-              <Phone size={16} color="#00D4FF" />
-              <span style={{ fontSize: '0.9rem', fontWeight: 800, color: '#00D4FF' }}>{PHONE_DISPLAY}</span>
+              <Phone size={14} color="#6E42E5" />
+              <span>{PHONE_DISPLAY}</span>
             </a>
 
             <button
               onClick={() => handleOpenBooking()}
-              className="btn-poster-orange"
-            >
-              <Calendar size={16} />
-              <span>BOOK SERVICE</span>
-            </button>
-
-            {/* Mobile Hamburger Toggle Button */}
-            <button 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="mobile-menu-btn"
               style={{
-                background: 'transparent',
-                border: 'none',
+                backgroundColor: '#6E42E5',
                 color: '#FFFFFF',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: 20,
+                fontWeight: 800,
+                fontSize: '0.8rem',
                 cursor: 'pointer',
-                display: 'none',
-                padding: 4
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                boxShadow: '0 4px 12px rgba(110, 66, 229, 0.3)'
               }}
             >
-              <Menu size={26} />
+              <ShoppingBag size={14} />
+              <span>Cart ({cartCount})</span>
             </button>
           </div>
         </div>
 
-        {/* Mobile Slide-down Nav Menu */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              style={{ overflow: 'hidden', background: '#071329', padding: '16px 0', borderTop: '1px solid rgba(255,255,255,0.1)' }}
-            >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 14, padding: '0 24px' }}>
-                <a href="#home" onClick={() => setMobileMenuOpen(false)} style={{ color: '#FFFFFF', textDecoration: 'none', fontWeight: 700 }}>Home</a>
-                <a href="#services" onClick={() => setMobileMenuOpen(false)} style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600 }}>Our Services</a>
-                <a href="#trending" onClick={() => setMobileMenuOpen(false)} style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600 }}>Trending Services</a>
-                <a href="#packages" onClick={() => setMobileMenuOpen(false)} style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600 }}>Plumbing Packages</a>
-                <a href="#why-us" onClick={() => setMobileMenuOpen(false)} style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600 }}>Why Choose Us</a>
-                <a href="#reviews" onClick={() => setMobileMenuOpen(false)} style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600 }}>Customer Reviews</a>
-                <a href="#faqs" onClick={() => setMobileMenuOpen(false)} style={{ color: '#CBD5E1', textDecoration: 'none', fontWeight: 600 }}>FAQs</a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
-
-      {/* --- HERO SECTION WITH VIBRANT WATER SPLASH GRAPHICS --- */}
-      <section id="home" style={{ background: 'linear-gradient(180deg, #071329 0%, #0D2C54 60%, #071329 100%)', color: '#FFFFFF', padding: '40px 24px 70px 24px', position: 'relative', overflow: 'hidden' }}>
-        
-        {/* Dynamic Water Glow Bubbles */}
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.18, pointerEvents: 'none' }}>
-          <motion.div
-            animate={{ y: [-20, 20, -20] }}
-            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-            style={{ position: 'absolute', top: '10%', left: '15%', width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, #00D4FF, transparent)' }}
-          />
-          <motion.div
-            animate={{ y: [20, -20, 20] }}
-            transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-            style={{ position: 'absolute', bottom: '15%', right: '10%', width: 260, height: 260, borderRadius: '50%', background: 'radial-gradient(circle, #FF5A1F, transparent)' }}
-          />
-        </div>
-
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 40, alignItems: 'center', position: 'relative', zIndex: 2 }}>
-          
-          {/* Left Text Content */}
-          <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <span style={{ background: 'rgba(255, 90, 31, 0.15)', color: '#FF5A1F', border: '1px solid rgba(255, 90, 31, 0.3)', padding: '6px 16px', borderRadius: 20, fontSize: '0.8rem', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 18 }}>
-                <Sparkles size={14} /> COMPLETE PLUMBING SOLUTIONS
-              </span>
-
-              <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', fontWeight: 900, lineHeight: 1.1, textTransform: 'uppercase', letterSpacing: '-0.5px' }}>
-                COMPLETE <br />
-                <span style={{ color: '#FF5A1F' }}>PLUMBING SOLUTIONS</span> <br />
-                <span style={{ color: '#00D4FF', fontSize: '1.8rem' }}>AT YOUR DOORSTEP</span>
-              </h2>
-
-              <p style={{ color: '#CBD5E1', fontSize: '1.05rem', margin: '18px 0 32px 0', maxWidth: 500, fontWeight: 500 }}>
-                Fast, Reliable & Affordable Plumbing Solutions for Your Home & Business. 24/7 Priority Emergency Support!
-              </p>
-            </motion.div>
-
-            {/* Quick Feature Badges Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14, marginBottom: 36, maxWidth: 480 }}>
-              {TRUST_BADGES.map((b, idx) => (
-                <div 
-                  key={idx} 
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: 14,
-                    padding: '12px 14px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 12
-                  }}
-                >
-                  <span style={{ fontSize: '1.5rem' }}>{b.icon}</span>
-                  <div>
-                    <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#FFFFFF' }}>{b.label}</div>
-                    <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>{b.sub}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Hero Buttons */}
-            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-              <button
-                onClick={() => handleOpenBooking()}
-                className="btn-poster-orange"
-                style={{ padding: '14px 32px', fontSize: '0.95rem' }}
-              >
-                <Calendar size={18} />
-                <span>BOOK SERVICE NOW</span>
-              </button>
-
-              <a
-                href={`tel:${PHONE_NUMBER}`}
-                style={{
-                  textDecoration: 'none',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  color: '#FFFFFF',
-                  padding: '14px 28px',
-                  borderRadius: 30,
-                  fontWeight: 700,
-                  fontSize: '0.95rem',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 8
-                }}
-              >
-                <Phone size={18} color="#00D4FF" />
-                <span>CALL: {PHONE_DISPLAY}</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Right Hero Graphic Showcase */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 320 }}
-          >
-            {/* 30 Minutes Timer Circle Graphic */}
-            <div 
-              style={{
-                position: 'relative',
-                width: 280,
-                height: 280,
-                borderRadius: '50%',
-                background: 'radial-gradient(circle, #0B2545 0%, #071329 100%)',
-                border: '6px solid #00D4FF',
-                boxShadow: '0 0 40px rgba(0, 212, 255, 0.5)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: 2
-              }}
-            >
-              <Clock size={36} color="#FF5A1F" style={{ marginBottom: 4 }} />
-              <div style={{ fontSize: '3.8rem', fontWeight: 900, lineHeight: 0.9, color: '#FFFFFF' }}>
-                30
-              </div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#00D4FF', letterSpacing: '1px', marginTop: 4 }}>
-                MINUTES
-              </div>
-              <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#FF5A1F', textTransform: 'uppercase', marginTop: 2 }}>
-                SERVICE GUARANTEE
-              </div>
-            </div>
-
-            {/* Mobile Service Vehicle Badge */}
-            <motion.div
-              animate={{ y: [-6, 6, -6] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              style={{
-                position: 'absolute',
-                bottom: -15,
-                right: -10,
-                background: '#FFFFFF',
-                color: '#071329',
-                padding: '12px 20px',
-                borderRadius: 20,
-                boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                zIndex: 3
-              }}
-            >
-              <div style={{ fontSize: '2rem' }}>🚐</div>
-              <div>
-                <div style={{ fontWeight: 900, fontSize: '0.85rem', color: '#071329' }}>WE REACH, YOU RELAX</div>
-                <div style={{ fontSize: '0.72rem', color: '#64748B' }}>Fully Equipped Service Van</div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* --- GOOGLE RATINGS & REVIEWS BANNER --- */}
-      <section style={{ backgroundColor: '#071329', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '18px 0' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: 20 }}>
-          
-          {/* Google Rating */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ width: 42, height: 42, borderRadius: '50%', backgroundColor: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, color: '#4285F4', fontSize: '1.4rem' }}>
-              G
-            </div>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#FFFFFF' }}>4.8</span>
-                <div style={{ display: 'flex', color: '#FFB800' }}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} fill="#FFB800" color="#FFB800" />
-                  ))}
-                </div>
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Google Rating (1200+ Reviews)</div>
-            </div>
-          </div>
-
-          {/* Happy Customers */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <User size={24} color="#00D4FF" />
-            <div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#FFFFFF' }}>10K+</div>
-              <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Happy Customers</div>
-            </div>
-          </div>
-
-          {/* Verified Professionals */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <ShieldCheck size={24} color="#FF5A1F" />
-            <div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#FFFFFF' }}>Verified</div>
-              <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Professionals</div>
-            </div>
-          </div>
-
-          {/* 24/7 Availability */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <Clock size={24} color="#25D366" />
-            <div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#FFFFFF' }}>24 / 7</div>
-              <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Service Available</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- OUR SERVICES SECTION (WHITE CARDS + BLUE CIRCLE ICONS LIKE POSTER) --- */}
-      <section id="services" style={{ backgroundColor: '#F4F7FB', color: '#071329', padding: '70px 24px' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          
-          {/* Poster Blue Ribbon Header Banner */}
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <div className="poster-ribbon">
-              <h2 style={{ fontSize: '1.4rem', fontWeight: 900, letterSpacing: '0.1em', margin: 0 }}>
-                OUR SERVICES
-              </h2>
-            </div>
-          </div>
-
-          {/* Search Filter Bar */}
-          <div style={{ maxWidth: 480, margin: '0 auto 36px auto', position: 'relative' }}>
-            <Search size={18} color="#64748B" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)' }} />
+        {/* Urban Company Search Bar Header */}
+        <div style={{ padding: '0 16px 12px 16px', maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ position: 'relative', width: '100%' }}>
+            <Search size={18} color="#757575" style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
-              placeholder="Search service (e.g. Tap leak, Geyser, Drain block)..."
+              placeholder="Search for 'Tap leak', 'Geyser', 'Drain block'..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 width: '100%',
-                padding: '12px 16px 12px 46px',
-                borderRadius: 30,
-                border: '1px solid #CBD5E1',
-                outline: 'none',
+                padding: '12px 14px 12px 42px',
+                borderRadius: 12,
+                border: '1px solid #E0E0E0',
+                backgroundColor: '#F5F5F7',
                 fontSize: '0.9rem',
-                backgroundColor: '#FFFFFF',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
+                outline: 'none',
+                boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.02)'
               }}
             />
           </div>
+        </div>
+      </header>
 
-          {/* 12 Service Cards (Matching Poster 3D Blue Circular Icons) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 20 }}>
-            {filteredServices.map((srv) => (
-              <motion.div
-                key={srv.id}
-                className="service-card-wrap"
-                whileHover={{ y: -6, boxShadow: '0 12px 24px rgba(11, 37, 69, 0.12)' }}
-                transition={{ duration: 0.2 }}
+      {/* --- HERO MOBILE APP CAROUSEL BANNER --- */}
+      <section style={{ backgroundColor: '#FFFFFF', padding: '16px 16px 24px 16px', borderBottom: '1px solid #E0E0E0' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div 
+            style={{
+              background: 'linear-gradient(135deg, #101010 0%, #1A1A1A 100%)',
+              color: '#FFFFFF',
+              borderRadius: 20,
+              padding: '24px 20px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 20,
+              boxShadow: '0 10px 24px rgba(0,0,0,0.12)'
+            }}
+          >
+            <div>
+              <span style={{ backgroundColor: '#FF5A1F', color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 900, padding: '4px 10px', borderRadius: 12, letterSpacing: '0.5px' }}>
+                EXPRESS 30-MIN DOORSTEP
+              </span>
+              <h2 style={{ fontSize: '1.8rem', fontWeight: 900, marginTop: 8, lineHeight: 1.2 }}>
+                Expert Plumbers at <br />
+                <span style={{ color: '#00D4FF' }}>Your Doorstep in 30 Mins</span>
+              </h2>
+              <p style={{ fontSize: '0.85rem', color: '#B0B0B0', marginTop: 6 }}>
+                Verified Plumbers • 30-Day Free Warranty • Upfront Pricing
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div 
                 style={{
-                  backgroundColor: '#FFFFFF',
-                  borderRadius: 18,
-                  padding: '24px 16px',
-                  textAlign: 'center',
-                  border: '1px solid #E2E8F0',
+                  width: 90,
+                  height: 90,
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(255,255,255,0.08)',
+                  border: '3px solid #6E42E5',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  boxShadow: '0 4px 14px rgba(0,0,0,0.03)'
+                  justifyContent: 'center',
+                  textAlign: 'center'
                 }}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-                  {/* 3D Blue Icon Circle Frame */}
-                  <div 
-                    className="service-icon-circle"
-                    style={{
-                      width: 72,
-                      height: 72,
-                      borderRadius: '50%',
-                      background: 'radial-gradient(circle at 30% 30%, #EBF4FF 0%, #D0E3FF 100%)',
-                      border: '2px solid #0084FF',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '2.2rem',
-                      marginBottom: 14,
-                      boxShadow: '0 6px 16px rgba(0, 132, 255, 0.15)'
-                    }}
-                  >
-                    {srv.icon}
-                  </div>
+                <Zap size={22} color="#FF5A1F" />
+                <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#FFFFFF', lineHeight: 1 }}>30</span>
+                <span style={{ fontSize: '0.55rem', fontWeight: 800, color: '#00D4FF' }}>MINS</span>
+              </div>
 
-                  <h3 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#071329', lineHeight: 1.3, marginBottom: 8 }}>
-                    {srv.name}
-                  </h3>
+              <button
+                onClick={() => handleOpenBooking()}
+                style={{
+                  backgroundColor: '#FF5A1F',
+                  color: '#FFFFFF',
+                  border: 'none',
+                  padding: '14px 24px',
+                  borderRadius: 25,
+                  fontWeight: 900,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer',
+                  boxShadow: '0 6px 18px rgba(255, 90, 31, 0.4)'
+                }}
+              >
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                  <p style={{ fontSize: '0.75rem', color: '#64748B', lineHeight: 1.4, marginBottom: 14 }}>
-                    {srv.desc}
-                  </p>
+      {/* --- URBAN COMPANY APP QUICK CATEGORIES GRID (6 APPS) --- */}
+      <section style={{ backgroundColor: '#FFFFFF', padding: '24px 16px', borderBottom: '1px solid #E0E0E0' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#101010', marginBottom: 16 }}>
+            What are you looking for?
+          </h3>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: 12 }}>
+            {UC_CATEGORIES.map((cat) => (
+              <motion.div
+                key={cat.id}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleOpenBooking(cat.name)}
+                style={{
+                  backgroundColor: '#F5F5F7',
+                  borderRadius: 16,
+                  padding: '16px 8px',
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                  border: '1px solid #EAEAEA',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
+                }}
+              >
+                <div 
+                  style={{
+                    width: 52,
+                    height: 52,
+                    borderRadius: 16,
+                    backgroundColor: '#FFFFFF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1.8rem',
+                    marginBottom: 8,
+                    boxShadow: '0 4px 10px rgba(0,0,0,0.04)'
+                  }}
+                >
+                  {cat.icon}
                 </div>
 
-                <div style={{ width: '100%' }}>
-                  <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#0084FF', marginBottom: 10 }}>
-                    Starts {srv.price}
-                  </div>
-
-                  <button
-                    onClick={() => handleOpenBooking(srv.name)}
-                    className="btn-poster-orange"
-                    style={{ width: '100%', justifyContent: 'center', padding: '8px 0', fontSize: '0.8rem' }}
-                  >
-                    BOOK NOW
-                  </button>
-                </div>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#101010', lineHeight: 1.2 }}>
+                  {cat.name}
+                </span>
+                
+                <span style={{ fontSize: '0.68rem', color: '#6E42E5', fontWeight: 800, marginTop: 4 }}>
+                  {cat.price}
+                </span>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* --- TRENDING SERVICES SECTION (DARK NAVY BLUE + REAL PHOTOS LIKE POSTER) --- */}
-      <section id="trending" style={{ backgroundColor: '#071329', color: '#FFFFFF', padding: '70px 24px' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          
-          {/* Poster Blue Ribbon Banner Header */}
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <div className="poster-ribbon">
-              <h2 style={{ fontSize: '1.4rem', fontWeight: 900, letterSpacing: '0.1em', margin: 0 }}>
-                TRENDING SERVICES
-              </h2>
-            </div>
+      {/* --- ALL SERVICES DETAILED LIST (URBAN COMPANY NATIVE CARDS WITH + ADD BUTTON) --- */}
+      <section id="services" style={{ maxWidth: 1200, margin: '30px auto', padding: '0 16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+          <div>
+            <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#101010' }}>
+              Plumbing Repairs & Services
+            </h2>
+            <p style={{ fontSize: '0.8rem', color: '#757575' }}>100% Guaranteed doorstep service by background-checked pros</p>
           </div>
+        </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+          {filteredServices.map((srv) => (
+            <motion.div
+              key={srv.id}
+              whileHover={{ y: -4 }}
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: 16,
+                padding: 16,
+                border: '1px solid #E0E0E0',
+                display: 'flex',
+                justifyContent: 'space-between',
+                gap: 16,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.03)'
+              }}
+            >
+              <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#6E42E5', backgroundColor: '#F0EAFB', padding: '2px 8px', borderRadius: 8 }}>
+                    {srv.rating}
+                  </span>
+                  <span style={{ fontSize: '0.7rem', color: '#757575' }}>Verified Service</span>
+                </div>
+
+                <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#101010', margin: '4px 0' }}>
+                  {srv.name}
+                </h3>
+
+                <div style={{ fontSize: '0.95rem', fontWeight: 900, color: '#101010', margin: '4px 0' }}>
+                  {srv.price}
+                </div>
+
+                <p style={{ fontSize: '0.78rem', color: '#757575', lineHeight: 1.4 }}>
+                  {srv.desc}
+                </p>
+              </div>
+
+              {/* Action Box with Icon & UC Add Button */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', width: 80 }}>
+                <div 
+                  style={{
+                    width: 60,
+                    height: 60,
+                    borderRadius: 14,
+                    backgroundColor: '#F5F5F7',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '2rem'
+                  }}
+                >
+                  {srv.icon}
+                </div>
+
+                <button
+                  onClick={() => handleOpenBooking(srv.name)}
+                  style={{
+                    width: '100%',
+                    backgroundColor: '#FFFFFF',
+                    color: '#6E42E5',
+                    border: '1.5px solid #6E42E5',
+                    borderRadius: 8,
+                    padding: '6px 0',
+                    fontWeight: 900,
+                    fontSize: '0.85rem',
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 6px rgba(110, 66, 229, 0.15)'
+                  }}
+                >
+                  ADD +
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* --- TRENDING SERVICES SECTION (HIGH RES REAL PHOTO CAROUSEL) --- */}
+      <section id="trending" style={{ backgroundColor: '#FFFFFF', padding: '40px 16px', borderTop: '1px solid #E0E0E0', borderBottom: '1px solid #E0E0E0' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#101010', marginBottom: 4 }}>
+            Trending Services & Renovation
+          </h2>
+          <p style={{ fontSize: '0.8rem', color: '#757575', marginBottom: 20 }}>Most booked home upgrades this month</p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 16 }}>
             {TRENDING_SERVICES.map((t, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                whileHover={{ scale: 1.02 }}
                 style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  backgroundColor: '#F5F5F7',
                   borderRadius: 16,
                   overflow: 'hidden',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  border: '1px solid #E0E0E0',
                   display: 'flex',
                   flexDirection: 'column'
                 }}
@@ -737,10 +578,10 @@ export function App() {
                       position: 'absolute',
                       top: 10,
                       left: 10,
-                      backgroundColor: '#FF5A1F',
+                      backgroundColor: '#101010',
                       color: '#FFFFFF',
                       fontSize: '0.65rem',
-                      fontWeight: 900,
+                      fontWeight: 800,
                       padding: '4px 10px',
                       borderRadius: 12
                     }}
@@ -749,22 +590,22 @@ export function App() {
                   </span>
                 </div>
 
-                <div style={{ padding: 16, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div style={{ padding: 14, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: 6 }}>{t.title}</h3>
-                    <p style={{ fontSize: '0.8rem', color: '#94A3B8', lineHeight: 1.4 }}>{t.desc}</p>
+                    <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#101010', marginBottom: 4 }}>{t.title}</h3>
+                    <p style={{ fontSize: '0.78rem', color: '#757575', lineHeight: 1.4 }}>{t.desc}</p>
                   </div>
 
                   <button
                     onClick={() => handleOpenBooking(t.title)}
                     style={{
-                      marginTop: 16,
-                      background: 'transparent',
-                      border: '1px solid #00D4FF',
-                      color: '#00D4FF',
+                      marginTop: 14,
+                      backgroundColor: '#FFFFFF',
+                      border: '1px solid #101010',
+                      color: '#101010',
                       padding: '8px 14px',
-                      borderRadius: 20,
-                      fontWeight: 700,
+                      borderRadius: 8,
+                      fontWeight: 800,
                       fontSize: '0.8rem',
                       cursor: 'pointer',
                       display: 'flex',
@@ -773,112 +614,106 @@ export function App() {
                       gap: 6
                     }}
                   >
-                    Explore Service <ChevronRight size={14} />
+                    Book Consultation <ChevronRight size={14} />
                   </button>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* --- PACKAGES SECTION --- */}
-      <section id="packages" style={{ backgroundColor: '#F4F7FB', color: '#071329', padding: '70px 24px' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <span style={{ backgroundColor: 'rgba(255, 90, 31, 0.1)', color: '#FF5A1F', padding: '4px 14px', borderRadius: 20, fontSize: '0.8rem', fontWeight: 800 }}>
-              SPECIAL COMBOS
-            </span>
-            <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#071329', marginTop: 8 }}>
-              PLUMBING PACKAGES
-            </h2>
-            <div style={{ width: 60, height: 4, backgroundColor: '#FF5A1F', margin: '8px auto 0 auto', borderRadius: 2 }}></div>
-          </div>
+      <section id="packages" style={{ maxWidth: 1200, margin: '40px auto', padding: '0 16px' }}>
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#101010', marginBottom: 16 }}>
+          Popular Plumbing Packages
+        </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
-            {PACKAGES.map((pkg, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ y: -8 }}
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  borderRadius: 20,
-                  padding: 28,
-                  border: pkg.popular ? '2px solid #FF5A1F' : '1px solid #E2E8F0',
-                  position: 'relative',
-                  boxShadow: pkg.popular ? '0 12px 30px rgba(255, 90, 31, 0.15)' : '0 6px 18px rgba(0,0,0,0.04)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}
-              >
-                {pkg.popular && (
-                  <div style={{ position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)', backgroundColor: '#FF5A1F', color: '#FFFFFF', fontSize: '0.75rem', fontWeight: 900, padding: '4px 16px', borderRadius: 12 }}>
-                    MOST POPULAR CHOICE
-                  </div>
-                )}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
+          {PACKAGES.map((pkg, idx) => (
+            <div
+              key={idx}
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: 20,
+                padding: 24,
+                border: pkg.popular ? '2px solid #6E42E5' : '1px solid #E0E0E0',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: pkg.popular ? '0 8px 24px rgba(110, 66, 229, 0.15)' : 'none'
+              }}
+            >
+              {pkg.popular && (
+                <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', backgroundColor: '#6E42E5', color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 900, padding: '4px 14px', borderRadius: 12 }}>
+                  MOST POPULAR
+                </div>
+              )}
 
-                <div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 900, color: '#071329' }}>{pkg.name}</h3>
-                  
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, margin: '16px 0' }}>
-                    <span style={{ fontSize: '2.2rem', fontWeight: 900, color: '#071329' }}>{pkg.price}</span>
-                    <span style={{ fontSize: '1rem', color: '#94A3B8', textDecoration: 'line-through' }}>{pkg.originalPrice}</span>
-                  </div>
-
-                  <ul style={{ listStyle: 'none', padding: 0, margin: '20px 0' }}>
-                    {pkg.features.map((feat, fIdx) => (
-                      <li key={fIdx} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.88rem', color: '#334155', marginBottom: 12 }}>
-                        <CheckCircle size={16} color="#0084FF" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <div>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#101010' }}>{pkg.name}</h3>
+                
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, margin: '12px 0' }}>
+                  <span style={{ fontSize: '2rem', fontWeight: 900, color: '#101010' }}>{pkg.price}</span>
+                  <span style={{ fontSize: '0.9rem', color: '#757575', textDecoration: 'line-through' }}>{pkg.originalPrice}</span>
                 </div>
 
-                <button
-                  onClick={() => handleOpenBooking(pkg.name)}
-                  className="btn-poster-orange"
-                  style={{ width: '100%', justifyContent: 'center', padding: '12px 0' }}
-                >
-                  SELECT PACKAGE
-                </button>
-              </motion.div>
-            ))}
-          </div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '16px 0' }}>
+                  {pkg.features.map((feat, fIdx) => (
+                    <li key={fIdx} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.85rem', color: '#424242', marginBottom: 10 }}>
+                      <CheckCircle size={16} color="#6E42E5" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <button
+                onClick={() => handleOpenBooking(pkg.name)}
+                style={{
+                  width: '100%',
+                  backgroundColor: pkg.popular ? '#6E42E5' : '#101010',
+                  color: '#FFFFFF',
+                  border: 'none',
+                  padding: '12px 0',
+                  borderRadius: 12,
+                  fontWeight: 800,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer'
+                }}
+              >
+                Book Package
+              </button>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* --- WHY CHOOSE US SECTION --- */}
-      <section id="why-us" style={{ backgroundColor: '#FFFFFF', color: '#071329', padding: '70px 24px', borderTop: '1px solid #E2E8F0' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#071329' }}>
-              WHY CHOOSE <span style={{ color: '#FF5A1F' }}>NARAYAN PLUMBING SERVICES?</span>
-            </h2>
-            <p style={{ color: '#64748B', fontSize: '0.95rem', marginTop: 6 }}>
-              We bring trust, speed, and premium craftsmanship to every repair.
-            </p>
-          </div>
+      {/* --- WHY CHOOSE US --- */}
+      <section id="why-us" style={{ backgroundColor: '#FFFFFF', padding: '40px 16px', borderTop: '1px solid #E0E0E0' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#101010', marginBottom: 20 }}>
+            Urban Guarantee for Narayan Plumbing
+          </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
             {WHY_CHOOSE.map((item, idx) => (
               <div 
                 key={idx}
                 style={{
-                  backgroundColor: '#F8FAFC',
+                  backgroundColor: '#F5F5F7',
                   borderRadius: 16,
-                  padding: 20,
+                  padding: 16,
                   display: 'flex',
-                  gap: 16,
-                  alignItems: 'flex-start',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.03)'
+                  gap: 14,
+                  alignItems: 'flex-start'
                 }}
               >
-                <div style={{ fontSize: '2rem' }}>{item.icon}</div>
+                <div style={{ fontSize: '1.8rem' }}>{item.icon}</div>
                 <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#071329', marginBottom: 4 }}>{item.title}</h3>
-                  <p style={{ fontSize: '0.82rem', color: '#64748B', lineHeight: 1.4 }}>{item.desc}</p>
+                  <h3 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#101010', marginBottom: 2 }}>{item.title}</h3>
+                  <p style={{ fontSize: '0.8rem', color: '#757575', lineHeight: 1.4 }}>{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -886,58 +721,47 @@ export function App() {
         </div>
       </section>
 
-      {/* --- REVIEWS SECTION --- */}
-      <section id="reviews" style={{ backgroundColor: '#F4F7FB', color: '#071329', padding: '70px 24px' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <span style={{ backgroundColor: 'rgba(0, 132, 255, 0.1)', color: '#0084FF', padding: '4px 14px', borderRadius: 20, fontSize: '0.8rem', fontWeight: 800 }}>
-              TESTIMONIALS
-            </span>
-            <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#071329', marginTop: 8 }}>
-              WHAT OUR CUSTOMERS SAY
-            </h2>
-            <div style={{ width: 60, height: 4, backgroundColor: '#FF5A1F', margin: '8px auto 0 auto', borderRadius: 2 }}></div>
-          </div>
+      {/* --- CUSTOMER REVIEWS --- */}
+      <section id="reviews" style={{ maxWidth: 1200, margin: '40px auto', padding: '0 16px' }}>
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#101010', marginBottom: 16 }}>
+          Customer Reviews
+        </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-            {REVIEWS.map((rev, idx) => (
-              <div key={idx} style={{ backgroundColor: '#FFFFFF', borderRadius: 16, padding: 24, border: '1px solid #E2E8F0', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                  <div>
-                    <h4 style={{ fontWeight: 800, color: '#071329', fontSize: '1rem' }}>{rev.name}</h4>
-                    <span style={{ fontSize: '0.75rem', color: '#64748B' }}>{rev.area}</span>
-                  </div>
-                  <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>{rev.time}</span>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+          {REVIEWS.map((rev, idx) => (
+            <div key={idx} style={{ backgroundColor: '#FFFFFF', borderRadius: 16, padding: 20, border: '1px solid #E0E0E0' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                <div>
+                  <h4 style={{ fontWeight: 800, color: '#101010', fontSize: '0.95rem' }}>{rev.name}</h4>
+                  <span style={{ fontSize: '0.75rem', color: '#757575' }}>{rev.area}</span>
                 </div>
-                <div style={{ display: 'flex', color: '#FFB800', marginBottom: 10 }}>
-                  {[...Array(rev.rating)].map((_, i) => (
-                    <Star key={i} size={16} fill="#FFB800" color="#FFB800" />
-                  ))}
-                </div>
-                <p style={{ fontSize: '0.88rem', color: '#334155', lineHeight: 1.5 }}>"{rev.comment}"</p>
+                <span style={{ fontSize: '0.75rem', color: '#9E9E9E' }}>{rev.time}</span>
               </div>
-            ))}
-          </div>
+              <div style={{ display: 'flex', color: '#FFB800', marginBottom: 8 }}>
+                {[...Array(rev.rating)].map((_, i) => (
+                  <Star key={i} size={14} fill="#FFB800" color="#FFB800" />
+                ))}
+              </div>
+              <p style={{ fontSize: '0.85rem', color: '#424242', lineHeight: 1.5 }}>"{rev.comment}"</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* --- FAQS SECTION --- */}
-      <section id="faqs" style={{ backgroundColor: '#FFFFFF', color: '#071329', padding: '70px 24px', borderTop: '1px solid #E2E8F0' }}>
+      {/* --- FAQS --- */}
+      <section id="faqs" style={{ backgroundColor: '#FFFFFF', padding: '40px 16px', borderTop: '1px solid #E0E0E0' }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#071329' }}>
-              FREQUENTLY ASKED QUESTIONS
-            </h2>
-            <p style={{ color: '#64748B', fontSize: '0.9rem', marginTop: 4 }}>Everything you need to know before booking</p>
-          </div>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#101010', marginBottom: 20 }}>
+            Frequently Asked Questions
+          </h2>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {FAQS.map((faq, idx) => (
               <div 
                 key={idx}
                 style={{
-                  border: '1px solid #E2E8F0',
-                  borderRadius: 14,
+                  border: '1px solid #E0E0E0',
+                  borderRadius: 12,
                   overflow: 'hidden'
                 }}
               >
@@ -945,13 +769,13 @@ export function App() {
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
                   style={{
                     width: '100%',
-                    padding: '16px 20px',
-                    backgroundColor: '#F8FAFC',
+                    padding: '14px 16px',
+                    backgroundColor: '#F5F5F7',
                     border: 'none',
                     textAlign: 'left',
-                    fontWeight: 800,
-                    color: '#071329',
-                    fontSize: '0.95rem',
+                    fontWeight: 700,
+                    color: '#101010',
+                    fontSize: '0.9rem',
                     cursor: 'pointer',
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -959,11 +783,11 @@ export function App() {
                   }}
                 >
                   <span>{faq.q}</span>
-                  <ChevronRight size={18} style={{ transform: openFaq === idx ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }} />
+                  <ChevronRight size={16} style={{ transform: openFaq === idx ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }} />
                 </button>
 
                 {openFaq === idx && (
-                  <div style={{ padding: '16px 20px', fontSize: '0.88rem', color: '#475569', lineHeight: 1.5, backgroundColor: '#FFFFFF' }}>
+                  <div style={{ padding: '14px 16px', fontSize: '0.85rem', color: '#616161', lineHeight: 1.5, backgroundColor: '#FFFFFF' }}>
                     {faq.a}
                   </div>
                 )}
@@ -973,149 +797,90 @@ export function App() {
         </div>
       </section>
 
-      {/* --- BOTTOM CALLOUT BANNER --- */}
-      <section style={{ background: 'linear-gradient(135deg, #071329 0%, #0D2C54 100%)', color: '#FFFFFF', padding: '48px 24px' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 28 }}>
-          <div>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: 900 }}>Need Urgent Plumbing Assistance?</h2>
-            <p style={{ color: '#00D4FF', fontWeight: 700, marginTop: 4 }}>We are available 24/7. Technician arrives in 30 minutes!</p>
-          </div>
-
-          <div style={{ display: 'flex', gap: 14 }}>
-            <a
-              href={`tel:${PHONE_NUMBER}`}
-              style={{
-                backgroundColor: '#FFFFFF',
-                color: '#071329',
-                textDecoration: 'none',
-                padding: '12px 24px',
-                borderRadius: 25,
-                fontWeight: 900,
-                fontSize: '0.95rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8
-              }}
-            >
-              <Phone size={18} color="#FF5A1F" />
-              {PHONE_DISPLAY}
-            </a>
-
-            <button
-              onClick={() => handleOpenBooking()}
-              className="btn-poster-orange"
-            >
-              BOOK NOW
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* --- FOOTER --- */}
-      <footer style={{ backgroundColor: '#030A16', color: '#94A3B8', padding: '40px 24px 90px 24px', fontSize: '0.85rem' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 32 }}>
+      <footer style={{ backgroundColor: '#101010', color: '#9E9E9E', padding: '40px 16px 90px 16px', fontSize: '0.85rem' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 32 }}>
           <div>
             <h3 style={{ color: '#FFFFFF', fontWeight: 900, fontSize: '1.2rem', marginBottom: 12 }}>
-              NARAYAN <span style={{ color: '#FF5A1F' }}>PLUMBING</span>
+              NARAYAN <span style={{ color: '#6E42E5' }}>PLUMBING</span>
             </h3>
             <p style={{ lineHeight: 1.5 }}>
-              Expert Plumbers. On Time. Every Time. Providing residential and commercial plumbing across the city with 30-minute rapid doorstep delivery.
+              Urban Company verified plumbing professionals. 30-minute rapid doorstep service across Bangalore.
             </p>
           </div>
 
           <div>
             <h4 style={{ color: '#FFFFFF', fontWeight: 800, marginBottom: 12 }}>Contact Details</h4>
             <p>📞 Phone: <a href={`tel:${PHONE_NUMBER}`} style={{ color: '#00D4FF', textDecoration: 'none' }}><strong>{PHONE_DISPLAY}</strong></a></p>
-            <p style={{ margin: '6px 0' }}>📍 Address: Citywide Service Hub</p>
+            <p style={{ margin: '6px 0' }}>📍 Address: Citywide Service Hub, Bangalore</p>
             <p>⏰ Hours: 24 Hours / 7 Days Open</p>
           </div>
 
           <div>
             <h4 style={{ color: '#FFFFFF', fontWeight: 800, marginBottom: 12 }}>Our Guarantees</h4>
-            <p>✔ 30-Min Arrival</p>
+            <p>✔ 30-Min Rapid Arrival</p>
             <p style={{ margin: '6px 0' }}>✔ 30 Days Free Warranty</p>
             <p>✔ Upfront Rate Card</p>
           </div>
         </div>
 
-        <div style={{ maxWidth: 1280, margin: '30px auto 0 auto', paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', textAlign: 'center', fontSize: '0.75rem' }}>
+        <div style={{ maxWidth: 1200, margin: '30px auto 0 auto', paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center', fontSize: '0.75rem' }}>
           © {new Date().getFullYear()} Narayan Plumbing Services. All Rights Reserved.
         </div>
       </footer>
 
-      {/* --- MOBILE-ONLY BOTTOM NAVIGATION BAR --- */}
+      {/* --- NATIVE MOBILE APP BOTTOM NAVIGATION BAR (URBAN COMPANY STYLE) --- */}
       <div 
-        className="mobile-bottom-nav"
         style={{
           position: 'fixed',
           bottom: 0,
           left: 0,
           right: 0,
-          height: 65,
-          backgroundColor: '#071329',
-          borderTop: '1px solid rgba(255,255,255,0.1)',
+          height: 60,
+          backgroundColor: '#FFFFFF',
+          borderTop: '1px solid #E0E0E0',
           display: 'flex',
           justifyContent: 'space-around',
           alignItems: 'center',
           zIndex: 1000,
-          boxShadow: '0 -4px 20px rgba(0,0,0,0.3)'
+          boxShadow: '0 -4px 15px rgba(0,0,0,0.06)'
         }}
       >
         <button 
           onClick={() => { setActiveTab('Home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          style={{ background: 'none', border: 'none', color: activeTab === 'Home' ? '#FF5A1F' : '#94A3B8', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
+          style={{ background: 'none', border: 'none', color: activeTab === 'Home' ? '#6E42E5' : '#757575', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
         >
           <Home size={20} />
-          <span style={{ fontSize: '0.65rem', marginTop: 3, fontWeight: 700 }}>Home</span>
+          <span style={{ fontSize: '0.65rem', marginTop: 3, fontWeight: 700 }}>UC Home</span>
         </button>
 
         <button 
           onClick={() => { setActiveTab('Services'); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}
-          style={{ background: 'none', border: 'none', color: activeTab === 'Services' ? '#FF5A1F' : '#94A3B8', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
+          style={{ background: 'none', border: 'none', color: activeTab === 'Services' ? '#6E42E5' : '#757575', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
         >
           <Wrench size={20} />
           <span style={{ fontSize: '0.65rem', marginTop: 3, fontWeight: 700 }}>Services</span>
         </button>
 
-        {/* Center Floating Action Button */}
-        <motion.button 
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => handleOpenBooking()}
-          style={{
-            width: 54,
-            height: 54,
-            borderRadius: '50%',
-            backgroundColor: '#FF5A1F',
-            border: '3px solid #071329',
-            marginTop: -24,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#FFFFFF',
-            boxShadow: '0 4px 15px rgba(255, 90, 31, 0.6)',
-            cursor: 'pointer'
-          }}
-        >
-          <Calendar size={22} />
-          <span style={{ fontSize: '0.55rem', fontWeight: 900, marginTop: 1 }}>BOOK</span>
-        </motion.button>
-
         <button 
-          onClick={() => { setActiveTab('Packages'); document.getElementById('packages')?.scrollIntoView({ behavior: 'smooth' }); }}
-          style={{ background: 'none', border: 'none', color: activeTab === 'Packages' ? '#FF5A1F' : '#94A3B8', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
+          onClick={() => handleOpenBooking()}
+          style={{ background: 'none', border: 'none', color: '#6E42E5', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', position: 'relative' }}
         >
-          <Tag size={20} />
-          <span style={{ fontSize: '0.65rem', marginTop: 3, fontWeight: 700 }}>Packages</span>
+          <ShoppingBag size={20} />
+          <span style={{ fontSize: '0.65rem', marginTop: 3, fontWeight: 800 }}>Cart</span>
+          {cartCount > 0 && (
+            <span style={{ position: 'absolute', top: -4, right: 10, backgroundColor: '#FF5A1F', color: '#FFFFFF', fontSize: '0.6rem', fontWeight: 900, borderRadius: '50%', width: 16, height: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              {cartCount}
+            </span>
+          )}
         </button>
 
         <a 
           href={`tel:${PHONE_NUMBER}`}
-          style={{ textDecoration: 'none', color: '#25D366', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+          style={{ textDecoration: 'none', color: '#757575', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
-          <Phone size={20} />
-          <span style={{ fontSize: '0.65rem', marginTop: 3, fontWeight: 700, color: '#94A3B8' }}>Call</span>
+          <Phone size={20} color="#25D366" />
+          <span style={{ fontSize: '0.65rem', marginTop: 3, fontWeight: 700, color: '#757575' }}>Call Pro</span>
         </a>
       </div>
 
@@ -1128,10 +893,10 @@ export function App() {
         rel="noopener noreferrer"
         style={{
           position: 'fixed',
-          bottom: 76,
+          bottom: 72,
           right: 16,
-          width: 50,
-          height: 50,
+          width: 48,
+          height: 48,
           borderRadius: '50%',
           backgroundColor: '#25D366',
           color: '#FFFFFF',
@@ -1142,7 +907,7 @@ export function App() {
           zIndex: 999
         }}
       >
-        <MessageSquare size={26} />
+        <MessageSquare size={24} />
       </motion.a>
 
       {/* --- INTERACTIVE BOOKING MODAL --- */}
@@ -1155,8 +920,8 @@ export function App() {
             style={{
               position: 'fixed',
               inset: 0,
-              backgroundColor: 'rgba(7, 19, 41, 0.85)',
-              backdropFilter: 'blur(6px)',
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              backdropFilter: 'blur(4px)',
               zIndex: 10000,
               display: 'flex',
               alignItems: 'center',
@@ -1170,7 +935,7 @@ export function App() {
               exit={{ scale: 0.9, y: 20 }}
               style={{
                 backgroundColor: '#FFFFFF',
-                borderRadius: 24,
+                borderRadius: 20,
                 width: '100%',
                 maxWidth: 480,
                 overflow: 'hidden',
@@ -1179,7 +944,7 @@ export function App() {
               }}
             >
               {/* Modal Header */}
-              <div style={{ backgroundColor: '#071329', color: '#FFFFFF', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ backgroundColor: '#101010', color: '#FFFFFF', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 900 }}>Schedule Service Visit</h3>
                   <p style={{ fontSize: '0.75rem', color: '#00D4FF', margin: 0 }}>Technician arrives at your doorstep in 30 mins</p>
@@ -1201,21 +966,21 @@ export function App() {
                   >
                     <CheckCircle size={40} />
                   </motion.div>
-                  <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#071329' }}>Booking Confirmed!</h3>
-                  <p style={{ color: '#64748B', fontSize: '0.9rem', marginTop: 8 }}>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#101010' }}>Booking Confirmed!</h3>
+                  <p style={{ color: '#757575', fontSize: '0.9rem', marginTop: 8 }}>
                     Our master plumber will call you within 5 minutes to confirm exact doorstep location.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit} style={{ padding: 24 }}>
                   <div style={{ marginBottom: 14 }}>
-                    <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155', display: 'block', marginBottom: 4 }}>
+                    <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
                       Select Service
                     </label>
                     <select
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: '0.9rem', outline: 'none' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: 10, border: '1px solid #E0E0E0', fontSize: '0.9rem', outline: 'none' }}
                     >
                       {CORE_SERVICES.map((s) => (
                         <option key={s.id} value={s.name}>{s.name} ({s.price})</option>
@@ -1224,7 +989,7 @@ export function App() {
                   </div>
 
                   <div style={{ marginBottom: 14 }}>
-                    <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155', display: 'block', marginBottom: 4 }}>
+                    <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
                       Your Full Name *
                     </label>
                     <input
@@ -1233,12 +998,12 @@ export function App() {
                       placeholder="e.g. Rahul Sharma"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: '0.9rem', outline: 'none' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: 10, border: '1px solid #E0E0E0', fontSize: '0.9rem', outline: 'none' }}
                     />
                   </div>
 
                   <div style={{ marginBottom: 14 }}>
-                    <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155', display: 'block', marginBottom: 4 }}>
+                    <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
                       Phone Number *
                     </label>
                     <input
@@ -1247,12 +1012,12 @@ export function App() {
                       placeholder="10-digit mobile number"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: '0.9rem', outline: 'none' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: 10, border: '1px solid #E0E0E0', fontSize: '0.9rem', outline: 'none' }}
                     />
                   </div>
 
                   <div style={{ marginBottom: 14 }}>
-                    <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155', display: 'block', marginBottom: 4 }}>
+                    <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
                       Complete Address / Flat No. *
                     </label>
                     <input
@@ -1261,19 +1026,24 @@ export function App() {
                       placeholder="House/Flat No., Landmark, Area"
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: '0.9rem', outline: 'none' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: 10, border: '1px solid #E0E0E0', fontSize: '0.9rem', outline: 'none' }}
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="btn-poster-orange"
                     style={{
                       width: '100%',
-                      justifyContent: 'center',
+                      backgroundColor: '#6E42E5',
+                      color: '#FFFFFF',
+                      border: 'none',
                       padding: '14px',
+                      borderRadius: 12,
+                      fontWeight: 900,
                       fontSize: '1rem',
-                      marginTop: 8
+                      cursor: 'pointer',
+                      marginTop: 8,
+                      boxShadow: '0 6px 18px rgba(110, 66, 229, 0.4)'
                     }}
                   >
                     CONFIRM INSTANT BOOKING
