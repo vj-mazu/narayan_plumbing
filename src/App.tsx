@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Phone, Calendar, ShieldCheck, Clock, Award, Star, CheckCircle, Wrench, 
@@ -126,6 +126,8 @@ export function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [cartCount, setCartCount] = useState(0);
 
+  const reviewsContainerRef = useRef<HTMLDivElement>(null);
+
   // Booking Form State
   const [formData, setFormData] = useState({
     name: '',
@@ -141,6 +143,29 @@ export function App() {
       setLoading(false);
     }, 1800);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Automatic Smooth Horizontal Scrolling for Customer Reviews
+  useEffect(() => {
+    const container = reviewsContainerRef.current;
+    if (!container) return;
+
+    let scrollAmount = 0;
+    const step = 280;
+
+    const interval = setInterval(() => {
+      if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+        scrollAmount = 0;
+      } else {
+        scrollAmount += step;
+      }
+      container.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const triggerConfetti = () => {
@@ -339,14 +364,84 @@ export function App() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              style={{ overflow: 'hidden', backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB', padding: '12px 16px' }}
+              style={{ overflow: 'hidden', backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB', padding: '12px 16px', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <a href="#services" onClick={() => setThreeDotsMenuOpen(false)} style={{ color: '#101010', textDecoration: 'none', fontWeight: 700, fontSize: '0.85rem' }}>All Services</a>
-                <a href="#trending" onClick={() => setThreeDotsMenuOpen(false)} style={{ color: '#101010', textDecoration: 'none', fontWeight: 700, fontSize: '0.85rem' }}>Trending Upgrades</a>
-                <a href="#packages" onClick={() => setThreeDotsMenuOpen(false)} style={{ color: '#101010', textDecoration: 'none', fontWeight: 700, fontSize: '0.85rem' }}>Plumbing Packages</a>
-                <a href="#why-us" onClick={() => setThreeDotsMenuOpen(false)} style={{ color: '#101010', textDecoration: 'none', fontWeight: 700, fontSize: '0.85rem' }}>Why Choose Us</a>
-                <a href="#reviews" onClick={() => setThreeDotsMenuOpen(false)} style={{ color: '#101010', textDecoration: 'none', fontWeight: 700, fontSize: '0.85rem' }}>Customer Reviews</a>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                <button 
+                  onClick={() => {
+                    setThreeDotsMenuOpen(false);
+                    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
+                >
+                  🛠️ All 12 Core Services
+                </button>
+                <button 
+                  onClick={() => {
+                    setThreeDotsMenuOpen(false);
+                    document.getElementById('trending')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
+                >
+                  🔥 Trending Upgrades
+                </button>
+                <button 
+                  onClick={() => {
+                    setThreeDotsMenuOpen(false);
+                    document.getElementById('packages')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
+                >
+                  📦 3D Plumbing Packages
+                </button>
+                <button 
+                  onClick={() => {
+                    setThreeDotsMenuOpen(false);
+                    document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
+                >
+                  🛡️ Why Choose Us
+                </button>
+                <button 
+                  onClick={() => {
+                    setThreeDotsMenuOpen(false);
+                    document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  style={{ background: 'none', border: 'none', textAlign: 'left', color: '#101010', fontWeight: 800, fontSize: '0.88rem', cursor: 'pointer', padding: '4px 0' }}
+                >
+                  ⭐ Customer Reviews
+                </button>
+                <a 
+                  href="https://maps.app.goo.gl/HRGVvm5RDNo7Vs448"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setThreeDotsMenuOpen(false)}
+                  style={{ color: '#00D4FF', textDecoration: 'none', fontWeight: 800, fontSize: '0.88rem', padding: '4px 0', display: 'flex', alignItems: 'center', gap: 6 }}
+                >
+                  📍 Google Maps Location
+                </a>
+                <a 
+                  href={`tel:${PHONE_NUMBER}`}
+                  style={{
+                    backgroundColor: '#FF5A1F',
+                    color: '#FFFFFF',
+                    textDecoration: 'none',
+                    textAlign: 'center',
+                    padding: '10px 0',
+                    borderRadius: 10,
+                    fontWeight: 900,
+                    fontSize: '0.85rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 8,
+                    marginTop: 4
+                  }}
+                >
+                  <Phone size={16} />
+                  <span>CALL NOW ({PHONE_DISPLAY})</span>
+                </a>
               </div>
             </motion.div>
           )}
@@ -755,6 +850,7 @@ export function App() {
 
         {/* Smooth Horizontal Carousel Container */}
         <div 
+          ref={reviewsContainerRef}
           className="no-scrollbar"
           style={{ 
             display: 'flex', 
