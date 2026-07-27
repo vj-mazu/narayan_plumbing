@@ -234,55 +234,57 @@ export function App() {
         )}
       </AnimatePresence>
 
-      {/* --- URBAN COMPANY NATIVE APP TOP HEADER (LOCATION & SEARCH) --- */}
+      {/* --- URBAN COMPANY NATIVE APP TOP HEADER --- */}
       <header 
         style={{
           position: 'sticky',
           top: 0,
           zIndex: 1000,
           backgroundColor: '#FFFFFF',
-          borderBottom: '1px solid #E0E0E0',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.04)'
+          borderBottom: '1px solid #E5E7EB',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
         }}
       >
-        {/* Location & Profile Top Bar */}
-        <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 1200, margin: '0 auto' }}>
+        {/* Compact Top Navigation Bar */}
+        <div style={{ padding: '8px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 1200, margin: '0 auto', gap: 8 }}>
           
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ width: 38, height: 38, borderRadius: 12, backgroundColor: '#101010', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Wrench size={20} />
+          {/* Brand Logo & Location */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
+            <div style={{ width: 34, height: 34, borderRadius: 10, backgroundColor: '#101010', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <Wrench size={16} />
             </div>
 
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: '#757575', fontWeight: 600 }}>
-                <MapPin size={12} color="#6E42E5" />
+            <div style={{ minWidth: 0, overflow: 'hidden' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: '0.68rem', color: '#6E42E5', fontWeight: 700 }}>
+                <MapPin size={11} color="#6E42E5" />
                 <span>BANGALORE</span>
-                <ChevronDown size={12} />
+                <ChevronDown size={10} />
               </div>
-              <h1 style={{ fontSize: '0.98rem', fontWeight: 800, color: '#101010', margin: 0, lineHeight: 1.1 }}>
-                Narayan Plumbing Services
+              <h1 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#101010', margin: 0, lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                Narayan Plumbing
               </h1>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          {/* Quick Call & Cart Action Buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
             <a 
               href={`tel:${PHONE_NUMBER}`}
               style={{
-                backgroundColor: '#F5F5F7',
+                backgroundColor: '#F3F4F6',
                 color: '#101010',
-                padding: '8px 14px',
-                borderRadius: 20,
+                padding: '6px 10px',
+                borderRadius: 16,
                 textDecoration: 'none',
                 fontWeight: 700,
-                fontSize: '0.8rem',
+                fontSize: '0.72rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6
+                gap: 4
               }}
             >
-              <Phone size={14} color="#6E42E5" />
-              <span>{PHONE_DISPLAY}</span>
+              <Phone size={12} color="#6E42E5" />
+              <span>Call</span>
             </a>
 
             <button
@@ -291,41 +293,40 @@ export function App() {
                 backgroundColor: '#6E42E5',
                 color: '#FFFFFF',
                 border: 'none',
-                padding: '8px 16px',
-                borderRadius: 20,
+                padding: '6px 12px',
+                borderRadius: 16,
                 fontWeight: 800,
-                fontSize: '0.8rem',
+                fontSize: '0.72rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6,
-                boxShadow: '0 4px 12px rgba(110, 66, 229, 0.3)'
+                gap: 4,
+                boxShadow: '0 2px 8px rgba(110, 66, 229, 0.25)'
               }}
             >
-              <ShoppingBag size={14} />
+              <ShoppingBag size={12} />
               <span>Cart ({cartCount})</span>
             </button>
           </div>
         </div>
 
         {/* Urban Company Search Bar Header */}
-        <div style={{ padding: '0 16px 12px 16px', maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ padding: '0 12px 8px 12px', maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ position: 'relative', width: '100%' }}>
-            <Search size={18} color="#757575" style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)' }} />
+            <Search size={15} color="#9CA3AF" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
-              placeholder="Search for 'Tap leak', 'Geyser', 'Drain block'..."
+              placeholder="Search 'Tap leak', 'Geyser', 'Drain'..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 width: '100%',
-                padding: '12px 14px 12px 42px',
-                borderRadius: 12,
-                border: '1px solid #E0E0E0',
-                backgroundColor: '#F5F5F7',
-                fontSize: '0.9rem',
-                outline: 'none',
-                boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.02)'
+                padding: '8px 12px 8px 36px',
+                borderRadius: 10,
+                border: '1px solid #E5E7EB',
+                backgroundColor: '#F9FAFB',
+                fontSize: '0.82rem',
+                outline: 'none'
               }}
             />
           </div>
