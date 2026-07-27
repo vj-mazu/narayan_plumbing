@@ -26,7 +26,7 @@
 
 body {
   font-family: var(--ff-main);
-  background-color: #071329;
+  background-color: #F5F5F7;
   color: var(--text-dark);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -35,67 +35,39 @@ body {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  height: 6px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #071329;
+  background: #F5F5F7;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--poster-orange-bright);
+  background: #6E42E5;
   border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--poster-orange-hover);
+
+/* Hide scrollbar for clean horizontal carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 3D Card Perspective */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
 }
 
 /* Glass Header */
 .glass-header {
-  background: rgba(7, 19, 41, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-}
-
-/* Orange Poster Buttons */
-.btn-poster-orange {
-  background: linear-gradient(135deg, #FF5A1F 0%, #E0480E 100%);
-  color: #FFFFFF;
-  border: none;
-  padding: 10px 22px;
-  border-radius: 25px;
-  font-weight: 800;
-  font-size: 0.85rem;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(255, 90, 31, 0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.btn-poster-orange:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 90, 31, 0.6);
-}
-
-/* Ribbon Banner Headers */
-.poster-ribbon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(90deg, #002B66 0%, #0047AB 50%, #002B66 100%);
-  color: #FFFFFF;
-  padding: 8px 36px;
-  border-radius: 30px;
-  box-shadow: 0 4px 15px rgba(0, 71, 171, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Service Card Hover Zoom */
-.service-icon-circle {
-  transition: transform 0.3s ease;
-}
-.service-card-wrap:hover .service-icon-circle {
-  transform: scale(1.15) rotate(5deg);
 }
 
 /* Responsive Rules */
