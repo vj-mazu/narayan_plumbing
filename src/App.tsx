@@ -29,6 +29,7 @@ export function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const reviewsRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const reviewing = useRef(false);
 
   useEffect(() => {
@@ -37,12 +38,18 @@ export function App() {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
-  // Close the mobile dropdown menu as soon as the user scrolls
+  // Close the mobile dropdown menu when the user taps anywhere outside the header.
+  // (Not a scroll listener — scroll events on mobile fire after a tap and would
+  // instantly close the menu when the page is scrolled down.)
   useEffect(() => {
     if (!menuOpen) return;
-    const onScroll = () => setMenuOpen(false);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const onClickOutside = (e: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('pointerdown', onClickOutside);
+    return () => document.removeEventListener('pointerdown', onClickOutside);
   }, [menuOpen]);
 
   // Auto horizontal carousel for reviews (pauses while user interacts)
@@ -100,6 +107,7 @@ export function App() {
 
       {/* ======================= HEADER ======================= */}
       <header
+        ref={headerRef}
         className="glass-header"
         style={{
           position: 'sticky',
