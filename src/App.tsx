@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Phone, Calendar, Star, CheckCircle, Wrench, MapPin, ChevronRight, Home, MessageSquare, Zap, MoreVertical,
+  Phone, Calendar, Star, CheckCircle, Wrench, MapPin, ChevronRight, Home, MessageSquare, Zap, MoreVertical, X,
 } from 'lucide-react';
 import BookingModal from './BookingModal';
 import {
@@ -206,6 +206,17 @@ export function App() {
               style={{ overflow: 'hidden', backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
             >
               <div style={{ padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '2px 0 8px 0', marginBottom: 4, borderBottom: '1px solid #F0F0F0' }}>
+                  <strong style={{ fontSize: '0.8rem', color: '#757575', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Menu</strong>
+                  <button
+                    type="button"
+                    onClick={() => setMenuOpen(false)}
+                    aria-label="Close menu"
+                    style={{ background: '#F3F4F6', border: 'none', color: '#101010', width: 30, height: 30, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
                 {NAV_ITEMS.map((item) => (
                   <button
                     type="button"
