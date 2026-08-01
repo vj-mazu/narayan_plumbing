@@ -126,8 +126,8 @@ export function App() {
             </div>
           </button>
 
-          {/* Desktop nav links */}
-          <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: 4, flexWrap: 'wrap' }} aria-label="Main navigation">
+          {/* Desktop nav links (hidden on mobile via CSS, shown >=901px) */}
+          <nav className="desktop-nav" style={{ alignItems: 'center', gap: 4, flexWrap: 'wrap' }} aria-label="Main navigation">
             {NAV_ITEMS.map((item) => (
               <button
                 type="button"
