@@ -1,19 +1,14 @@
 :root {
-  /* Exact Colors from Poster */
-  --poster-navy-dark: #071329;
-  --poster-navy-main: #0B2545;
-  --poster-navy-blue: #0D2C54;
-  --poster-blue-ribbon: #0047AB;
-  --poster-orange-bright: #FF5A1F;
-  --poster-orange-hover: #E0480E;
-  --poster-cyan-glow: #00D4FF;
-  --poster-card-bg: #FFFFFF;
-  --poster-card-border: #D1E0F0;
-  --poster-gold: #FFB800;
-  --poster-green: #25D366;
-  --text-dark: #071329;
-  --text-muted: #64748B;
-  --ff-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --brand: #6E42E5;
+  --brand-dark: #5A32C9;
+  --accent: #FF5A1F;
+  --cyan: #00D4FF;
+  --ink: #101010;
+  --muted: #757575;
+  --bg: #F5F5F7;
+  --border: #E0E0E0;
+  --card: #FFFFFF;
+  --ff-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --ff-serif: 'Playfair Display', serif;
 }
 
@@ -21,29 +16,28 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--ff-main);
-  background-color: #F5F5F7;
-  color: var(--text-dark);
+  background-color: var(--bg);
+  color: var(--ink);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  height: 6px;
-  width: 6px;
+button {
+  font-family: inherit;
 }
-::-webkit-scrollbar-track {
-  background: #F5F5F7;
-}
-::-webkit-scrollbar-thumb {
-  background: #6E42E5;
-  border-radius: 4px;
+
+img {
+  max-width: 100%;
 }
 
 /* Hide scrollbar for clean horizontal carousel */
@@ -55,33 +49,77 @@ body {
   scrollbar-width: none;
 }
 
-/* 3D Card Perspective */
-.perspective-1000 {
-  perspective: 1000px;
+/* ================= RESPONSIVE NAVIGATION ================= */
+/* Mobile: 3-dot menu + bottom nav visible, desktop nav hidden */
+.mobile-menu-btn {
+  display: flex;
 }
-.preserve-3d {
-  transform-style: preserve-3d;
+.desktop-nav {
+  display: none;
+}
+.bottom-nav {
+  display: flex;
+}
+.call-number {
+  display: none;
 }
 
-/* Glass Header */
-.glass-header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-/* Responsive Rules */
-@media (max-width: 900px) {
-  .desktop-nav {
-    display: none !important;
-  }
-  .mobile-menu-btn {
-    display: block !important;
+/* Phone number shown on larger screens */
+@media (min-width: 640px) {
+  .call-number {
+    display: inline;
   }
 }
 
+/* Tablet & Desktop: desktop nav visible, mobile nav hidden */
 @media (min-width: 901px) {
-  .mobile-bottom-nav {
+  .mobile-menu-btn {
     display: none !important;
+  }
+  .desktop-nav {
+    display: flex;
+  }
+  .bottom-nav {
+    display: none !important;
+  }
+}
+
+/* Small phones: tighter spacing, hide full-width call label */
+@media (max-width: 420px) {
+  .call-label {
+    display: none;
+  }
+}
+
+/* Very small phones: icon-only Book Now button keeps header tidy */
+@media (max-width: 360px) {
+  .book-now-label {
+    display: none;
+  }
+  .header-book-btn {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+/* Keep focus visible for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Toast slide-in */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
