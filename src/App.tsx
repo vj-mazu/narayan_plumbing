@@ -74,12 +74,22 @@ export function App() {
   }, [isAdmin]);
 
   const scrollToSection = (id: string) => {
+    const wasOpen = menuOpen;
     setMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      const headerOffset = 72;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-      window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+    const doScroll = () => {
+      const element = document.getElementById(id);
+      if (element) {
+        const headerOffset = 72;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+      }
+    };
+    if (wasOpen) {
+      // Wait for the dropdown close animation so the header height is final
+      // and the scroll lands on the exact section.
+      setTimeout(doScroll, 280);
+    } else {
+      doScroll();
     }
   };
 
@@ -232,9 +242,13 @@ export function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMenuOpen(false)}
-                  style={{ color: '#00D4FF', textDecoration: 'none', fontWeight: 800, fontSize: '0.88rem', padding: '10px 4px', display: 'flex', alignItems: 'center', gap: 6 }}
+                  style={{
+                    border: '1.5px solid #E5E7EB', color: '#101010', textDecoration: 'none', textAlign: 'center',
+                    padding: '11px 0', borderRadius: 10, fontWeight: 800, fontSize: '0.85rem',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  }}
                 >
-                  <MapPin size={15} /> Google Maps Location
+                  <MapPin size={16} color="#00D4FF" /> Google Maps Location
                 </a>
                 <a
                   href={`tel:${PHONE_NUMBER}`}
