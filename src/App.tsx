@@ -386,9 +386,9 @@ export function App() {
             <div
               key={idx}
               style={{
-                backgroundColor: '#FFFFFF', borderRadius: 20, padding: 22, border: pkg.popular ? '2px solid #6E42E5' : '1px solid #E0E0E0',
+                backgroundColor: '#FFFFFF', borderRadius: 20, padding: 22, border: pkg.popular ? '2px solid #101010' : '1px solid #E0E0E0',
                 position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                boxShadow: pkg.popular ? '0 12px 30px rgba(110, 66, 229, 0.2)' : '0 6px 18px rgba(0,0,0,0.05)',
+                boxShadow: pkg.popular ? '0 12px 30px rgba(0,0,0,0.12)' : '0 6px 18px rgba(0,0,0,0.05)',
               }}
             >
               <div>
@@ -396,12 +396,12 @@ export function App() {
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, margin: '10px 0' }}>
                   <span style={{ fontSize: '1.8rem', fontWeight: 900, color: '#101010' }}>{pkg.price}</span>
                   <span style={{ fontSize: '0.85rem', color: '#757575', textDecoration: 'line-through' }}>{pkg.originalPrice}</span>
-                  {pkg.popular && <span style={{ fontSize: '0.68rem', color: '#6E42E5', fontWeight: 800 }}>MOST POPULAR</span>}
+                  {pkg.popular && <span style={{ fontSize: '0.68rem', color: '#FF5A1F', fontWeight: 800 }}>MOST POPULAR</span>}
                 </div>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '14px 0' }}>
                   {pkg.features.map((feat, fIdx) => (
                     <li key={fIdx} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#424242', marginBottom: 8 }}>
-                      <CheckCircle size={14} color="#6E42E5" />
+                      <CheckCircle size={14} color="#16A34A" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -409,7 +409,7 @@ export function App() {
               </div>
               <button
                 onClick={() => openBooking(pkg.name)}
-                style={{ width: '100%', backgroundColor: pkg.popular ? '#6E42E5' : '#101010', color: '#FFFFFF', border: 'none', padding: '11px 0', borderRadius: 10, fontWeight: 800, fontSize: '0.82rem', cursor: 'pointer', marginTop: 10 }}
+                style={{ width: '100%', backgroundColor: '#101010', color: '#FFFFFF', border: 'none', padding: '11px 0', borderRadius: 10, fontWeight: 800, fontSize: '0.82rem', cursor: 'pointer', marginTop: 10 }}
               >
                 Book Package
               </button>
