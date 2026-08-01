@@ -8,7 +8,7 @@ import {
   QUICK_CATEGORIES, CORE_SERVICES, TRENDING_SERVICES, PACKAGES,
   WHY_CHOOSE, REVIEWS, FAQS, AREAS_SERVED,
 } from './data';
-import { PHONE_NUMBER, PHONE_DISPLAY, ADMIN_ROUTE } from './types';
+import { PHONE_NUMBER, PHONE_DISPLAY } from './types';
 
 const AdminPanel = lazy(() => import('./AdminPanel'));
 
@@ -391,9 +391,6 @@ export function App() {
                 boxShadow: pkg.popular ? '0 12px 30px rgba(110, 66, 229, 0.2)' : '0 6px 18px rgba(0,0,0,0.05)',
               }}
             >
-              <div style={{ position: 'absolute', top: 12, right: 14, backgroundColor: '#6E42E5', color: '#FFFFFF', fontSize: '0.62rem', fontWeight: 900, padding: '3px 8px', borderRadius: 8 }}>
-                {pkg.badge}
-              </div>
               <div>
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#101010', margin: 0 }}>{pkg.name}</h3>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, margin: '10px 0' }}>
@@ -551,7 +548,6 @@ export function App() {
             <button type="button" onClick={() => scrollToSection('services')} style={{ background: 'none', border: 'none', color: '#9E9E9E', padding: 0, margin: 0, cursor: 'pointer', fontSize: '0.8rem', display: 'block' }}>Services</button>
             <button type="button" onClick={() => scrollToSection('packages')} style={{ background: 'none', border: 'none', color: '#9E9E9E', padding: '4px 0', cursor: 'pointer', fontSize: '0.8rem', display: 'block' }}>Packages</button>
             <button type="button" onClick={() => scrollToSection('reviews')} style={{ background: 'none', border: 'none', color: '#9E9E9E', padding: 0, margin: 0, cursor: 'pointer', fontSize: '0.8rem', display: 'block' }}>Reviews</button>
-            <a href={ADMIN_ROUTE} style={{ color: '#00D4FF', textDecoration: 'none', display: 'inline-block', marginTop: 8, fontSize: '0.75rem', backgroundColor: 'rgba(110,66,229,0.2)', padding: '6px 12px', borderRadius: 8, fontWeight: 800 }}>🔐 Admin Login</a>
           </div>
         </div>
         <div style={{ maxWidth: 1200, margin: '24px auto 0', paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center', fontSize: '0.7rem' }}>
