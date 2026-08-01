@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Narayan Plumbing Services Bangalore | Plumber in 30 Mins – Call +91 96061 57745</title>
+  <meta name="description" content="Verified plumbers at your doorstep in 30 minutes. Upfront pricing, 30-day warranty. Tap repair, drain unblocking, geyser service & more." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #6E42E5;
+      --brand-dark: #5A32C9;
+      --accent: #FF5A1F;
+      --cyan: #00D4FF;
+      --ink: #101010;
+      --muted: #757575;
+      --bg: #F5F5F7;
+      --border: #E0E0E0;
+      --card: #FFFFFF;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    button { font-family: inherit; cursor: pointer; }
+    a { text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid #E5E7EB;
+      backdrop-filter: blur(8px);
+    }
+    .hdr {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .brand {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      padding: 0;
+      text-align: left;
+    }
+    .blogo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background-color: #101010;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+    .brand-loc {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.66rem;
+      color: var(--brand);
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    .brand-title {
+      font-size: 0.88rem;
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+    .brand-title span { color: var(--brand); }
+    .desktop-nav { display: none; }
+    .hdr-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .call-btn {
+      background-color: #F3F4F6;
+      color: var(--ink);
+      padding: 8px 12px;
+      border-radius: 18px;
+      font-weight: 800;
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .call-btn span.num { color: var(--brand); font-weight: 900; display: none; }
+    .book-btn {
+      background-color: var(--brand);
+      color: #FFFFFF;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 18px;
+      font-weight: 900;
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 10px rgba(110, 66, 229, 0.3);
+    }
+    .menu-btn {
+      background-color: #F3F4F6;
+      border: none;
+      color: var(--ink);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mob-dropdown {
+      display: none;
+      background-color: #FFFFFF;
+      border-top: 1px solid #E5E7EB;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 12px 16px;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mob-dropdown.open { display: flex; }
+    .mob-dropdown button {
+      background: none;
+      border: none;
+      text-align: left;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 10px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #F0F0F0;
+    }
+    .mob-dropdown a.call-act {
+      background-color: var(--accent);
+      color: #FFFFFF;
+      text-align: center;
+      padding: 12px 0;
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    @media (min-width: 640px) {
+      .call-btn span.num { display: inline; }
+    }
+    @media (min-width: 901px) {
+      .menu-btn { display: none !important; }
+      .desktop-nav { display: flex; align-items: center; gap: 4px; }
+      .desktop-nav button {
+        background: none;
+        border: none;
+        color: #424242;
+        font-weight: 700;
+        font-size: 0.8rem;
+        padding: 8px 12px;
+        border-radius: 8px;
+      }
+      .desktop-nav button:hover { background: rgba(0,0,0,0.04); }
+      .bnav { display: none !important; }
+    }
+
+    /* HERO */
+    .hero { background-color: #FFFFFF; padding: 16px 14px 20px; border-bottom: 1px solid var(--border); }
+    .hero-card {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #101010 0%, #1A1A1A 100%);
+      color: #FFFFFF;
+      border-radius: 18px;
+      padding: 22px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .hero-tag {
+      background-color: var(--accent);
+      color: #FFFFFF;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+    .hero-title {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 900;
+      margin-top: 8px;
+      line-height: 1.2;
+    }
+    .hero-title span { color: var(--cyan); }
+    .hero-desc { font-size: 0.8rem; color: #B0B0B0; margin-top: 6px; }
+    .hero-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .hero-timer {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.08);
+      border: 3px solid var(--brand);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-timer .num { font-size: 1.05rem; font-weight: 900; color: #FFFFFF; line-height: 1; }
+    .hero-timer .unit { font-size: 0.5rem; font-weight: 800; color: var(--cyan); }
+    .hero-book {
+      background-color: var(--accent);
+      color: #FFFFFF;
+      border: none;
+      padding: 13px 22px;
+      border-radius: 22px;
+      font-weight: 900;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 14px rgba(255, 90, 31, 0.4);
+    }
+
+    /* QUICK CATEGORIES */
+    .qc-sec { background-color: #FFFFFF; padding: 20px 14px; border-bottom: 1px solid var(--border); }
+    .qc-wrap { max-width: 1200px; margin: 0 auto; }
+    .qc-sec h2 { font-size: 1.05rem; font-weight: 800; color: var(--ink); marginBottom: 14px; }
+    .qc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+    @media (min-width: 480px) {
+      .qc-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+    .qc-card {
+      background-color: var(--bg);
+      border-radius: 14px;
+      padding: 14px 6px;
+      text-align: center;
+      border: 1px solid #EAEAEA;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .qc-card .icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background-color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    }
+    .qc-card .name { font-size: 0.74rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+    .qc-card .price { font-size: 0.65rem; color: var(--brand); font-weight: 800; margin-top: 3px; }
+
+    /* CORE SERVICES */
+    .srv-sec { max-width: 1200px; margin: 26px auto; padding: 0 14px; }
+    .srv-sec h2 { font-size: 1.25rem; font-weight: 900; color: var(--ink); margin-bottom: 2px; }
+    .srv-sec p.subtitle { font-size: 0.78rem; color: var(--muted); margin-bottom: 16px; }
+    .srv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .srv-card {
+      background-color: #FFFFFF;
+      border-radius: 16px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+    }
+    .srv-info { flex: 1; min-width: 0; }
+    .srv-rating { display: flex; alignItems: center; gap: 6px; margin-bottom: 4px; }
+    .srv-rating span.rate { font-size: 0.7rem; font-weight: 800; color: var(--brand); background-color: #F0EAFB; padding: 2px 6px; border-radius: 6px; }
+    .srv-rating span.verify { font-size: 0.68rem; color: var(--muted); }
+    .srv-card h3 { font-size: 0.92rem; font-weight: 800; color: var(--ink); margin: 3px 0; }
+    .srv-card .price { font-size: 0.9rem; font-weight: 900; color: var(--ink); margin: 3px 0; }
+    .srv-card .desc { font-size: 0.75rem; color: var(--muted); line-height: 1.35; }
+    .srv-actions { display: flex; flexDirection: column; alignItems: center; justifyContent: space-between; width: 70px; flex-shrink: 0; }
+    .srv-actions .icon { width: 52px; height: 52px; border-radius: 12px; background-color: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; }
+    .srv-actions button { width: 100%; background-color: var(--brand); color: #FFFFFF; border: none; border-radius: 8px; padding: 6px 0; font-weight: 900; font-size: 0.76rem; }
+
+    /* TRENDING */
+    .tr-sec { background-color: #FFFFFF; padding: 32px 14px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .tr-wrap { max-width: 1200px; margin: 0 auto; }
+    .tr-wrap h2 { font-size: 1.25rem; font-weight: 900; color: var(--ink); }
+    .tr-wrap p.subtitle { font-size: 0.78rem; color: var(--muted); margin-bottom: 16px; }
+    .tr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+    .tr-card { background-color: var(--bg); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); display: flex; flex-direction: column; }
+    .tr-img-box { position: relative; height: 140px; overflow: hidden; }
+    .tr-img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .tr-img-box .tag { position: absolute; top: 8px; left: 8px; background-color: #101010; color: #FFFFFF; font-size: 0.6rem; font-weight: 800; padding: 3px 8px; border-radius: 10px; }
+    .tr-body { padding: 12px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .tr-body h3 { font-size: 0.92rem; font-weight: 800; color: var(--ink); marginBottom: 3px; }
+    .tr-body p { font-size: 0.75rem; color: var(--muted); line-height: 1.35; }
+    .tr-body button { margin-top: 12px; background-color: #FFFFFF; border: 1px solid #101010; color: #101010; padding: 6px 12px; border-radius: 8px; font-weight: 800; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 4px; }
+
+    /* PACKAGES */
+    .pkg-sec { max-width: 1200px; margin: 32px auto; padding: 0 14px; }
+    .pkg-sec h2 { font-size: 1.25rem; font-weight: 900; color: var(--ink); }
+    .pkg-sec p.subtitle { font-size: 0.78rem; color: var(--muted); margin-bottom: 16px; }
+    .pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .pkg-card {
+      background-color: #FFFFFF;
+      border-radius: 20px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+    .pkg-card.popular { border: 2px solid #101010; box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
+    .pkg-card h3 { font-size: 1.1rem; font-weight: 800; color: var(--ink); }
+    .pkg-price-box { display: flex; align-items: baseline; gap: 8px; margin: 10px 0; }
+    .pkg-price-box .price { font-size: 1.8rem; font-weight: 900; color: var(--ink); }
+    .pkg-price-box .original { font-size: 0.85rem; color: var(--muted); text-decoration: line-through; }
+    .pkg-price-box .pop-badge { font-size: 0.68rem; color: var(--accent); font-weight: 800; }
+    .pkg-features { list-style: none; padding: 0; margin: 14px 0; }
+    .pkg-features li { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: #424242; mb: 8px; }
+    .pkg-features li::before { content: '✓'; color: #16A34A; font-weight: 900; }
+    .pkg-card button { width: 100%; background-color: #101010; color: #FFFFFF; border: none; padding: 11px 0; border-radius: 10px; font-weight: 800; font-size: 0.82rem; margin-top: 10px; }
+
+    /* WHY CHOOSE */
+    .why-sec { background-color: #FFFFFF; padding: 32px 14px; border-top: 1px solid var(--border); }
+    .why-wrap { max-width: 1200px; margin: 0 auto; }
+    .why-wrap h2 { font-size: 1.25rem; font-weight: 900; color: var(--ink); margin-bottom: 16px; }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .why-card { background-color: var(--bg); border-radius: 14px; padding: 14px; display: flex; gap: 12px; align-items: flex-start; }
+    .why-card .icon { font-size: 1.6rem; }
+    .why-card h3 { font-size: 0.88rem; font-weight: 800; color: var(--ink); margin-bottom: 2px; }
+    .why-card p { font-size: 0.75rem; color: var(--muted); line-height: 1.35; }
+
+    /* AREAS SERVED */
+    .areas-sec { max-width: 1200px; margin: 32px auto; padding: 0 14px; }
+    .areas-sec h2 { font-size: 1.25rem; font-weight: 900; color: var(--ink); }
+    .areas-sec p.subtitle { font-size: 0.78rem; color: var(--muted); margin-bottom: 14px; }
+    .areas-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .area-pill { background-color: #FFFFFF; border: 1px solid var(--border); border-radius: 20px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: #424242; display: flex; align-items: center; gap: 6px; }
+
+    /* REVIEWS */
+    .rev-sec { max-width: 1200px; margin: 32px auto; padding: 0 14px; }
+    .rev-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .rev-hdr h2 { font-size: 1.25rem; font-weight: 900; color: var(--ink); }
+    .rev-hdr span { font-size: 0.75rem; color: var(--brand); font-weight: 700; }
+    .rev-track { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; }
+    .rev-card { min-width: 260px; max-width: 280px; background-color: #FFFFFF; border-radius: 16px; padding: 16px; border: 1px solid var(--border); scroll-snap-align: start; flex-shrink: 0; box-shadow: 0 3px 10px rgba(0,0,0,0.03); }
+    .rev-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .rev-top h4 { font-weight: 800; color: var(--ink); fontSize: 0.88rem; }
+    .rev-top span.area { font-size: 0.7rem; color: var(--muted); }
+    .rev-top span.time { font-size: 0.7rem; color: #9E9E9E; }
+    .rev-card .stars { color: #FFB800; margin-bottom: 6px; font-size: 0.8rem; }
+    .rev-card p { font-size: 0.8rem; color: #424242; line-height: 1.4; }
+
+    /* FAQS */
+    .faq-sec { background-color: #FFFFFF; padding: 32px 14px; border-top: 1px solid var(--border); }
+    .faq-wrap { max-width: 800px; margin: 0 auto; }
+    .faq-wrap h2 { font-size: 1.25rem; font-weight: 900; color: var(--ink); margin-bottom: 16px; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .faq-q { width: 100%; padding: 12px 14px; background-color: var(--bg); border: none; text-align: left; font-weight: 700; color: var(--ink); font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q span.ch { transition: transform 0.2s; font-size: 0.8rem; opacity: 0.7; }
+    .faq-q.open span.ch { transform: rotate(90deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.28s ease, padding 0.28s; background-color: #FFFFFF; font-size: 0.8rem; color: #616161; line-height: 1.45; }
+    .faq-a.open { max-height: 200px; padding: 12px 14px; }
+
+    /* FOOTER */
+    footer { background-color: #101010; color: #9E9E9E; padding: 32px 14px 96px; font-size: 0.8rem; }
+    .ft-wrap { maxWidth: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+    footer h3 { color: #FFFFFF; font-weight: 900; font-size: 1.1rem; margin-bottom: 10px; }
+    footer h3 span { color: var(--brand); }
+    footer h4 { color: #FFFFFF; font-weight: 800; margin-bottom: 10px; }
+    footer p, footer a.fl { font-size: 0.8rem; color: #9E9E9E; line-height: 1.8; display: block; }
+    footer a.fl strong { color: #00D4FF; }
+    .ft-bot { max-width: 1200px; margin: 24px auto 0; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.7rem; }
+
+    /* BOTTOM NAV */
+    .bnav { position: fixed; bottom: 0; left: 0; right: 0; height: 58px; background-color: #FFFFFF; border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 1000; box-shadow: 0 -4px 15px rgba(0,0,0,0.06); padding-bottom: env(safe-area-inset-bottom); }
+    .bnav-item { background: none; border: none; color: var(--muted); display: flex; flex-direction: column; align-items: center; font-size: 1.2rem; cursor: pointer; text-decoration: none; }
+    .bnav-item span { font-size: 0.62rem; margin-top: 2px; font-weight: 700; color: var(--muted); }
+    .bnav-item.active { color: var(--brand); }
+    .bnav-item.active span { color: var(--brand); }
+    .bnav-book { transform: translateY(-12px); height: 44px; padding: 0 18px; border-radius: 22px; border: 4px solid var(--bg); background-color: var(--brand); color: #FFFFFF; display: flex; align-items: center; gap: 6px; font-weight: 900; font-size: 0.8rem; box-shadow: 0 6px 18px rgba(110, 66, 229, 0.45); }
+
+    /* WHATSAPP FLOAT */
+    .waf { position: fixed; bottom: 70px; right: 14px; width: 46px; height: 46px; border-radius: 50%; background-color: #25D366; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4); z-index: 999; font-size: 1.4rem; }
+
+    /* BOOKING MODAL */
+    .mov { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 14px; opacity: 0; pointer-events: none; transition: opacity 0.22s; }
+    .mov.open { opacity: 1; pointer-events: auto; }
+    .mpn { background-color: #FFFFFF; border-radius: 20px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.15); border: 1px solid var(--border); }
+    .mhd { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .mhd h3 { font-size: 1.05rem; font-weight: 900; color: var(--ink); }
+    .mhd p { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+    .mcl { background-color: #F3F4F6; border: none; color: var(--ink); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+    .mbd { padding: 20px; }
+    .fg { margin-bottom: 14px; }
+    .flbl { font-size: 0.75rem; font-weight: 800; color: #424242; display: block; margin-bottom: 5px; }
+    .fc { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background-color: #FFFFFF; color: var(--ink); font-size: 0.85rem; outline: none; }
+    .fc:focus { border-color: var(--brand); }
+    .dbtns, .tbtns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .dbtn { flex: 1; min-width: 80px; padding: 8px 6px; border-radius: 8px; border: 1px solid var(--border); background-color: var(--bg); color: #424242; font-weight: 800; font-size: 0.74rem; text-align: center; }
+    .dbtn.active, .tbtn.active { background-color: var(--brand); border-color: var(--brand); color: #FFFFFF; }
+    .tbtn { padding: 7px 10px; border-radius: 8px; border: 1px solid var(--border); background-color: var(--bg); color: #424242; font-weight: 700; font-size: 0.72rem; }
+    .ferr { font-size: 0.7rem; color: #DC2626; margin-top: 3px; display: block; }
+    .bcnf { width: 100%; background-color: var(--brand); color: #FFFFFF; border: none; padding: 14px; border-radius: 10px; font-weight: 900; font-size: 0.9rem; box-shadow: 0 4px 16px rgba(110, 66, 229, 0.3); margin-top: 4px; }
+    .fnote { font-size: 0.68rem; color: var(--muted); text-align: center; margin-top: 10px; }
+    .bkok { padding: 36px 24px; text-align: center; }
+    .okico { width: 70px; height: 70px; border-radius: 50%; background-color: #22C55E; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 16px; box-shadow: 0 0 30px rgba(34,197,94,0.3); }
+    .bkok h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 8px; }
+    .bkok p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin-bottom: 6px; }
+    .bkid { color: var(--brand); font-weight: 900; }
+    .bcn { display: inline-flex; align-items: center; gap: 6px; background-color: #22C55E; color: #FFFFFF; padding: 11px 20px; border-radius: 10px; font-weight: 800; font-size: 0.85rem; margin-top: 14px; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="top">
+  <div class="hdr">
+    <button class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Home">
+      <div class="blogo">🔧</div>
+      <div>
+        <div class="brand-loc">📍 BANGALORE</div>
+        <div class="brand-title">Narayan <span>Plumbing</span></div>
+      </div>
+    </button>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <button onclick="goTo('services')">Services</button>
+      <button onclick="goTo('trending')">Trending</button>
+      <button onclick="goTo('packages')">Packages</button>
+      <button onclick="goTo('why-us')">Why Us</button>
+      <button onclick="goTo('reviews')">Reviews</button>
+      <button onclick="goTo('faqs')">FAQs</button>
+    </nav>
+    <div class="hdr-actions">
+      <a href="tel:9606157745" class="call-btn" aria-label="Call">
+        📞 <span class="call-label">Call</span> <span class="num">9606157745</span>
+      </a>
+      <button class="book-btn" onclick="openBk()">
+        📅 <span class="book-now-label">Book Now</span>
+      </button>
+      <button class="menu-btn" onclick="toggleM()" aria-label="Open menu" id="hbtn">☰</button>
+    </div>
+  </div>
+  <nav class="mob-dropdown" id="mmenu" aria-label="Mobile navigation">
+    <button onclick="goTo('services');closeM()">Services <span>›</span></button>
+    <button onclick="goTo('trending');closeM()">Trending <span>›</span></button>
+    <button onclick="goTo('packages');closeM()">Packages <span>›</span></button>
+    <button onclick="goTo('why-us');closeM()">Why Us <span>›</span></button>
+    <button onclick="goTo('reviews');closeM()">Reviews <span>›</span></button>
+    <button onclick="goTo('faqs');closeM()">FAQs <span>›</span></button>
+    <a href="tel:9606157745" class="call-act">📞 CALL NOW (9606157745)</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-card">
+    <div>
+      <span class="hero-tag">EXPRESS 30-MIN DOORSTEP</span>
+      <h1 class="hero-title">Expert Plumbers at<br><span>Your Doorstep in 30 Mins</span></h1>
+      <p class="hero-desc">Verified Plumbers • 30-Day Warranty • Upfront Pricing</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-timer">
+        <span>⚡</span>
+        <span class="num">30</span>
+        <span class="unit">MINS</span>
+      </div>
+      <button class="hero-book" onclick="openBk()">Book Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK CATEGORIES -->
+<section class="qc-sec">
+  <div class="qc-wrap">
+    <h2>What are you looking for?</h2>
+    <div class="qc-grid" id="qc"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="srv-sec">
+  <h2>Plumbing Repairs & Services (12 Core Services)</h2>
+  <p class="subtitle">100% guaranteed doorstep service by background-checked pros</p>
+  <div class="srv-grid" id="sg"></div>
+</section>
+
+<!-- TRENDING -->
+<section id="trending" class="tr-sec">
+  <div class="tr-wrap">
+    <h2>Trending Services & Renovation</h2>
+    <p class="subtitle">Most booked home upgrades this month</p>
+    <div class="tr-grid" id="ts"></div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" class="pkg-sec">
+  <h2>Plumbing Care Packages</h2>
+  <p class="subtitle">Save more with value bundles — every package includes a 30-day warranty</p>
+  <div class="pkg-grid" id="pg"></div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section id="why-us" class="why-sec">
+  <div class="why-wrap">
+    <h2>The Narayan Plumbing Guarantee</h2>
+    <div class="why-grid" id="wg"></div>
+  </div>
+</section>
+
+<!-- AREAS SERVED -->
+<section id="areas" class="areas-sec">
+  <h2>Areas We Serve in Bangalore</h2>
+  <p class="subtitle">30-minute response in these localities and nearby</p>
+  <div class="areas-wrap" id="aw"></div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="rev-sec">
+  <div class="rev-hdr">
+    <h2>Customer Reviews</h2>
+    <span>Swipe →</span>
+  </div>
+  <div class="rev-track no-scrollbar" id="rs"></div>
+</section>
+
+<!-- FAQS -->
+<section id="faqs" class="faq-sec">
+  <div class="faq-wrap">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list" id="fi"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-wrap">
+    <div>
+      <h3>NARAYAN <span>PLUMBING</span></h3>
+      <p>Verified plumbing professionals. 30-minute rapid doorstep service across Bangalore.</p>
+    </div>
+    <div>
+      <h4>Contact Details</h4>
+      <p>📞 <a href="tel:9606157745" class="fl"><strong>+91 96061 57745</strong></a></p>
+      <p>📍 Citywide Service Hub, Bangalore</p>
+      <p>⏰ 24 Hours / 7 Days Open</p>
+    </div>
+    <div>
+      <h4>Our Guarantees</h4>
+      <p>✔ 30-Min Rapid Arrival</p>
+      <p>✔ 30 Days Free Warranty</p>
+      <p>✔ Upfront Rate Card</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#services" class="fl" onclick="goTo('services');return false">Services</a>
+      <a href="#packages" class="fl" onclick="goTo('packages');return false">Packages</a>
+      <a href="#reviews" class="fl" onclick="goTo('reviews');return false">Reviews</a>
+    </div>
+  </div>
+  <div class="ft-bot">© 2025 Narayan Plumbing Services. All Rights Reserved.</div>
+</footer>
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bnav" aria-label="Mobile navigation">
+  <button class="bnav-item active" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    🏠<span>Home</span>
+  </button>
+  <button class="bnav-item" onclick="goTo('services')">
+    🔧<span>Services</span>
+  </button>
+  <button class="bnav-book" onclick="openBk()">
+    📅 Book
+  </button>
+  <button class="bnav-item" onclick="goTo('reviews')">
+    ⭐<span>Reviews</span>
+  </button>
+  <a href="tel:9606157745" class="bnav-item">
+    📞<span>Call</span>
+  </a>
+</nav>
+
+<!-- WHATSAPP FLOAT -->
+<a class="waf" href="https://wa.me/919606157745?text=Hi%20Narayan%20Plumbing%20Services,%20I%20need%20plumbing%20assistance." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">💬</a>
+
+<!-- BOOKING MODAL -->
+<div class="mov" id="mo" onclick="hdlOv(event)" role="dialog" aria-modal="true">
+  <div class="mpn" onclick="event.stopPropagation()">
+    <div class="mhd">
+      <div><h3>📅 Book a Service Visit</h3><p>Technician arrives at your doorstep in 30 mins</p></div>
+      <button class="mcl" onclick="closeBk()" aria-label="Close">✕</button>
+    </div>
+    <div class="mbd" id="mb"></div>
+  </div>
+</div>
+
+<script>
+const PH='9606157745',WA='https://wa.me/91'+PH+'?text=';
+const QCAT=[
+  {id:'tap',name:'Tap Repair',icon:'🚰',price:'₹149'},
+  {id:'toilet',name:'WC & Toilet',icon:'🚽',price:'₹349'},
+  {id:'pipe',name:'Leakage Repair',icon:'🔧',price:'₹199'},
+  {id:'drain',name:'Drain Unblock',icon:'🌪️',price:'₹399'},
+  {id:'geyser',name:'Geyser Service',icon:'♨️',price:'₹349'},
+  {id:'tank',name:'Tank Cleaning',icon:'🛢️',price:'₹699'}
+];
+const SRVS=[
+  {id:'tap',name:'Tap Installation & Repair',icon:'🚰',desc:'Leaking taps, mixer replacement, cartridge repair & fitting.',price:'₹149',rating:'4.8 ★'},
+  {id:'shower',name:'Shower Installation & Repair',icon:'🚿',desc:'Wall mixer, rain showerhead, pressure boosting & repair.',price:'₹249',rating:'4.9 ★'},
+  {id:'toilet',name:'Toilet (WC) Installation & Repair',icon:'🚽',desc:'Flush tank leak repair, western/commode installation & gasket.',price:'₹349',rating:'4.8 ★'},
+  {id:'basin',name:'Wash Basin Installation & Repair',icon:'🧼',desc:'Pedestal basin, counter basin & bottle trap replacement.',price:'₹299',rating:'4.7 ★'},
+  {id:'kitchen',name:'Kitchen Sink Installation & Repair',icon:'🥣',desc:'Sink clogged drain, waste pipe replacement & coupling.',price:'₹249',rating:'4.9 ★'},
+  {id:'pipe-leak',name:'Pipe Leak Repair',icon:'🔧',desc:'Concealed wall leaks, joint sealing & copper/CPVC patching.',price:'₹199',rating:'4.9 ★'},
+  {id:'pipe-inst',name:'Pipe Installation & Replacement',icon:'🔩',desc:'New water pipeline layout, CPVC/UPVC fitting & line extension.',price:'₹499',rating:'4.8 ★'},
+  {id:'drain',name:'Drain Blockage Cleaning',icon:'🌪️',desc:'High-pressure drain jetting, floor trap unblocking & snake line.',price:'₹399',rating:'4.8 ★'},
+  {id:'tank',name:'Water Tank Installation & Clean',icon:'🛢️',desc:'Overhead tank fitting, auto-cut valve, float valve & clean tank.',price:'₹699',rating:'4.9 ★'},
+  {id:'geyser',name:'Geyser Installation & Repair',icon:'♨️',desc:'Thermostat repair, heating element, inlet connection & mounting.',price:'₹349',rating:'4.9 ★'},
+  {id:'bath-plumb',name:'Bathroom Plumbing Services',icon:'🛀',desc:'Complete sanitaryware overhaul, diverters & fittings.',price:'₹599',rating:'4.8 ★'},
+  {id:'emergency',name:'Emergency Plumbing Service',icon:'🚨',desc:'24/7 priority burst pipe, main valve leak & midnight emergency.',price:'₹499',rating:'5.0 ★'}
+];
+const TRND=[
+  {title:'Bathroom Renovation',tag:'POPULAR',image:'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=300&q=75',desc:'Luxury marble layouts, concealed diverters & rain shower systems.'},
+  {title:'Kitchen Renovation',tag:'HOT',image:'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=300&q=75',desc:'Modular plumbing, under-sink RO setup & heavy-duty waste fittings.'},
+  {title:'Complete Plumbing',tag:'BEST VALUE',image:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=300&q=75',desc:'Whole house piping, pressure pump integration & valve overhaul.'},
+  {title:'Water Tank Cleaning',tag:'HYGIENE',image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=300&q=75',desc:'High-pressure jet washing, vacuum sludger & UV sanitization.'},
+  {title:'Waterproofing Solutions',tag:'PROTECT',image:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=300&q=75',desc:'Seepage treatment, slab crack injection & tile chemical coating.'},
+  {title:'CPVC / UPVC Pipeline',tag:'DURABLE',image:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=300&q=75',desc:'Lead-free food grade piping with 10-year joint leak guarantee.'},
+  {title:'Geyser Installation',tag:'WINTER CARE',image:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=300&q=75',desc:'Instant & storage water heater mounting with safety valve test.'},
+  {title:'Drain Cleaning',tag:'EXPRESS',image:'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=300&q=75',desc:'Camera line inspection & heavy motorized drain auger clearance.'}
+];
+const WHY=[
+  {title:'30 Minutes Doorstep Service',desc:'GPS tracked local plumbers stationed nearby for rapid response.',icon:'⚡'},
+  {title:'Verified & Trained Experts',desc:'Background checked professionals with 5+ years hands-on experience.',icon:'🛡️'},
+  {title:'Transparent Upfront Pricing',desc:'Rate card approval before starting work. Zero hidden surprise fees.',icon:'🏷️'},
+  {title:'Genuine Parts & Quality Work',desc:'Original ISI-certified fittings from top brands (Jaquar, Astral, Supreme).',icon:'🧰'},
+  {title:'30 Days Service Warranty',desc:'Free re-visit and fix if issues recur within 30 days of completion.',icon:'📅'},
+  {title:'No Hidden Charges',desc:'Honest billing with invoice details for every single component.',icon:'🚫'}
+];
+const PKGS=[
+  {name:'Essential Home Checkup',price:'₹499',originalPrice:'₹999',popular:false,features:['Whole house tap & valve inspection','Flush tank leak assessment','Minor joint tightening included','Water pressure testing','Free quotation for repairs']},
+  {name:'Complete Bathroom Care',price:'₹1,299',originalPrice:'₹2,499',popular:true,features:['Deep cleaning of all shower heads','2 tap valve/washer replacements','Drain trap descaling & clearing','Geyser safety valve inspection','Anti-leak seal application']},
+  {name:'Full House Plumbing Audit',price:'₹2,499',originalPrice:'₹4,599',popular:false,features:['Overhead water tank sanitization check','All bathroom & kitchen fixtures service','Main line pressure & leak test','Free 2 minor repair labour jobs','30-day unconditional warranty']}
+];
+const REVS=[
+  {name:'Rajesh Kumar',area:'Indiranagar',rating:5,time:'2 days ago',comment:'Came in 20 minutes! Fixed main pipe leak very fast. Highly professional work.'},
+  {name:'Priya Sharma',area:'Koramangala',rating:5,time:'1 week ago',comment:'Geyser installation done smoothly. Very clean work and affordable price.'},
+  {name:'Anand Verma',area:'Whitefield',rating:5,time:'3 days ago',comment:'Cleared clogged kitchen sink in no time. Transparent pricing approved before work.'},
+  {name:'Suresh Menon',area:'HSR Layout',rating:5,time:'4 days ago',comment:'Super fast response! Tap replacement done within 30 mins. Great experience.'},
+  {name:'Kavita Reddy',area:'Jayanagar',rating:5,time:'Yesterday',comment:'Clean water tank service. Courteous plumber with genuine rates.'}
+];
+const FAQS=[
+  {q:'How fast will the plumber reach my house?',a:'We guarantee a technician at your doorstep within 30 minutes of booking in all covered Bangalore locations.'},
+  {q:'Are your plumbers background verified?',a:'Yes, 100% of our plumbers are police background checked, identity verified and certified.'},
+  {q:'Do you offer warranty on repair work?',a:'Yes, every service comes with a 30-day unconditional service warranty.'}
+];
+const AREAS=['Indiranagar','Koramangala','Whitefield','HSR Layout','Jayanagar','J. P. Nagar','Bannerghatta Road','Electronic City','Marathahalli','Malleshwaram'];
+const SLOTS=['9 AM – 12 PM','12 PM – 3 PM','3 PM – 6 PM','6 PM – 9 PM','9 PM – 12 AM'];
+
+// RENDER QUICK CATEGORIES
+document.getElementById('qc').innerHTML=QCAT.map(c=>`
+  <div class="qc-card" onclick="openBk('${c.name}')" style="cursor:pointer;">
+    <div class="icon-box">${c.icon}</div>
+    <span class="name">${c.name}</span>
+    <span class="price">${c.price}</span>
+  </div>
+`).join('');
+
+// RENDER SERVICES
+document.getElementById('sg').innerHTML=SRVS.map(s=>`
+  <div class="srv-card">
+    <div class="srv-info">
+      <div class="srv-rating">
+        <span class="rate">${s.rating}</span>
+        <span class="verify">Verified Service</span>
+      </div>
+      <h3>${s.name}</h3>
+      <div class="price">${s.price}</div>
+      <p class="desc">${s.desc}</p>
+    </div>
+    <div class="srv-actions">
+      <div class="icon">${s.icon}</div>
+      <button onclick="openBk('${s.name}')">Book</button>
+    </div>
+  </div>
+`).join('');
+
+// RENDER TRENDING
+document.getElementById('ts').innerHTML=TRND.map(t=>`
+  <div class="tr-card" onclick="openBk('${t.title}')">
+    <div class="tr-img-box">
+      <img src="${t.image}" alt="${t.title}" loading="lazy">
+      <span class="tag">${t.tag}</span>
+    </div>
+    <div class="tr-body">
+      <div>
+        <h3>${t.title}</h3>
+        <p>${t.desc}</p>
+      </div>
+      <button onclick="event.stopPropagation(); openBk('${t.title}')">
+        Book Consultation <span>&gt;</span>
+      </button>
+    </div>
+  </div>
+`).join('');
+
+// RENDER PACKAGES
+document.getElementById('pg').innerHTML=PKGS.map(p=>`
+  <div class="pkg-card${p.popular?' popular':''}">
+    <div>
+      <h3>${p.name}</h3>
+      <div class="pkg-price-box">
+        <span class="price">${p.price}</span>
+        <span class="original">${p.originalPrice}</span>
+        ${p.popular?'<span class="pop-badge">MOST POPULAR</span>':''}
+      </div>
+      <ul class="pkg-features">
+        ${p.features.map(f=>`<li>${f}</li>`).join('')}
+      </ul>
+    </div>
+    <button onclick="openBk('${p.name}')">Book Package</button>
+  </div>
+`).join('');
+
+// RENDER WHY
+document.getElementById('wg').innerHTML=WHY.map(w=>`
+  <div class="why-card">
+    <span class="icon">${w.icon}</span>
+    <div>
+      <h3>${w.title}</h3>
+      <p>${w.desc}</p>
+    </div>
+  </div>
+`).join('');
+
+// RENDER AREAS
+document.getElementById('aw').innerHTML=AREAS.map(a=>`
+  <button class="area-pill" onclick="openBk()">
+    📍 ${a}
+  </button>
+`).join('');
+
+// RENDER REVIEWS
+document.getElementById('rs').innerHTML=REVS.map(r=>`
+  <div class="rev-card">
+    <div class="rev-top">
+      <div>
+        <h4>${r.name}</h4>
+        <span class="area">${r.area}</span>
+      </div>
+      <span class="time">${r.time}</span>
+    </div>
+    <div class="stars">★★★★★</div>
+    <p>"${r.comment}"</p>
+  </div>
+`).join('');
+
+// RENDER FAQS
+document.getElementById('fi').innerHTML=FAQS.map((f,i)=>`
+  <div class="faq-item">
+    <button class="faq-q" id="fq${i}" onclick="tFaq(${i})">
+      <span>${f.q}</span>
+      <span class="ch">›</span>
+    </button>
+    <div class="faq-a" id="fa${i}">${f.a}</div>
+  </div>
+`).join('');
+
+function goTo(id){
+  const e=document.getElementById(id);
+  if(e) window.scrollTo({top:e.getBoundingClientRect().top+pageYOffset-70,behavior:'smooth'});
+}
+function toggleM(){
+  const m=document.getElementById('mmenu'),b=document.getElementById('hbtn'),o=m.classList.toggle('open');
+  b.textContent=o?'✕':'☰';
+}
+function closeM(){
+  const m=document.getElementById('mmenu'),b=document.getElementById('hbtn');
+  m.classList.remove('open'); b.textContent='☰';
+}
+function tFaq(i){
+  const b=document.getElementById('fq'+i),a=document.getElementById('fa'+i),o=a.classList.toggle('open');
+  b.classList.toggle('open',o);
+}
+
+let psel='',sdT='today',ssl='';
+function openBk(s){
+  psel=s||SRVS[0].name; sdT='today'; ssl='';
+  rForm();
+  document.getElementById('mo').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeBk(){
+  document.getElementById('mo').classList.remove('open');
+  document.body.style.overflow='';
+}
+function hdlOv(e){if(e.target===document.getElementById('mo'))closeBk()}
+
+function rForm(){
+  const td=new Date().toISOString().split('T')[0];
+  document.getElementById('mb').innerHTML=`
+  <div class="fg"><label class="flbl" for="bsv">Select Service *</label><select id="bsv" class="fc">${SRVS.map(s=>`<option value="${s.name}"${s.name===psel?' selected':''}>${s.name} (${s.price})</option>`).join('')}</select></div>
+  <div class="fg"><label class="flbl" for="bnm">Your Full Name *</label><input id="bnm" type="text" class="fc" placeholder="e.g. Rahul Sharma" autocomplete="name"><span class="ferr" id="enm"></span></div>
+  <div class="fg"><label class="flbl" for="bph">Phone Number *</label><input id="bph" type="tel" class="fc" placeholder="10-digit mobile number" maxlength="10" inputmode="numeric" autocomplete="tel"><span class="ferr" id="eph"></span></div>
+  <div class="fg"><label class="flbl" for="badr">Complete Address *</label><input id="badr" type="text" class="fc" placeholder="House/Flat No., Landmark, Area" autocomplete="street-address"><span class="ferr" id="eadr"></span></div>
+  <div class="fg"><label class="flbl">When do you need service? *</label><div class="dbtns"><button type="button" class="dbtn active" id="dt-today" onclick="sDate('today')">📅 Today</button><button type="button" class="dbtn" id="dt-tomorrow" onclick="sDate('tomorrow')">📅 Tomorrow</button><button type="button" class="dbtn" id="dt-custom" onclick="sDate('custom')">📅 Pick date</button></div><div id="cdw" style="display:none;margin-top:8px"><input type="date" id="bdt" class="fc" min="${td}"></div></div>
+  <div class="fg"><label class="flbl">Preferred Time Slot *</label><div class="tbtns">${SLOTS.map(s=>`<button type="button" class="tbtn" onclick="sSlt('${s}',this)">🕐 ${s}</button>`).join('')}</div><span class="ferr" id="eslt"></span></div>
+  <div class="fg"><label class="flbl" for="bnts">Notes (optional)</label><textarea id="bnts" class="fc" rows="2" placeholder="Describe the issue briefly" style="resize:vertical"></textarea></div>
+  <button type="button" class="bcnf" onclick="subBk()">CONFIRM INSTANT BOOKING</button>
+  <p class="fnote">Free visit &amp; estimate • No payment required now • 30-day warranty</p>`;
+}
+
+function sDate(t){sdT=t;['today','tomorrow','custom'].forEach(x=>document.getElementById('dt-'+x).classList.toggle('active',x===t));document.getElementById('cdw').style.display=t==='custom'?'block':'none'}
+function sSlt(s,b){ssl=s;document.querySelectorAll('.tbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+
+function subBk(){
+  const nm=document.getElementById('bnm').value.trim(),ph=document.getElementById('bph').value.trim(),ad=document.getElementById('badr').value.trim(),sv=document.getElementById('bsv').value,nt=document.getElementById('bnts').value.trim();
+  let ok=true;
+  ['enm','eph','eadr','eslt'].forEach(x=>document.getElementById(x).textContent='');
+  if(nm.length<2){document.getElementById('enm').textContent='Please enter your full name';ok=false}
+  if(!/^[6-9]\d{9}$/.test(ph)){document.getElementById('eph').textContent='Enter valid 10-digit mobile number';ok=false}
+  if(ad.length<10){document.getElementById('eadr').textContent='Enter complete address (min 10 chars)';ok=false}
+  if(!ssl){document.getElementById('eslt').textContent='Please choose a time slot';ok=false}
+  if(!ok)return;
+  const now=new Date(),tmr=new Date();tmr.setDate(tmr.getDate()+1);
+  const cde=document.getElementById('bdt');
+  let ds=now.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  if(sdT==='tomorrow')ds=tmr.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  else if(sdT==='custom'&&cde&&cde.value)ds=new Date(cde.value+'T00:00:00').toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  const bid='NPS'+Date.now().toString(36).toUpperCase().slice(-6);
+  const msg=`🔧 *New Booking – Narayan Plumbing Services*\n\n📋 Booking ID: ${bid}\n👤 Name: ${nm}\n📞 Phone: ${ph}\n📍 Address: ${ad}\n🛠️ Service: ${sv}\n📅 Date: ${ds}\n🕐 Time: ${ssl}${nt?'\n📝 Notes: '+nt:''}\n\n✅ Please confirm this booking.`;
+  showOk(bid,nm,sv,ds);
+  setTimeout(()=>{window.open(WA+encodeURIComponent(msg),'_blank')},1200);
+}
+
+function showOk(id,nm,sv,dt){
+  document.getElementById('mb').innerHTML=`<div class="bkok"><div class="okico">✅</div><h3>Booking Confirmed!</h3><p>Booking ID: <span class="bkid">${id}</span></p><p>Hi <strong>${nm}</strong>, your booking for <strong>${sv}</strong> on <strong>${dt}</strong> is confirmed.</p><p>Our master plumber will call you within 5 minutes to confirm your doorstep location.</p><p style="margin-top:8px;font-size:.75rem;color:#6E42E5">📲 Redirecting to WhatsApp with your booking details…</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px"><a href="tel:9606157745" class="bcn">📞 Need help? Call us</a><button onclick="closeBk()" style="background:rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.15);color:#fff;padding:11px 18px;border-radius:10px;font-weight:800;font-size:.82rem;cursor:pointer">Close</button></div></div>`;
+}
+
+(function(){
+  const el=document.getElementById('rs');if(!el)return;
+  let p=false,pos=0;
+  el.addEventListener('pointerdown',()=>{p=true});
+  el.addEventListener('pointerup',()=>{setTimeout(()=>{p=false},4000)});
+  setInterval(()=>{if(p)return;if(el.scrollLeft+el.clientWidth>=el.scrollWidth-10)pos=0;else pos+=274;el.scrollTo({left:pos,behavior:'smooth'})},3000);
+})();
+</script>
+</body>
+</html>
