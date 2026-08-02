@@ -144,7 +144,13 @@ export function App() {
           ))}
         </div>
         <div className="brand-bar">
-          <button className="menu-button" type="button" onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }} aria-label="Open menu">
+          <button 
+            className="menu-button" 
+            type="button" 
+            onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }} 
+            onTouchStart={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }}
+            aria-label="Open menu"
+          >
             {menuOpen ? <X size={26} /> : <Menu size={30} />}
           </button>
           <button className="brand-lockup" type="button" onClick={(e) => { e.stopPropagation(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
