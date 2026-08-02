@@ -1990,23 +1990,30 @@ img {
   .review-grid article { min-width: 0; }
 
   .proof-bar {
-    width: calc(100% - 24px);
+    width: calc(100% - 12px);
     margin-top: 0;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-radius: 12px;
   }
 
   .proof-bar div {
-    min-height: 142px;
-    padding: 16px 10px;
-    gap: 4px 10px;
+    min-height: 86px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-content: center;
+    gap: 2px;
+    padding: 7px 3px;
+    text-align: center;
   }
 
   .proof-bar strong {
-    font-size: 1.35rem;
+    font-size: .86rem;
   }
 
-  .proof-bar span { font-size: .72rem; }
-  .proof-bar .google-logo { width: 52px; height: 52px; }
+  .proof-bar span { max-width: 78px; font-size: .49rem; line-height: 1.05; }
+  .proof-bar svg { width: 24px; height: 24px; grid-row: auto; }
+  .proof-bar .google-logo { width: 28px; height: 28px; grid-row: auto; }
 
   .services-panel,
   .why-panel {
