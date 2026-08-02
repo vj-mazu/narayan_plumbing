@@ -257,7 +257,7 @@ export function App() {
           <button className="view-all" type="button" onClick={() => openBooking()}>VIEW ALL SERVICES <ChevronRight size={18} /></button>
         </section>
 
-        <section className="lower-poster" aria-label="Trending services and booking call to action">
+        <section className="lower-poster" id="trending" aria-label="Trending services and booking call to action">
           <img src="/narayan-lower-art.png" alt="Trending plumbing services and booking call to action" />
           <button className="lower-hotspot lower-services" type="button" onClick={() => scrollTo('services')} aria-label="View all services" />
           {TRENDING_SERVICES.map((item, index) => (
@@ -285,7 +285,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="packages-panel">
+        <section className="packages-panel" id="packages">
           <span className="section-kicker">Value packages</span>
           <h2>Popular service bundles for homes and businesses</h2>
           <div className="package-grid">
