@@ -144,10 +144,10 @@ export function App() {
           ))}
         </div>
         <div className="brand-bar">
-          <button className="menu-button" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Open menu">
+          <button className="menu-button" type="button" onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }} aria-label="Open menu">
             {menuOpen ? <X size={26} /> : <Menu size={30} />}
           </button>
-          <button className="brand-lockup" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <button className="brand-lockup" type="button" onClick={(e) => { e.stopPropagation(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
             <span className="plumber-avatar" style={{ fontSize: '1.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               👨‍🔧
             </span>
@@ -165,7 +165,7 @@ export function App() {
             <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
             <button type="button" onClick={() => scrollTo('faqs')}>FAQs</button>
           </nav>
-          <a className="call-block" href={`tel:${PHONE_NUMBER}`}>
+          <a className="call-block" href={`tel:${PHONE_NUMBER}`} onClick={(e) => e.stopPropagation()}>
             <Phone size={28} />
             <span>
               <small>Call Us Now</small>
@@ -173,20 +173,20 @@ export function App() {
               <em>24/7 Emergency Service</em>
             </span>
           </a>
-          <button className="book-top" type="button" onClick={() => openBooking()}>
+          <button className="book-top" type="button" onClick={(e) => { e.stopPropagation(); openBooking(); }}>
             <CalendarDays size={28} />
             <span>BOOK SERVICE<small>Schedule Online</small></span>
           </button>
         </div>
         {menuOpen && (
-          <nav className="mobile-drop">
-            <button type="button" onClick={() => scrollTo('services')}>Services</button>
-            <button type="button" onClick={() => scrollTo('trending')}>Trending</button>
-            <button type="button" onClick={() => scrollTo('packages')}>Packages</button>
-            <button type="button" onClick={() => scrollTo('why-us')}>Why Choose</button>
-            <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
-            <button type="button" onClick={() => scrollTo('faqs')}>FAQs</button>
-            <a href={`tel:${PHONE_NUMBER}`}>Call Now</a>
+          <nav className="mobile-drop" onClick={(e) => e.stopPropagation()}>
+            <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('services'); }}>Services</button>
+            <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('trending'); }}>Trending</button>
+            <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('packages'); }}>Packages</button>
+            <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('why-us'); }}>Why Choose</button>
+            <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('reviews'); }}>Reviews</button>
+            <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('faqs'); }}>FAQs</button>
+            <a href={`tel:${PHONE_NUMBER}`} onClick={(e) => e.stopPropagation()}>Call Now</a>
           </nav>
         )}
       </header>
@@ -420,12 +420,12 @@ export function App() {
         </div>
       )}
 
-      <nav className="bottom-nav" aria-label="Mobile navigation">
-        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><Home size={22} /><span>Home</span></button>
-        <button type="button" onClick={() => scrollTo('services')}><Wrench size={22} /><span>Services</span></button>
-        <button className="book-float" type="button" onClick={() => openBooking()}><CalendarDays size={28} /><span>BOOK NOW</span></button>
-        <button type="button" onClick={() => scrollTo('packages')}><Tag size={22} /><span>Packages</span></button>
-        <a href={`tel:${PHONE_NUMBER}`}><Phone size={22} /><span>Contact</span></a>
+      <nav className="bottom-nav" aria-label="Mobile navigation" onClick={(e) => e.stopPropagation()}>
+        <button type="button" onClick={(e) => { e.stopPropagation(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}><Home size={22} /><span>Home</span></button>
+        <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('services'); }}><Wrench size={22} /><span>Services</span></button>
+        <button className="book-float" type="button" onClick={(e) => { e.stopPropagation(); openBooking(); }}><CalendarDays size={28} /><span>BOOK NOW</span></button>
+        <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('packages'); }}><Tag size={22} /><span>Packages</span></button>
+        <a href={`tel:${PHONE_NUMBER}`} onClick={(e) => e.stopPropagation()}><Phone size={22} /><span>Contact</span></a>
       </nav>
 
       <a className="whatsapp" href={`https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent('Hi Narayan Plumbing Services, I need plumbing service.')}`} target="_blank" rel="noreferrer" aria-label="WhatsApp">
