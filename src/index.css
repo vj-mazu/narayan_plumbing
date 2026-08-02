@@ -139,7 +139,7 @@ img {
 .poster-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 9999 !important;
   background: #02091f;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
@@ -365,23 +365,37 @@ img {
 }
 
 .mobile-drop {
-  width: min(1540px, calc(100% - 28px));
-  margin: -4px auto 8px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  position: absolute;
+  top: 96%;
+  right: 14px;
+  width: 240px;
+  background: #0a1628;
+  border: 2px solid rgba(255, 107, 0, 0.35);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 9999;
 }
 
 .mobile-drop button,
 .mobile-drop a {
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: #0a1628;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
   color: #fff;
-  border-radius: 10px;
-  padding: 11px 8px;
-  font-weight: 900;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 800;
   text-decoration: none;
-  text-align: center;
+  text-align: left;
+  font-size: 0.82rem;
+}
+
+.mobile-drop button:hover,
+.mobile-drop a:hover {
+  background: var(--orange);
 }
 
 .hero-poster {
@@ -1821,14 +1835,15 @@ img {
   }
 
   .mobile-drop {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   .hero-poster {
     width: calc(100% - 6px);
     min-height: auto;
     padding: 12px 10px;
-    margin-top: -4px;
+    margin-top: 0 !important;
     border-radius: 12px 12px 0 0;
   }
 
