@@ -454,6 +454,16 @@ img {
 .hero-composite + .hero-poster { display: none; }
 .poster-header { display: none; }
 
+/* The supplied poster already contains the complete lower campaign composition.
+   Keep the public flow focused on the matching sections instead of rendering
+   the older duplicate marketing panels between them. */
+.process-panel,
+.packages-panel,
+.gallery-panel,
+.final-booking,
+.trending-panel,
+.cta-band { display: none; }
+
 .mobile-art-menu {
   position: absolute;
   z-index: 20;
