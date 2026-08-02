@@ -148,10 +148,8 @@ export function App() {
             {menuOpen ? <X size={26} /> : <Menu size={30} />}
           </button>
           <button className="brand-lockup" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <span className="plumber-avatar">
-              <img src="/narayan-logo-art.png" alt="Narayan Plumbing Services logo" />
-              <Wrench size={30} />
-              <em>N</em>
+            <span className="plumber-avatar" style={{ fontSize: '1.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              👨‍🔧
             </span>
             <span>
               <strong>NARAYAN</strong>
@@ -162,18 +160,20 @@ export function App() {
           <nav className="desktop-site-nav" aria-label="Primary navigation">
             <button type="button" onClick={() => scrollTo('services')}>Services</button>
             <button type="button" onClick={() => scrollTo('trending')}>Trending</button>
-            <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
+            <button type="button" onClick={() => scrollTo('packages')}>Packages</button>
             <button type="button" onClick={() => scrollTo('why-us')}>Why Us</button>
+            <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
+            <button type="button" onClick={() => scrollTo('faqs')}>FAQs</button>
           </nav>
           <a className="call-block" href={`tel:${PHONE_NUMBER}`}>
             <Phone size={28} />
             <span>
               <small>Call Us Now</small>
-              <strong>{PHONE_NUMBER}</strong>
+              <strong>{PHONE_DISPLAY}</strong>
               <em>24/7 Emergency Service</em>
             </span>
           </a>
-          <button className="book-top" type="button" onClick={() => whatsappBooking()}>
+          <button className="book-top" type="button" onClick={() => openBooking()}>
             <CalendarDays size={28} />
             <span>BOOK SERVICE<small>Schedule Online</small></span>
           </button>
@@ -182,32 +182,16 @@ export function App() {
           <nav className="mobile-drop">
             <button type="button" onClick={() => scrollTo('services')}>Services</button>
             <button type="button" onClick={() => scrollTo('trending')}>Trending</button>
-            <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
+            <button type="button" onClick={() => scrollTo('packages')}>Packages</button>
             <button type="button" onClick={() => scrollTo('why-us')}>Why Choose</button>
+            <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
+            <button type="button" onClick={() => scrollTo('faqs')}>FAQs</button>
             <a href={`tel:${PHONE_NUMBER}`}>Call Now</a>
-            <button type="button" onClick={() => whatsappBooking()}>WhatsApp Book</button>
           </nav>
         )}
       </header>
 
       <main>
-        <section className="hero-composite" aria-label="Narayan Plumbing Services complete hero design">
-          <img src="/narayan-hero-art.png" alt="Narayan Plumbing Services complete hero design" />
-          <button className="composite-hotspot composite-menu" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Open navigation menu" />
-          <a className="composite-hotspot composite-call" href={`tel:${PHONE_NUMBER}`} aria-label="Call Narayan Plumbing Services" />
-          <button className="composite-hotspot composite-book" type="button" onClick={() => openBooking()} aria-label="Book a plumbing service" />
-          <button className="composite-hotspot composite-services" type="button" onClick={() => scrollTo('services')} aria-label="View plumbing services" />
-        </section>
-        {menuOpen && (
-          <nav className="mobile-art-menu" aria-label="Mobile navigation">
-            <button type="button" onClick={() => scrollTo('services')}>Services</button>
-            <button type="button" onClick={() => scrollTo('trending')}>Trending</button>
-            <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
-            <button type="button" onClick={() => scrollTo('why-us')}>Why Choose</button>
-            <a href={`tel:${PHONE_NUMBER}`}>Call Now</a>
-            <button type="button" onClick={() => openBooking()}>Book Service</button>
-          </nav>
-        )}
         <section className="hero-poster">
           <div className="hero-copy">
             <p className="script-text">Complete</p>
@@ -454,7 +438,7 @@ export function App() {
         <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><Home size={22} /><span>Home</span></button>
         <button type="button" onClick={() => scrollTo('services')}><Wrench size={22} /><span>Services</span></button>
         <button className="book-float" type="button" onClick={() => whatsappBooking()}><CalendarDays size={28} /><span>BOOK NOW</span></button>
-        <button type="button" onClick={() => scrollTo('trending')}><Tag size={22} /><span>Offers</span></button>
+        <button type="button" onClick={() => scrollTo('packages')}><Tag size={22} /><span>Packages</span></button>
         <a href={`tel:${PHONE_NUMBER}`}><Phone size={22} /><span>Contact</span></a>
       </nav>
 
