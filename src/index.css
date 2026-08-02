@@ -674,7 +674,17 @@ img {
 
 @media (max-width: 640px) {
   .hero-composite { overflow: visible; }
-  .mobile-art-menu { top: 76px; left: 8px; width: min(230px, calc(100% - 16px)); }
+  .mobile-art-menu {
+    top: 76px;
+    left: 8px;
+    width: calc(100% - 16px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-composite img {
+    height: 460px;
+    object-fit: fill;
+  }
 }
 
 .hero-badges {
@@ -1980,18 +1990,23 @@ img {
   .review-grid article { min-width: 0; }
 
   .proof-bar {
-    width: calc(100% - 28px);
-    margin-top: -18px;
+    width: calc(100% - 24px);
+    margin-top: 0;
     grid-template-columns: repeat(2, 1fr);
   }
 
   .proof-bar div {
-    min-height: 75px;
+    min-height: 142px;
+    padding: 16px 10px;
+    gap: 4px 10px;
   }
 
   .proof-bar strong {
-    font-size: 1.1rem;
+    font-size: 1.35rem;
   }
+
+  .proof-bar span { font-size: .72rem; }
+  .proof-bar .google-logo { width: 52px; height: 52px; }
 
   .services-panel,
   .why-panel {
