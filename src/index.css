@@ -1717,9 +1717,12 @@ img {
   }
 
   .hero-poster {
-    grid-template-columns: 1fr;
-    width: calc(100% - 10px);
+    display: block !important;
+    width: 100% !important;
     min-height: auto;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
   }
 
   .hero-visual {
@@ -1932,7 +1935,7 @@ img {
   }
 
   .hero-visual {
-    display: none !important;
+    display: block !important;
   }
 
   .phone-preview,
