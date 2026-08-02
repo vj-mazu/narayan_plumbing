@@ -193,7 +193,18 @@ export function App() {
 
       <main>
         <section className="hero-poster">
-          <div className="hero-visual" style={{ width: '100%', height: '100%', position: 'relative' }} aria-label="Plumbing service illustration">
+          <div className="hero-copy">
+            <p className="script-text">Complete</p>
+            <h1><span>PLUMBING</span><strong>SOLUTIONS</strong><em>AT YOUR DOORSTEP</em></h1>
+            <p className="hero-sub">Fast, Reliable & Affordable Plumbing Solutions for Your Home & Business</p>
+            <div className="hero-badges">
+              <div><Timer /><strong>30</strong><span>Minutes Doorstep Service</span></div>
+              <div><ShieldCheck /><strong>Verified</strong><span>& Trained Plumbers</span></div>
+              <div><IndianRupee /><strong>Upfront</strong><span>Pricing</span></div>
+              <div><ThumbsUp /><strong>100%</strong><span>Satisfaction Guaranteed</span></div>
+            </div>
+          </div>
+          <div className="hero-visual" aria-label="Plumbing service illustration">
             <div className="phone-preview">
               <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=520&q=80" alt="Modern bathroom plumbing" />
             </div>
