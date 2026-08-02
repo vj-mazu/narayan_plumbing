@@ -199,6 +199,35 @@ export function App() {
               alt="Narayan Plumbing Services complete hero design" 
               style={{ width: '100%', height: 'auto', display: 'block' }} 
             />
+            {/* Absolute clickable overlay hotspots matching poster coordinates */}
+            {/* Header Call Hotspot (Middle area on logo bar) */}
+            <a 
+              href={`tel:${PHONE_NUMBER}`}
+              onClick={(e) => e.stopPropagation()}
+              style={{ position: 'absolute', top: '1%', left: '50%', width: '20%', height: '8%', display: 'block', cursor: 'pointer', zIndex: 10 }}
+              aria-label="Call Narayan Plumbing Services"
+            />
+            {/* Header Book Service Hotspot (Right area on logo bar) */}
+            <button 
+              type="button"
+              onClick={(e) => { e.stopPropagation(); openBooking(); }}
+              style={{ position: 'absolute', top: '1%', left: '72%', width: '20%', height: '8%', display: 'block', border: 'none', background: 'transparent', cursor: 'pointer', zIndex: 10 }}
+              aria-label="Book service"
+            />
+            {/* Hero Main Orange Book Now Button Hotspot */}
+            <button 
+              type="button"
+              onClick={(e) => { e.stopPropagation(); openBooking(); }}
+              style={{ position: 'absolute', top: '78%', left: '5%', width: '18%', height: '10%', display: 'block', border: 'none', background: 'transparent', cursor: 'pointer', zIndex: 10 }}
+              aria-label="Book Now"
+            />
+            {/* Hero Main Transparent Call Now Button Hotspot */}
+            <a 
+              href={`tel:${PHONE_NUMBER}`}
+              onClick={(e) => e.stopPropagation()}
+              style={{ position: 'absolute', top: '78%', left: '25%', width: '16%', height: '10%', display: 'block', cursor: 'pointer', zIndex: 10 }}
+              aria-label="Call Now"
+            />
           </div>
         </section>
 
