@@ -1748,6 +1748,9 @@ img {
     overflow-x: hidden;
   }
 
+  /* The reference poster moves directly from the hero into its proof strip. */
+  .intro-panel { display: none; }
+
   .micro-logo-row {
     height: 32px;
   }
