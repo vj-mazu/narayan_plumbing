@@ -207,6 +207,8 @@ img {
   color: #ffffff;
   border: 2px solid rgba(255, 107, 0, 0.25);
   border-radius: 22px;
+  position: relative;
+  z-index: 999999 !important;
 }
 
 .desktop-site-nav {
