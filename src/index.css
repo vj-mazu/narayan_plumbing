@@ -1844,7 +1844,7 @@ img {
     width: 100% !important;
     min-height: auto;
     padding: 0 !important;
-    margin-top: 0 !important;
+    margin-top: 12px !important;
     border: none !important;
     background: transparent !important;
   }
@@ -2015,23 +2015,23 @@ img {
   }
 
   .service-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 
   .service-card {
-    min-height: 154px;
-    padding: 12px 6px 10px;
+    min-height: 140px;
+    padding: 10px 4px 8px;
     border-right: 1px solid #e4e8f1 !important;
     border-bottom: 1px solid #e4e8f1 !important;
   }
 
-  .service-card:nth-child(2n) {
+  .service-card:nth-child(3n) {
     border-right: 0 !important;
   }
 
   .icon-disc {
-    width: 66px;
-    height: 66px;
+    width: 58px;
+    height: 58px;
   }
 
   .service-card strong {

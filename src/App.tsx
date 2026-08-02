@@ -423,7 +423,7 @@ export function App() {
       <nav className="bottom-nav" aria-label="Mobile navigation">
         <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><Home size={22} /><span>Home</span></button>
         <button type="button" onClick={() => scrollTo('services')}><Wrench size={22} /><span>Services</span></button>
-        <button className="book-float" type="button" onClick={() => whatsappBooking()}><CalendarDays size={28} /><span>BOOK NOW</span></button>
+        <button className="book-float" type="button" onClick={() => openBooking()}><CalendarDays size={28} /><span>BOOK NOW</span></button>
         <button type="button" onClick={() => scrollTo('packages')}><Tag size={22} /><span>Packages</span></button>
         <a href={`tel:${PHONE_NUMBER}`}><Phone size={22} /><span>Contact</span></a>
       </nav>
