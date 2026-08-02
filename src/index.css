@@ -139,7 +139,7 @@ img {
 .poster-header {
   position: sticky;
   top: 0;
-  z-index: 9999 !important;
+  z-index: 999999 !important;
   background: #02091f;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
@@ -1159,10 +1159,9 @@ img {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: #0758cc;
-  background: radial-gradient(circle, #fff 0 58%, #f1f6ff 59% 100%);
-  border: 2px solid #ebeff7;
-  box-shadow: inset 0 -10px 18px rgba(12, 91, 220, 0.08);
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .service-card strong {
@@ -1614,7 +1613,7 @@ img {
   z-index: 60;
   height: 68px;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   align-items: center;
   background: #061443;
   border-top: 2px solid #1d4faa;
@@ -1799,46 +1798,46 @@ img {
   }
 
   .brand-bar {
-    width: calc(100% - 6px);
-    min-height: 76px;
-    grid-template-columns: auto 1fr auto;
-    gap: 8px;
-    padding: 10px 10px;
-    border-radius: 18px;
+    width: 100% !important;
+    min-height: 70px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999 !important;
+    padding: 0 !important;
   }
 
   .menu-button {
-    width: 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #ffffff;
+    position: absolute;
+    top: 15px;
+    left: 12px;
+    width: 46px;
+    height: 46px;
+    background: transparent !important;
+    border: none !important;
+    color: transparent !important; /* Make icon text transparent so only the image's icon is visible */
+    z-index: 1000000 !important;
   }
 
-  .plumber-avatar {
-    width: 54px;
-    height: 54px;
-    border-width: 3px;
-  }
-
-  .brand-lockup {
-    gap: 8px;
-  }
-
-  .book-top {
-    padding: 10px;
-  }
-
-  .book-top span {
-    display: none;
+  .plumber-avatar,
+  .brand-lockup,
+  .book-top,
+  .call-block {
+    display: none !important;
   }
 
   .mobile-drop {
     display: flex !important;
     flex-direction: column !important;
+    position: absolute !important;
+    top: 60px !important;
+    left: 12px !important;
+    right: auto !important;
+    width: 220px !important;
+    z-index: 1000000 !important;
   }
 
   .hero-poster {
@@ -2020,10 +2019,16 @@ img {
   }
 
   .service-card {
-    min-height: 140px;
-    padding: 10px 4px 8px;
+    min-height: 184px !important;
+    height: auto !important;
+    padding: 12px 4px 10px !important;
     border-right: 1px solid #e4e8f1 !important;
     border-bottom: 1px solid #e4e8f1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
   }
 
   .service-card:nth-child(3n) {
@@ -2031,17 +2036,23 @@ img {
   }
 
   .icon-disc {
-    width: 58px;
-    height: 58px;
+    width: 76px !important;
+    height: 76px !important;
   }
 
   .service-card strong {
-    font-size: 0.68rem;
+    font-size: 0.65rem !important;
+    line-height: 1.25 !important;
+    min-height: auto !important;
+    padding: 0 2px !important;
+    margin: 4px 0 !important;
+    word-break: keep-all !important;
   }
 
   .service-card em {
-    padding: 5px 9px;
-    font-size: 0.61rem;
+    padding: 4px 8px !important;
+    font-size: 0.58rem !important;
+    margin-top: auto !important;
   }
 
   .trending-panel {

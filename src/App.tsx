@@ -20,13 +20,13 @@ import {
   Tag,
   ThumbsUp,
   Timer,
-  Toilet,
   Wrench,
   X,
 } from 'lucide-react';
 import BookingModal from './BookingModal';
 import { CORE_SERVICES, TRENDING_SERVICES, WHY_CHOOSE } from './data';
 import { PHONE_DISPLAY, PHONE_NUMBER } from './types';
+import { TapIcon, ShowerIcon, ToiletIcon, WashBasinIcon, KitchenSinkIcon, PipeLeakIcon, PipeInstallIcon, DrainIcon, WaterTankIcon, GeyserIcon, BathroomIcon, EmergencyIcon } from './PlumbingIcons';
 
 const AdminPanel = lazy(() => import('./AdminPanel'));
 
@@ -37,7 +37,7 @@ const trustItems = [
   { label: 'No Hidden Charges', icon: Sparkles },
 ];
 
-const serviceIcons = [Droplets, ShowerHead, Toilet, Droplets, Droplets, Wrench, Wrench, Sparkles, Droplets, ShieldCheck, ShowerHead, Siren];
+const serviceIcons = [TapIcon, ShowerIcon, ToiletIcon, WashBasinIcon, KitchenSinkIcon, PipeLeakIcon, PipeInstallIcon, DrainIcon, WaterTankIcon, GeyserIcon, BathroomIcon, EmergencyIcon];
 const proofStats = [
   { title: '4.8', subtitle: 'Google Rating (1200+ Reviews)', icon: Star },
   { title: '10K+', subtitle: 'Happy Customers', icon: ThumbsUp },
@@ -282,7 +282,7 @@ export function App() {
               const Icon = serviceIcons[index] || Wrench;
               return (
                 <button className="service-card" type="button" key={service.id} onClick={() => openBooking(service.name)}>
-                  <span className="icon-disc"><Icon size={36} /></span>
+                  <span className="icon-disc"><Icon size={76} /></span>
                   <strong>{service.name.replace('Installation & Repair', 'Installation & Repair')}</strong>
                   <em>BOOK NOW</em>
                 </button>
@@ -396,7 +396,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="gallery-panel">
+        <section className="gallery-panel" id="gallery">
           <div>
             <span className="section-kicker">Work quality</span>
             <h2>Bathroom, kitchen, pipe and drain work handled end to end</h2>
@@ -458,8 +458,10 @@ export function App() {
       <nav className="bottom-nav" aria-label="Mobile navigation" onClick={(e) => e.stopPropagation()}>
         <button type="button" onClick={(e) => { e.stopPropagation(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}><Home size={22} /><span>Home</span></button>
         <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('services'); }}><Wrench size={22} /><span>Services</span></button>
-        <button className="book-float" type="button" onClick={(e) => { e.stopPropagation(); openBooking(); }}><CalendarDays size={28} /><span>BOOK NOW</span></button>
         <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('packages'); }}><Tag size={22} /><span>Packages</span></button>
+        <button className="book-float" type="button" onClick={(e) => { e.stopPropagation(); openBooking(); }}><CalendarDays size={28} /><span>BOOK NOW</span></button>
+        <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('trending'); }}><Gift size={22} /><span>Offers</span></button>
+        <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('gallery'); }}><Image size={22} /><span>Gallery</span></button>
         <a href={`tel:${PHONE_NUMBER}`} onClick={(e) => e.stopPropagation()}><Phone size={22} /><span>Contact</span></a>
       </nav>
 
