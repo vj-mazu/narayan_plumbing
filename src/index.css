@@ -1931,49 +1931,15 @@ img {
   }
 
   .hero-visual {
-    min-height: 280px;
+    display: none !important;
   }
 
-  .phone-preview {
-    left: 4%;
-    width: 165px;
-  }
-
-  .water-ring {
-    right: -34px;
-    top: 30px;
-    width: 300px;
-    border-width: 12px;
-  }
-
-  .relax-card {
-    right: 0;
-    top: 22px;
-    padding: 10px 11px;
-    font-size: 0.83rem;
-  }
-
-  .timer-badge {
-    right: 4px;
-    top: 136px;
-    width: 132px;
-    height: 132px;
-  }
-
-  .timer-badge strong {
-    font-size: 3.1rem;
-  }
-
-  .timer-badge span {
-    font-size: 0.72rem;
-  }
-
+  .phone-preview,
+  .water-ring,
+  .relax-card,
+  .timer-badge,
   .service-van {
-    right: 2px;
-    bottom: 6px;
-    width: 190px;
-    height: 76px;
-    font-size: 0.72rem;
+    display: none !important;
   }
 
   .reviews-panel {
