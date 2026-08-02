@@ -293,7 +293,7 @@ export function App() {
         </section>
 
         <section className="lower-poster" id="trending" aria-label="Trending services and booking call to action">
-          <img src="/narayan-lower-art.png" alt="Trending plumbing services and booking call to action" />
+          <img src="/narayan-lower-art.png" alt="Trending plumbing services and booking call to action" loading="lazy" />
           <button className="lower-hotspot lower-services" type="button" onClick={() => scrollTo('services')} aria-label="View all services" />
           {TRENDING_SERVICES.map((item, index) => (
             <button
@@ -403,7 +403,7 @@ export function App() {
           </div>
           <div className="gallery-grid">
             {galleryImages.map((src, index) => (
-              <img key={src} src={src} alt={`Narayan Plumbing work sample ${index + 1}`} />
+              <img key={src} src={src} alt={`Narayan Plumbing work sample ${index + 1}`} loading="lazy" />
             ))}
           </div>
         </section>

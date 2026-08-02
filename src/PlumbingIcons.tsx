@@ -52,11 +52,11 @@ export function KitchenSinkIcon({ size }: IconProps) { return <CropIcon targetX=
 
 // Row 2 (y ≈ 452)
 export function PipeLeakIcon({ size }: IconProps) { return <CropIcon targetX={156} targetY={452} size={size} />; }
-export function PipeInstallIcon({ size }: IconProps) { return <CropIcon targetX={454} targetY={452} size={size} />; }
+export function PipeInstallIcon({ size }: IconProps) { return <CropIcon targetX={442} targetY={452} size={size} />; }
 export function DrainIcon({ size }: IconProps) { return <CropIcon targetX={702} targetY={452} size={size} />; }
 export function WaterTankIcon({ size }: IconProps) { return <CropIcon targetX={1000} targetY={452} size={size} />; }
-export function GeyserIcon({ size }: IconProps) { return <CropIcon targetX={1296} targetY={452} size={size} />; }
+export function GeyserIcon({ size }: IconProps) { return <CropIcon targetX={1284} targetY={452} size={size} />; }
 
 // Row 3 (y ≈ 774)
 export function BathroomIcon({ size }: IconProps) { return <CropIcon targetX={156} targetY={774} size={size} />; }
-export function EmergencyIcon({ size }: IconProps) { return <CropIcon targetX={454} targetY={774} size={size} />; }
+export function EmergencyIcon({ size }: IconProps) { return <CropIcon targetX={442} targetY={774} size={size} />; }

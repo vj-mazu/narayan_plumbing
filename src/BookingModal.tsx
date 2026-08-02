@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle, Phone, Calendar, Clock } from 'lucide-react';
+import { X, CheckCircle, Phone, Calendar, Clock, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CORE_SERVICES, TIME_SLOTS } from './data';
 import { createBooking } from './storage';
@@ -16,7 +16,7 @@ interface FormState {
   name: string;
   phone: string;
   address: string;
-  service: string;
+  services: string[]; // Multi-select array instead of a single string
   dateType: 'today' | 'tomorrow' | 'custom';
   customDate: string;
   timeSlot: string;
@@ -28,13 +28,14 @@ interface FormErrors {
   phone?: string;
   address?: string;
   timeSlot?: string;
+  services?: string;
 }
 
 const initialForm: FormState = {
   name: '',
   phone: '',
   address: '',
-  service: 'Tap Installation & Repair',
+  services: ['Tap Installation & Repair'],
   dateType: 'today',
   customDate: '',
   timeSlot: '',
@@ -65,6 +66,10 @@ function validate(form: FormState): FormErrors {
     errors.address = 'Enter your complete address (min 10 characters)';
   }
 
+  if (form.services.length === 0) {
+    errors.services = 'Please select at least one service';
+  }
+
   if (!form.timeSlot) {
     errors.timeSlot = 'Please choose a time slot';
   }
@@ -75,16 +80,18 @@ function validate(form: FormState): FormErrors {
 export default function BookingModal({ open, preselectedService, onClose }: BookingModalProps) {
   const [form, setForm] = useState<FormState>({
     ...initialForm,
-    service: preselectedService || initialForm.service,
+    services: preselectedService ? [preselectedService] : initialForm.services,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [bookingId, setBookingId] = useState<string | null>(null);
 
-  // Re-initialize the form every time the modal opens so the tapped
-  // service/category/package is always preselected (fixes stale service bug).
+  // Re-initialize the form every time the modal opens
   useEffect(() => {
     if (open) {
-      setForm({ ...initialForm, service: preselectedService || initialForm.service });
+      setForm({ 
+        ...initialForm, 
+        services: preselectedService ? [preselectedService] : initialForm.services 
+      });
       setErrors({});
       setBookingId(null);
     }
@@ -92,6 +99,20 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
 
   const close = () => {
     onClose();
+  };
+
+  const toggleService = (svcName: string) => {
+    setForm((prev) => {
+      const alreadySelected = prev.services.includes(svcName);
+      let updated: string[];
+      if (alreadySelected) {
+        // Keep at least one selected
+        updated = prev.services.filter((s) => s !== svcName);
+      } else {
+        updated = [...prev.services, svcName];
+      }
+      return { ...prev, services: updated };
+    });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -116,15 +137,23 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
       : form.dateType === 'tomorrow' ? formatDate(tomorrow)
       : formatDate(new Date(form.customDate + 'T00:00:00'));
 
-    const service = CORE_SERVICES.find((s) => s.name === form.service);
-    const price = service ? service.price : '₹499';
+    // Compute average/sum price dynamically
+    let totalPrice = 0;
+    form.services.forEach(sName => {
+      const match = CORE_SERVICES.find((s) => s.name === sName);
+      if (match) {
+        const val = parseInt(match.price.replace(/[^\d]/g, ''), 10) || 0;
+        totalPrice += val;
+      }
+    });
+    const priceStr = totalPrice > 0 ? `₹${totalPrice}` : '₹499';
 
     const booking = createBooking({
       name: form.name.trim(),
       phone: form.phone.trim(),
       address: form.address.trim(),
-      service: form.service,
-      price,
+      service: form.services.join(', '),
+      price: priceStr,
       date,
       dateISO,
       timeSlot: form.timeSlot,
@@ -137,7 +166,8 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
       `Booking ID: ${booking.id}`,
       `Name: ${form.name.trim()}`,
       `Phone: ${form.phone.trim()}`,
-      `Service: ${form.service}`,
+      `Services: ${form.services.join(', ')}`,
+      `Est. Total: ${priceStr}`,
       `Date: ${date}`,
       `Time: ${form.timeSlot}`,
       `Address: ${form.address.trim()}`,
@@ -245,20 +275,45 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate style={{ padding: 20 }}>
-                <div style={{ marginBottom: 12 }}>
-                  <label htmlFor="svc" style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
-                    Select Service *
+                <div style={{ marginBottom: 14 }}>
+                  <label style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 6 }}>
+                    Select Services (Choose one or multiple) *
                   </label>
-                  <select
-                    id="svc"
-                    value={form.service}
-                    onChange={(e) => setForm({ ...form, service: e.target.value })}
-                    style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: '1px solid #D0D5DD', fontSize: '0.85rem', outline: 'none', backgroundColor: '#FFFFFF' }}
-                  >
-                    {CORE_SERVICES.map((s) => (
-                      <option key={s.id} value={s.name}>{s.name} ({s.price})</option>
-                    ))}
-                  </select>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 6, maxHeight: 180, overflowY: 'auto', border: '1px solid #D0D5DD', padding: 10, borderRadius: 8, backgroundColor: '#FAFAFA' }}>
+                    {CORE_SERVICES.map((s) => {
+                      const selected = form.services.includes(s.name);
+                      return (
+                        <button
+                          key={s.id}
+                          type="button"
+                          onClick={() => toggleService(s.name)}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            padding: '8px 10px',
+                            borderRadius: 6,
+                            border: selected ? '1.5px solid #6E42E5' : '1px solid #E0E0E0',
+                            backgroundColor: selected ? '#F5F2FF' : '#FFFFFF',
+                            textAlign: 'left',
+                            cursor: 'pointer',
+                            fontSize: '0.8rem',
+                            fontWeight: selected ? 800 : 600,
+                            color: selected ? '#6E42E5' : '#424242',
+                          }}
+                        >
+                          <span>{s.name}</span>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <span style={{ fontSize: '0.75rem', color: '#9E9E9E' }}>({s.price})</span>
+                            <span style={{ width: 18, height: 18, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#6E42E5' : '#FFFFFF', borderColor: selected ? '#6E42E5' : '#BDBDBD' }}>
+                              {selected && <Check size={12} color="#FFFFFF" />}
+                            </span>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {errors.services && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.services}</span>}
                 </div>
 
                 <div style={{ marginBottom: 12 }}>

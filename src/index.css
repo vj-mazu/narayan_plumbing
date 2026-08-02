@@ -2113,24 +2113,57 @@ img {
     text-align: left;
   }
 
+  .package-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: none !important;
+    padding-bottom: 8px !important;
+  }
+
+  .package-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .package-grid button {
+    flex: 0 0 260px !important;
+    min-height: 220px !important;
+    scroll-snap-align: start !important;
+    padding: 14px 10px !important;
+  }
+
   .why-grid {
     grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
   }
 
   .why-grid div {
-    min-height: 124px;
+    min-height: 98px !important;
     border-right: 1px solid #dfe5f2 !important;
     border-bottom: 1px solid #dfe5f2 !important;
-    padding: 14px 6px !important;
+    padding: 8px 4px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 4px !important;
   }
 
   .why-grid div:nth-child(3n) {
     border-right: 0 !important;
   }
 
+  .why-grid svg {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
   .why-grid strong {
-    font-size: 0.72rem !important;
+    font-size: 0.65rem !important;
     font-weight: 800;
+    line-height: 1.15 !important;
   }
 
   .bottom-nav {
