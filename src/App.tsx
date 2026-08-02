@@ -192,26 +192,13 @@ export function App() {
       </header>
 
       <main>
-        <section className="hero-poster">
-          <div className="hero-copy">
-            <p className="script-text">Complete</p>
-            <h1><span>PLUMBING</span><strong>SOLUTIONS</strong><em>AT YOUR DOORSTEP</em></h1>
-            <p className="hero-sub">Fast, Reliable & Affordable Plumbing Solutions for Your Home & Business</p>
-            <div className="hero-badges">
-              <div><Timer /><strong>30</strong><span>Minutes Doorstep Service</span></div>
-              <div><ShieldCheck /><strong>Verified</strong><span>& Trained Plumbers</span></div>
-              <div><IndianRupee /><strong>Upfront</strong><span>Pricing</span></div>
-              <div><ThumbsUp /><strong>100%</strong><span>Satisfaction Guaranteed</span></div>
-            </div>
-          </div>
-          <div className="hero-visual" aria-label="Plumbing service illustration">
-            <div className="phone-preview">
-              <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=520&q=80" alt="Modern bathroom plumbing" />
-            </div>
-            <div className="water-ring" />
-            <div className="relax-card">WE REACH,<strong>YOU RELAX</strong></div>
-            <div className="timer-badge"><strong>30</strong><span>MINUTES SERVICE</span></div>
-            <div className="service-van"><Wrench size={34} /><span>NARAYAN<br />PLUMBING</span></div>
+        <section className="hero-poster" style={{ padding: 0, overflow: 'hidden', border: 'none', background: 'transparent' }}>
+          <div style={{ width: '100%', position: 'relative', display: 'block' }}>
+            <img 
+              src="/narayan-hero-art.png" 
+              alt="Narayan Plumbing Services complete hero design" 
+              style={{ width: '100%', height: 'auto', display: 'block' }} 
+            />
           </div>
         </section>
 
