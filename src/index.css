@@ -1838,11 +1838,12 @@ img {
   }
 
   .hero-poster {
-    width: calc(100% - 6px);
+    width: 100% !important;
     min-height: auto;
-    padding: 12px 10px;
+    padding: 0 !important;
     margin-top: 0 !important;
-    border-radius: 12px 12px 0 0;
+    border: none !important;
+    background: transparent !important;
   }
 
   .intro-panel,
