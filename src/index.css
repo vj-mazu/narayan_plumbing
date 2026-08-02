@@ -237,6 +237,7 @@ img {
   background: transparent;
   color: #ffffff;
   padding: 6px;
+  display: none;
 }
 
 .brand-lockup {
@@ -399,24 +400,15 @@ img {
 }
 
 .hero-poster {
-  width: min(1540px, calc(100% - 28px));
-  margin: 0 auto;
-  min-height: calc(100svh - 172px);
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 20px;
-  align-items: center;
-  padding: clamp(22px, 4vw, 42px);
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  display: block;
   position: relative;
   overflow: hidden;
-  border: 2px solid #124195;
-  border-radius: 18px 18px 0 0;
-  background:
-    linear-gradient(105deg, rgba(5, 15, 54, 0.94) 0 39%, rgba(5, 22, 80, 0.62) 40% 58%, rgba(5, 18, 62, 0.92) 75%),
-    radial-gradient(circle at 77% 44%, rgba(30, 196, 255, 0.7), transparent 17rem),
-    radial-gradient(circle at 44% 18%, rgba(255, 255, 255, 0.28), transparent 0.12rem),
-    radial-gradient(circle at 88% 24%, rgba(255, 255, 255, 0.35), transparent 0.16rem),
-    linear-gradient(135deg, #06123d 0%, #071d67 52%, #02091f 100%);
+  border: none;
+  background: transparent;
 }
 
 .hero-composite {
@@ -1712,6 +1704,10 @@ img {
     width: calc(100% - 10px);
   }
 
+  .menu-button {
+    display: block !important;
+  }
+
   .desktop-site-nav {
     display: none;
   }
@@ -1813,7 +1809,9 @@ img {
     display: grid;
     place-items: center;
     border-radius: 12px;
-    background: #f1f6ff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
   }
 
   .plumber-avatar {
