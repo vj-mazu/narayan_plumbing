@@ -7,7 +7,6 @@ import {
   Droplets,
   Gift,
   Home,
-  Image,
   IndianRupee,
   Menu,
   MessageCircle,
@@ -65,6 +64,14 @@ const galleryImages = [
   'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=78',
 ];
 
+const heroSlides = [
+  '/narayan-hero-art.png',
+  '/hero-slide-1.jpeg',
+  '/hero-slide-2.jpeg',
+  '/hero-slide-3.jpeg',
+  '/hero-slide-4.jpeg',
+];
+
 export function App() {
   const [isAdmin, setIsAdmin] = useState(() => window.location.hash.startsWith('#/admin'));
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -72,12 +79,18 @@ export function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([]);
   const [loading, setLoading] = useState(true);
+  const [heroSlide, setHeroSlide] = useState(0);
   const [legalPage, setLegalPage] = useState<'privacy' | 'terms' | 'refund' | null>(null);
 
   useEffect(() => {
     const onHash = () => setIsAdmin(window.location.hash.startsWith('#/admin'));
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setHeroSlide((slide) => (slide + 1) % heroSlides.length), 2500);
+    return () => window.clearInterval(timer);
   }, []);
 
   useEffect(() => {
@@ -130,7 +143,7 @@ export function App() {
       {ripples.map((item) => (
         <span key={item.id} className="click-ripple" style={{ left: item.x, top: item.y }} />
       ))}
-      <header className="poster-header">
+      <header className="poster-header" style={{ display: 'block', visibility: 'visible' }}>
         <div className="micro-logo-row">
           <span className="micro-logo">NP</span>
           <span className="micro-logo pink">24/7</span>
@@ -169,7 +182,6 @@ export function App() {
             <button type="button" onClick={() => scrollTo('packages')}>Packages</button>
             <button type="button" onClick={() => scrollTo('why-us')}>Why Us</button>
             <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
-            <button type="button" onClick={() => scrollTo('faqs')}>FAQs</button>
           </nav>
           <a className="call-block" href={`tel:${PHONE_NUMBER}`} onClick={(e) => e.stopPropagation()}>
             <Phone size={28} />
@@ -191,7 +203,6 @@ export function App() {
             <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('packages'); }}>Packages</button>
             <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('why-us'); }}>Why Choose</button>
             <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('reviews'); }}>Reviews</button>
-            <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('faqs'); }}>FAQs</button>
             <a href={`tel:${PHONE_NUMBER}`} onClick={(e) => e.stopPropagation()}>Call Now</a>
           </nav>
         )}
@@ -199,12 +210,26 @@ export function App() {
 
       <main>
         <section className="hero-poster" style={{ padding: 0, overflow: 'hidden', border: 'none', background: 'transparent' }}>
-          <div style={{ width: '100%', position: 'relative', display: 'block' }}>
+          <div className={`hero-slide-frame hero-slide-frame-${heroSlide}`} style={{ width: '100%', position: 'relative', display: 'block' }}>
             <img 
-              src="/narayan-hero-art.png" 
+              key={heroSlides[heroSlide]}
+              className={`hero-slide-image hero-slide-image-${heroSlide}`}
+              src={heroSlides[heroSlide]} 
               alt="Narayan Plumbing Services complete hero design" 
+              fetchPriority="high"
               style={{ width: '100%', height: 'auto', display: 'block' }} 
             />
+            <div className="hero-slide-dots" aria-label="Hero slides">
+              {heroSlides.map((slide, index) => (
+                <button
+                  key={slide}
+                  type="button"
+                  className={index === heroSlide ? 'active' : ''}
+                  onClick={(e) => { e.stopPropagation(); setHeroSlide(index); }}
+                  aria-label={`Show hero slide ${index + 1}`}
+                />
+              ))}
+            </div>
             {/* Absolute clickable overlay hotspots matching poster coordinates */}
             {/* Header Call Hotspot (Middle area on logo bar) */}
             <a 
@@ -313,7 +338,7 @@ export function App() {
           <div className="trend-strip">
             {TRENDING_SERVICES.map((item) => (
               <button className="trend-card" type="button" key={item.title} onClick={() => openBooking(item.title)}>
-                <img src={item.image} alt={item.title} />
+                <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
                 <span>{item.title}</span>
               </button>
             ))}
@@ -324,13 +349,23 @@ export function App() {
           <span className="section-kicker">Value packages</span>
           <h2>Popular service bundles for homes and businesses</h2>
           <div className="package-grid">
-            {packageCards.map((item) => (
-              <button key={item.title} type="button" onClick={() => openBooking(item.title)}>
+            {packageCards.map((item, index) => (
+              <button id={`package-card-${index}`} key={item.title} type="button" onClick={() => openBooking(item.title)}>
                 <strong>{item.title}</strong>
                 <em>{item.price}</em>
                 <span>{item.text}</span>
                 <b>BOOK PACKAGE</b>
               </button>
+            ))}
+          </div>
+          <div className="package-dots" aria-label="Package slides">
+            {packageCards.map((item, index) => (
+              <button
+                key={item.title}
+                type="button"
+                aria-label={`Show ${item.title}`}
+                onClick={() => document.getElementById(`package-card-${index}`)?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })}
+              />
             ))}
           </div>
         </section>
@@ -347,7 +382,7 @@ export function App() {
             </div>
           </div>
           <div className="worker-figure">
-            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=520&q=85" alt="Professional plumbing service technician" />
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=520&q=85" alt="Professional plumbing service technician" loading="lazy" decoding="async" />
             <span className="worker-badge"><Wrench size={22} /><strong>N</strong></span>
           </div>
           <div className="cta-actions">
@@ -458,10 +493,8 @@ export function App() {
       <nav className="bottom-nav" aria-label="Mobile navigation" onClick={(e) => e.stopPropagation()}>
         <button type="button" onClick={(e) => { e.stopPropagation(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}><Home size={22} /><span>Home</span></button>
         <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('services'); }}><Wrench size={22} /><span>Services</span></button>
-        <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('packages'); }}><Tag size={22} /><span>Packages</span></button>
         <button className="book-float" type="button" onClick={(e) => { e.stopPropagation(); openBooking(); }}><CalendarDays size={28} /><span>BOOK NOW</span></button>
         <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('trending'); }}><Gift size={22} /><span>Offers</span></button>
-        <button type="button" onClick={(e) => { e.stopPropagation(); scrollTo('gallery'); }}><Image size={22} /><span>Gallery</span></button>
         <a href={`tel:${PHONE_NUMBER}`} onClick={(e) => e.stopPropagation()}><Phone size={22} /><span>Contact</span></a>
       </nav>
 
