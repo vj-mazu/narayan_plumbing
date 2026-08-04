@@ -1712,13 +1712,13 @@ img { display: block; max-width: 100%; }
     max-width: 100% !important;
     overflow: hidden !important;
     border-radius: 16px !important;
-    background: #ffffff !important;
   }
   .trending-carousel-track {
     position: relative !important;
     width: 100% !important;
-    height: auto !important;
-    min-height: 480px !important;
+    height: 480px !important;
+    max-height: 480px !important;
+    overflow: hidden !important;
   }
   .trending-carousel-slide {
     position: absolute;
@@ -1735,12 +1735,10 @@ img { display: block; max-width: 100%; }
   }
   .trending-carousel-slide img {
     width: 100% !important;
-    height: auto !important;
-    min-height: 480px !important;
-    object-fit: contain !important;
+    height: 100% !important;
+    object-fit: cover !important;
     object-position: center !important;
     display: block !important;
-    border-radius: 16px !important;
   }
   .trending-badge-overlay {
     font-size: 0.72rem;
@@ -1772,13 +1770,13 @@ img { display: block; max-width: 100%; }
     margin: 24px auto !important;
     position: relative !important;
     overflow: hidden !important;
-    background: #ffffff !important;
   }
   .why-choose-carousel-track {
     position: relative !important;
     width: 100% !important;
-    height: auto !important;
-    min-height: 540px !important;
+    height: 540px !important;
+    max-height: 540px !important;
+    overflow: hidden !important;
   }
   .why-choose-carousel-slide {
     position: absolute;
@@ -1795,12 +1793,10 @@ img { display: block; max-width: 100%; }
   }
   .why-choose-carousel-slide img {
     width: 100% !important;
-    height: auto !important;
-    min-height: 540px !important;
-    object-fit: contain !important;
+    height: 100% !important;
+    object-fit: cover !important;
     object-position: center !important;
     display: block !important;
-    border-radius: 14px !important;
   }
   .why-carousel-arrow {
     width: 38px;
@@ -1827,8 +1823,9 @@ img { display: block; max-width: 100%; }
   .hero-banner-track {
     position: relative !important;
     width: 100% !important;
-    height: auto !important;
-    min-height: 480px !important;
+    height: 480px !important;
+    max-height: 480px !important;
+    overflow: hidden !important;
   }
   .hero-fullscreen-slide,
   .hero-banner-slide {
@@ -1848,12 +1845,10 @@ img { display: block; max-width: 100%; }
   .hero-fullscreen-slide img,
   .hero-banner-slide img {
     width: 100% !important;
-    height: auto !important;
-    min-height: 480px !important;
-    object-fit: contain !important;
+    height: 100% !important;
+    object-fit: cover !important;
     object-position: center !important;
     display: block !important;
-    background: #fff !important;
   }
 
   /* Book Site Visit Form & Contact Info - Overflow Prevention */
