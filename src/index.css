@@ -1550,7 +1550,18 @@ img { display: block; max-width: 100%; }
   }
   .menu-button { display: block; }
   .desktop-site-nav, .call-block { display: none; }
-  .brand-bar { grid-template-columns: auto 1fr auto; }
+  .brand-bar { 
+    grid-template-columns: auto 1fr auto; 
+    gap: 8px;
+  }
+  .book-top {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+  .book-top small {
+    display: none;
+  }
   .hero-premium-top { grid-template-columns: 1fr; }
   .hero-premium-gallery { display: none; }
   .hero-banner-carousel { display: block; }
@@ -1568,7 +1579,26 @@ img { display: block; max-width: 100%; }
   }
   .hero-booking-grid { grid-template-columns: 1fr; }
   .hero-form-row { grid-template-columns: 1fr; }
-  .services-grid-container { grid-template-columns: repeat(3, 1fr); }
+  .services-grid-container { 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .service-grid-card {
+    padding: 16px 10px 14px;
+  }
+  .service-grid-icon {
+    font-size: 1.8rem;
+  }
+  .service-grid-title {
+    font-size: 0.8rem;
+  }
+  .service-grid-desc {
+    font-size: 0.7rem;
+  }
+  .btn-book-now {
+    padding: 7px;
+    font-size: 0.7rem;
+  }
   .stats-container { grid-template-columns: repeat(2, 1fr); }
   .why-choose-grid { 
     grid-template-columns: repeat(3, 1fr);
