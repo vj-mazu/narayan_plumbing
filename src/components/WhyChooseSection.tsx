@@ -17,8 +17,8 @@ interface WhyChooseSectionProps {
 }
 
 const WHY_CHOOSE_IMAGES: WhyChooseImage[] = [
-  { src: '/whychoose/why-1.png', alt: 'Why choose Narayan Plumbing - Quality service' },
-  { src: '/whychoose/why-2.png', alt: 'Why choose Narayan Plumbing - Expert team' },
+  { src: '/whychoose/why-1.webp', alt: 'Why choose Narayan Plumbing - Quality service' },
+  { src: '/whychoose/why-2.webp', alt: 'Why choose Narayan Plumbing - Expert team' },
 ];
 
 const icons = [Timer, ShieldCheck, IndianRupee, Wrench, CalendarDays, Ban];

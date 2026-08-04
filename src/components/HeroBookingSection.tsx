@@ -11,6 +11,7 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
   const [phone, setPhone] = useState('');
   const [area, setArea] = useState('');
   const [city, setCity] = useState('Bangalore');
+  const [timing, setTiming] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
       `Phone: ${phone.trim()}`,
       area.trim() ? `Area/Locality: ${area.trim()}` : '',
       `City: ${city}`,
+      timing.trim() ? `Preferred Timing: ${timing.trim()}` : '',
     ]
       .filter(Boolean)
       .join('\n');
@@ -94,6 +96,8 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
               onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
               inputMode="numeric"
               autoComplete="tel"
+              minLength={10}
+              maxLength={10}
             />
           </div>
 
@@ -113,6 +117,15 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
             >
               <option value="Bangalore">Bangalore</option>
             </select>
+          </div>
+
+          <div className="hero-input-group">
+            <input
+              type="text"
+              placeholder="Preferred Timing (e.g. Morning 10 AM, Evening 5 PM)"
+              value={timing}
+              onChange={(e) => setTiming(e.target.value)}
+            />
           </div>
 
           <button type="submit" className="hero-form-submit">

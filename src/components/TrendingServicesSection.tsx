@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Flame, Sparkles } from 'lucide-react';
 const TRENDING_SLIDES = [
   {
     id: 'bathroom-renovation',
-    src: '/trending/trending-1.png',
+    src: '/trending/trending-1.webp',
     alt: 'Bathroom Renovation & Sanitaryware Plumbing',
     badge: '🚽 Bathroom Renovation',
     title: 'Bathroom Renovation & Plumbing',
@@ -13,7 +13,7 @@ const TRENDING_SLIDES = [
   },
   {
     id: 'kitchen-sink',
-    src: '/trending/trending-2.png',
+    src: '/trending/trending-2.webp',
     alt: 'Kitchen Sink Installation & Repair Services',
     badge: '🔧 Kitchen Sink Services',
     title: 'Kitchen Sink Installation & Repair',
@@ -22,7 +22,7 @@ const TRENDING_SLIDES = [
   },
   {
     id: 'water-tank',
-    src: '/trending/water-tank.png',
+    src: '/trending/water-tank.webp',
     alt: 'Water Tank Cleaning & Maintenance',
     badge: '🛢️ Water Tank Service',
     title: 'Water Tank Cleaning & Installation',
@@ -31,7 +31,7 @@ const TRENDING_SLIDES = [
   },
   {
     id: 'geyser-service',
-    src: '/trending/geyser.png',
+    src: '/trending/geyser.webp',
     alt: 'Geyser Installation & Repair Services',
     badge: '🔥 Geyser Service',
     title: 'Geyser Installation & Repair',

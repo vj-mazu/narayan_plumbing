@@ -1722,10 +1722,6 @@ img { display: block; max-width: 100%; }
     padding: 30px 12px;
     overflow: hidden;
   }
-  /* Hide header text above carousel on mobile - text shows on image instead */
-  .trending-section > div:first-child {
-    display: none !important;
-  }
   .trending-carousel-box {
     max-width: 100% !important;
     overflow: hidden !important;
@@ -2068,6 +2064,11 @@ img { display: block; max-width: 100%; }
 
 /* Custom scrollbar for testimonials on mobile */
 @media (max-width: 768px) {
+  /* Ensure testimonials auto-scroll on mobile */
+  .testimonials-scroll {
+    animation: scroll-testimonials 30s linear infinite !important;
+    animation-play-state: running !important;
+  }
   .testimonials-scroll::-webkit-scrollbar {
     height: 8px;
   }

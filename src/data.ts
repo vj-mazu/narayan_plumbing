@@ -52,13 +52,13 @@ export const TRENDING_SERVICES: TrendingService[] = [
   {
     title: 'Bathroom Renovation',
     tag: 'TRENDING',
-    image: '/trending/trending-1.png',
+    image: '/trending/trending-1.webp',
     desc: 'Complete bathroom makeover with modern fittings, tiles, and fixtures.',
   },
   {
     title: 'Kitchen Sink Services',
     tag: 'TRENDING',
-    image: '/trending/trending-2.png',
+    image: '/trending/trending-2.webp',
     desc: 'Professional sink installation, repair, and drainage solutions.',
   },
   {
@@ -183,10 +183,10 @@ export const AREAS_SERVED = [
 export const TIME_SLOTS = ['9 AM – 12 PM', '12 PM – 3 PM', '3 PM – 6 PM', '6 PM – 9 PM', '9 PM – 12 AM'];
 
 export const HERO_CAROUSEL_IMAGES = [
-  { src: '/hero/banner-1.jpg', alt: 'Narayan Plumbing — complete plumbing solutions at your doorstep' },
-  { src: '/hero/banner-2.jpg', alt: 'Narayan Plumbing — solutions that flow, care that lasts' },
-  { src: '/hero/banner-3.jpg', alt: 'Narayan Plumbing — expert plumbers on time every time' },
-  { src: '/hero/banner-4.jpg', alt: 'Narayan Plumbing — protect your home from leaks and damage' },
+  { src: '/hero/banner-1.webp', alt: 'Narayan Plumbing — complete plumbing solutions at your doorstep' },
+  { src: '/hero/banner-2.webp', alt: 'Narayan Plumbing — solutions that flow, care that lasts' },
+  { src: '/hero/banner-3.webp', alt: 'Narayan Plumbing — expert plumbers on time every time' },
+  { src: '/hero/banner-4.webp', alt: 'Narayan Plumbing — protect your home from leaks and damage' },
 ];
 
 export interface Testimonial {

@@ -1,6 +1,6 @@
 /**
  * Custom plumbing service icons mapped directly from the screenshot sprite sheet.
- * The sprite sheet is at public/all-icons.png (1500 x 1000 pixels).
+ * The sprite sheet is at public/all-icons.webp (1500 x 1000 pixels).
  * 
  * We zoom in tighter (scale factor based on 170px diameter instead of 200px) 
  * to crop only the inner blue graphic and completely hide the text underneath.
@@ -28,7 +28,7 @@ function CropIcon({ targetX, targetY, size = 80 }: { targetX: number; targetY: n
         width: size,
         height: size,
         borderRadius: '50%',
-        backgroundImage: 'url("/all-icons.png")',
+        backgroundImage: 'url("/all-icons.webp")',
         backgroundPosition: `${posX}px ${posY}px`,
         backgroundSize: `${bgWidth}px ${bgHeight}px`,
         backgroundRepeat: 'no-repeat',
