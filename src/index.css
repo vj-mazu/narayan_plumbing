@@ -1733,6 +1733,114 @@ img { display: block; max-width: 100%; }
   .site-shell { 
     padding-bottom: 72px;
   }
+  
+  /* Why Choose Carousel - Bigger on Mobile */
+  .why-choose-carousel {
+    margin: 24px 0;
+    max-width: 100%;
+    min-height: 280px;
+  }
+  .why-choose-carousel-slide img {
+    width: 100%;
+    height: auto;
+    min-height: 280px;
+    max-height: 400px;
+    object-fit: cover;
+  }
+  .why-carousel-arrow {
+    width: 36px;
+    height: 36px;
+  }
+  .why-prev {
+    left: 8px;
+  }
+  .why-next {
+    right: 8px;
+  }
+  
+  /* Trending Services - Fix Image Sizes & Overlap */
+  .trending-section {
+    padding: 40px 12px;
+    overflow: hidden;
+  }
+  .trending-carousel-box {
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .trending-carousel-track {
+    width: 100%;
+    overflow: hidden;
+  }
+  .trending-carousel-slide {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  .trending-carousel-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 240px;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+  .trending-badge-overlay {
+    font-size: 0.7rem;
+    padding: 6px 10px;
+    top: 12px;
+    right: 12px;
+  }
+  .trending-title-overlay {
+    padding: 12px 16px;
+  }
+  .trending-title-overlay h3 {
+    font-size: 1rem;
+  }
+  .trending-nav-arrow {
+    width: 36px;
+    height: 36px;
+  }
+  
+  /* Testimonials - Auto-scroll on Mobile */
+  .testimonials-section {
+    overflow: hidden;
+    padding: 30px 12px;
+  }
+  .testimonials-scroll {
+    animation: scroll-testimonials 30s linear infinite;
+    overflow: hidden;
+    width: max-content;
+    scroll-snap-type: none;
+  }
+  .testimonial-card {
+    min-width: 90%;
+    max-width: 90%;
+  }
+  
+  /* Hero Section - Expand Vertically 20% */
+  .hero-banner-carousel {
+    padding: 0 12px 24px;
+  }
+  .hero-banner-track {
+    aspect-ratio: 16 / 10;
+    min-height: 280px;
+  }
+  .hero-banner-slide img {
+    object-fit: contain;
+  }
+  .hero-premium-top {
+    padding: clamp(28px, 5vw, 44px) 16px 32px;
+  }
+  .hero-premium-headline {
+    margin-bottom: 12px;
+  }
+  .hero-premium-desc {
+    margin-bottom: 28px;
+  }
+  .hero-premium-actions {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2012,7 +2120,20 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 768px) {
   .brands-section {
-    padding: 40px 16px;
+    padding: 40px 12px;
+  }
+  .brands-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .brand-card {
+    padding: 16px 10px;
+  }
+  .brand-card strong {
+    font-size: 0.85rem;
+  }
+  .brand-card span {
+    font-size: 0.7rem;
   }
   
   .packages-grid {
