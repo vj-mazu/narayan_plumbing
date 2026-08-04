@@ -1717,7 +1717,7 @@ img { display: block; max-width: 100%; }
   .trending-carousel-track {
     position: relative !important;
     width: 100% !important;
-    height: 480px !important;
+    height: auto !important;
     min-height: 480px !important;
   }
   .trending-carousel-slide {
@@ -1735,7 +1735,8 @@ img { display: block; max-width: 100%; }
   }
   .trending-carousel-slide img {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    min-height: 480px !important;
     object-fit: contain !important;
     object-position: center !important;
     display: block !important;
@@ -1776,7 +1777,7 @@ img { display: block; max-width: 100%; }
   .why-choose-carousel-track {
     position: relative !important;
     width: 100% !important;
-    height: 540px !important;
+    height: auto !important;
     min-height: 540px !important;
   }
   .why-choose-carousel-slide {
@@ -1794,7 +1795,8 @@ img { display: block; max-width: 100%; }
   }
   .why-choose-carousel-slide img {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    min-height: 540px !important;
     object-fit: contain !important;
     object-position: center !important;
     display: block !important;
@@ -1825,7 +1827,7 @@ img { display: block; max-width: 100%; }
   .hero-banner-track {
     position: relative !important;
     width: 100% !important;
-    height: 480px !important;
+    height: auto !important;
     min-height: 480px !important;
   }
   .hero-fullscreen-slide,
@@ -1846,7 +1848,8 @@ img { display: block; max-width: 100%; }
   .hero-fullscreen-slide img,
   .hero-banner-slide img {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    min-height: 480px !important;
     object-fit: contain !important;
     object-position: center !important;
     display: block !important;
