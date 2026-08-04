@@ -69,4 +69,3 @@ export interface Booking {
 
 export const PHONE_NUMBER = '9606157745';
 export const PHONE_DISPLAY = '+91 96061 57745';
-export const ADMIN_ROUTE = '#/admin';

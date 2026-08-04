@@ -1,8 +1,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle, Phone, Calendar, Clock, Check } from 'lucide-react';
+import { X, CheckCircle, Phone, Calendar, Clock, Check, Package, Wrench } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { CORE_SERVICES, TIME_SLOTS } from './data';
+import { CORE_SERVICES, PACKAGES, TIME_SLOTS } from './data';
 import { createBooking } from './storage';
 import { PHONE_NUMBER } from './types';
 
@@ -15,8 +15,9 @@ interface BookingModalProps {
 interface FormState {
   name: string;
   phone: string;
+  email: string;
   address: string;
-  services: string[]; // Multi-select array instead of a single string
+  services: string[];
   dateType: 'today' | 'tomorrow' | 'custom';
   customDate: string;
   timeSlot: string;
@@ -26,6 +27,7 @@ interface FormState {
 interface FormErrors {
   name?: string;
   phone?: string;
+  email?: string;
   address?: string;
   timeSlot?: string;
   services?: string;
@@ -34,6 +36,7 @@ interface FormErrors {
 const initialForm: FormState = {
   name: '',
   phone: '',
+  email: '',
   address: '',
   services: ['Tap Installation & Repair'],
   dateType: 'today',
@@ -52,24 +55,36 @@ function validate(form: FormState): FormErrors {
   const phone = form.phone.trim();
   const address = form.address.trim();
 
-  if (name.length < 2) {
-    errors.name = 'Please enter your full name';
-  } else if (!/^[a-zA-Z\s.'-]+$/.test(name)) {
-    errors.name = 'Name can contain letters only';
+  // Name validation
+  if (!name) {
+    errors.name = 'Name is required';
+  } else if (name.length > 100) {
+    errors.name = 'Name must not exceed 100 characters';
   }
 
-  if (!/^[6-9]\d{9}$/.test(phone)) {
+  // Phone validation
+  if (!phone) {
+    errors.phone = 'Phone number is required';
+  } else if (!/^\d{10,15}$/.test(phone)) {
     errors.phone = 'Enter a valid 10-digit mobile number';
   }
 
-  if (address.length < 10) {
-    errors.address = 'Enter your complete address (min 10 characters)';
+  // Email validation (optional if empty, format check if entered)
+  if (form.email.trim() && !/@.+/.test(form.email.trim())) {
+    errors.email = 'Enter a valid email address';
   }
 
+  // Address validation
+  if (!address) {
+    errors.address = 'Address is required';
+  }
+
+  // Service validation
   if (form.services.length === 0) {
-    errors.services = 'Please select at least one service';
+    errors.services = 'Please select at least one service or package';
   }
 
+  // Time slot validation
   if (!form.timeSlot) {
     errors.timeSlot = 'Please choose a time slot';
   }
@@ -85,12 +100,38 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
   const [errors, setErrors] = useState<FormErrors>({});
   const [bookingId, setBookingId] = useState<string | null>(null);
 
-  // Re-initialize the form every time the modal opens
+  // Combine packages and core services for complete visibility
+  const packageItems = PACKAGES.map((p) => ({
+    id: `pkg-${p.name}`,
+    name: p.name,
+    price: p.price,
+    isPackage: true,
+  }));
+
+  const coreItems = CORE_SERVICES.map((s) => ({
+    id: s.id,
+    name: s.name,
+    price: s.price,
+    isPackage: false,
+  }));
+
+  // Ensure any custom preselectedService is included in the list
+  const allServicesList = [...packageItems, ...coreItems];
+  if (preselectedService && !allServicesList.some((s) => s.name === preselectedService)) {
+    allServicesList.unshift({
+      id: `custom-${preselectedService}`,
+      name: preselectedService,
+      price: '₹499',
+      isPackage: preselectedService.toLowerCase().includes('package') || preselectedService.toLowerCase().includes('care'),
+    });
+  }
+
+  // Re-initialize form when modal opens
   useEffect(() => {
     if (open) {
-      setForm({ 
-        ...initialForm, 
-        services: preselectedService ? [preselectedService] : initialForm.services 
+      setForm({
+        ...initialForm,
+        services: preselectedService ? [preselectedService] : initialForm.services,
       });
       setErrors({});
       setBookingId(null);
@@ -106,7 +147,6 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
       const alreadySelected = prev.services.includes(svcName);
       let updated: string[];
       if (alreadySelected) {
-        // Keep at least one selected
         updated = prev.services.filter((s) => s !== svcName);
       } else {
         updated = [...prev.services, svcName];
@@ -137,10 +177,10 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
       : form.dateType === 'tomorrow' ? formatDate(tomorrow)
       : formatDate(new Date(form.customDate + 'T00:00:00'));
 
-    // Compute average/sum price dynamically
+    // Compute total price across packages and core services
     let totalPrice = 0;
-    form.services.forEach(sName => {
-      const match = CORE_SERVICES.find((s) => s.name === sName);
+    form.services.forEach((sName) => {
+      const match = allServicesList.find((s) => s.name === sName);
       if (match) {
         const val = parseInt(match.price.replace(/[^\d]/g, ''), 10) || 0;
         totalPrice += val;
@@ -166,7 +206,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
       `Booking ID: ${booking.id}`,
       `Name: ${form.name.trim()}`,
       `Phone: ${form.phone.trim()}`,
-      `Services: ${form.services.join(', ')}`,
+      `Selected Services/Packages: ${form.services.join(', ')}`,
       `Est. Total: ${priceStr}`,
       `Date: ${date}`,
       `Time: ${form.timeSlot}`,
@@ -215,7 +255,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
               backgroundColor: '#FFFFFF',
               borderRadius: 18,
               width: '100%',
-              maxWidth: 460,
+              maxWidth: 480,
               maxHeight: '92vh',
               overflowY: 'auto',
               boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
@@ -223,15 +263,16 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
               overscrollBehavior: 'contain',
             }}
           >
-            <div style={{ backgroundColor: '#101010', color: '#FFFFFF', padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2 }}>
+            <div style={{ background: 'linear-gradient(135deg, #ff6200 0%, #FF8C42 100%)', color: '#FFFFFF', padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2 }}>
               <div>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 900, margin: 0 }}>Book a Service Visit</h3>
-                <p style={{ fontSize: '0.72rem', color: '#00D4FF', margin: '2px 0 0 0' }}>Technician arrives at your doorstep in 30 mins</p>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 900, margin: 0 }}>Book a Service or Package</h3>
+                <p style={{ fontSize: '0.72rem', color: '#FFFFFF', margin: '2px 0 0 0', opacity: 0.95 }}>Technician arrives at your doorstep in 30 mins</p>
               </div>
               <button
+                type="button"
                 onClick={close}
                 aria-label="Close booking form"
-                style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: '#FFFFFF', width: 32, height: 32, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: '#FFFFFF', width: 32, height: 32, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >
                 <X size={16} />
               </button>
@@ -249,7 +290,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                 </motion.div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 900, color: '#101010', margin: 0 }}>Booking Confirmed!</h3>
                 <p style={{ color: '#757575', fontSize: '0.85rem', marginTop: 8 }}>
-                  Booking ID: <strong style={{ color: '#6E42E5' }}>{bookingId}</strong>
+                  Booking ID: <strong style={{ color: '#ff6200' }}>{bookingId}</strong>
                 </p>
                 <p style={{ color: '#757575', fontSize: '0.85rem', marginTop: 4, lineHeight: 1.5 }}>
                   Our master plumber will call you within 5 minutes to confirm your doorstep location.
@@ -261,7 +302,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     alignItems: 'center',
                     gap: 6,
                     marginTop: 16,
-                    backgroundColor: '#6E42E5',
+                    backgroundColor: '#ff6200',
                     color: '#FFFFFF',
                     textDecoration: 'none',
                     padding: '10px 18px',
@@ -275,12 +316,57 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate style={{ padding: 20 }}>
+                {/* Service / Package Selection */}
                 <div style={{ marginBottom: 14 }}>
                   <label style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 6 }}>
-                    Select Services (Choose one or multiple) *
+                    Select Package or Services (Choose one or multiple) *
                   </label>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 6, maxHeight: 180, overflowY: 'auto', border: '1px solid #D0D5DD', padding: 10, borderRadius: 8, backgroundColor: '#FAFAFA' }}>
-                    {CORE_SERVICES.map((s) => {
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 6, maxHeight: 220, overflowY: 'auto', border: '1px solid #D0D5DD', padding: 10, borderRadius: 8, backgroundColor: '#FAFAFA' }}>
+                    {/* Packages Section */}
+                    <div style={{ fontSize: '0.7rem', fontWeight: 900, color: '#ff6200', padding: '4px 6px 2px', display: 'flex', alignItems: 'center', gap: 4, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      <Package size={12} /> Service Packages
+                    </div>
+                    {packageItems.map((pkg) => {
+                      const selected = form.services.includes(pkg.name);
+                      return (
+                        <button
+                          key={pkg.id}
+                          type="button"
+                          onClick={() => toggleService(pkg.name)}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            padding: '8px 10px',
+                            borderRadius: 6,
+                            border: selected ? '2px solid #ff6200' : '1px solid #E0E0E0',
+                            backgroundColor: selected ? '#FFF5F0' : '#FFFFFF',
+                            textAlign: 'left',
+                            cursor: 'pointer',
+                            fontSize: '0.82rem',
+                            fontWeight: selected ? 800 : 600,
+                            color: selected ? '#ff6200' : '#222',
+                          }}
+                        >
+                          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <span style={{ background: '#ff6200', color: '#fff', fontSize: '0.62rem', fontWeight: 900, padding: '2px 6px', borderRadius: 4 }}>PACKAGE</span>
+                            {pkg.name}
+                          </span>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#ff6200' }}>{pkg.price}</span>
+                            <span style={{ width: 18, height: 18, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#ff6200' : '#FFFFFF', borderColor: selected ? '#ff6200' : '#BDBDBD' }}>
+                              {selected && <Check size={12} color="#FFFFFF" />}
+                            </span>
+                          </span>
+                        </button>
+                      );
+                    })}
+
+                    {/* Individual Services Section */}
+                    <div style={{ fontSize: '0.7rem', fontWeight: 900, color: '#555', padding: '8px 6px 2px', display: 'flex', alignItems: 'center', gap: 4, textTransform: 'uppercase', letterSpacing: '0.5px', borderTop: '1px solid #e5e5e5', marginTop: 4 }}>
+                      <Wrench size={12} /> Individual Plumbing Services
+                    </div>
+                    {coreItems.map((s) => {
                       const selected = form.services.includes(s.name);
                       return (
                         <button
@@ -293,19 +379,19 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                             justifyContent: 'space-between',
                             padding: '8px 10px',
                             borderRadius: 6,
-                            border: selected ? '1.5px solid #6E42E5' : '1px solid #E0E0E0',
-                            backgroundColor: selected ? '#F5F2FF' : '#FFFFFF',
+                            border: selected ? '2px solid #ff6200' : '1px solid #E0E0E0',
+                            backgroundColor: selected ? '#FFF5F0' : '#FFFFFF',
                             textAlign: 'left',
                             cursor: 'pointer',
                             fontSize: '0.8rem',
                             fontWeight: selected ? 800 : 600,
-                            color: selected ? '#6E42E5' : '#424242',
+                            color: selected ? '#ff6200' : '#424242',
                           }}
                         >
                           <span>{s.name}</span>
                           <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontSize: '0.75rem', color: '#9E9E9E' }}>({s.price})</span>
-                            <span style={{ width: 18, height: 18, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#6E42E5' : '#FFFFFF', borderColor: selected ? '#6E42E5' : '#BDBDBD' }}>
+                            <span style={{ fontSize: '0.75rem', color: '#757575' }}>({s.price})</span>
+                            <span style={{ width: 18, height: 18, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#ff6200' : '#FFFFFF', borderColor: selected ? '#ff6200' : '#BDBDBD' }}>
                               {selected && <Check size={12} color="#FFFFFF" />}
                             </span>
                           </span>
@@ -344,7 +430,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     type="tel"
                     autoComplete="tel"
                     placeholder="10-digit mobile number"
-                    maxLength={10}
+                    maxLength={15}
                     inputMode="numeric"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, '') })}
@@ -354,6 +440,26 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     }}
                   />
                   {errors.phone && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.phone}</span>}
+                </div>
+
+                <div style={{ marginBottom: 12 }}>
+                  <label htmlFor="email" style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
+                    Email Address (optional)
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="your.email@example.com"
+                    maxLength={254}
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    style={{
+                      width: '100%', padding: '10px 12px', borderRadius: 8, border: errors.email ? '1.5px solid #E11D48' : '1px solid #D0D5DD',
+                      fontSize: '0.85rem', outline: 'none',
+                    }}
+                  />
+                  {errors.email && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.email}</span>}
                 </div>
 
                 <div style={{ marginBottom: 12 }}>
@@ -387,9 +493,9 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                         onClick={() => setForm({ ...form, dateType: t })}
                         style={{
                           flex: 1, minWidth: 90, padding: '8px 6px', borderRadius: 8, cursor: 'pointer',
-                          backgroundColor: form.dateType === t ? '#6E42E5' : '#FFFFFF',
+                          backgroundColor: form.dateType === t ? '#ff6200' : '#FFFFFF',
                           color: form.dateType === t ? '#FFFFFF' : '#424242',
-                          border: form.dateType === t ? '1.5px solid #6E42E5' : '1px solid #D0D5DD',
+                          border: form.dateType === t ? '1.5px solid #ff6200' : '1px solid #D0D5DD',
                           fontWeight: 800, fontSize: '0.75rem',
                           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
                         }}
@@ -455,7 +561,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                   type="submit"
                   style={{
                     width: '100%',
-                    backgroundColor: '#6E42E5',
+                    backgroundColor: '#ff6200',
                     color: '#FFFFFF',
                     border: 'none',
                     padding: '13px',
@@ -463,7 +569,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     fontWeight: 900,
                     fontSize: '0.9rem',
                     cursor: 'pointer',
-                    boxShadow: '0 4px 14px rgba(110, 66, 229, 0.4)',
+                    boxShadow: '0 4px 14px rgba(255, 98, 0, 0.4)',
                   }}
                 >
                   CONFIRM INSTANT BOOKING

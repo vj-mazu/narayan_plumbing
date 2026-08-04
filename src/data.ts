@@ -18,6 +18,7 @@ export const QUICK_CATEGORIES: QuickCategory[] = [
 ];
 
 export const CORE_SERVICES: Service[] = [
+  { id: 'site-visit', name: 'Book Site Visit', icon: '🏠', desc: 'Free on-site inspection and cost estimation for your plumbing needs.', price: '₹0', rating: '5.0 ★' },
   { id: 'tap', name: 'Tap Installation & Repair', icon: '🚰', desc: 'Leaking taps, mixer replacement, cartridge repair & fitting.', price: '₹149', rating: '4.8 ★' },
   { id: 'shower', name: 'Shower Installation & Repair', icon: '🚿', desc: 'Wall mixer, rain showerhead, pressure boosting & repair.', price: '₹249', rating: '4.9 ★' },
   { id: 'toilet', name: 'Toilet (WC) Installation & Repair', icon: '🚽', desc: 'Flush tank leak repair, western/commode installation & gasket.', price: '₹349', rating: '4.8 ★' },
@@ -32,15 +33,46 @@ export const CORE_SERVICES: Service[] = [
   { id: 'emergency', name: 'Emergency Plumbing Service', icon: '🚨', desc: '24/7 priority burst pipe, main valve leak & midnight emergency.', price: '₹499', rating: '5.0 ★' },
 ];
 
+export const SERVICE_DISPLAY = [
+  { id: 'tap', shortName: 'Tap', subtitle: 'Installation & Repair' },
+  { id: 'shower', shortName: 'Shower', subtitle: 'Installation & Repair' },
+  { id: 'toilet', shortName: 'Toilet (WC)', subtitle: 'Installation & Repair' },
+  { id: 'basin', shortName: 'Wash Basin', subtitle: 'Installation & Repair' },
+  { id: 'kitchen', shortName: 'Kitchen Sink', subtitle: 'Installation & Repair' },
+  { id: 'pipe-leak', shortName: 'Pipe Leak', subtitle: 'Leak Detection & Repair' },
+  { id: 'pipe-inst', shortName: 'Pipe Fitting', subtitle: 'Installation & Replacement' },
+  { id: 'drain', shortName: 'Drain Blockage', subtitle: 'Cleaning & Unclogging' },
+  { id: 'tank', shortName: 'Water Tank', subtitle: 'Installation & Cleaning' },
+  { id: 'geyser', shortName: 'Geyser', subtitle: 'Installation & Repair' },
+  { id: 'bath-plumb', shortName: 'Bathroom Plumbing', subtitle: 'Complete Solutions' },
+  { id: 'emergency', shortName: 'Emergency Service', subtitle: '24/7 Rapid Response', emergency: true },
+];
+
 export const TRENDING_SERVICES: TrendingService[] = [
-  { title: 'Bathroom Renovation', tag: 'POPULAR', image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=75', desc: 'Luxury marble layouts, concealed diverters & rain shower systems.' },
-  { title: 'Kitchen Renovation', tag: 'HOT', image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=75', desc: 'Modular plumbing, under-sink RO setup & heavy-duty waste fittings.' },
-  { title: 'Complete Plumbing', tag: 'BEST VALUE', image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=75', desc: 'Whole house piping, pressure pump integration & valve overhaul.' },
-  { title: 'Water Tank Cleaning', tag: 'HYGIENE', image: '/tank.webp', desc: 'High-pressure jet washing, vacuum sludger & UV sanitization.' },
-  { title: 'Waterproofing Solutions', tag: 'PROTECT', image: '/waterproof.webp', desc: 'Seepage treatment, slab crack injection & tile chemical coating.' },
-  { title: 'CPVC / UPVC Pipeline', tag: 'DURABLE', image: '/cpvc.webp', desc: 'Lead-free food grade piping with 10-year joint leak guarantee.' },
-  { title: 'Geyser Installation', tag: 'WINTER CARE', image: '/geyser.webp', desc: 'Instant & storage water heater mounting with safety valve test.' },
-  { title: 'Drain Cleaning', tag: 'EXPRESS', image: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=600&q=75', desc: 'Camera line inspection & heavy motorized drain auger clearance.' },
+  {
+    title: 'Bathroom Renovation',
+    tag: 'TRENDING',
+    image: '/trending/trending-1.png',
+    desc: 'Complete bathroom makeover with modern fittings, tiles, and fixtures.',
+  },
+  {
+    title: 'Kitchen Sink Services',
+    tag: 'TRENDING',
+    image: '/trending/trending-2.png',
+    desc: 'Professional sink installation, repair, and drainage solutions.',
+  },
+  {
+    title: 'Water Tank Installation',
+    tag: 'TRENDING',
+    image: '/tank.webp',
+    desc: 'Expert overhead tank fitting, cleaning, and maintenance services.',
+  },
+  {
+    title: 'Geyser Installation & Repair',
+    tag: 'TRENDING',
+    image: '/geyser-trending.png',
+    desc: 'Professional water heater installation and repair for all brands.',
+  },
 ];
 
 export const PACKAGES: ServicePackage[] = [
@@ -89,12 +121,44 @@ export const PACKAGES: ServicePackage[] = [
 ];
 
 export const WHY_CHOOSE: WhyChoose[] = [
-  { title: '30 Minutes Doorstep Service', desc: 'GPS tracked local plumbers stationed nearby for rapid response.', icon: '⚡' },
-  { title: 'Verified & Trained Experts', desc: 'Background checked professionals with 5+ years hands-on experience.', icon: '🛡️' },
-  { title: 'Transparent Upfront Pricing', desc: 'Rate card approval before starting work. Zero hidden surprise fees.', icon: '🏷️' },
-  { title: 'Genuine Parts & Quality Work', desc: 'Original ISI-certified fittings from top brands (Jaquar, Astral, Supreme).', icon: '🧰' },
-  { title: '30 Days Service Warranty', desc: 'Free re-visit and fix if issues recur within 30 days of completion.', icon: '📅' },
-  { title: 'No Hidden Charges', desc: 'Honest billing with invoice details for every single component.', icon: '🚫' },
+  { title: '30 Minutes', desc: 'Doorstep Service', icon: '⚡' },
+  { title: 'Verified', desc: 'Trained Experts', icon: '🛡️' },
+  { title: 'Upfront', desc: 'Transparent Pricing', icon: '🏷️' },
+  { title: 'Quality', desc: 'Genuine Parts & Work', icon: '🧰' },
+  { title: '30 Days', desc: 'Service Warranty', icon: '📅' },
+  { title: 'No Hidden', desc: 'Charges Ever', icon: '🚫' },
+];
+
+export const WHY_CHOOSE_DISPLAY = [
+  { title: '30 Minutes', subtitle: 'Doorstep Service' },
+  { title: 'Verified', subtitle: 'Trained Experts' },
+  { title: 'Upfront', subtitle: 'Transparent Pricing' },
+  { title: 'Quality', subtitle: 'Genuine Parts & Work' },
+  { title: '30 Days', subtitle: 'Service Warranty' },
+  { title: 'No Hidden', subtitle: 'Charges Ever' },
+];
+
+export const WHY_CHOOSE_IMAGES = [
+  {
+    src: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=500&q=80',
+    alt: 'Premium CPVC and Ashirvad quality pipes',
+    label: 'Ashirvad & CPVC Pipes',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=500&q=80',
+    alt: 'Professional trained plumbing expert',
+    label: 'Expert Professionals',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=80',
+    alt: 'Skilled worker installing plumbing fixtures',
+    label: 'Trained Workers',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=500&q=80',
+    alt: 'Quality plumbing tools and fittings',
+    label: 'Quality Fittings',
+  },
 ];
 
 export const REVIEWS: Review[] = [
@@ -117,3 +181,43 @@ export const AREAS_SERVED = [
 ];
 
 export const TIME_SLOTS = ['9 AM – 12 PM', '12 PM – 3 PM', '3 PM – 6 PM', '6 PM – 9 PM', '9 PM – 12 AM'];
+
+export const HERO_CAROUSEL_IMAGES = [
+  { src: '/hero/banner-1.jpg', alt: 'Narayan Plumbing — complete plumbing solutions at your doorstep' },
+  { src: '/hero/banner-2.jpg', alt: 'Narayan Plumbing — solutions that flow, care that lasts' },
+  { src: '/hero/banner-3.jpg', alt: 'Narayan Plumbing — expert plumbers on time every time' },
+  { src: '/hero/banner-4.jpg', alt: 'Narayan Plumbing — protect your home from leaks and damage' },
+];
+
+export interface Testimonial {
+  id: string;
+  customerName: string;
+  location: string;
+  reviewText: string;
+  rating: number;
+  date?: string;
+}
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: '1',
+    customerName: 'Ramesh K.',
+    location: 'Whitefield',
+    reviewText: 'Plumber arrived within 30 minutes for a bathroom pipe leak. Clean work and price exactly as quoted.',
+    rating: 5,
+  },
+  {
+    id: '2',
+    customerName: 'Priya S.',
+    location: 'Jayanagar',
+    reviewText: 'Booked geyser installation in the morning, done by afternoon. Very polite and professional team.',
+    rating: 5,
+  },
+  {
+    id: '3',
+    customerName: 'Imran A.',
+    location: 'HSR Layout',
+    reviewText: 'Our kitchen sink was fully blocked. They cleared it fast and even cleaned up afterwards. Highly recommend.',
+    rating: 5,
+  },
+];
