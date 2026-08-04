@@ -1717,7 +1717,7 @@ img { display: block; max-width: 100%; }
     position: relative !important;
     width: 100% !important;
     height: 0 !important;
-    padding-bottom: 75% !important;
+    padding-bottom: 100% !important;
     overflow: hidden !important;
   }
   .trending-carousel-slide {
@@ -1778,7 +1778,7 @@ img { display: block; max-width: 100%; }
     position: relative !important;
     width: 100% !important;
     height: 0 !important;
-    padding-bottom: 75% !important;
+    padding-bottom: 100% !important;
     overflow: hidden !important;
   }
   .why-choose-carousel-slide {
@@ -1830,7 +1830,7 @@ img { display: block; max-width: 100%; }
     position: relative !important;
     width: 100% !important;
     height: 0 !important;
-    padding-bottom: 56.25% !important;
+    padding-bottom: 75% !important;
     overflow: hidden !important;
   }
   .hero-fullscreen-slide,
