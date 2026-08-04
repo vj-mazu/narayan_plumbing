@@ -2015,27 +2015,78 @@ img { display: block; max-width: 100%; }
     box-sizing: border-box !important;
   }
   .brand-card {
-    padding: 14px 6px !important;
+    padding: 16px 8px !important;
     background: #fff !important;
-    border-radius: 10px !important;
-    border: 1px solid #eaeaea !important;
+    border-radius: 12px !important;
+    border: 2px solid #ff6200 !important;
+    box-shadow: 0 2px 8px rgba(255, 98, 0, 0.1) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
-    min-height: 80px !important;
+    min-height: 130px !important;
+    max-height: 130px !important;
     box-sizing: border-box !important;
+    gap: 8px !important;
+    position: relative !important;
+  }
+  .brand-name {
+    font-size: 1.1rem !important;
+    font-weight: 900 !important;
+    color: var(--text) !important;
+    text-align: center !important;
+    letter-spacing: 0.3px !important;
+  }
+  .brand-card img {
+    max-width: 95px !important;
+    max-height: 60px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    position: absolute !important;
+    top: 48% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
   }
   .brand-card svg {
-    width: 80px !important;
-    height: 22px !important;
+    max-width: 95px !important;
+    max-height: 60px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    margin: 0 !important;
+    position: absolute !important;
+    top: 48% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  .brand-card svg {
+    max-width: 85px !important;
+    max-height: 50px !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) translate(0, -8px) !important;
   }
   .brand-card-desc {
     font-size: 0.62rem !important;
     color: #666 !important;
-    margin-top: 4px !important;
-    line-height: 1.1 !important;
+    margin: 0 !important;
+    padding: 0 4px !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    position: absolute !important;
+    bottom: 8px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
   }
 }
 
@@ -2045,7 +2096,25 @@ img { display: block; max-width: 100%; }
     gap: 6px !important;
   }
   .brand-card {
-    padding: 10px 4px !important;
+    padding: 14px 6px !important;
+    min-height: 120px !important;
+    max-height: 120px !important;
+  }
+  .brand-card img {
+    max-width: 90px !important;
+    max-height: 56px !important;
+  }
+  .brand-card svg {
+    max-width: 90px !important;
+    max-height: 56px !important;
+  }
+  .brand-card-desc {
+    font-size: 0.6rem !important;
+    bottom: 6px !important;
+  }
+}
+  .brand-card img {
+    max-width: 70px !important;
   }
   .services-grid-container { grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; }
   .service-grid-card { padding: 12px 6px !important; }
@@ -2247,9 +2316,10 @@ img { display: block; max-width: 100%; }
 }
 
 .brands-container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
+  padding: 0 20px;
 }
 
 .brands-container h2 {
@@ -2268,24 +2338,58 @@ img { display: block; max-width: 100%; }
 .brands-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  max-width: 1100px;
+  gap: 16px;
+  max-width: 100%;
   margin: 0 auto;
+  justify-items: center;
 }
 
 .brand-card {
   background: white;
   border: 2px solid var(--border);
   border-radius: 12px;
-  padding: 24px 16px;
+  padding: 20px 14px;
+  width: 100%;
+  max-width: 180px;
   text-align: center;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 140px;
+  max-height: 140px;
+  position: relative;
 }
 
 .brand-card:hover {
   border-color: var(--orange);
   box-shadow: 0 6px 20px rgba(255, 98, 0, 0.15);
   transform: translateY(-4px);
+}
+
+.brand-name {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--text);
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.brand-card img {
+  max-width: 150px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 }
 
 .brand-card strong {
@@ -2298,10 +2402,12 @@ img { display: block; max-width: 100%; }
 
 .brand-card span {
   display: block;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--muted);
   font-weight: 600;
+  text-align: center;
 }
+
 
 @media (max-width: 1024px) {
   .brands-grid {
@@ -2967,6 +3073,7 @@ img { display: block; max-width: 100%; }
   width: 100%;
   min-height: 450px;
   aspect-ratio: 16 / 10;
+  overflow: hidden;
 }
 
 .trending-carousel-slide {
@@ -2991,7 +3098,7 @@ img { display: block; max-width: 100%; }
 .trending-carousel-slide img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   display: block;
   border-radius: 20px;
@@ -2999,6 +3106,7 @@ img { display: block; max-width: 100%; }
 }
 
 .trending-badge-overlay {
+  display: none;
   position: absolute;
   top: 16px;
   right: 16px;
@@ -3008,7 +3116,6 @@ img { display: block; max-width: 100%; }
   font-weight: 900;
   padding: 6px 14px;
   border-radius: 20px;
-  display: flex;
   align-items: center;
   gap: 6px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
@@ -3017,12 +3124,15 @@ img { display: block; max-width: 100%; }
 }
 
 .trending-title-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 30px 20px 20px;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+  position: static;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #ff6200, #ff8533);
+  border-radius: 12px;
+  margin-top: 16px;
+  text-align: center;
   z-index: 5;
 }
 

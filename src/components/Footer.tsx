@@ -9,7 +9,6 @@ interface FooterProps {
 
 const FOOTER_SERVICES = [
   { name: 'Plumbing Services', icon: Wrench, serviceKey: 'Plumbing Services' },
-  { name: 'Tap & Mixer Repair', icon: Droplets, serviceKey: 'Tap Installation & Repair' },
   { name: 'Toilet & WC Repair', icon: ShieldCheck, serviceKey: 'Toilet & WC Repair' },
   { name: 'Geyser Installation', icon: Flame, serviceKey: 'Geyser Installation & Repair' },
   { name: 'Leak Detection', icon: Sparkles, serviceKey: 'Pipe Leakage Detection' },
