@@ -1716,7 +1716,7 @@ img { display: block; max-width: 100%; }
   .trending-carousel-track {
     width: 100%;
     overflow: hidden;
-    min-height: 290px;
+    min-height: 400px;
   }
   .trending-carousel-slide {
     width: 100%;
@@ -1726,8 +1726,8 @@ img { display: block; max-width: 100%; }
   .trending-carousel-slide img {
     width: 100%;
     height: auto;
-    min-height: 290px;
-    max-height: 340px;
+    min-height: 400px;
+    max-height: 500px;
     object-fit: contain;
     object-position: center;
     display: block;
@@ -1749,18 +1749,54 @@ img { display: block; max-width: 100%; }
     height: 38px;
   }
 
+  /* Why Choose Carousel - Bigger Images on Mobile */
+  .why-choose-carousel {
+    max-width: 100%;
+    margin: 30px auto;
+    min-height: 450px;
+  }
+  .why-choose-carousel-track {
+    min-height: 450px;
+  }
+  .why-choose-carousel-slide {
+    min-height: 450px;
+  }
+  .why-choose-carousel-slide img {
+    width: 100%;
+    height: auto;
+    min-height: 450px;
+    max-height: 550px;
+    object-fit: contain;
+    object-position: center;
+  }
+  .why-carousel-arrow {
+    width: 38px;
+    height: 38px;
+  }
+  .why-carousel-arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+  .why-prev {
+    left: 10px;
+  }
+  .why-next {
+    right: 10px;
+  }
+
+
   /* Hero Section - Vertically Enlarged by 20% */
   .hero-fullscreen-track,
   .hero-banner-track {
     aspect-ratio: 16 / 12 !important;
-    min-height: 340px !important;
+    min-height: 400px !important;
   }
   .hero-fullscreen-slide img,
   .hero-banner-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    min-height: 340px;
+    min-height: 400px;
   }
 
   /* Book Site Visit Form & Contact Info - Overflow Prevention */
@@ -1937,34 +1973,6 @@ img { display: block; max-width: 100%; }
   .why-choose-card {
     padding: 14px 4px !important;
   }
-}
-  .why-choose-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-  .why-choose-card {
-    padding: 12px 6px;
-    border-radius: 8px;
-  }
-  .why-choose-card svg {
-    width: 24px;
-    height: 24px;
-  }
-  .why-choose-card strong {
-    font-size: 0.75rem;
-  }
-  .why-choose-card span {
-    font-size: 0.62rem;
-  }
-  .testimonial-card {
-    min-width: 90%;
-    max-width: 90%;
-  }
-  .package-card {
-    min-width: 85%;
-  }
-  .stats-container { grid-template-columns: 1fr; }
-  .service-icon-item { min-width: calc(50% - 8px); }
 }
 
 /* Custom scrollbar for testimonials on mobile */
@@ -2303,7 +2311,8 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 480px) {
   .brands-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
   }
 }
 
