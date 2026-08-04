@@ -1716,8 +1716,7 @@ img { display: block; max-width: 100%; }
   .trending-carousel-track {
     position: relative !important;
     width: 100% !important;
-    height: 480px !important;
-    max-height: 480px !important;
+    height: auto !important;
     overflow: hidden !important;
   }
   .trending-carousel-slide {
@@ -1735,9 +1734,7 @@ img { display: block; max-width: 100%; }
   }
   .trending-carousel-slide img {
     width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center !important;
+    height: auto !important;
     display: block !important;
   }
   .trending-badge-overlay {
@@ -1774,8 +1771,7 @@ img { display: block; max-width: 100%; }
   .why-choose-carousel-track {
     position: relative !important;
     width: 100% !important;
-    height: 540px !important;
-    max-height: 540px !important;
+    height: auto !important;
     overflow: hidden !important;
   }
   .why-choose-carousel-slide {
@@ -1793,9 +1789,7 @@ img { display: block; max-width: 100%; }
   }
   .why-choose-carousel-slide img {
     width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center !important;
+    height: auto !important;
     display: block !important;
   }
   .why-carousel-arrow {
@@ -1823,8 +1817,7 @@ img { display: block; max-width: 100%; }
   .hero-banner-track {
     position: relative !important;
     width: 100% !important;
-    height: 480px !important;
-    max-height: 480px !important;
+    height: auto !important;
     overflow: hidden !important;
   }
   .hero-fullscreen-slide,
@@ -1845,9 +1838,7 @@ img { display: block; max-width: 100%; }
   .hero-fullscreen-slide img,
   .hero-banner-slide img {
     width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center !important;
+    height: auto !important;
     display: block !important;
   }
 
