@@ -1722,6 +1722,10 @@ img { display: block; max-width: 100%; }
     padding: 30px 12px;
     overflow: hidden;
   }
+  /* Hide header text above carousel on mobile - text shows on image instead */
+  .trending-section > div:first-child {
+    display: none !important;
+  }
   .trending-carousel-box {
     max-width: 100% !important;
     overflow: hidden !important;
@@ -1787,6 +1791,9 @@ img { display: block; max-width: 100%; }
     margin: 24px auto !important;
     position: relative !important;
     overflow: hidden !important;
+    border: 3px solid var(--orange) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(255, 98, 0, 0.2) !important;
   }
   .why-choose-carousel-track {
     position: relative !important;
@@ -1873,6 +1880,14 @@ img { display: block; max-width: 100%; }
     object-position: center !important;
     display: block !important;
   }
+  /* Hide all carousel arrow buttons on mobile */
+  .hero-fs-arrow,
+  .hero-banner-arrow,
+  .trending-nav-arrow,
+  .why-carousel-arrow {
+    display: none !important;
+  }
+
 
   /* Book Site Visit Form & Contact Info - Overflow Prevention */
   .hero-booking-section {
