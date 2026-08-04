@@ -1703,47 +1703,46 @@ img { display: block; max-width: 100%; }
     font-size: 0.68rem;
   }
 
-  /* Trending Services - Vertically Enlarged + 100% Fit */
+  /* Trending Services Carousel Mobile - 100% Uncropped Full Poster View */
   .trending-section {
-    padding: 44px 14px;
+    padding: 30px 12px;
     overflow: hidden;
   }
   .trending-carousel-box {
-    max-width: 100%;
-    overflow: hidden;
-    border-radius: 16px;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+    background: #ffffff !important;
   }
   .trending-carousel-track {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    min-height: 400px !important;
-    max-height: 500px !important;
-    aspect-ratio: 16 / 10 !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
   }
   .trending-carousel-slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     opacity: 0;
     pointer-events: none;
   }
   .trending-carousel-slide.active {
-    position: relative;
-    opacity: 1;
-    pointer-events: auto;
+    position: relative !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
   .trending-carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+    border-radius: 16px !important;
   }
   .trending-badge-overlay {
     font-size: 0.72rem;
@@ -1762,44 +1761,43 @@ img { display: block; max-width: 100%; }
     height: 38px;
   }
 
-  /* Why Choose Carousel - Bigger Images on Mobile */
+  /* Why Choose Carousel Mobile - 100% Uncropped Full Image View */
   .why-choose-carousel {
-    max-width: 100%;
-    margin: 30px auto;
-    position: relative;
-    overflow: hidden;
-    min-height: 450px !important;
+    max-width: 100% !important;
+    margin: 24px auto !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
   }
   .why-choose-carousel-track {
-    position: relative;
-    overflow: hidden;
-    min-height: 450px !important;
-    max-height: 550px !important;
-    aspect-ratio: 16 / 10 !important;
-    width: 100%;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
   }
   .why-choose-carousel-slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
     pointer-events: none;
   }
   .why-choose-carousel-slide.active {
-    position: relative;
-    opacity: 1;
-    pointer-events: auto;
+    position: relative !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
   .why-choose-carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+    border-radius: 14px !important;
   }
   .why-carousel-arrow {
     width: 38px;
@@ -1817,27 +1815,23 @@ img { display: block; max-width: 100%; }
   }
 
 
-  /* Hero Section - Vertically Enlarged by 20% */
+  /* Hero Section Mobile - 100% Uncropped Full Banner View */
   .hero-fullscreen,
   .hero-banner-carousel {
-    overflow: hidden;
+    overflow: hidden !important;
   }
   .hero-fullscreen-track,
   .hero-banner-track {
-    position: relative;
-    overflow: hidden;
-    min-height: 400px !important;
-    max-height: 450px !important;
-    aspect-ratio: 16 / 11 !important;
-    width: 100%;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
   }
   .hero-fullscreen-slide,
   .hero-banner-slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
@@ -1845,18 +1839,16 @@ img { display: block; max-width: 100%; }
   }
   .hero-fullscreen-slide.active,
   .hero-banner-slide.active {
-    position: relative;
-    opacity: 1;
     pointer-events: auto;
   }
   .hero-fullscreen-slide img,
   .hero-banner-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
-    min-height: 400px;
     display: block;
+    background: #fff;
   }
 
   /* Book Site Visit Form & Contact Info - Overflow Prevention */
@@ -2114,8 +2106,9 @@ img { display: block; max-width: 100%; }
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
+  background: #fff;
 }
 
 .hero-fullscreen-overlay {
@@ -2962,10 +2955,11 @@ img { display: block; max-width: 100%; }
 .trending-carousel-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   display: block;
   border-radius: 20px;
+  background: #fff;
 }
 
 .trending-badge-overlay {
@@ -3119,8 +3113,9 @@ img { display: block; max-width: 100%; }
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
+  background: #fff;
 }
 
 .why-carousel-arrow {
