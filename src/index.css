@@ -1716,8 +1716,10 @@ img { display: block; max-width: 100%; }
   .trending-carousel-track {
     width: 100%;
     overflow: hidden;
-    min-height: 400px;
     position: relative;
+    min-height: 400px !important;
+    max-height: 500px !important;
+    aspect-ratio: 16 / 10 !important;
   }
   .trending-carousel-slide {
     position: absolute;
@@ -1739,8 +1741,6 @@ img { display: block; max-width: 100%; }
   .trending-carousel-slide img {
     width: 100%;
     height: 100%;
-    min-height: 400px;
-    max-height: 500px;
     object-fit: cover;
     object-position: center;
     display: block;
@@ -1766,14 +1766,17 @@ img { display: block; max-width: 100%; }
   .why-choose-carousel {
     max-width: 100%;
     margin: 30px auto;
-    min-height: 450px;
     position: relative;
     overflow: hidden;
+    min-height: 450px !important;
   }
   .why-choose-carousel-track {
-    min-height: 450px;
     position: relative;
     overflow: hidden;
+    min-height: 450px !important;
+    max-height: 550px !important;
+    aspect-ratio: 16 / 10 !important;
+    width: 100%;
   }
   .why-choose-carousel-slide {
     position: absolute;
@@ -1783,7 +1786,6 @@ img { display: block; max-width: 100%; }
     bottom: 0;
     width: 100%;
     height: 100%;
-    min-height: 450px;
     opacity: 0;
     pointer-events: none;
   }
@@ -1795,8 +1797,6 @@ img { display: block; max-width: 100%; }
   .why-choose-carousel-slide img {
     width: 100%;
     height: 100%;
-    min-height: 450px;
-    max-height: 550px;
     object-fit: cover;
     object-position: center;
     display: block;
@@ -1818,12 +1818,18 @@ img { display: block; max-width: 100%; }
 
 
   /* Hero Section - Vertically Enlarged by 20% */
+  .hero-fullscreen,
+  .hero-banner-carousel {
+    overflow: hidden;
+  }
   .hero-fullscreen-track,
   .hero-banner-track {
-    aspect-ratio: 16 / 12 !important;
-    min-height: 400px !important;
     position: relative;
     overflow: hidden;
+    min-height: 400px !important;
+    max-height: 450px !important;
+    aspect-ratio: 16 / 11 !important;
+    width: 100%;
   }
   .hero-fullscreen-slide,
   .hero-banner-slide {
@@ -2083,7 +2089,8 @@ img { display: block; max-width: 100%; }
 .hero-fullscreen-track {
   position: relative;
   width: 100%;
-  height: auto;
+  min-height: 420px;
+  aspect-ratio: 16 / 9;
 }
 
 .hero-fullscreen-slide {
@@ -2929,7 +2936,8 @@ img { display: block; max-width: 100%; }
 .trending-carousel-track {
   position: relative;
   width: 100%;
-  height: auto;
+  min-height: 450px;
+  aspect-ratio: 16 / 10;
 }
 
 .trending-carousel-slide {
@@ -3084,7 +3092,8 @@ img { display: block; max-width: 100%; }
 .why-choose-carousel-track {
   position: relative;
   width: 100%;
-  height: auto;
+  min-height: 500px;
+  aspect-ratio: 16 / 10;
 }
 
 .why-choose-carousel-slide {
