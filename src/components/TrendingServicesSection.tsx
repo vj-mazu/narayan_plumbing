@@ -8,6 +8,8 @@ const TRENDING_SLIDES = [
     alt: 'Bathroom Renovation & Sanitaryware Plumbing',
     badge: '🚽 Bathroom Renovation',
     title: 'Bathroom Renovation & Plumbing',
+    width: 1281,
+    height: 1227,
   },
   {
     id: 'kitchen-sink',
@@ -15,6 +17,8 @@ const TRENDING_SLIDES = [
     alt: 'Kitchen Sink Installation & Repair Services',
     badge: '🔧 Kitchen Sink Services',
     title: 'Kitchen Sink Installation & Repair',
+    width: 1536,
+    height: 1024,
   },
   {
     id: 'water-tank',
@@ -22,6 +26,8 @@ const TRENDING_SLIDES = [
     alt: 'Water Tank Cleaning & Maintenance',
     badge: '🛢️ Water Tank Service',
     title: 'Water Tank Cleaning & Installation',
+    width: 1535,
+    height: 1024,
   },
   {
     id: 'geyser-service',
@@ -29,6 +35,8 @@ const TRENDING_SLIDES = [
     alt: 'Geyser Installation & Repair Services',
     badge: '🔥 Geyser Service',
     title: 'Geyser Installation & Repair',
+    width: 1535,
+    height: 1024,
   },
 ];
 
@@ -75,6 +83,8 @@ export function TrendingServicesSection() {
               <img 
                 src={s.src} 
                 alt={s.alt} 
+                width={s.width} 
+                height={s.height} 
                 loading={index === 0 ? 'eager' : 'lazy'}
               />
             </div>

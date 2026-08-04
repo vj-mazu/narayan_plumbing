@@ -37,9 +37,9 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
     <section className="hero-booking-section" aria-label="Book plumbing service" id="book-visit">
       <div className="hero-booking-grid">
         <div className="hero-booking-info">
-          <h1>
+          <h2>
             Your Trusted Plumbing Partner in Bengaluru
-          </h1>
+          </h2>
           <p>
             With over a decade of experience, Narayan Plumbing Services is the most trusted name 
             in residential and commercial plumbing across Bengaluru. We deliver exceptional service 

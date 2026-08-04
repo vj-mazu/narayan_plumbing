@@ -26,6 +26,7 @@ export function HeroCarousel({ images, onBookNow, autoRotateInterval = 5000 }: H
 
   return (
     <section className="hero-fullscreen" aria-label="Narayan Plumbing Services">
+      <h1 className="sr-only">Narayan Plumbing Services Bangalore | Plumber in 30 Minutes</h1>
       <div className="hero-fullscreen-track">
         {images.map((image, index) => (
           <div
@@ -33,7 +34,7 @@ export function HeroCarousel({ images, onBookNow, autoRotateInterval = 5000 }: H
             className={`hero-fullscreen-slide ${index === active ? 'active' : ''}`}
             aria-hidden={index !== active}
           >
-            <img src={image.src} alt={image.alt} loading={index === 0 ? 'eager' : 'lazy'} />
+            <img src={image.src} alt={image.alt} width={1600} height={800} loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'low'} />
           </div>
         ))}
       </div>

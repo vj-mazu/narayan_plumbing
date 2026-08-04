@@ -70,7 +70,7 @@ export function WhyChooseSection({ benefits }: WhyChooseSectionProps) {
                 key={`why-slide-${image.src}`}
                 className={`why-choose-carousel-slide ${index === currentSlide ? 'active' : ''}`}
               >
-                <img src={image.src} alt={image.alt} loading="lazy" />
+                <img src={image.src} alt={image.alt} width={1536} height={1024} loading="lazy" />
               </div>
             ))}
           </div>
