@@ -1668,108 +1668,55 @@ img { display: block; max-width: 100%; }
   .stat-subtitle {
     font-size: 0.7rem;
   }
+  /* Why Choose Section - Enlarged on Mobile */
   .why-choose-section {
-    padding: 30px 12px;
+    padding: 44px 14px;
   }
   .why-choose-container h2 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+    font-size: 1.3rem;
+    margin-bottom: 24px;
     word-wrap: break-word;
+    overflow-wrap: anywhere;
     hyphens: auto;
   }
   .why-choose-grid { 
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 24px;
   }
   .why-choose-card {
-    padding: 12px 6px;
+    padding: 16px 8px;
+    min-height: 95px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   .why-choose-card svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
   .why-choose-card strong {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
   .why-choose-card span {
-    font-size: 0.62rem;
+    font-size: 0.68rem;
   }
-  .testimonials-section {
-    overflow-x: hidden;
-    padding: 30px 12px;
-  }
-  .testimonial-card {
-    min-width: 90%;
-    max-width: 90%;
-  }
-  .testimonials-scroll {
-    animation: none;
-    overflow-x: auto;
-    width: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: var(--orange) #f0f0f0;
-  }
-  .testimonials-scroll::-webkit-scrollbar {
-    height: 8px;
-  }
-  .testimonials-scroll::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
-  }
-  .testimonials-scroll::-webkit-scrollbar-thumb {
-    background: var(--orange);
-    border-radius: 10px;
-  }
-  .testimonial-card {
-    scroll-snap-align: center;
-  }
-  .site-footer { 
-    grid-template-columns: 1fr;
-    padding: 24px 12px 90px;
-  }
-  .site-shell { 
-    padding-bottom: 72px;
-  }
-  
-  /* Why Choose Carousel - Bigger on Mobile */
-  .why-choose-carousel {
-    margin: 24px 0;
-    max-width: 100%;
-    min-height: 280px;
-  }
-  .why-choose-carousel-slide img {
-    width: 100%;
-    height: auto;
-    min-height: 280px;
-    max-height: 400px;
-    object-fit: cover;
-  }
-  .why-carousel-arrow {
-    width: 36px;
-    height: 36px;
-  }
-  .why-prev {
-    left: 8px;
-  }
-  .why-next {
-    right: 8px;
-  }
-  
-  /* Trending Services - Fix Image Sizes & Overlap */
+
+  /* Trending Services - Vertically Enlarged + 100% Fit */
   .trending-section {
-    padding: 40px 12px;
+    padding: 44px 14px;
     overflow: hidden;
   }
   .trending-carousel-box {
     max-width: 100%;
     overflow: hidden;
+    border-radius: 16px;
   }
   .trending-carousel-track {
     width: 100%;
     overflow: hidden;
+    min-height: 290px;
   }
   .trending-carousel-slide {
     width: 100%;
@@ -1779,75 +1726,218 @@ img { display: block; max-width: 100%; }
   .trending-carousel-slide img {
     width: 100%;
     height: auto;
-    max-height: 240px;
+    min-height: 290px;
+    max-height: 340px;
     object-fit: contain;
     object-position: center;
     display: block;
   }
   .trending-badge-overlay {
-    font-size: 0.7rem;
-    padding: 6px 10px;
+    font-size: 0.72rem;
+    padding: 6px 12px;
     top: 12px;
     right: 12px;
   }
   .trending-title-overlay {
-    padding: 12px 16px;
+    padding: 16px 18px;
   }
   .trending-title-overlay h3 {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   .trending-nav-arrow {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
   }
-  
-  /* Testimonials - Auto-scroll on Mobile */
-  .testimonials-section {
-    overflow: hidden;
-    padding: 30px 12px;
-  }
-  .testimonials-scroll {
-    animation: scroll-testimonials 30s linear infinite;
-    overflow: hidden;
-    width: max-content;
-    scroll-snap-type: none;
-  }
-  .testimonial-card {
-    min-width: 90%;
-    max-width: 90%;
-  }
-  
-  /* Hero Section - Expand Vertically 20% */
-  .hero-banner-carousel {
-    padding: 0 12px 24px;
-  }
+
+  /* Hero Section - Vertically Enlarged by 20% */
+  .hero-fullscreen-track,
   .hero-banner-track {
-    aspect-ratio: 16 / 10;
-    min-height: 280px;
+    aspect-ratio: 16 / 12 !important;
+    min-height: 340px !important;
   }
+  .hero-fullscreen-slide img,
   .hero-banner-slide img {
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 340px;
   }
-  .hero-premium-top {
-    padding: clamp(28px, 5vw, 44px) 16px 32px;
+
+  /* Book Site Visit Form & Contact Info - Overflow Prevention */
+  .hero-booking-section {
+    padding: 30px 12px;
+    overflow: hidden;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
-  .hero-premium-headline {
-    margin-bottom: 12px;
+  .hero-booking-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
-  .hero-premium-desc {
-    margin-bottom: 28px;
+  .hero-booking-info {
+    padding: 24px 18px !important;
+    border-radius: 18px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
-  .hero-premium-actions {
-    gap: 12px;
-    margin-bottom: 12px;
+  .hero-booking-info h1 {
+    font-size: 1.4rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 12px !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .hero-booking-info p {
+    font-size: 0.85rem !important;
+    line-height: 1.45 !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .hero-contact-list {
+    padding: 0 !important;
+    margin: 16px 0 0 0 !important;
+    list-style: none !important;
+  }
+  .hero-contact-list li {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+    max-width: 100% !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+  .hero-contact-text {
+    max-width: calc(100% - 32px) !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    font-size: 0.82rem !important;
+  }
+  .hero-contact-text a {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    font-size: 0.95rem !important;
+  }
+  .hero-booking-form {
+    background: rgba(235, 237, 240, 0.95) !important;
+    border-radius: 20px !important;
+    padding: 20px 14px !important;
+    border: 1px solid #dcdcdc !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06) !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .hero-booking-form h2 {
+    color: #000 !important;
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    margin: 0 0 8px 0 !important;
+  }
+  .hero-form-sub {
+    color: #4a4a4a !important;
+    font-size: 0.8rem !important;
+    text-align: center !important;
+    margin-bottom: 16px !important;
+    line-height: 1.35 !important;
+  }
+  .hero-input-group {
+    margin-bottom: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .hero-input-group input,
+  .hero-input-group select {
+    width: 100% !important;
+    padding: 12px 14px !important;
+    border-radius: 12px !important;
+    border: 2px solid #ccc !important;
+    font-size: 0.88rem !important;
+    outline: none !important;
+    background: #fff !important;
+    box-sizing: border-box !important;
+  }
+  .hero-form-submit {
+    width: 100% !important;
+    background: #f05a4f !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 14px !important;
+    border-radius: 12px !important;
+    font-size: 0.92rem !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+    text-transform: uppercase !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Trusted Brands - 3 Column Grid Pattern on Mobile */
+  .brands-section {
+    padding: 36px 14px !important;
+  }
+  .brands-container h2 {
+    font-size: 1.2rem !important;
+    margin-bottom: 6px !important;
+  }
+  .brands-subtitle {
+    font-size: 0.8rem !important;
+    margin-bottom: 20px !important;
+  }
+  .brands-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .brand-card {
+    padding: 14px 6px !important;
+    background: #fff !important;
+    border-radius: 10px !important;
+    border: 1px solid #eaeaea !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    min-height: 80px !important;
+    box-sizing: border-box !important;
+  }
+  .brand-card svg {
+    width: 80px !important;
+    height: 22px !important;
+  }
+  .brand-card-desc {
+    font-size: 0.62rem !important;
+    color: #666 !important;
+    margin-top: 4px !important;
+    line-height: 1.1 !important;
   }
 }
 
 @media (max-width: 480px) {
-  .services-grid-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .service-grid-card { padding: 14px 10px; }
-  .trending-services-grid { grid-template-columns: 1fr; }
-  .why-choose-gallery { grid-template-columns: 1fr 1fr; }
+  .brands-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+  .brand-card {
+    padding: 10px 4px !important;
+  }
+  .services-grid-container { grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; }
+  .service-grid-card { padding: 12px 6px !important; }
+  .why-choose-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+  .why-choose-card {
+    padding: 14px 4px !important;
+  }
+}
   .why-choose-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
