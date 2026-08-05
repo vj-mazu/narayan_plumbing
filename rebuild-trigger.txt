@@ -1,0 +1,3 @@
+Triggering a fresh production rebuild for Vercel deployment.
+Timestamp: 2026-08-05T21:04:05+05:30
+This ensures that the build cache is invalidated and Vite compiles all CSS (index.css) properly.
