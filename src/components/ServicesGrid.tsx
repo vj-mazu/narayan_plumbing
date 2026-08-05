@@ -39,7 +39,7 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
         <h2 className="services-main-title">Our Services</h2>
         <button
           className="view-all-services-link"
-          onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={() => onBookNow('All Services')}
         >
           View All Services <ChevronRight size={14} />
         </button>
