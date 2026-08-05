@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   BadgeCheck,
-  CalendarDays,
+  CalendarCheck,
   Home,
   Menu,
   MessageCircle,
@@ -14,12 +14,9 @@ import {
 } from 'lucide-react';
 import BookingModal from './BookingModal';
 import {
-  SERVICE_DISPLAY,
-  WHY_CHOOSE_DISPLAY,
-  WHY_CHOOSE_IMAGES,
+  CORE_SERVICES,
   TESTIMONIALS,
   HERO_CAROUSEL_IMAGES,
-  PACKAGES,
 } from './data';
 import { PHONE_DISPLAY, PHONE_NUMBER } from './types';
 import { HeroCarousel } from './components/HeroCarousel';
@@ -27,10 +24,9 @@ import { HeroBookingSection } from './components/HeroBookingSection';
 import { StatsBar } from './components/StatsBar';
 import { TrendingServicesSection } from './components/TrendingServicesSection';
 import { ServicesGrid } from './components/ServicesGrid';
-import { WhyChooseSection } from './components/WhyChooseSection';
+import { HowItWorksSection } from './components/HowItWorksSection';
+import { WhyChooseBanner } from './components/WhyChooseBanner';
 import { TestimonialsSection } from './components/TestimonialsSection';
-import { PackagesSection } from './components/PackagesSection';
-import { BrandLogosSection } from './components/BrandLogosSection';
 import { Footer } from './components/Footer';
 
 const trustItems = [
@@ -105,9 +101,7 @@ export function App() {
           </button>
           <nav className="desktop-site-nav" aria-label="Primary navigation">
             <button type="button" onClick={() => scrollTo('services')}>Services</button>
-            <button type="button" onClick={() => scrollTo('packages')}>Packages</button>
             <button type="button" onClick={() => scrollTo('trending')}>Trending</button>
-            <button type="button" onClick={() => scrollTo('why-us')}>Why Us</button>
             <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
           </nav>
           <a className="call-block" href={`tel:${PHONE_NUMBER}`}>
@@ -117,17 +111,15 @@ export function App() {
               <strong>{PHONE_DISPLAY}</strong>
             </span>
           </a>
-          <button className="book-top" type="button" onClick={() => openBooking()}>
-            <CalendarDays size={22} />
-            <span>BOOK SERVICE<small>Schedule Online</small></span>
-          </button>
+          <a className="book-top" href={`tel:${PHONE_NUMBER}`}>
+            <Phone size={22} />
+            <span>CALL NOW<small>Quick Support</small></span>
+          </a>
         </div>
         {menuOpen && (
           <nav className="mobile-drop">
             <button type="button" onClick={() => scrollTo('services')}>Services</button>
-            <button type="button" onClick={() => scrollTo('packages')}>Packages</button>
             <button type="button" onClick={() => scrollTo('trending')}>Trending</button>
-            <button type="button" onClick={() => scrollTo('why-us')}>Why Us</button>
             <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
             <a href={`tel:${PHONE_NUMBER}`}>Call Now</a>
           </nav>
@@ -136,13 +128,12 @@ export function App() {
 
       <main>
         <HeroCarousel images={HERO_CAROUSEL_IMAGES} onBookNow={() => openBooking()} />
-        <ServicesGrid services={SERVICE_DISPLAY} onBookNow={openBooking} />
+        <ServicesGrid services={CORE_SERVICES} onBookNow={openBooking} />
+        <HowItWorksSection />
         <StatsBar />
         <TrendingServicesSection />
-        <PackagesSection packages={PACKAGES} onSelectPackage={(name) => openBooking(name)} />
+        <WhyChooseBanner />
         <HeroBookingSection onOpenBooking={openBooking} />
-        <WhyChooseSection benefits={WHY_CHOOSE_DISPLAY} />
-        <BrandLogosSection />
         <TestimonialsSection testimonials={TESTIMONIALS} />
 
         <Footer onScrollTo={scrollTo} onBook={openBooking} onLegal={setLegalPage} />
@@ -164,7 +155,14 @@ export function App() {
       <nav className="bottom-nav" aria-label="Mobile navigation">
         <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><Home size={22} /><span>Home</span></button>
         <button type="button" onClick={() => scrollTo('services')}><Wrench size={22} /><span>Services</span></button>
-        <button className="book-float" type="button" onClick={() => openBooking()}><CalendarDays size={26} /><span>BOOK</span></button>
+        <a
+          className="call-float"
+          href={`tel:${PHONE_NUMBER}`}
+          aria-label="Call Now"
+        >
+          <Phone size={26} />
+          <span>CALL NOW</span>
+        </a>
         <a
           className="bottom-nav-whatsapp"
           href={`https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent('Hi Narayan Plumbing Services, I need plumbing service.')}`}
@@ -175,14 +173,15 @@ export function App() {
           <MessageCircle size={22} />
           <span>WhatsApp</span>
         </a>
-        <a
-          className="bottom-nav-call"
-          href={`tel:${PHONE_NUMBER}`}
-          aria-label="Call Now"
+        <button
+          className="bottom-nav-book"
+          type="button"
+          onClick={() => openBooking()}
+          aria-label="Book Now"
         >
-          <Phone size={22} />
-          <span>Call</span>
-        </a>
+          <CalendarCheck size={22} />
+          <span>Book</span>
+        </button>
       </nav>
 
       <BookingModal open={bookingOpen} preselectedService={preselectedService} onClose={() => setBookingOpen(false)} />

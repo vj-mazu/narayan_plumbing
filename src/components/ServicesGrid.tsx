@@ -1,18 +1,14 @@
-import { TapIcon, ShowerIcon, ToiletIcon, WashBasinIcon, KitchenSinkIcon, PipeLeakIcon, PipeInstallIcon, DrainIcon, WaterTankIcon, GeyserIcon, BathroomIcon, EmergencyIcon } from '../PlumbingIcons';
-
-interface ServiceDisplay {
+interface Service {
   id: string;
-  shortName: string;
-  subtitle: string;
-  emergency?: boolean;
+  name: string;
+  icon: string;
+  desc: string;
 }
 
 interface ServicesGridProps {
-  services: ServiceDisplay[];
+  services: Service[];
   onBookNow: (serviceName: string) => void;
 }
-
-const serviceIcons = [TapIcon, ShowerIcon, ToiletIcon, WashBasinIcon, KitchenSinkIcon, PipeLeakIcon, PipeInstallIcon, DrainIcon, WaterTankIcon, GeyserIcon, BathroomIcon, EmergencyIcon];
 
 export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
   return (
@@ -23,21 +19,27 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
         <span className="section-line" aria-hidden="true" />
       </div>
       <div className="services-grid-container">
-        {services.map((service, index) => {
-          const Icon = serviceIcons[index] || TapIcon;
+        {services.map((service) => {
           return (
             <div
               key={service.id}
-              className={`service-grid-card ${service.emergency ? 'emergency' : ''}`}
+              className={`service-grid-card ${service.id === 'emergency' ? 'emergency' : ''}`}
             >
-              <div className="service-grid-icon">
-                <Icon size={44} />
+              <div 
+                className="service-grid-icon-emoji"
+                style={service.id === 'plumbing' ? { transform: 'scaleX(-1)', display: 'inline-block' } : undefined}
+              >
+                {service.icon.startsWith('/') ? (
+                  <img src={service.icon} alt={service.name} />
+                ) : (
+                  service.icon
+                )}
               </div>
-              <h3 className="service-grid-title">{service.shortName}</h3>
-              <p className="service-grid-desc">{service.subtitle}</p>
+              <h3 className="service-grid-title">{service.name}</h3>
+              <p className="service-grid-desc">{service.desc}</p>
               <button
                 className="btn-book-now"
-                onClick={() => onBookNow(service.shortName)}
+                onClick={() => onBookNow(service.name)}
                 type="button"
               >
                 BOOK NOW

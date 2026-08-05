@@ -1,10 +1,10 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle, Phone, Calendar, Clock, Check, Package, Wrench } from 'lucide-react';
+import { X, CheckCircle, Phone, Check, Wrench } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { CORE_SERVICES, PACKAGES, TIME_SLOTS } from './data';
+import { CORE_SERVICES } from './data';
 import { createBooking } from './storage';
-import { PHONE_NUMBER } from './types';
+import { PHONE_NUMBER, PHONE_DISPLAY } from './types';
 
 interface BookingModalProps {
   open: boolean;
@@ -15,37 +15,34 @@ interface BookingModalProps {
 interface FormState {
   name: string;
   phone: string;
-  email: string;
   address: string;
   services: string[];
-  dateType: 'today' | 'tomorrow' | 'custom';
-  customDate: string;
-  timeSlot: string;
-  notes: string;
+  date: string;
+  time: string;
 }
 
 interface FormErrors {
   name?: string;
   phone?: string;
-  email?: string;
   address?: string;
-  timeSlot?: string;
   services?: string;
+  date?: string;
+  time?: string;
 }
 
 const initialForm: FormState = {
   name: '',
   phone: '',
-  email: '',
   address: '',
-  services: ['Tap Installation & Repair'],
-  dateType: 'today',
-  customDate: '',
-  timeSlot: '',
-  notes: '',
+  services: ['Plumbing Services'],
+  date: '',
+  time: '',
 };
 
-function formatDate(d: Date): string {
+function formatDate(iso: string): string {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  if (Number.isNaN(d.getTime())) return iso;
   return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', weekday: 'short' });
 }
 
@@ -69,11 +66,6 @@ function validate(form: FormState): FormErrors {
     errors.phone = 'Enter a valid 10-digit mobile number';
   }
 
-  // Email validation (optional if empty, format check if entered)
-  if (form.email.trim() && !/@.+/.test(form.email.trim())) {
-    errors.email = 'Enter a valid email address';
-  }
-
   // Address validation
   if (!address) {
     errors.address = 'Address is required';
@@ -81,12 +73,15 @@ function validate(form: FormState): FormErrors {
 
   // Service validation
   if (form.services.length === 0) {
-    errors.services = 'Please select at least one service or package';
+    errors.services = 'Please select at least one service';
   }
 
-  // Time slot validation
-  if (!form.timeSlot) {
-    errors.timeSlot = 'Please choose a time slot';
+  // Date & time validation
+  if (!form.date) {
+    errors.date = 'Choose a date';
+  }
+  if (!form.time) {
+    errors.time = 'Choose a time';
   }
 
   return errors;
@@ -100,29 +95,18 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
   const [errors, setErrors] = useState<FormErrors>({});
   const [bookingId, setBookingId] = useState<string | null>(null);
 
-  // Combine packages and core services for complete visibility
-  const packageItems = PACKAGES.map((p) => ({
-    id: `pkg-${p.name}`,
-    name: p.name,
-    price: p.price,
-    isPackage: true,
-  }));
-
+  // Core services for booking
   const coreItems = CORE_SERVICES.map((s) => ({
     id: s.id,
     name: s.name,
-    price: s.price,
-    isPackage: false,
   }));
 
   // Ensure any custom preselectedService is included in the list
-  const allServicesList = [...packageItems, ...coreItems];
+  const allServicesList = [...coreItems];
   if (preselectedService && !allServicesList.some((s) => s.name === preselectedService)) {
     allServicesList.unshift({
       id: `custom-${preselectedService}`,
       name: preselectedService,
-      price: '₹499',
-      isPackage: preselectedService.toLowerCase().includes('package') || preselectedService.toLowerCase().includes('care'),
     });
   }
 
@@ -161,43 +145,14 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
-    const now = new Date();
-    const todayISO = now.toISOString().split('T')[0];
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const tomorrowISO = tomorrow.toISOString().split('T')[0];
-
-    const dateISO =
-      form.dateType === 'today' ? todayISO
-      : form.dateType === 'tomorrow' ? tomorrowISO
-      : form.customDate;
-
-    const date =
-      form.dateType === 'today' ? formatDate(now)
-      : form.dateType === 'tomorrow' ? formatDate(tomorrow)
-      : formatDate(new Date(form.customDate + 'T00:00:00'));
-
-    // Compute total price across packages and core services
-    let totalPrice = 0;
-    form.services.forEach((sName) => {
-      const match = allServicesList.find((s) => s.name === sName);
-      if (match) {
-        const val = parseInt(match.price.replace(/[^\d]/g, ''), 10) || 0;
-        totalPrice += val;
-      }
-    });
-    const priceStr = totalPrice > 0 ? `₹${totalPrice}` : '₹499';
-
     const booking = createBooking({
       name: form.name.trim(),
       phone: form.phone.trim(),
       address: form.address.trim(),
       service: form.services.join(', '),
-      price: priceStr,
-      date,
-      dateISO,
-      timeSlot: form.timeSlot,
-      notes: form.notes.trim(),
+      date: formatDate(form.date),
+      dateISO: form.date,
+      timeSlot: form.time,
     });
 
     const whatsappMessage = [
@@ -206,12 +161,10 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
       `Booking ID: ${booking.id}`,
       `Name: ${form.name.trim()}`,
       `Phone: ${form.phone.trim()}`,
-      `Selected Services/Packages: ${form.services.join(', ')}`,
-      `Est. Total: ${priceStr}`,
-      `Date: ${date}`,
-      `Time: ${form.timeSlot}`,
+      `Selected Services: ${form.services.join(', ')}`,
+      `Date: ${formatDate(form.date)}`,
+      `Time: ${form.time}`,
       `Address: ${form.address.trim()}`,
-      form.notes.trim() ? `Notes: ${form.notes.trim()}` : '',
     ].filter(Boolean).join('\n');
 
     window.location.href = `https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -221,6 +174,15 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
   };
 
   const todayISO = new Date().toISOString().split('T')[0];
+
+  const inputStyle = (hasError?: string): React.CSSProperties => ({
+    width: '100%', padding: '9px 12px', borderRadius: 8, border: hasError ? '1.5px solid #E11D48' : '1px solid #D0D5DD',
+    fontSize: '0.85rem', outline: 'none',
+  });
+
+  const fieldLabelStyle: React.CSSProperties = {
+    fontSize: '0.75rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4,
+  };
 
   return (
     <AnimatePresence>
@@ -255,7 +217,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
               backgroundColor: '#FFFFFF',
               borderRadius: 18,
               width: '100%',
-              maxWidth: 480,
+              maxWidth: 460,
               maxHeight: '92vh',
               overflowY: 'auto',
               boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
@@ -263,18 +225,18 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
               overscrollBehavior: 'contain',
             }}
           >
-            <div style={{ background: 'linear-gradient(135deg, #ff6200 0%, #FF8C42 100%)', color: '#FFFFFF', padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2 }}>
+            <div style={{ background: 'linear-gradient(135deg, #ff6200 0%, #FF8C42 100%)', color: '#FFFFFF', padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2 }}>
               <div>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 900, margin: 0 }}>Book a Service or Package</h3>
-                <p style={{ fontSize: '0.72rem', color: '#FFFFFF', margin: '2px 0 0 0', opacity: 0.95 }}>Technician arrives at your doorstep in 30 mins</p>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>Book a Service</h3>
+                <p style={{ fontSize: '0.7rem', color: '#FFFFFF', margin: '2px 0 0 0', opacity: 0.95 }}>Technician arrives at your doorstep in 30 mins</p>
               </div>
               <button
                 type="button"
                 onClick={close}
                 aria-label="Close booking form"
-                style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: '#FFFFFF', width: 32, height: 32, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: '#FFFFFF', width: 30, height: 30, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >
-                <X size={16} />
+                <X size={15} />
               </button>
             </div>
 
@@ -315,58 +277,14 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                 </a>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate style={{ padding: 20 }}>
-                {/* Service / Package Selection */}
-                <div style={{ marginBottom: 14 }}>
-                  <label style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 6 }}>
-                    Select Package or Services (Choose one or multiple) *
+              <form onSubmit={handleSubmit} noValidate style={{ padding: 16 }}>
+                {/* Service Selection */}
+                <div style={{ marginBottom: 12 }}>
+                  <label style={fieldLabelStyle}>
+                    Select Services (Choose one or multiple) *
                   </label>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 6, maxHeight: 220, overflowY: 'auto', border: '1px solid #D0D5DD', padding: 10, borderRadius: 8, backgroundColor: '#FAFAFA' }}>
-                    {/* Packages Section */}
-                    <div style={{ fontSize: '0.7rem', fontWeight: 900, color: '#ff6200', padding: '4px 6px 2px', display: 'flex', alignItems: 'center', gap: 4, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                      <Package size={12} /> Service Packages
-                    </div>
-                    {packageItems.map((pkg) => {
-                      const selected = form.services.includes(pkg.name);
-                      return (
-                        <button
-                          key={pkg.id}
-                          type="button"
-                          onClick={() => toggleService(pkg.name)}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: '8px 10px',
-                            borderRadius: 6,
-                            border: selected ? '2px solid #ff6200' : '1px solid #E0E0E0',
-                            backgroundColor: selected ? '#FFF5F0' : '#FFFFFF',
-                            textAlign: 'left',
-                            cursor: 'pointer',
-                            fontSize: '0.82rem',
-                            fontWeight: selected ? 800 : 600,
-                            color: selected ? '#ff6200' : '#222',
-                          }}
-                        >
-                          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ background: '#ff6200', color: '#fff', fontSize: '0.62rem', fontWeight: 900, padding: '2px 6px', borderRadius: 4 }}>PACKAGE</span>
-                            {pkg.name}
-                          </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#ff6200' }}>{pkg.price}</span>
-                            <span style={{ width: 18, height: 18, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#ff6200' : '#FFFFFF', borderColor: selected ? '#ff6200' : '#BDBDBD' }}>
-                              {selected && <Check size={12} color="#FFFFFF" />}
-                            </span>
-                          </span>
-                        </button>
-                      );
-                    })}
-
-                    {/* Individual Services Section */}
-                    <div style={{ fontSize: '0.7rem', fontWeight: 900, color: '#555', padding: '8px 6px 2px', display: 'flex', alignItems: 'center', gap: 4, textTransform: 'uppercase', letterSpacing: '0.5px', borderTop: '1px solid #e5e5e5', marginTop: 4 }}>
-                      <Wrench size={12} /> Individual Plumbing Services
-                    </div>
-                    {coreItems.map((s) => {
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 5, maxHeight: 180, overflowY: 'auto', border: '1px solid #D0D5DD', padding: 8, borderRadius: 8, backgroundColor: '#FAFAFA' }}>
+                    {allServicesList.map((s) => {
                       const selected = form.services.includes(s.name);
                       return (
                         <button
@@ -377,23 +295,23 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            padding: '8px 10px',
+                            padding: '7px 9px',
                             borderRadius: 6,
                             border: selected ? '2px solid #ff6200' : '1px solid #E0E0E0',
                             backgroundColor: selected ? '#FFF5F0' : '#FFFFFF',
                             textAlign: 'left',
                             cursor: 'pointer',
-                            fontSize: '0.8rem',
+                            fontSize: '0.78rem',
                             fontWeight: selected ? 800 : 600,
                             color: selected ? '#ff6200' : '#424242',
                           }}
                         >
-                          <span>{s.name}</span>
                           <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontSize: '0.75rem', color: '#757575' }}>({s.price})</span>
-                            <span style={{ width: 18, height: 18, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#ff6200' : '#FFFFFF', borderColor: selected ? '#ff6200' : '#BDBDBD' }}>
-                              {selected && <Check size={12} color="#FFFFFF" />}
-                            </span>
+                            <Wrench size={12} style={{ flexShrink: 0, opacity: 0.7 }} />
+                            <span>{s.name}</span>
+                          </span>
+                          <span style={{ width: 17, height: 17, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#ff6200' : '#FFFFFF', borderColor: selected ? '#ff6200' : '#BDBDBD', flexShrink: 0 }}>
+                            {selected && <Check size={11} color="#FFFFFF" />}
                           </span>
                         </button>
                       );
@@ -402,8 +320,8 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                   {errors.services && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.services}</span>}
                 </div>
 
-                <div style={{ marginBottom: 12 }}>
-                  <label htmlFor="name" style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
+                <div style={{ marginBottom: 10 }}>
+                  <label htmlFor="name" style={fieldLabelStyle}>
                     Your Full Name *
                   </label>
                   <input
@@ -413,16 +331,13 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     placeholder="e.g. Rahul Sharma"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    style={{
-                      width: '100%', padding: '10px 12px', borderRadius: 8, border: errors.name ? '1.5px solid #E11D48' : '1px solid #D0D5DD',
-                      fontSize: '0.85rem', outline: 'none',
-                    }}
+                    style={inputStyle(errors.name)}
                   />
                   {errors.name && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.name}</span>}
                 </div>
 
-                <div style={{ marginBottom: 12 }}>
-                  <label htmlFor="phone" style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
+                <div style={{ marginBottom: 10 }}>
+                  <label htmlFor="phone" style={fieldLabelStyle}>
                     Phone Number *
                   </label>
                   <input
@@ -434,36 +349,13 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     inputMode="numeric"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, '') })}
-                    style={{
-                      width: '100%', padding: '10px 12px', borderRadius: 8, border: errors.phone ? '1.5px solid #E11D48' : '1px solid #D0D5DD',
-                      fontSize: '0.85rem', outline: 'none',
-                    }}
+                    style={inputStyle(errors.phone)}
                   />
                   {errors.phone && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.phone}</span>}
                 </div>
 
-                <div style={{ marginBottom: 12 }}>
-                  <label htmlFor="email" style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
-                    Email Address (optional)
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="your.email@example.com"
-                    maxLength={254}
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    style={{
-                      width: '100%', padding: '10px 12px', borderRadius: 8, border: errors.email ? '1.5px solid #E11D48' : '1px solid #D0D5DD',
-                      fontSize: '0.85rem', outline: 'none',
-                    }}
-                  />
-                  {errors.email && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.email}</span>}
-                </div>
-
-                <div style={{ marginBottom: 12 }}>
-                  <label htmlFor="address" style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
+                <div style={{ marginBottom: 10 }}>
+                  <label htmlFor="address" style={fieldLabelStyle}>
                     Complete Address / Flat No. *
                   </label>
                   <input
@@ -473,88 +365,40 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     placeholder="House/Flat No., Landmark, Area"
                     value={form.address}
                     onChange={(e) => setForm({ ...form, address: e.target.value })}
-                    style={{
-                      width: '100%', padding: '10px 12px', borderRadius: 8, border: errors.address ? '1.5px solid #E11D48' : '1px solid #D0D5DD',
-                      fontSize: '0.85rem', outline: 'none',
-                    }}
+                    style={inputStyle(errors.address)}
                   />
                   {errors.address && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.address}</span>}
                 </div>
 
-                <div style={{ marginBottom: 12 }}>
-                  <label style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
-                    When do you need service? *
-                  </label>
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {(['today', 'tomorrow', 'custom'] as const).map((t) => (
-                      <button
-                        key={t}
-                        type="button"
-                        onClick={() => setForm({ ...form, dateType: t })}
-                        style={{
-                          flex: 1, minWidth: 90, padding: '8px 6px', borderRadius: 8, cursor: 'pointer',
-                          backgroundColor: form.dateType === t ? '#ff6200' : '#FFFFFF',
-                          color: form.dateType === t ? '#FFFFFF' : '#424242',
-                          border: form.dateType === t ? '1.5px solid #ff6200' : '1px solid #D0D5DD',
-                          fontWeight: 800, fontSize: '0.75rem',
-                          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
-                        }}
-                      >
-                        <Calendar size={13} />
-                        {t === 'today' ? 'Today' : t === 'tomorrow' ? 'Tomorrow' : 'Pick date'}
-                      </button>
-                    ))}
-                  </div>
-                  {form.dateType === 'custom' && (
+                {/* Manual date & time */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 12 }}>
+                  <div>
+                    <label htmlFor="date" style={fieldLabelStyle}>
+                      Date *
+                    </label>
                     <input
+                      id="date"
                       type="date"
                       min={todayISO}
-                      value={form.customDate}
-                      onChange={(e) => setForm({ ...form, customDate: e.target.value })}
-                      style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: '1px solid #D0D5DD', fontSize: '0.85rem', outline: 'none', marginTop: 8 }}
+                      value={form.date}
+                      onChange={(e) => setForm({ ...form, date: e.target.value })}
+                      style={inputStyle(errors.date)}
                     />
-                  )}
-                </div>
-
-                <div style={{ marginBottom: 12 }}>
-                  <label style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
-                    Preferred Time Slot *
-                  </label>
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {TIME_SLOTS.map((slot) => (
-                      <button
-                        key={slot}
-                        type="button"
-                        onClick={() => setForm({ ...form, timeSlot: slot })}
-                        style={{
-                          padding: '7px 10px', borderRadius: 8, cursor: 'pointer',
-                          backgroundColor: form.timeSlot === slot ? '#FF6500' : '#FFFFFF',
-                          color: form.timeSlot === slot ? '#FFFFFF' : '#424242',
-                          border: form.timeSlot === slot ? '1.5px solid #FF6500' : '1px solid #D0D5DD',
-                          fontWeight: 700, fontSize: '0.75rem',
-                          display: 'flex', alignItems: 'center', gap: 4,
-                        }}
-                      >
-                        <Clock size={12} />
-                        {slot}
-                      </button>
-                    ))}
+                    {errors.date && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.date}</span>}
                   </div>
-                  {errors.timeSlot && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.timeSlot}</span>}
-                </div>
-
-                <div style={{ marginBottom: 16 }}>
-                  <label htmlFor="notes" style={{ fontSize: '0.78rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4 }}>
-                    Notes (optional)
-                  </label>
-                  <textarea
-                    id="notes"
-                    rows={2}
-                    placeholder="Describe the issue briefly, e.g. leaking kitchen tap"
-                    value={form.notes}
-                    onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                    style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: '1px solid #D0D5DD', fontSize: '0.85rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit' }}
-                  />
+                  <div>
+                    <label htmlFor="time" style={fieldLabelStyle}>
+                      Time *
+                    </label>
+                    <input
+                      id="time"
+                      type="time"
+                      value={form.time}
+                      onChange={(e) => setForm({ ...form, time: e.target.value })}
+                      style={inputStyle(errors.time)}
+                    />
+                    {errors.time && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.time}</span>}
+                  </div>
                 </div>
 
                 <button
@@ -564,19 +408,37 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     backgroundColor: '#ff6200',
                     color: '#FFFFFF',
                     border: 'none',
-                    padding: '13px',
+                    padding: '12px',
                     borderRadius: 10,
                     fontWeight: 900,
-                    fontSize: '0.9rem',
+                    fontSize: '0.88rem',
                     cursor: 'pointer',
                     boxShadow: '0 4px 14px rgba(255, 98, 0, 0.4)',
                   }}
                 >
                   CONFIRM INSTANT BOOKING
                 </button>
-                <p style={{ fontSize: '0.72rem', color: '#9E9E9E', textAlign: 'center', marginTop: 10 }}>
-                  Free visit & estimate • No payment required now • 30-day warranty
-                </p>
+
+                <a
+                  href={`tel:${PHONE_NUMBER}`}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 8,
+                    marginTop: 8,
+                    backgroundColor: '#101010',
+                    color: '#FFFFFF',
+                    textDecoration: 'none',
+                    padding: '11px',
+                    borderRadius: 10,
+                    fontWeight: 800,
+                    fontSize: '0.85rem',
+                  }}
+                >
+                  <Phone size={16} /> CALL NOW — {PHONE_DISPLAY}
+                </a>
               </form>
             )}
           </motion.div>

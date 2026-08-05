@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
-import { MessageCircle, MapPin, Mail, Phone } from 'lucide-react';
-import { PHONE_DISPLAY, PHONE_NUMBER } from '../types';
+import { Phone } from 'lucide-react';
+import { PHONE_NUMBER } from '../types';
+import { CORE_SERVICES } from '../data';
 
 interface HeroBookingSectionProps {
   onOpenBooking?: (service?: string) => void;
@@ -11,7 +12,7 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
   const [phone, setPhone] = useState('');
   const [area, setArea] = useState('');
   const [city, setCity] = useState('Bangalore');
-  const [timing, setTiming] = useState('');
+  const [service, setService] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -24,9 +25,9 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
       '',
       `Name: ${name.trim()}`,
       `Phone: ${phone.trim()}`,
+      service ? `Service: ${service}` : '',
       area.trim() ? `Area/Locality: ${area.trim()}` : '',
       `City: ${city}`,
-      timing.trim() ? `Preferred Timing: ${timing.trim()}` : '',
     ]
       .filter(Boolean)
       .join('\n');
@@ -35,43 +36,17 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
     window.location.href = waUrl;
   };
 
+  const handleCallNow = () => {
+    window.location.href = `tel:${PHONE_NUMBER}`;
+  };
+
   return (
     <section className="hero-booking-section" aria-label="Book plumbing service" id="book-visit">
-      <div className="hero-booking-grid">
-        <div className="hero-booking-info">
-          <h2>
-            Your Trusted Plumbing Partner in Bengaluru
-          </h2>
-          <p>
-            With over a decade of experience, Narayan Plumbing Services is the most trusted name 
-            in residential and commercial plumbing across Bengaluru. We deliver exceptional service 
-            quality using genuine parts from leading brands.
-          </p>
-          <ul className="hero-contact-list">
-            <li>
-              <span className="hero-contact-icon" aria-hidden="true">
-                <Phone size={18} />
-              </span>
-              <span className="hero-contact-text">
-                <small>Call Now</small>
-                <a href={`tel:${PHONE_NUMBER}`}>{PHONE_DISPLAY}</a>
-              </span>
-            </li>
-            <li>
-              <span className="hero-contact-icon" aria-hidden="true">
-                <MapPin size={18} />
-              </span>
-              <span className="hero-contact-text">Bengaluru, Karnataka — all areas covered</span>
-            </li>
-            <li>
-              <span className="hero-contact-icon" aria-hidden="true">
-                <Mail size={18} />
-              </span>
-              <span className="hero-contact-text">narayanplumbingservices@gmail.com</span>
-            </li>
-          </ul>
-        </div>
-
+      <div className="hero-booking-section-header">
+        <h2 className="hero-booking-main-heading">Schedule Your Site Inspection</h2>
+        <p className="hero-booking-main-subtitle">Expert plumbing consultation at your doorstep</p>
+      </div>
+      <div className="hero-booking-grid-form-only">
         <form className="hero-booking-form" onSubmit={handleSubmit} noValidate>
           <h2>BOOK SITE VISIT</h2>
           <p className="hero-form-sub">
@@ -102,6 +77,20 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
           </div>
 
           <div className="hero-input-group">
+            <select 
+              value={service} 
+              onChange={(e) => setService(e.target.value)}
+            >
+              <option value="">Select Service</option>
+              {CORE_SERVICES.map((s) => (
+                <option key={s.id} value={s.name}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="hero-input-group">
             <input
               type="text"
               placeholder="Area / Locality (e.g. Indiranagar, HSR Layout)"
@@ -119,17 +108,13 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
             </select>
           </div>
 
-          <div className="hero-input-group">
-            <input
-              type="text"
-              placeholder="Preferred Timing (e.g. Morning 10 AM, Evening 5 PM)"
-              value={timing}
-              onChange={(e) => setTiming(e.target.value)}
-            />
-          </div>
-
           <button type="submit" className="hero-form-submit">
             BOOK SITE INSPECTION
+          </button>
+          
+          <button type="button" className="hero-form-call" onClick={handleCallNow}>
+            <Phone size={20} />
+            CALL NOW FOR INSTANT SERVICE
           </button>
         </form>
       </div>

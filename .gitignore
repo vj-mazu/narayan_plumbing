@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Kiro spec files (internal development)
+.kiro/
+
+# Utility scripts
+*.py
+crop_icons.py

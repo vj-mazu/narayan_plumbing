@@ -8,11 +8,16 @@ interface FooterProps {
 }
 
 const FOOTER_SERVICES = [
-  { name: 'Plumbing Services', icon: Wrench, serviceKey: 'Plumbing Services' },
-  { name: 'Toilet & WC Repair', icon: ShieldCheck, serviceKey: 'Toilet & WC Repair' },
-  { name: 'Geyser Installation', icon: Flame, serviceKey: 'Geyser Installation & Repair' },
-  { name: 'Leak Detection', icon: Sparkles, serviceKey: 'Pipe Leakage Detection' },
-  { name: 'Drain Cleaning', icon: Wrench, serviceKey: 'Drain Cleaning & Unclogging' },
+  { name: 'Plumbing Services', serviceKey: 'Plumbing Services' },
+  { name: 'Bathroom Renovation', serviceKey: 'Bathroom Renovation' },
+  { name: 'Painting Services', serviceKey: 'Painting Services' },
+  { name: 'Construction Work', serviceKey: 'Construction Work' },
+  { name: 'Tiles & Granite Work', serviceKey: 'Tiles & Granite Work' },
+  { name: 'Civil Work', serviceKey: 'Civil Work' },
+  { name: 'Carpenter Work', serviceKey: 'Carpenter Work' },
+  { name: 'Electrical Work', serviceKey: 'Electrical Work' },
+  { name: 'False Ceiling Work', serviceKey: 'False Ceiling Work' },
+  { name: 'Interior Design', serviceKey: 'Interior Design' },
 ];
 
 export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
@@ -97,7 +102,6 @@ export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
             <h3 className="footer-heading">OUR SERVICES</h3>
             <ul className="footer-services-list">
               {FOOTER_SERVICES.map((item) => {
-                const IconComponent = item.icon;
                 return (
                   <li key={item.name}>
                     <button 
@@ -105,9 +109,7 @@ export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
                       onClick={() => onBook(item.serviceKey)}
                       className="footer-service-btn"
                     >
-                      <span className="footer-svc-icon-badge">
-                        <IconComponent size={14} />
-                      </span>
+                      <ChevronRight size={14} className="link-arrow" />
                       <span>{item.name}</span>
                     </button>
                   </li>
