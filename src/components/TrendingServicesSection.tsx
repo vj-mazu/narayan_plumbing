@@ -73,7 +73,10 @@ export function TrendingServicesSection() {
 
       {/* Carousel */}
       <div className="trending-carousel-box">
-        <div className="trending-carousel-track">
+        <div
+          className="trending-carousel-track"
+          style={{ aspectRatio: `${slide.width} / ${slide.height}` }}
+        >
           {TRENDING_SLIDES.map((s, index) => (
             <div
               key={s.id}

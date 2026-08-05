@@ -3,6 +3,7 @@ import {
   BadgeCheck,
   CalendarCheck,
   Home,
+  LayoutGrid,
   Menu,
   MessageCircle,
   Phone,
@@ -25,7 +26,9 @@ import { StatsBar } from './components/StatsBar';
 import { TrendingServicesSection } from './components/TrendingServicesSection';
 import { ServicesGrid } from './components/ServicesGrid';
 import { HowItWorksSection } from './components/HowItWorksSection';
+import { QuickHelpSection } from './components/QuickHelpSection';
 import { WhyChooseBanner } from './components/WhyChooseBanner';
+import { FloatingContactBar } from './components/FloatingContactBar';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { Footer } from './components/Footer';
 
@@ -92,11 +95,16 @@ export function App() {
             {menuOpen ? <X size={24} /> : <Menu size={26} />}
           </button>
           <button className="brand-lockup" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <span className="plumber-avatar" aria-hidden="true">👨‍🔧</span>
+            <img src="/logo.png" className="plumber-avatar" alt="Narayan Logo" onError={(e) => {
+              // fallback if logo.png doesn't exist yet
+              (e.target as HTMLElement).style.display = 'none';
+            }} />
+            <span className="logo-icon-fallback" style={{ display: 'none' }}>💙</span>
             <span>
-              <strong>NARAYAN</strong>
-              <b>PLUMBING SERVICES</b>
-              <small>Expert Plumbers. On Time. Every Time.</small>
+              <strong style={{ color: '#061443', fontSize: '1.25rem', fontWeight: 900, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                NARAYAN
+              </strong>
+              <b style={{ color: '#2563eb', fontSize: '0.78rem', letterSpacing: '0.05em', fontWeight: 800 }}>PLUMBING SERVICES</b>
             </span>
           </button>
           <nav className="desktop-site-nav" aria-label="Primary navigation">
@@ -104,17 +112,17 @@ export function App() {
             <button type="button" onClick={() => scrollTo('trending')}>Trending</button>
             <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
           </nav>
-          <a className="call-block" href={`tel:${PHONE_NUMBER}`}>
-            <Phone size={22} />
-            <span>
+          <a className="call-block" href={`tel:${PHONE_NUMBER}`} aria-label="Call Us Now">
+            <span className="call-block-phone"><Phone size={20} /></span>
+            <span className="call-block-text">
               <small>Call Us Now</small>
               <strong>{PHONE_DISPLAY}</strong>
             </span>
           </a>
-          <a className="book-top" href={`tel:${PHONE_NUMBER}`}>
-            <Phone size={22} />
-            <span>CALL NOW<small>Quick Support</small></span>
-          </a>
+          <button className="book-top" type="button" onClick={() => openBooking()}>
+            <CalendarCheck size={18} />
+            <span>Book Now</span>
+          </button>
         </div>
         {menuOpen && (
           <nav className="mobile-drop">
@@ -128,11 +136,13 @@ export function App() {
 
       <main>
         <HeroCarousel images={HERO_CAROUSEL_IMAGES} onBookNow={() => openBooking()} />
+        <QuickHelpSection />
         <ServicesGrid services={CORE_SERVICES} onBookNow={openBooking} />
         <HowItWorksSection />
         <StatsBar />
         <TrendingServicesSection />
         <WhyChooseBanner />
+        <FloatingContactBar />
         <HeroBookingSection onOpenBooking={openBooking} />
         <TestimonialsSection testimonials={TESTIMONIALS} />
 
@@ -153,35 +163,37 @@ export function App() {
       )}
 
       <nav className="bottom-nav" aria-label="Mobile navigation">
-        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><Home size={22} /><span>Home</span></button>
-        <button type="button" onClick={() => scrollTo('services')}><Wrench size={22} /><span>Services</span></button>
+        <button type="button" className="bottom-nav-item" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <Home size={22} /><span>Home</span>
+        </button>
+        <button type="button" className="bottom-nav-item" onClick={() => scrollTo('services')}>
+          <LayoutGrid size={22} /><span>Services</span>
+        </button>
         <a
           className="call-float"
           href={`tel:${PHONE_NUMBER}`}
           aria-label="Call Now"
         >
           <Phone size={26} />
-          <span>CALL NOW</span>
-        </a>
-        <a
-          className="bottom-nav-whatsapp"
-          href={`https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent('Hi Narayan Plumbing Services, I need plumbing service.')}`}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Chat on WhatsApp"
-        >
-          <MessageCircle size={22} />
-          <span>WhatsApp</span>
+          <span>CALL</span>
         </a>
         <button
-          className="bottom-nav-book"
           type="button"
+          className="bottom-nav-item"
           onClick={() => openBooking()}
           aria-label="Book Now"
         >
-          <CalendarCheck size={22} />
-          <span>Book</span>
+          <CalendarCheck size={22} /><span>Book</span>
         </button>
+        <a
+          className="bottom-nav-item"
+          href={`https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent('Hi Narayan Plumbing Services, I need plumbing service.')}`}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="WhatsApp"
+        >
+          <MessageCircle size={22} /><span>WhatsApp</span>
+        </a>
       </nav>
 
       <BookingModal open={bookingOpen} preselectedService={preselectedService} onClose={() => setBookingOpen(false)} />

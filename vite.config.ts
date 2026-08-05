@@ -62,6 +62,14 @@ try {
       console.warn(`⚠️  ${label} image not found at: ${src}`);
     }
   });
+
+  // Copy brand logo if it exists in downloads
+  const srcLogo = "C:\\Users\\maju\\Downloads\\download.png"; // Or whichever name it has
+  const destLogo = path.resolve(__dirname, 'public/logo.png');
+  if (fs.existsSync(srcLogo)) {
+    fs.copyFileSync(srcLogo, destLogo);
+    console.log('✅ Copied brand logo to public/logo.png');
+  }
 } catch (err) {
   console.error('Failed to copy assets:', err);
 }

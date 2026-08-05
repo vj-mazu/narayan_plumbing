@@ -16,10 +16,9 @@ export const CORE_SERVICES: Service[] = [
 ];
 
 export const HERO_CAROUSEL_IMAGES = [
-  { src: '/hero/banner-1.webp', alt: 'Narayan Plumbing — complete plumbing solutions at your doorstep' },
-  { src: '/hero/banner-2.webp', alt: 'Narayan Plumbing — solutions that flow, care that lasts' },
-  { src: '/hero/banner-3.webp', alt: 'Narayan Plumbing — expert plumbers on time every time' },
-  { src: '/hero/banner-4.webp', alt: 'Narayan Plumbing — protect your home from leaks and damage' },
+  { src: '/hero/flyer-1.webp', alt: 'Narayan Plumbing Services — flyer: protect your home from leaks & damage' },
+  { src: '/hero/flyer-2.webp', alt: 'Narayan Plumbing Services — flyer: verified & trained plumbers' },
+  { src: '/hero/flyer-3.webp', alt: 'Narayan Plumbing Services — flyer: expert plumbers on time every time' },
 ];
 
 export interface Testimonial {

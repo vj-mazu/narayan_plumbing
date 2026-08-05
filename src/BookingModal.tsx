@@ -225,7 +225,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
               overscrollBehavior: 'contain',
             }}
           >
-            <div style={{ background: 'linear-gradient(135deg, #ff6200 0%, #FF8C42 100%)', color: '#FFFFFF', padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2 }}>
+            <div style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #e8267e 100%)', color: '#FFFFFF', padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2 }}>
               <div>
                 <h3 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>Book a Service</h3>
                 <p style={{ fontSize: '0.7rem', color: '#FFFFFF', margin: '2px 0 0 0', opacity: 0.95 }}>Technician arrives at your doorstep in 30 mins</p>
@@ -252,7 +252,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                 </motion.div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 900, color: '#101010', margin: 0 }}>Booking Confirmed!</h3>
                 <p style={{ color: '#757575', fontSize: '0.85rem', marginTop: 8 }}>
-                  Booking ID: <strong style={{ color: '#ff6200' }}>{bookingId}</strong>
+                  Booking ID: <strong style={{ color: '#7c3aed' }}>{bookingId}</strong>
                 </p>
                 <p style={{ color: '#757575', fontSize: '0.85rem', marginTop: 4, lineHeight: 1.5 }}>
                   Our master plumber will call you within 5 minutes to confirm your doorstep location.
@@ -264,7 +264,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     alignItems: 'center',
                     gap: 6,
                     marginTop: 16,
-                    backgroundColor: '#ff6200',
+                    backgroundColor: '#7c3aed',
                     color: '#FFFFFF',
                     textDecoration: 'none',
                     padding: '10px 18px',
@@ -297,20 +297,20 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                             justifyContent: 'space-between',
                             padding: '7px 9px',
                             borderRadius: 6,
-                            border: selected ? '2px solid #ff6200' : '1px solid #E0E0E0',
-                            backgroundColor: selected ? '#FFF5F0' : '#FFFFFF',
+                            border: selected ? '2px solid #7c3aed' : '1px solid #E0E0E0',
+                            backgroundColor: selected ? '#F5F3FF' : '#FFFFFF',
                             textAlign: 'left',
                             cursor: 'pointer',
                             fontSize: '0.78rem',
                             fontWeight: selected ? 800 : 600,
-                            color: selected ? '#ff6200' : '#424242',
+                            color: selected ? '#7c3aed' : '#424242',
                           }}
                         >
                           <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                             <Wrench size={12} style={{ flexShrink: 0, opacity: 0.7 }} />
                             <span>{s.name}</span>
                           </span>
-                          <span style={{ width: 17, height: 17, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#ff6200' : '#FFFFFF', borderColor: selected ? '#ff6200' : '#BDBDBD', flexShrink: 0 }}>
+                          <span style={{ width: 17, height: 17, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#7c3aed' : '#FFFFFF', borderColor: selected ? '#7c3aed' : '#BDBDBD', flexShrink: 0 }}>
                             {selected && <Check size={11} color="#FFFFFF" />}
                           </span>
                         </button>
@@ -405,7 +405,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                   type="submit"
                   style={{
                     width: '100%',
-                    backgroundColor: '#ff6200',
+                    backgroundColor: '#7c3aed',
                     color: '#FFFFFF',
                     border: 'none',
                     padding: '12px',
@@ -413,7 +413,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     fontWeight: 900,
                     fontSize: '0.88rem',
                     cursor: 'pointer',
-                    boxShadow: '0 4px 14px rgba(255, 98, 0, 0.4)',
+                    boxShadow: '0 4px 14px rgba(124, 58, 237, 0.4)',
                   }}
                 >
                   CONFIRM INSTANT BOOKING
