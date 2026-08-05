@@ -15,8 +15,55 @@ try {
   } else {
     console.warn(`Source icon not found at: ${srcIcon}`);
   }
+
+  // Copy generated service background images
+  const artifactDir = "C:\\Users\\maju\\.gemini\\antigravity\\brain\\59a1c82e-c3c9-4145-bf8d-5b03b8e36a11";
+  const servicesDestDir = path.resolve(__dirname, 'public/services');
+  if (fs.existsSync(artifactDir)) {
+    fs.mkdirSync(servicesDestDir, { recursive: true });
+    const files = fs.readdirSync(artifactDir);
+    files.forEach(file => {
+      if (file.includes('_bg_') && file.endsWith('.jpg')) {
+        const srcPath = path.join(artifactDir, file);
+        const serviceName = file.split('_bg_')[0];
+        const destPath = path.join(servicesDestDir, `${serviceName}.jpg`);
+        fs.copyFileSync(srcPath, destPath);
+        console.log(`Copied generated image: ${file} -> public/services/${serviceName}.jpg`);
+      }
+    });
+  }
+  // Copy user's local service images from Downloads to public/services
+  const servicesDestDir2 = path.resolve(__dirname, 'public/services');
+  fs.mkdirSync(servicesDestDir2, { recursive: true });
+
+  const userImages = [
+    {
+      src: "C:\\Users\\maju\\Downloads\\A carpenter creates a unique wooden chair in a cozy workshop, putting his heart into eve.jpg",
+      dest: path.join(servicesDestDir2, 'carpenter.jpg'),
+      label: 'carpenter',
+    },
+    {
+      src: "C:\\Users\\maju\\Downloads\\download.jpg",
+      dest: path.join(servicesDestDir2, 'ceiling.jpg'),
+      label: 'false-ceiling',
+    },
+    {
+      src: "C:\\Users\\maju\\Downloads\\Do It Right… Even When No One Sees.jpg",
+      dest: path.join(servicesDestDir2, 'electrical.jpg'),
+      label: 'electrical',
+    },
+  ];
+
+  userImages.forEach(({ src, dest, label }) => {
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+      console.log(`✅ Copied ${label} image -> ${dest}`);
+    } else {
+      console.warn(`⚠️  ${label} image not found at: ${src}`);
+    }
+  });
 } catch (err) {
-  console.error('Failed to copy ceiling-light icon:', err);
+  console.error('Failed to copy assets:', err);
 }
 
 // https://vite.dev/config/

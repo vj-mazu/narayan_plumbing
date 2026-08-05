@@ -3,6 +3,7 @@ export interface Service {
   name: string;
   icon: string;
   desc: string;
+  bgImage?: string;
 }
 
 export type BookingStatus = 'New' | 'Confirmed' | 'Completed' | 'Cancelled';

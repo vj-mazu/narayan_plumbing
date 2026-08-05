@@ -3,16 +3,16 @@ import type {
 } from './types';
 
 export const CORE_SERVICES: Service[] = [
-  { id: 'plumbing', name: 'Plumbing Services', icon: '🚰', desc: 'Complete Plumbing Solutions' },
-  { id: 'bathroom', name: 'Bathroom Renovation', icon: '🛁', desc: 'Modern Bathroom Makeovers' },
-  { id: 'painting', name: 'Painting Services', icon: '🎨', desc: 'Interior & Exterior Painting' },
-  { id: 'construction', name: 'Construction Work', icon: '🏗️', desc: 'Building & Construction' },
-  { id: 'tiles', name: 'Tiles & Granite Work', icon: '🧱', desc: 'Flooring & Wall Tiles' },
-  { id: 'civil', name: 'Civil Work', icon: '👷', desc: 'Structural & Civil Engineering' },
-  { id: 'carpenter', name: 'Carpenter Work', icon: '🪚', desc: 'Wood & Furniture Work' },
-  { id: 'electrical', name: 'Electrical Work', icon: '⚡', desc: 'Wiring & Electrical Solutions' },
-  { id: 'ceiling', name: 'False Ceiling Work', icon: '/service-icons/ceiling-light.png', desc: 'Modern Ceiling Designs' },
-  { id: 'interior', name: 'Interior Design', icon: '🛋️', desc: 'Complete Interior Solutions' },
+  { id: 'plumbing', name: 'Plumbing Services', icon: '🚰', desc: 'Complete Plumbing Solutions', bgImage: '/services/plumbing.jpg' },
+  { id: 'bathroom', name: 'Bathroom Renovation', icon: '🛁', desc: 'Modern Bathroom Makeovers', bgImage: '/services/bathroom.jpg' },
+  { id: 'painting', name: 'Painting Services', icon: '🎨', desc: 'Interior & Exterior Painting', bgImage: '/services/painting.jpg' },
+  { id: 'construction', name: 'Construction Work', icon: '🏗️', desc: 'Building & Construction', bgImage: '/services/construction.jpg' },
+  { id: 'tiles', name: 'Tiles & Granite Work', icon: '🧱', desc: 'Flooring & Wall Tiles', bgImage: '/services/tiles.jpg' },
+  { id: 'civil', name: 'Civil Work', icon: '👷', desc: 'Structural & Civil Engineering', bgImage: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80' },
+  { id: 'carpenter', name: 'Carpenter Work', icon: '🪚', desc: 'Wood & Furniture Work', bgImage: '/services/carpenter.jpg' },
+  { id: 'electrical', name: 'Electrical Work', icon: '⚡', desc: 'Wiring & Electrical Solutions', bgImage: '/services/electrical.jpg' },
+  { id: 'ceiling', name: 'False Ceiling Work', icon: '/service-icons/ceiling-light.png', desc: 'Modern Ceiling Designs', bgImage: '/services/ceiling.jpg' },
+  { id: 'interior', name: 'Interior Design', icon: '🛋️', desc: 'Complete Interior Solutions', bgImage: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
 ];
 
 export const HERO_CAROUSEL_IMAGES = [
