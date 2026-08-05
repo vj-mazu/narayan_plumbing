@@ -70,6 +70,26 @@ try {
     fs.copyFileSync(srcLogo, destLogo);
     console.log('✅ Copied brand logo to public/logo.png');
   }
+
+  // Copy custom hero carousel images
+  const heroDestDir = path.resolve(__dirname, 'public/hero');
+  fs.mkdirSync(heroDestDir, { recursive: true });
+  
+  const customHeroImages = [
+    { src: "C:\\Users\\maju\\Downloads\\ChatGPT Image Aug 5, 2026, 04_26_41 PM.png", dest: path.join(heroDestDir, 'banner-1.png'), label: 'hero-banner-1' },
+    { src: "C:\\Users\\maju\\Downloads\\ChatGPT Image Aug 5, 2026, 04_33_59 PM.png", dest: path.join(heroDestDir, 'banner-2.png'), label: 'hero-banner-2' },
+    { src: "C:\\Users\\maju\\Downloads\\ChatGPT Image Aug 5, 2026, 04_38_20 PM.png", dest: path.join(heroDestDir, 'banner-3.png'), label: 'hero-banner-3' },
+  ];
+
+  customHeroImages.forEach(({ src, dest, label }) => {
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+      console.log(`✅ Copied custom hero image: ${label} -> ${dest}`);
+    } else {
+      console.warn(`⚠️  Custom hero image not found: ${src}`);
+    }
+  });
+
 } catch (err) {
   console.error('Failed to copy assets:', err);
 }

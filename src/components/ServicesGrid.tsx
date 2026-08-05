@@ -67,7 +67,7 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
                   <p className="service-list-card-desc">{meta.shortDesc}</p>
                 </div>
               </div>
-              <div className="service-list-card-cta">
+              <div className="service-list-card-cta" style={{ backgroundColor: meta.bg, color: meta.color }}>
                 <ChevronRight size={14} />
               </div>
             </button>
