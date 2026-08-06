@@ -95,7 +95,7 @@ export function App() {
             {menuOpen ? <X size={24} /> : <Menu size={26} />}
           </button>
           <button className="brand-lockup" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <img src="/logo-emblem.webp" width={93} height={111} className="brand-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
+            <img src="/logo-emblem-new.webp" width={96} height={96} className="brand-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
               const el = e.target as HTMLImageElement;
               // Try the full logo if the emblem is missing
               if (!el.src.endsWith('logo.webp')) {

@@ -129,15 +129,10 @@ img { display: block; max-width: 100%; }
 }
 .brand-logo-img {
   height: 64px;
-  width: auto;
-  max-width: 76px;
+  width: 64px;
   object-fit: contain;
   display: block;
-  border-radius: 12px;
-  background: #ffffff;
-  border: 1px solid #eef1f6;
-  padding: 4px;
-  box-shadow: 0 2px 10px rgba(6, 20, 67, 0.10);
+  border-radius: 50%;
 }
 .brand-logo-text {
   display: flex;
@@ -672,7 +667,7 @@ img { display: block; max-width: 100%; }
 @media (max-width: 768px) {
   .brand-logo-img {
     height: 54px;
-    max-width: 64px;
+    width: 54px;
   }
   .brand-logo-text strong {
     font-size: 1.05rem;
