@@ -31,11 +31,10 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
         {services.map((service) => {
           const { main, sub } = splitServiceName(service.name);
           return (
-            <button
+            <div
               key={service.id}
               className="service-framed-card"
               onClick={() => onBookNow(service.name)}
-              type="button"
             >
               <div className="service-framed-image-box">
                 <img
@@ -45,6 +44,7 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
                   alt={service.name}
                   loading="lazy"
                   decoding="async"
+                  draggable={false}
                   onError={(e) => {
                     const target = e.currentTarget;
                     if (service.id === 'plumbing') target.src = '/service-icons/plumbing.webp';
@@ -52,6 +52,9 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
                     else if (service.id === 'painting') target.src = '/service-icons/painting.webp';
                     else if (service.id === 'tiles') target.src = '/service-icons/tiles.webp';
                     else if (service.id === 'civil') target.src = '/service-icons/civil.webp';
+                    else if (service.id === 'cleaning') target.src = '/hero-cleaning.webp';
+                    else if (service.id === 'home-renovation') target.src = '/work-interior-living.webp';
+                    else if (service.id === 'home-maintenance') target.src = '/hero/banner-1.webp';
                     else target.src = '/service-icons/construction.webp';
                   }}
                 />
@@ -63,8 +66,18 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
                     <em className="service-framed-sub">{(sub || service.desc).toUpperCase()}</em>
                   )}
                 </span>
+                <button
+                  className="service-book-btn"
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onBookNow(service.name);
+                  }}
+                >
+                  Book Now
+                </button>
               </div>
-            </button>
+            </div>
           );
         })}
       </div>

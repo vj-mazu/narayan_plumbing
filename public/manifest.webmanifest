@@ -1,7 +1,7 @@
 {
   "name": "Narayan Plumbing Services Bangalore",
   "short_name": "Narayan Plumbing",
-  "description": "Verified plumbers at your doorstep in 30 minutes in Bangalore. Tap repair, drain unblocking, geyser service, tank cleaning & more. Upfront pricing, 30-day warranty.",
+  "description": "13 home services at your doorstep in 30 minutes in Bangalore — plumbing, bathroom renovation, cleaning, painting, tiles & granite, electrical, false ceiling, construction, interior design, home renovation, carpenter & home maintenance. Upfront pricing, 30-day warranty.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -12,6 +12,12 @@
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
       "purpose": "any"
     }
   ]

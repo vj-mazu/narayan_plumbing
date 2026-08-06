@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, ShieldCheck, Leaf, Clock, ThumbsUp, MessageSquare, Star, Home, BadgeCheck, Paintbrush, Bath, Wrench, ChevronLeft, ChevronRight, Sparkles, Building, Layers } from 'lucide-react';
+import { ShieldCheck, Clock, MessageSquare, Star, Home, Paintbrush, Bath, Wrench, ChevronLeft, ChevronRight, Sparkles, Building, Layers } from 'lucide-react';
 import { PHONE_NUMBER } from '../types';
 
 interface HeroSlide {

@@ -1,4 +1,6 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { PHONE_NUMBER } from '../types';
+import { useHorizontalScroll } from '../hooks/useHorizontalScroll';
 
 const QUICK_SERVICES = [
   {
@@ -28,10 +30,10 @@ const QUICK_SERVICES = [
   {
     id: 'cleaning',
     label: 'Cleaning Services',
-    image: '/hero-cleaning.webp',
+    image: '/service-card-cleaning.webp',
     width: 900,
-    height: 1658,
-    fallbackImg: '/hero/banner-3.webp',
+    height: 900,
+    fallbackImg: '/hero-cleaning.webp',
   },
   {
     id: 'painting',
@@ -41,9 +43,75 @@ const QUICK_SERVICES = [
     height: 1599,
     fallbackImg: '/hero/banner-1.webp',
   },
+  {
+    id: 'tiles',
+    label: 'Tiles & Granite Works',
+    image: '/service-card-tiles.webp',
+    width: 900,
+    height: 900,
+    fallbackImg: '/service-icons/tiles.webp',
+  },
+  {
+    id: 'electrical',
+    label: 'Electrical Work',
+    image: '/service-card-electrical.webp',
+    width: 900,
+    height: 900,
+    fallbackImg: '/service-icons/construction.webp',
+  },
+  {
+    id: 'ceiling',
+    label: 'False Ceiling Work',
+    image: '/service-card-ceiling.webp',
+    width: 900,
+    height: 900,
+    fallbackImg: '/service-icons/construction.webp',
+  },
+  {
+    id: 'construction',
+    label: 'Construction Work',
+    image: '/service-card-construction.webp',
+    width: 900,
+    height: 900,
+    fallbackImg: '/service-icons/construction.webp',
+  },
+  {
+    id: 'interior',
+    label: 'Interior Design',
+    image: '/hero-interior.webp',
+    width: 900,
+    height: 1352,
+    fallbackImg: '/hero/banner-1.webp',
+  },
+  {
+    id: 'home-renovation',
+    label: 'Home Renovation',
+    image: '/service-card-home-renovation.webp',
+    width: 900,
+    height: 900,
+    fallbackImg: '/work-interior-living.webp',
+  },
+  {
+    id: 'carpenter',
+    label: 'Carpenter Work',
+    image: '/service-card-carpenter.webp',
+    width: 900,
+    height: 900,
+    fallbackImg: '/work-ceiling-cove.webp',
+  },
+  {
+    id: 'home-maintenance',
+    label: 'Home Maintenance',
+    image: '/service-card-home-maintenance.webp',
+    width: 900,
+    height: 900,
+    fallbackImg: '/hero/banner-1.webp',
+  },
 ];
 
 export function QuickHelpSection() {
+  const { trackRef, scrollBy, onPointerDown, onPointerMove, endDrag, wasDragged } = useHorizontalScroll();
+
   const openCall = (label: string) => {
     const msg = encodeURIComponent(`Hi Narayan Services, I need help with: ${label}`);
     window.open(`https://wa.me/91${PHONE_NUMBER}?text=${msg}`, '_blank');
@@ -60,31 +128,63 @@ export function QuickHelpSection() {
           View All →
         </a>
       </div>
-      <div className="quick-help-grid">
-        {QUICK_SERVICES.map((s) => (
-          <button
-            key={s.id}
-            className="quick-help-photo-card"
-            onClick={() => openCall(s.label)}
-            type="button"
-            aria-label={`Get help with ${s.label}`}
-          >
-            <div className="quick-help-image-wrapper">
-              <img
-                src={s.image}
-                width={s.width}
-                height={s.height}
-                alt={s.label}
-                loading="lazy"
-                decoding="async"
-                onError={(e) => {
-                  e.currentTarget.src = s.fallbackImg;
-                }}
-              />
-            </div>
-            <span className="quick-help-card-label">{s.label}</span>
-          </button>
-        ))}
+      <div className="quick-help-carousel">
+        <button
+          className="services-scroll-btn services-scroll-prev quick-help-scroll-prev"
+          onClick={() => scrollBy(-1)}
+          type="button"
+          aria-label="Scroll help options left"
+        >
+          <ChevronLeft size={22} />
+        </button>
+
+        <div
+          ref={trackRef}
+          className="quick-help-grid quick-help-track"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onPointerLeave={endDrag}
+        >
+          {QUICK_SERVICES.map((s) => (
+            <button
+              key={s.id}
+              className="quick-help-photo-card"
+              onClick={() => {
+                if (wasDragged()) return;
+                openCall(s.label);
+              }}
+              type="button"
+              aria-label={`Get help with ${s.label}`}
+            >
+              <div className="quick-help-image-wrapper">
+                <img
+                  src={s.image}
+                  width={s.width}
+                  height={s.height}
+                  alt={s.label}
+                  loading="lazy"
+                  decoding="async"
+                  draggable={false}
+                  onError={(e) => {
+                    e.currentTarget.src = s.fallbackImg;
+                  }}
+                />
+              </div>
+              <span className="quick-help-card-label">{s.label}</span>
+            </button>
+          ))}
+        </div>
+
+        <button
+          className="services-scroll-btn services-scroll-next quick-help-scroll-next"
+          onClick={() => scrollBy(1)}
+          type="button"
+          aria-label="Scroll help options right"
+        >
+          <ChevronRight size={22} />
+        </button>
       </div>
     </section>
   );

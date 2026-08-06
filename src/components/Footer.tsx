@@ -1,49 +1,5 @@
-import { Phone, Mail, MapPin, Clock, ChevronRight, ShieldCheck, Star, Sparkles, Award, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ChevronRight, ShieldCheck, Award, CheckCircle } from 'lucide-react';
 import { PHONE_DISPLAY, PHONE_NUMBER } from '../types';
-
-/* Accurate colored payment brand logos (inline SVG) */
-function VisaLogo() {
-  return (
-    <span className="payment-logo" aria-label="Visa" title="Visa">
-      <svg viewBox="0 0 80 26" width="52" height="17" role="img" aria-label="Visa">
-        <text x="0" y="19" fontFamily="Arial, Helvetica, sans-serif" fontSize="19" fontStyle="italic" fontWeight="800" fill="#1A1F71">VISA</text>
-      </svg>
-    </span>
-  );
-}
-
-function MastercardLogo() {
-  return (
-    <span className="payment-logo" aria-label="Mastercard" title="MasterCard">
-      <svg viewBox="0 0 48 30" width="38" height="24" role="img" aria-label="Mastercard">
-        <circle cx="18" cy="15" r="13" fill="#EB001B" />
-        <circle cx="30" cy="15" r="13" fill="#F79E1B" fillOpacity="0.92" />
-      </svg>
-    </span>
-  );
-}
-
-function RuPayLogo() {
-  return (
-    <span className="payment-logo" aria-label="RuPay" title="RuPay">
-      <svg viewBox="0 0 64 30" width="44" height="20" role="img" aria-label="RuPay">
-        <rect width="64" height="30" rx="6" fill="#1F3B93" />
-        <text x="32" y="21" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontSize="15" fontWeight="800" fill="#F58F1F">RuPay</text>
-      </svg>
-    </span>
-  );
-}
-
-function UpiLogo() {
-  return (
-    <span className="payment-logo" aria-label="UPI" title="UPI">
-      <svg viewBox="0 0 64 30" width="44" height="20" role="img" aria-label="UPI">
-        <rect width="64" height="30" rx="6" fill="#18498F" />
-        <text x="32" y="21" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontSize="14" fontWeight="800" fill="#ffffff">UPI</text>
-      </svg>
-    </span>
-  );
-}
 
 interface FooterProps {
   onScrollTo: (id: string) => void;
@@ -53,17 +9,18 @@ interface FooterProps {
 
 const FOOTER_SERVICES = [
   { name: 'Plumbing Services', serviceKey: 'Plumbing Services' },
-  { name: 'Bathroom Renovation', serviceKey: 'Bathroom Renovation' },
-  { name: 'Kitchen Renovation', serviceKey: 'Kitchen Renovation' },
-  { name: 'Home Renovation', serviceKey: 'Home Renovation' },
-  { name: 'Tiles & Granite Work', serviceKey: 'Tiles & Granite Work' },
-  { name: 'Waterproofing Work', serviceKey: 'Waterproofing Work' },
   { name: 'Civil Work', serviceKey: 'Civil Work' },
-  { name: 'Electrical Work', serviceKey: 'Electrical Work' },
-  { name: 'Carpenter Work', serviceKey: 'Carpenter Work' },
+  { name: 'Bathroom Renovation', serviceKey: 'Bathroom Renovation' },
+  { name: 'Cleaning Services', serviceKey: 'Cleaning Services' },
   { name: 'Painting Services', serviceKey: 'Painting Services' },
+  { name: 'Tiles & Granite Works', serviceKey: 'Tiles & Granite Works' },
+  { name: 'Electrical Work', serviceKey: 'Electrical Work' },
   { name: 'False Ceiling Work', serviceKey: 'False Ceiling Work' },
+  { name: 'Construction Work', serviceKey: 'Construction Work' },
   { name: 'Interior Design', serviceKey: 'Interior Design' },
+  { name: 'Home Renovation', serviceKey: 'Home Renovation' },
+  { name: 'Carpenter Work', serviceKey: 'Carpenter Work' },
+  { name: 'Home Maintenance', serviceKey: 'Home Maintenance' },
 ];
 
 const SERVICE_AREAS = [
@@ -81,8 +38,6 @@ const SERVICE_AREAS = [
 ];
 
 export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
-  const waLink = `https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent('Hi Narayan Services, I would like to book a service.')}`;
-
   return (
     <footer className="footer-layout">
       {/* Top 5-Column Navigation Grid */}
@@ -295,7 +250,7 @@ export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
 
         <div className="footer-brand-description">
           <p>
-            Narayan Plumbing Services is a trusted and professional home improvement company in <span className="highlight-orange">Bangalore</span>, specialized in <span className="highlight-white">Plumbing, Bathroom Renovation, Kitchen Renovation, Tiles & Granite Work, Waterproofing, Civil Work, Electrical Work, Carpenter Work, Painting Services, False Ceiling Work</span> & <span className="highlight-white">Interior Design</span>. We deliver quality workmanship, premium materials, transparent pricing and on-time completion with 100% customer satisfaction.
+            Narayan Plumbing Services is a trusted and professional home improvement company in <span className="highlight-orange">Bangalore</span>, specialized in <span className="highlight-white">Plumbing, Civil Work, Bathroom Renovation, Cleaning, Painting, Tiles & Granite Work, Electrical Work, False Ceiling Work, Construction Work, Interior Design, Home Renovation, Carpenter Work</span> & <span className="highlight-white">Home Maintenance</span>. We deliver quality workmanship, premium materials, transparent pricing and on-time completion with 100% customer satisfaction.
           </p>
         </div>
       </div>
@@ -331,16 +286,6 @@ export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
             <ShieldCheck size={14} />
             <span>Your Satisfaction is Our Priority</span>
             <span className="copyright-text">© {new Date().getFullYear()} Narayan Plumbing Services. All Rights Reserved.<br /><small>Best Plumbing & Bathroom Renovation Company in Bangalore</small></span>
-          </div>
-
-          <div className="footer-payment-methods">
-            <span>WE ACCEPT</span>
-            <div className="payment-cards">
-              <VisaLogo />
-              <MastercardLogo />
-              <RuPayLogo />
-              <UpiLogo />
-            </div>
           </div>
         </div>
       </div>

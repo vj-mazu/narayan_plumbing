@@ -29,3 +29,6 @@ dist-ssr
 # Utility scripts
 *.py
 crop_icons.py
+
+# Crash dumps
+*.stackdump

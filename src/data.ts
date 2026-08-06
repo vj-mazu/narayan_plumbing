@@ -3,21 +3,19 @@ import type {
 } from './types';
 
 export const CORE_SERVICES: Service[] = [
-  { id: 'plumbing', name: 'Plumbing Services', icon: '/service-card-plumbing.webp', desc: 'SERVICES', bgImage: '/service-card-plumbing.webp' },
-  { id: 'painting', name: 'Painting Services', icon: '/service-card-painting.webp', desc: 'SERVICES', bgImage: '/service-card-painting.webp' },
-  { id: 'tiles', name: 'Tiles & Granite Works', icon: '/service-card-tiles.webp', desc: 'WORKS', bgImage: '/service-card-tiles.webp' },
-  { id: 'electrical', name: 'Electrical Work', icon: '/service-card-electrical.webp', desc: 'WORK', bgImage: '/service-card-electrical.webp' },
-  { id: 'ceiling', name: 'False Ceiling Work', icon: '/service-card-ceiling.webp', desc: 'WORK', bgImage: '/service-card-ceiling.webp' },
-  { id: 'bathroom', name: 'Bathroom Renovation', icon: '/service-card-bathroom.webp', desc: 'RENOVATION', bgImage: '/service-card-bathroom.webp' },
-  { id: 'interior', name: 'Interior Design', icon: '/service-card-interior.webp', desc: 'WORK', bgImage: '/service-card-interior.webp' },
-  { id: 'construction', name: 'Construction Work', icon: '/service-card-construction.webp', desc: 'WORK', bgImage: '/service-card-construction.webp' },
-  { id: 'civil', name: 'Civil Work', icon: '/service-card-civil.webp', desc: 'WORK', bgImage: '/service-card-civil.webp' },
-];
-
-export const HERO_CAROUSEL_IMAGES = [
-  { src: '/hero/banner-1.webp', alt: 'Narayan Plumbing Services — beautiful home interiors served' },
-  { src: '/hero/banner-2.webp', alt: 'Narayan Plumbing Services — expert plumber at work under sink' },
-  { src: '/hero/banner-3.webp', alt: 'Narayan Plumbing Services — professional home cleaning service' },
+  { id: 'plumbing', name: 'Plumbing Services', icon: '/service-card-plumbing.webp', desc: 'SERVICES' },
+  { id: 'civil', name: 'Civil Work', icon: '/service-card-civil.webp', desc: 'WORK' },
+  { id: 'bathroom', name: 'Bathroom Renovation', icon: '/service-card-bathroom.webp', desc: 'RENOVATION' },
+  { id: 'cleaning', name: 'Cleaning Services', icon: '/service-card-cleaning.webp', desc: 'SERVICES' },
+  { id: 'painting', name: 'Painting Services', icon: '/service-card-painting.webp', desc: 'SERVICES' },
+  { id: 'tiles', name: 'Tiles & Granite Works', icon: '/service-card-tiles.webp', desc: 'WORKS' },
+  { id: 'electrical', name: 'Electrical Work', icon: '/service-card-electrical.webp', desc: 'WORK' },
+  { id: 'ceiling', name: 'False Ceiling Work', icon: '/service-card-ceiling.webp', desc: 'WORK' },
+  { id: 'construction', name: 'Construction Work', icon: '/service-card-construction.webp', desc: 'WORK' },
+  { id: 'interior', name: 'Interior Design', icon: '/service-card-interior.webp', desc: 'WORK' },
+  { id: 'home-renovation', name: 'Home Renovation', icon: '/service-card-home-renovation.webp', desc: 'RENOVATION' },
+  { id: 'carpenter', name: 'Carpenter Work', icon: '/service-card-carpenter.webp', desc: 'WORK' },
+  { id: 'home-maintenance', name: 'Home Maintenance', icon: '/service-card-home-maintenance.webp', desc: 'MAINTENANCE' },
 ];
 
 export interface Testimonial {
