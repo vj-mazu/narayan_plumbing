@@ -2361,13 +2361,23 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 768px) {
-  /* Compact 2-column footer grid on mobile — professional, not a long vertical stack */
+  /* Single-column stacked footer on mobile — full width, nothing clips or overlaps */
   .footer-top-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 26px 20px;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .footer-nav-col {
+    width: 100%;
+    min-width: 0;
   }
   .footer-nav-col:last-child {
-    grid-column: 1 / -1;
+    grid-column: auto;
+  }
+  .footer-list-links li button {
+    width: 100%;
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
   .areas-list {
     display: grid;
