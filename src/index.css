@@ -554,105 +554,113 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 768px) {
   .hero-banner-section {
-    padding: 8px 4px;
+    padding: 6px 4px;
   }
   .hero-banner-card {
-    padding: 12px 10px;
-    border-radius: 16px;
+    padding: 10px 8px;
+    border-radius: 14px;
   }
   .hero-banner-grid {
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 8px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 6px;
     align-items: center;
   }
   .hero-top-badge {
-    padding: 3px 8px;
-    font-size: 0.6rem;
-    margin-bottom: 6px;
-  }
-  .hero-banner-headline {
-    font-size: 1.15rem;
-    line-height: 1.1;
+    padding: 2px 7px;
+    font-size: 0.55rem;
+    gap: 4px;
     margin-bottom: 4px;
   }
+  .hero-top-badge svg {
+    width: 11px;
+    height: 11px;
+  }
+  .hero-banner-headline {
+    font-size: 1.05rem;
+    line-height: 1.08;
+    margin-bottom: 3px;
+  }
   .hero-banner-subfeatures {
-    font-size: 0.58rem;
-    margin-bottom: 8px;
+    font-size: 0.55rem;
+    margin-bottom: 6px;
+    line-height: 1.2;
   }
   .hero-services-icon-row {
     display: flex;
-    gap: 3px;
-    margin-bottom: 10px;
+    gap: 2px;
+    margin-bottom: 7px;
   }
   .hero-service-icon-item {
     width: 19%;
-    gap: 2px;
+    gap: 1px;
   }
   .hero-service-icon-item .hero-icon-box {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 6px;
   }
   .hero-service-icon-item .hero-icon-box svg {
-    width: 13px;
-    height: 13px;
+    width: 11px;
+    height: 11px;
   }
   .hero-service-icon-item span {
-    font-size: 0.45rem;
+    font-size: 0.42rem;
     line-height: 1.05;
   }
   .hero-banner-cta-group {
     flex-direction: row;
-    gap: 4px;
-    margin-bottom: 10px;
+    gap: 3px;
+    margin-bottom: 7px;
   }
   .hero-btn-orange, .hero-btn-whatsapp-outline {
     flex: 1;
-    padding: 6px 4px;
-    font-size: 0.55rem;
+    padding: 5px 3px;
+    font-size: 0.52rem;
     justify-content: center;
-    border-radius: 6px;
-    gap: 3px;
+    border-radius: 5px;
+    gap: 2px;
   }
   .hero-btn-orange svg, .hero-btn-whatsapp-outline svg {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
   }
   .hero-bottom-ratings-card {
     flex-direction: row;
     justify-content: space-around;
-    padding: 6px 4px;
-    gap: 2px;
-    border-radius: 8px;
+    padding: 5px 3px;
+    gap: 1px;
+    border-radius: 7px;
     width: 100%;
   }
   .rating-stat-box {
     flex-direction: column;
-    gap: 1px;
+    gap: 0;
     text-align: center;
   }
   .orange-stat-circle {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
   .orange-stat-circle svg {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
   .stat-text strong {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
   }
   .stat-text small {
-    font-size: 0.42rem;
+    font-size: 0.4rem;
   }
   .stars-row svg {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
   }
   .hero-image-container {
-    aspect-ratio: 4 / 5;
-    border-radius: 10px;
-    height: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    width: min(100%, 148px);
+    align-self: center;
+    justify-self: center;
   }
 }
 
@@ -1112,31 +1120,31 @@ img { display: block; max-width: 100%; }
   }
 }
 @media (max-width: 640px) {
-  /* Compact 3-column grid on mobile — no overlap, professional */
+  /* 2-column grid on mobile — like Recently Completed Projects, names stay clean */
   .services-framed-container {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
   .service-framed-card {
-    border-width: 2.5px;
+    border-width: 2px;
     border-radius: 12px;
   }
   .service-framed-image-box {
     aspect-ratio: 1 / 1;
   }
   .service-framed-label-banner {
-    padding: 6px 3px 8px;
-    border-top-width: 2.5px;
+    padding: 7px 5px 9px;
+    border-top-width: 2px;
   }
   .service-framed-title {
-    font-size: clamp(0.56rem, 2.2vw, 0.72rem);
+    font-size: clamp(0.62rem, 2.8vw, 0.82rem);
     letter-spacing: 0.02em;
-    line-height: 1.15;
+    line-height: 1.2;
     white-space: nowrap;
   }
   .service-framed-sub {
-    margin-left: 3px;
-    font-size: 0.88em;
+    margin-left: 4px;
+    font-size: 0.9em;
   }
 }
 .stats-bar {
