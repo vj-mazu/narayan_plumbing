@@ -1476,7 +1476,7 @@ img { display: block; max-width: 100%; }
 }
 @media (max-width: 992px) {
   .projects-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
 }
@@ -1484,9 +1484,9 @@ img { display: block; max-width: 100%; }
   .projects-section {
     padding: 36px 12px 44px;
   }
-  /* Mobile: 4-column grid like the reference app — clean white thumbnail cards */
+  /* Mobile: 2-column grid — clean white thumbnail cards */
   .projects-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
   .project-card {
@@ -1506,15 +1506,15 @@ img { display: block; max-width: 100%; }
     pointer-events: none;
   }
   .project-info {
-    padding: 6px 6px 10px;
+    padding: 8px 6px 12px;
     gap: 2px;
   }
   .project-info h3 {
-    font-size: 0.6rem;
-    line-height: 1.15;
+    font-size: 0.78rem;
+    line-height: 1.2;
   }
   .project-done {
-    font-size: 0.52rem;
+    font-size: 0.6rem;
     line-height: 1.2;
   }
   .projects-sub {
