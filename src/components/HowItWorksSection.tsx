@@ -1,4 +1,5 @@
 import { ClipboardList, CalendarDays, Bike, Wrench, CreditCard, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const steps = [
   {
@@ -44,7 +45,20 @@ export function HowItWorksSection() {
 
       <div className="how-it-works-container">
         {steps.map((step, index) => (
-          <div key={step.number} className="hiw-step-wrapper">
+          <motion.div
+            key={step.number}
+            className="hiw-step-wrapper"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{
+              type: 'spring',
+              stiffness: 180,
+              damping: 15,
+              delay: index * 0.08
+            }}
+          >
             <div className="hiw-step">
               <div className="hiw-icon-box">
                 {step.icon}
@@ -58,7 +72,7 @@ export function HowItWorksSection() {
                 <ArrowRight size={24} />
               </div>
             )}
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

@@ -3,22 +3,21 @@ import type {
 } from './types';
 
 export const CORE_SERVICES: Service[] = [
-  { id: 'plumbing', name: 'Plumbing Services', icon: '🚰', desc: 'Complete Plumbing Solutions', bgImage: '/services/plumbing.jpg' },
-  { id: 'bathroom', name: 'Bathroom Renovation', icon: '🛁', desc: 'Modern Bathroom Makeovers', bgImage: '/services/bathroom.jpg' },
-  { id: 'painting', name: 'Painting Services', icon: '🎨', desc: 'Interior & Exterior Painting', bgImage: '/services/painting.jpg' },
-  { id: 'construction', name: 'Construction Work', icon: '🏗️', desc: 'Building & Construction', bgImage: '/services/construction.jpg' },
-  { id: 'tiles', name: 'Tiles & Granite Work', icon: '🧱', desc: 'Flooring & Wall Tiles', bgImage: '/services/tiles.jpg' },
-  { id: 'civil', name: 'Civil Work', icon: '👷', desc: 'Structural & Civil Engineering', bgImage: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80' },
-  { id: 'carpenter', name: 'Carpenter Work', icon: '🪚', desc: 'Wood & Furniture Work', bgImage: '/services/carpenter.jpg' },
-  { id: 'electrical', name: 'Electrical Work', icon: '⚡', desc: 'Wiring & Electrical Solutions', bgImage: '/services/electrical.jpg' },
-  { id: 'ceiling', name: 'False Ceiling Work', icon: '/service-icons/ceiling-light.png', desc: 'Modern Ceiling Designs', bgImage: '/services/ceiling.jpg' },
-  { id: 'interior', name: 'Interior Design', icon: '🛋️', desc: 'Complete Interior Solutions', bgImage: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
+  { id: 'plumbing', name: 'Plumbing Services', icon: '/service-card-plumbing.webp', desc: 'SERVICES', bgImage: '/service-card-plumbing.webp' },
+  { id: 'painting', name: 'Painting Services', icon: '/service-card-painting.webp', desc: 'SERVICES', bgImage: '/service-card-painting.webp' },
+  { id: 'tiles', name: 'Tiles & Granite Works', icon: '/service-card-tiles.webp', desc: 'WORKS', bgImage: '/service-card-tiles.webp' },
+  { id: 'electrical', name: 'Electrical Work', icon: '/service-card-electrical.webp', desc: 'WORK', bgImage: '/service-card-electrical.webp' },
+  { id: 'ceiling', name: 'False Ceiling Work', icon: '/service-card-ceiling.webp', desc: 'WORK', bgImage: '/service-card-ceiling.webp' },
+  { id: 'bathroom', name: 'Bathroom Renovation', icon: '/service-card-bathroom.webp', desc: 'RENOVATION', bgImage: '/service-card-bathroom.webp' },
+  { id: 'interior', name: 'Interior Design', icon: '/service-card-interior.webp', desc: 'WORK', bgImage: '/service-card-interior.webp' },
+  { id: 'construction', name: 'Construction Work', icon: '/service-card-construction.webp', desc: 'WORK', bgImage: '/service-card-construction.webp' },
+  { id: 'civil', name: 'Civil Work', icon: '/service-card-civil.webp', desc: 'WORK', bgImage: '/service-card-civil.webp' },
 ];
 
 export const HERO_CAROUSEL_IMAGES = [
-  { src: '/hero/banner-1.png', alt: 'Narayan Plumbing Services — 24/7 service available' },
-  { src: '/hero/banner-2.png', alt: 'Narayan Plumbing Services — expert plumbers on time' },
-  { src: '/hero/banner-3.png', alt: 'Narayan Plumbing Services — professional plumbing solutions' },
+  { src: '/hero/banner-1.webp', alt: 'Narayan Plumbing Services — beautiful home interiors served' },
+  { src: '/hero/banner-2.webp', alt: 'Narayan Plumbing Services — expert plumber at work under sink' },
+  { src: '/hero/banner-3.webp', alt: 'Narayan Plumbing Services — professional home cleaning service' },
 ];
 
 export interface Testimonial {

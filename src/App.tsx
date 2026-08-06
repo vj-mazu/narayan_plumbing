@@ -17,7 +17,6 @@ import BookingModal from './BookingModal';
 import {
   CORE_SERVICES,
   TESTIMONIALS,
-  HERO_CAROUSEL_IMAGES,
 } from './data';
 import { PHONE_DISPLAY, PHONE_NUMBER } from './types';
 import { HeroCarousel } from './components/HeroCarousel';
@@ -28,6 +27,7 @@ import { ServicesGrid } from './components/ServicesGrid';
 import { HowItWorksSection } from './components/HowItWorksSection';
 import { QuickHelpSection } from './components/QuickHelpSection';
 import { WhyChooseBanner } from './components/WhyChooseBanner';
+import { RecentlyCompletedProjects } from './components/RecentlyCompletedProjects';
 import { FloatingContactBar } from './components/FloatingContactBar';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { Footer } from './components/Footer';
@@ -95,16 +95,18 @@ export function App() {
             {menuOpen ? <X size={24} /> : <Menu size={26} />}
           </button>
           <button className="brand-lockup" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <img src="/logo.png" className="plumber-avatar" alt="Narayan Logo" onError={(e) => {
-              // fallback if logo.png doesn't exist yet
-              (e.target as HTMLElement).style.display = 'none';
+            <img src="/logo-emblem.webp" width={93} height={111} className="brand-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
+              const el = e.target as HTMLImageElement;
+              // Try the full logo if the emblem is missing
+              if (!el.src.endsWith('logo.webp')) {
+                el.src = '/logo.webp';
+              } else {
+                el.style.display = 'none';
+              }
             }} />
-            <span className="logo-icon-fallback" style={{ display: 'none' }}>💙</span>
-            <span>
-              <strong style={{ color: '#061443', fontSize: '1.25rem', fontWeight: 900, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                NARAYAN
-              </strong>
-              <b style={{ color: '#2563eb', fontSize: '0.78rem', letterSpacing: '0.05em', fontWeight: 800 }}>PLUMBING SERVICES</b>
+            <span className="brand-logo-text">
+              <strong>NARAYAN</strong>
+              <b>PLUMBING SERVICES</b>
             </span>
           </button>
           <nav className="desktop-site-nav" aria-label="Primary navigation">
@@ -135,15 +137,16 @@ export function App() {
       </header>
 
       <main>
-        <HeroCarousel images={HERO_CAROUSEL_IMAGES} onBookNow={() => openBooking()} />
+        <HeroCarousel onBookNow={() => openBooking()} />
         <QuickHelpSection />
         <ServicesGrid services={CORE_SERVICES} onBookNow={openBooking} />
         <HowItWorksSection />
         <StatsBar />
         <TrendingServicesSection />
         <WhyChooseBanner />
-        <FloatingContactBar />
         <HeroBookingSection onOpenBooking={openBooking} />
+        <RecentlyCompletedProjects />
+        <FloatingContactBar />
         <TestimonialsSection testimonials={TESTIMONIALS} />
 
         <Footer onScrollTo={scrollTo} onBook={openBooking} onLegal={setLegalPage} />

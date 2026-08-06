@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from 'react';
-import { Phone } from 'lucide-react';
+import { Phone, CalendarCheck } from 'lucide-react';
 import { PHONE_NUMBER } from '../types';
-import { CORE_SERVICES } from '../data';
 
 interface HeroBookingSectionProps {
   onOpenBooking?: (service?: string) => void;
@@ -10,24 +9,21 @@ interface HeroBookingSectionProps {
 export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [area, setArea] = useState('');
-  const [city, setCity] = useState('Bangalore');
-  const [service, setService] = useState('');
+  const [locality, setLocality] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !phone.trim()) {
-      onOpenBooking?.('Site Inspection');
+      onOpenBooking?.('Site Visit / Consultation');
       return;
     }
     const message = [
-      'Hi Narayan Plumbing Services, I want to book a Site Inspection.',
+      'Hi Narayan Plumbing Services, I want to book a Site Visit.',
       '',
       `Name: ${name.trim()}`,
       `Phone: ${phone.trim()}`,
-      service ? `Service: ${service}` : '',
-      area.trim() ? `Area/Locality: ${area.trim()}` : '',
-      `City: ${city}`,
+      locality.trim() ? `Locality: ${locality.trim()}` : '',
+      `City: Bangalore`,
     ]
       .filter(Boolean)
       .join('\n');
@@ -41,80 +37,65 @@ export function HeroBookingSection({ onOpenBooking }: HeroBookingSectionProps) {
   };
 
   return (
-    <section className="hero-booking-section" aria-label="Book plumbing service" id="book-visit">
+    <section className="hero-booking-section" aria-label="Book site visit" id="book-visit">
       <div className="hero-booking-section-header">
-        <h2 className="hero-booking-main-heading">Schedule Your Site Inspection</h2>
-        <p className="hero-booking-main-subtitle">Expert plumbing consultation at your doorstep</p>
+        <h2 className="hero-booking-main-heading">Book Site Visit</h2>
+        <p className="hero-booking-main-subtitle">Expert consultation & fair quotation at your doorstep</p>
       </div>
       <div className="hero-booking-grid-form-only">
         <form className="hero-booking-form" onSubmit={handleSubmit} noValidate>
           <h2>BOOK SITE VISIT</h2>
           <p className="hero-form-sub">
-            Get a thorough Site Inspection and Colour Consultation from Our Experts
+            Fastest door-step plumbing inspections by top-rated professionals
           </p>
           
           <div className="hero-input-group">
             <input
               type="text"
-              placeholder="Name"
+              name="name"
+              id="book-visit-name"
+              placeholder="Your Name *"
               value={name}
               onChange={(e) => setName(e.target.value)}
               autoComplete="name"
+              required
             />
           </div>
 
           <div className="hero-input-group">
             <input
               type="tel"
-              placeholder="Phone Number"
+              name="phone"
+              id="book-visit-phone"
+              placeholder="Phone Number *"
               value={phone}
               onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
               inputMode="numeric"
               autoComplete="tel"
               minLength={10}
               maxLength={10}
+              required
             />
-          </div>
-
-          <div className="hero-input-group">
-            <select 
-              value={service} 
-              onChange={(e) => setService(e.target.value)}
-            >
-              <option value="">Select Service</option>
-              {CORE_SERVICES.map((s) => (
-                <option key={s.id} value={s.name}>
-                  {s.name}
-                </option>
-              ))}
-            </select>
           </div>
 
           <div className="hero-input-group">
             <input
               type="text"
-              placeholder="Area / Locality (e.g. Indiranagar, HSR Layout)"
-              value={area}
-              onChange={(e) => setArea(e.target.value)}
+              name="locality"
+              id="book-visit-locality"
+              placeholder="Area / Locality (e.g. Indiranagar, HSR Layout) *"
+              value={locality}
+              onChange={(e) => setLocality(e.target.value)}
+              required
             />
           </div>
 
-          <div className="hero-input-group">
-            <select 
-              value={city} 
-              onChange={(e) => setCity(e.target.value)}
-            >
-              <option value="Bangalore">Bangalore</option>
-            </select>
-          </div>
-
           <button type="submit" className="hero-form-submit">
-            BOOK SITE INSPECTION
+            <CalendarCheck size={18} /> BOOK SITE VISIT
           </button>
           
           <button type="button" className="hero-form-call" onClick={handleCallNow}>
-            <Phone size={20} />
-            CALL NOW FOR INSTANT SERVICE
+            <Phone size={18} /> CALL NOW FOR INSTANT BOOKING
           </button>
         </form>
       </div>

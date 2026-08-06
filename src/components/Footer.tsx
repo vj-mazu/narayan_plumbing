@@ -1,5 +1,49 @@
-import { Phone, Mail, MapPin, Clock, Wrench, Droplets, Flame, Sparkles, ChevronRight, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ChevronRight, ShieldCheck, Star, Sparkles, Award, CheckCircle } from 'lucide-react';
 import { PHONE_DISPLAY, PHONE_NUMBER } from '../types';
+
+/* Accurate colored payment brand logos (inline SVG) */
+function VisaLogo() {
+  return (
+    <span className="payment-logo" aria-label="Visa" title="Visa">
+      <svg viewBox="0 0 80 26" width="52" height="17" role="img" aria-label="Visa">
+        <text x="0" y="19" fontFamily="Arial, Helvetica, sans-serif" fontSize="19" fontStyle="italic" fontWeight="800" fill="#1A1F71">VISA</text>
+      </svg>
+    </span>
+  );
+}
+
+function MastercardLogo() {
+  return (
+    <span className="payment-logo" aria-label="Mastercard" title="MasterCard">
+      <svg viewBox="0 0 48 30" width="38" height="24" role="img" aria-label="Mastercard">
+        <circle cx="18" cy="15" r="13" fill="#EB001B" />
+        <circle cx="30" cy="15" r="13" fill="#F79E1B" fillOpacity="0.92" />
+      </svg>
+    </span>
+  );
+}
+
+function RuPayLogo() {
+  return (
+    <span className="payment-logo" aria-label="RuPay" title="RuPay">
+      <svg viewBox="0 0 64 30" width="44" height="20" role="img" aria-label="RuPay">
+        <rect width="64" height="30" rx="6" fill="#1F3B93" />
+        <text x="32" y="21" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontSize="15" fontWeight="800" fill="#F58F1F">RuPay</text>
+      </svg>
+    </span>
+  );
+}
+
+function UpiLogo() {
+  return (
+    <span className="payment-logo" aria-label="UPI" title="UPI">
+      <svg viewBox="0 0 64 30" width="44" height="20" role="img" aria-label="UPI">
+        <rect width="64" height="30" rx="6" fill="#18498F" />
+        <text x="32" y="21" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontSize="14" fontWeight="800" fill="#ffffff">UPI</text>
+      </svg>
+    </span>
+  );
+}
 
 interface FooterProps {
   onScrollTo: (id: string) => void;
@@ -10,214 +54,296 @@ interface FooterProps {
 const FOOTER_SERVICES = [
   { name: 'Plumbing Services', serviceKey: 'Plumbing Services' },
   { name: 'Bathroom Renovation', serviceKey: 'Bathroom Renovation' },
-  { name: 'Painting Services', serviceKey: 'Painting Services' },
-  { name: 'Construction Work', serviceKey: 'Construction Work' },
+  { name: 'Kitchen Renovation', serviceKey: 'Kitchen Renovation' },
+  { name: 'Home Renovation', serviceKey: 'Home Renovation' },
   { name: 'Tiles & Granite Work', serviceKey: 'Tiles & Granite Work' },
+  { name: 'Waterproofing Work', serviceKey: 'Waterproofing Work' },
   { name: 'Civil Work', serviceKey: 'Civil Work' },
-  { name: 'Carpenter Work', serviceKey: 'Carpenter Work' },
   { name: 'Electrical Work', serviceKey: 'Electrical Work' },
+  { name: 'Carpenter Work', serviceKey: 'Carpenter Work' },
+  { name: 'Painting Services', serviceKey: 'Painting Services' },
   { name: 'False Ceiling Work', serviceKey: 'False Ceiling Work' },
   { name: 'Interior Design', serviceKey: 'Interior Design' },
 ];
 
+const SERVICE_AREAS = [
+  'Whitefield',
+  'Electronic City',
+  'HSR Layout',
+  'Koramangala',
+  'Marathahalli',
+  'Indiranagar',
+  'JP Nagar',
+  'Yelahanka',
+  'Hebbal',
+  'Manyata Tech Park',
+  'RT Nagar',
+];
+
 export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
-  const waLink = `https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent('Hi Narayan Plumbing Services, I need plumbing service.')}`;
+  const waLink = `https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent('Hi Narayan Services, I would like to book a service.')}`;
 
   return (
-    <>
-      {/* Premium CTA Banner */}
-      <div className="footer-cta-banner">
-        <div className="footer-cta-content">
-          <div className="footer-cta-text">
-            <h2>Fast &amp; Reliable Doorstep Service</h2>
-            <p>Certified master plumbers at your doorstep in 30 minutes across Bengaluru</p>
+    <footer className="footer-layout">
+      {/* Top 5-Column Navigation Grid */}
+      <div className="footer-top-grid">
+        {/* Column 1: Contact Information */}
+        <div className="footer-nav-col">
+          <h3 className="footer-nav-title">CONTACT INFORMATION</h3>
+          <div className="footer-contact-list">
+            <a href={`tel:${PHONE_NUMBER}`} className="footer-contact-link">
+              <div className="contact-icon-box orange">
+                <Phone size={16} />
+              </div>
+              <div className="contact-text-box">
+                <strong>+91 {PHONE_DISPLAY}</strong>
+                <span>Call or WhatsApp</span>
+              </div>
+            </a>
+
+            <a href="mailto:narayanplumbingservices@gmail.com" className="footer-contact-link">
+              <div className="contact-icon-box orange">
+                <Mail size={16} />
+              </div>
+              <div className="contact-text-box">
+                <span>narayanplumbingservices@gmail.com</span>
+                <span>Drop us an email</span>
+              </div>
+            </a>
+
+            <div className="footer-contact-link">
+              <div className="contact-icon-box orange">
+                <MapPin size={16} />
+              </div>
+              <div className="contact-text-box">
+                <strong>Bengaluru, Karnataka</strong>
+                <span>Serving All Areas</span>
+              </div>
+            </div>
+
+            <div className="footer-contact-link">
+              <div className="contact-icon-box orange">
+                <Clock size={16} />
+              </div>
+              <div className="contact-text-box">
+                <strong>24x7 Emergency Support</strong>
+                <span>Mon - Sun : Open 24 Hours</span>
+              </div>
+            </div>
+            
+            <div className="footer-need-help-card">
+              <div className="contact-icon-box orange-fill">
+                <Phone size={18} />
+              </div>
+              <div className="help-card-text">
+                <span className="help-tag">Need Immediate Help?</span>
+                <a href={`tel:${PHONE_NUMBER}`} className="help-phone">{PHONE_DISPLAY}</a>
+                <span className="help-tag">We're Available 24x7</span>
+              </div>
+            </div>
           </div>
-          <button 
-            type="button" 
-            className="footer-cta-button" 
-            onClick={() => {
-              onScrollTo('book-visit');
-              onBook('Free Site Visit');
-            }}
-          >
-            FREE SITE VISIT
-          </button>
+        </div>
+
+        {/* Column 2: Our Services */}
+        <div className="footer-nav-col">
+          <h3 className="footer-nav-title">OUR SERVICES</h3>
+          <ul className="footer-list-links">
+            {FOOTER_SERVICES.map((s) => (
+              <li key={s.name}>
+                <button type="button" onClick={() => onBook(s.serviceKey)}>
+                  <ChevronRight size={14} /> {s.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Column 3: Quick Links */}
+        <div className="footer-nav-col">
+          <h3 className="footer-nav-title">QUICK LINKS</h3>
+          <ul className="footer-list-links">
+            <li>
+              <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <ChevronRight size={14} /> Home
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => onScrollTo('why-us')}>
+                <ChevronRight size={14} /> About Us
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => onScrollTo('services')}>
+                <ChevronRight size={14} /> Services
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => onScrollTo('gallery')}>
+                <ChevronRight size={14} /> Gallery
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => onScrollTo('blog')}>
+                <ChevronRight size={14} /> Blog
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => onBook()}>
+                <ChevronRight size={14} /> Book Service
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => onScrollTo('reviews')}>
+                <ChevronRight size={14} /> Contact Us
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => onLegal('privacy')}>
+                <ChevronRight size={14} /> Privacy Policy
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => onLegal('terms')}>
+                <ChevronRight size={14} /> Terms & Conditions
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 4: Why Choose Us */}
+        <div className="footer-nav-col">
+          <h3 className="footer-nav-title">WHY CHOOSE US?</h3>
+          <ul className="footer-choose-list">
+            <li>
+              <Award size={16} />
+              <span>10+ Years of Experience</span>
+            </li>
+            <li>
+              <CheckCircle size={16} />
+              <span>1000+ Happy Customers</span>
+            </li>
+            <li>
+              <ShieldCheck size={16} />
+              <span>Verified & Skilled Professionals</span>
+            </li>
+            <li>
+              <CheckCircle size={16} />
+              <span>Transparent Pricing</span>
+            </li>
+            <li>
+              <Award size={16} />
+              <span>Premium Quality Materials</span>
+            </li>
+            <li>
+              <Clock size={16} />
+              <span>On-Time Project Delivery</span>
+            </li>
+            <li>
+              <CheckCircle size={16} />
+              <span>24x7 Customer Support</span>
+            </li>
+            <li>
+              <ShieldCheck size={16} />
+              <span>100% Satisfaction Guarantee</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 5: Service Areas */}
+        <div className="footer-nav-col">
+          <h3 className="footer-nav-title">SERVICE AREAS</h3>
+          <div className="footer-areas-box">
+            <div className="areas-header">
+              <MapPin size={18} />
+              <div>
+                <strong>We Serve All Areas in</strong>
+                <span>Bangalore</span>
+              </div>
+            </div>
+            <ul className="areas-list">
+              {SERVICE_AREAS.map((area) => (
+                <li key={area}>
+                  <CheckCircle size={12} /> {area}
+                </li>
+              ))}
+              <li>
+                <CheckCircle size={12} /> And Many More...
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      {/* Main Professional Footer */}
-      <footer className="new-site-footer">
-        <div className="footer-content">
-          {/* Brand & About Column */}
-          <div className="footer-column footer-brand-col">
-            <div className="footer-brand-header">
-              <div className="footer-logo-icon">
-                <Wrench size={22} color="#FFFFFF" />
-              </div>
-              <div>
-                <h3 className="footer-brand-title">NARAYAN <span>PLUMBING</span></h3>
-                <span className="footer-brand-sub">Expert Plumbers. On Time. Every Time.</span>
-              </div>
+      {/* Middle Brand Block */}
+      <div className="footer-middle-block">
+        <div className="footer-brand-info">
+          <div className="footer-brand-header">
+            <img src="/logo.webp" width={900} height={451} alt="Narayan Plumbing Services Logo" className="footer-brand-logo-img" loading="lazy" decoding="async" onError={(e) => {
+              e.currentTarget.style.display = 'none';
+              const textFallback = e.currentTarget.nextElementSibling as HTMLElement;
+              if (textFallback) textFallback.style.display = 'block';
+            }} />
+            <div className="footer-logo-text-fallback" style={{ display: 'none' }}>
+              <h2>NARAYAN</h2>
+              <span>PLUMBING SERVICES</span>
             </div>
-            <p className="footer-brand-desc">
-              Bengaluru's premier residential &amp; commercial plumbing experts. We deliver upfront 
-              pricing, verified technicians, genuine spare parts, and an unconditional 30-day warranty.
-            </p>
-            <div className="footer-live-badge">
-              <span className="live-dot" />
-              <span>24/7 Emergency Service Active</span>
-            </div>
-          </div>
-
-          {/* Contact Info Column */}
-          <div className="footer-column">
-            <h3 className="footer-heading">CONTACT INFO</h3>
-            <div className="footer-contact-items">
-              <a href={`tel:${PHONE_NUMBER}`} className="footer-contact-item">
-                <div className="footer-icon-box"><Phone size={16} /></div>
-                <span>{PHONE_DISPLAY}</span>
-              </a>
-              <a href="mailto:narayanplumbingservices@gmail.com" className="footer-contact-item">
-                <div className="footer-icon-box"><Mail size={16} /></div>
-                <span>narayanplumbingservices@gmail.com</span>
-              </a>
-              <a 
-                href="https://maps.app.goo.gl/HRGVvm5RDNo7Vs448" 
-                target="_blank" 
-                rel="noreferrer"
-                className="footer-contact-item"
-              >
-                <div className="footer-icon-box"><MapPin size={16} /></div>
-                <span>Bengaluru, Karnataka — All areas</span>
-              </a>
-              <div className="footer-contact-item">
-                <div className="footer-icon-box"><Clock size={16} /></div>
-                <span>24/7 Emergency Response</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Our Services Column */}
-          <div className="footer-column">
-            <h3 className="footer-heading">OUR SERVICES</h3>
-            <ul className="footer-services-list">
-              {FOOTER_SERVICES.map((item) => {
-                return (
-                  <li key={item.name}>
-                    <button 
-                      type="button" 
-                      onClick={() => onBook(item.serviceKey)}
-                      className="footer-service-btn"
-                    >
-                      <ChevronRight size={14} className="link-arrow" />
-                      <span>{item.name}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* Quick Links Column */}
-          <div className="footer-column">
-            <h3 className="footer-heading">QUICK LINKS</h3>
-            <ul className="footer-links">
-              <li>
-                <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                  <ChevronRight size={14} className="link-arrow" /> Home
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => onScrollTo('why-us')}>
-                  <ChevronRight size={14} className="link-arrow" /> About Us
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => onScrollTo('services')}>
-                  <ChevronRight size={14} className="link-arrow" /> Services
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => onScrollTo('packages')}>
-                  <ChevronRight size={14} className="link-arrow" /> Packages
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => onScrollTo('reviews')}>
-                  <ChevronRight size={14} className="link-arrow" /> Reviews
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => onBook()}>
-                  <ChevronRight size={14} className="link-arrow" /> Contact Us
-                </button>
-              </li>
-            </ul>
+            <p className="footer-brand-tagline">COMPLETE HOME IMPROVEMENT SOLUTIONS</p>
           </div>
         </div>
 
-        {/* Social Media & Support Bar */}
-        <div className="footer-social">
-          <div className="footer-social-header">
-            <h4>Connect With Us</h4>
-            <div className="footer-divider-line" />
+        <div className="footer-brand-divider" />
+
+        <div className="footer-brand-description">
+          <p>
+            Narayan Plumbing Services is a trusted and professional home improvement company in <span className="highlight-orange">Bangalore</span>, specialized in <span className="highlight-white">Plumbing, Bathroom Renovation, Kitchen Renovation, Tiles & Granite Work, Waterproofing, Civil Work, Electrical Work, Carpenter Work, Painting Services, False Ceiling Work</span> & <span className="highlight-white">Interior Design</span>. We deliver quality workmanship, premium materials, transparent pricing and on-time completion with 100% customer satisfaction.
+          </p>
+        </div>
+      </div>
+
+      {/* Footer Bottom Bar */}
+      <div className="footer-bottom-bar">
+        {/* Trust Badges */}
+        <div className="footer-bottom-badges">
+          <div className="bottom-badge-item">
+            <ShieldCheck size={16} />
+            <span>LICENSED & INSURED<br /><small>100% Safe & Secure Work</small></span>
           </div>
-          <div className="footer-social-icons">
-            <a 
-              href="https://www.instagram.com/narayanplumbingservices" 
-              target="_blank" 
-              rel="noreferrer" 
-              aria-label="Instagram" 
-              className="social-instagram"
-            >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-            <a 
-              href="https://www.facebook.com/narayanplumbingservices" 
-              target="_blank" 
-              rel="noreferrer" 
-              aria-label="Facebook" 
-              className="social-facebook"
-            >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a 
-              href={waLink} 
-              target="_blank" 
-              rel="noreferrer" 
-              aria-label="WhatsApp" 
-              className="social-whatsapp"
-            >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-            </a>
-            <a 
-              href={`tel:${PHONE_NUMBER}`} 
-              aria-label="Call Now" 
-              className="social-call"
-            >
-              <Phone size={20} />
-            </a>
+          <div className="bottom-badge-item">
+            <Award size={16} />
+            <span>EXPERT TEAM<br /><small>Skilled & Verified Professionals</small></span>
+          </div>
+          <div className="bottom-badge-item">
+            <CheckCircle size={16} />
+            <span>QUALITY MATERIALS<br /><small>Branded & Long Lasting</small></span>
+          </div>
+          <div className="bottom-badge-item">
+            <Clock size={16} />
+            <span>ON-TIME DELIVERY<br /><small>We Value Your Time</small></span>
+          </div>
+          <div className="bottom-badge-item">
+            <ShieldCheck size={16} />
+            <span>AFTER SERVICE SUPPORT<br /><small>Always Here for You</small></span>
           </div>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Narayan Plumbing Services. All rights reserved.</span>
-          <div className="footer-legal-links">
-            <button type="button" onClick={() => onLegal('privacy')}>Privacy Policy</button>
-            <span className="legal-dot">•</span>
-            <button type="button" onClick={() => onLegal('terms')}>Terms &amp; Conditions</button>
-            <span className="legal-dot">•</span>
-            <button type="button" onClick={() => onLegal('refund')}>Refund Policy</button>
+        <div className="footer-last-row">
+          <div className="footer-copyright">
+            <ShieldCheck size={14} />
+            <span>Your Satisfaction is Our Priority</span>
+            <span className="copyright-text">© {new Date().getFullYear()} Narayan Plumbing Services. All Rights Reserved.<br /><small>Best Plumbing & Bathroom Renovation Company in Bangalore</small></span>
+          </div>
+
+          <div className="footer-payment-methods">
+            <span>WE ACCEPT</span>
+            <div className="payment-cards">
+              <VisaLogo />
+              <MastercardLogo />
+              <RuPayLogo />
+              <UpiLogo />
+            </div>
           </div>
         </div>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 }

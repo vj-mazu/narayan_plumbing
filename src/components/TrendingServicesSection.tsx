@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Flame, Sparkles } from 'lucide-react';
 
 const TRENDING_SLIDES = [
@@ -62,17 +63,31 @@ export function TrendingServicesSection() {
 
   return (
     <section className="trending-section" id="trending">
-      {/* Header */}
-      <div style={{ textAlign: 'center', marginBottom: 20, padding: '0 16px' }}>
+      {/* Header with reveal animation */}
+      <motion.div 
+        style={{ textAlign: 'center', marginBottom: 20, padding: '0 16px' }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 30 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.5 }}
+      >
         <span className="trending-kicker">
           <Flame size={14} /> Most In Demand
         </span>
         <h2 className="trending-title">TRENDING SERVICES</h2>
         <p className="trending-sub">Explore our most requested plumbing solutions in Bengaluru</p>
-      </div>
+      </motion.div>
 
-      {/* Carousel */}
-      <div className="trending-carousel-box">
+      {/* Carousel Container with zoom/fade reveal */}
+      <motion.div 
+        className="trending-carousel-box"
+        initial={{ opacity: 0, scale: 0.96, y: 30 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 30 }}
+        viewport={{ once: false, amount: 0.15 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
         <div
           className="trending-carousel-track"
           style={{ aspectRatio: `${slide.width} / ${slide.height}` }}
@@ -89,6 +104,7 @@ export function TrendingServicesSection() {
                 width={s.width} 
                 height={s.height} 
                 loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
               />
             </div>
           ))}
@@ -131,7 +147,7 @@ export function TrendingServicesSection() {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

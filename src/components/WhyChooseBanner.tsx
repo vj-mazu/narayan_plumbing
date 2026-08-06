@@ -1,72 +1,67 @@
 import { motion } from 'framer-motion';
-import { ShieldCheck, BadgeCheck, Clock, Headset } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
-const REASONS = [
-  { icon: ShieldCheck, title: 'Verified & Experienced', desc: 'Background verified professionals' },
-  { icon: BadgeCheck, title: 'Upfront Pricing', desc: 'No hidden charges, transparent pricing' },
-  { icon: Clock, title: 'On-Time Service', desc: 'Punctual & reliable service delivery' },
-  { icon: Headset, title: '24/7 Customer Support', desc: "We're here to help you anytime" },
+const BANNER_IMAGES = [
+  {
+    src: '/why-choose/why-choose-banner.webp',
+    width: 1200,
+    height: 800,
+    alt: 'Why choose Narayan Plumbing Services — fast doorstep service, verified experts, transparent pricing, quality work and warranty',
+  },
+  {
+    src: '/why-choose/brands-banner.webp',
+    width: 1200,
+    height: 800,
+    alt: 'Quality brands we work with — Jaquar, Hindware, Cera, Kohler, Grohe, Ashirvad, Supreme, Astral, Finolex and Toto',
+  },
 ];
+
+const reveal = {
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: 28 },
+  viewport: { once: false, amount: 0.15 },
+};
 
 export function WhyChooseBanner() {
   return (
-    <section className="why-choose-section" id="why-us" aria-label="Why Choose Narayan Plumbing">
+    <section className="why-choose-section" id="why-us" aria-label="Why Choose Narayan Plumbing Services">
       <div className="why-choose-container">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-        >
-          Why Choose Us?
-        </motion.h2>
-
-        {/* Banner image — renders the why-choose-banner photo */}
+        {/* Heading with reveal animation */}
         <motion.div
-          className="why-choose-banner-image"
-          initial={{ opacity: 0, y: 20 }}
+          className="why-choose-header"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          exit={{ opacity: 0, y: 24 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <img
-            src="/why-choose-banner.jpg"
-            alt="Why Choose Narayan Plumbing Services"
-            loading="lazy"
-            onError={(e) => {
-              const el = e.target as HTMLImageElement;
-              el.style.display = 'none';
-            }}
-          />
+          <span className="why-choose-kicker">
+            <Sparkles size={13} /> Why Narayan Plumbing?
+          </span>
+          <h2 className="why-choose-title">WHY CHOOSE US</h2>
+          <p className="why-choose-sub">
+            Fast, reliable and affordable — trusted by thousands of homes across Bangalore
+          </p>
         </motion.div>
 
-        <motion.div
-          className="why-choose-grid"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.12 } },
-          }}
-        >
-          {REASONS.map(({ icon: Icon, title, desc }) => (
-            <motion.div
-              key={title}
-              className="why-choose-card"
-              variants={{
-                hidden: { opacity: 0, y: 24 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-              }}
-            >
-              <div className="why-choose-icon-box">
-                <Icon size={30} strokeWidth={1.6} />
-              </div>
-              <strong>{title}</strong>
-              <span>{desc}</span>
-            </motion.div>
+        {/* Reference banner images — short & accurate, with reveal animation */}
+        <div className="why-choose-image-stack">
+          {BANNER_IMAGES.map(({ src, width, height, alt }, index) => (
+            <motion.img
+              key={src}
+              className="why-choose-banner-img"
+              src={src}
+              width={width}
+              height={height}
+              alt={alt}
+              loading="lazy"
+              decoding="async"
+              {...reveal}
+              transition={{ duration: 0.45, delay: index * 0.08, ease: 'easeOut' }}
+            />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

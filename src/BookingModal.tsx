@@ -17,8 +17,6 @@ interface FormState {
   phone: string;
   address: string;
   services: string[];
-  date: string;
-  time: string;
 }
 
 interface FormErrors {
@@ -26,8 +24,6 @@ interface FormErrors {
   phone?: string;
   address?: string;
   services?: string;
-  date?: string;
-  time?: string;
 }
 
 const initialForm: FormState = {
@@ -35,16 +31,7 @@ const initialForm: FormState = {
   phone: '',
   address: '',
   services: ['Plumbing Services'],
-  date: '',
-  time: '',
 };
-
-function formatDate(iso: string): string {
-  if (!iso) return '';
-  const d = new Date(iso + 'T00:00:00');
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', weekday: 'short' });
-}
 
 function validate(form: FormState): FormErrors {
   const errors: FormErrors = {};
@@ -68,20 +55,12 @@ function validate(form: FormState): FormErrors {
 
   // Address validation
   if (!address) {
-    errors.address = 'Address is required';
+    errors.address = 'Locality/Address is required';
   }
 
   // Service validation
   if (form.services.length === 0) {
     errors.services = 'Please select at least one service';
-  }
-
-  // Date & time validation
-  if (!form.date) {
-    errors.date = 'Choose a date';
-  }
-  if (!form.time) {
-    errors.time = 'Choose a time';
   }
 
   return errors;
@@ -150,9 +129,9 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
       phone: form.phone.trim(),
       address: form.address.trim(),
       service: form.services.join(', '),
-      date: formatDate(form.date),
-      dateISO: form.date,
-      timeSlot: form.time,
+      date: new Date().toLocaleDateString('en-IN'),
+      dateISO: new Date().toISOString().split('T')[0],
+      timeSlot: 'ASAP / Doorstep in 30 mins',
     });
 
     const whatsappMessage = [
@@ -162,9 +141,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
       `Name: ${form.name.trim()}`,
       `Phone: ${form.phone.trim()}`,
       `Selected Services: ${form.services.join(', ')}`,
-      `Date: ${formatDate(form.date)}`,
-      `Time: ${form.time}`,
-      `Address: ${form.address.trim()}`,
+      `Locality/Address: ${form.address.trim()}`,
     ].filter(Boolean).join('\n');
 
     window.location.href = `https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -173,15 +150,13 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
     confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
   };
 
-  const todayISO = new Date().toISOString().split('T')[0];
-
   const inputStyle = (hasError?: string): React.CSSProperties => ({
-    width: '100%', padding: '9px 12px', borderRadius: 8, border: hasError ? '1.5px solid #E11D48' : '1px solid #D0D5DD',
-    fontSize: '0.85rem', outline: 'none',
+    width: '100%', padding: '7px 10px', borderRadius: 8, border: hasError ? '1.5px solid #E11D48' : '1px solid #D0D5DD',
+    fontSize: '0.8rem', outline: 'none',
   });
 
   const fieldLabelStyle: React.CSSProperties = {
-    fontSize: '0.75rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 4,
+    fontSize: '0.72rem', fontWeight: 800, color: '#424242', display: 'block', marginBottom: 3,
   };
 
   return (
@@ -202,60 +177,60 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: 14,
+            padding: 10,
           }}
           onClick={close}
         >
           <motion.div
             key="panel"
-            initial={{ scale: 0.92, y: 24 }}
+            initial={{ scale: 0.94, y: 15 }}
             animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.92, y: 24 }}
+            exit={{ scale: 0.94, y: 15 }}
             transition={{ type: 'spring', stiffness: 320, damping: 26 }}
             onClick={(e) => e.stopPropagation()}
             style={{
               backgroundColor: '#FFFFFF',
-              borderRadius: 18,
+              borderRadius: 14,
               width: '100%',
-              maxWidth: 460,
-              maxHeight: '92vh',
+              maxWidth: 400,
+              maxHeight: '94vh',
               overflowY: 'auto',
               boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
               position: 'relative',
               overscrollBehavior: 'contain',
             }}
           >
-            <div style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #e8267e 100%)', color: '#FFFFFF', padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2 }}>
+            <div style={{ background: 'linear-gradient(135deg, var(--orange) 0%, #d95a00 100%)', color: '#FFFFFF', padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2 }}>
               <div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>Book a Service</h3>
-                <p style={{ fontSize: '0.7rem', color: '#FFFFFF', margin: '2px 0 0 0', opacity: 0.95 }}>Technician arrives at your doorstep in 30 mins</p>
+                <h3 style={{ fontSize: '0.95rem', fontWeight: 900, margin: 0 }}>Book a Service</h3>
+                <p style={{ fontSize: '0.65rem', color: '#FFFFFF', margin: '1px 0 0 0', opacity: 0.95 }}>Technician arrives at your doorstep in 30 mins</p>
               </div>
               <button
                 type="button"
                 onClick={close}
                 aria-label="Close booking form"
-                style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: '#FFFFFF', width: 30, height: 30, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: '#FFFFFF', width: 26, height: 26, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >
-                <X size={15} />
+                <X size={13} />
               </button>
             </div>
 
             {bookingId ? (
-              <div style={{ padding: 32, textAlign: 'center' }}>
+              <div style={{ padding: 24, textAlign: 'center' }}>
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                  style={{ width: 64, height: 64, borderRadius: '50%', backgroundColor: '#25D366', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px auto' }}
+                  style={{ width: 54, height: 54, borderRadius: '50%', backgroundColor: '#25D366', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px auto' }}
                 >
-                  <CheckCircle size={38} />
+                  <CheckCircle size={32} />
                 </motion.div>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 900, color: '#101010', margin: 0 }}>Booking Confirmed!</h3>
-                <p style={{ color: '#757575', fontSize: '0.85rem', marginTop: 8 }}>
-                  Booking ID: <strong style={{ color: '#7c3aed' }}>{bookingId}</strong>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 900, color: '#101010', margin: 0 }}>Booking Confirmed!</h3>
+                <p style={{ color: '#757575', fontSize: '0.8rem', marginTop: 6 }}>
+                  Booking ID: <strong style={{ color: 'var(--orange)' }}>{bookingId}</strong>
                 </p>
-                <p style={{ color: '#757575', fontSize: '0.85rem', marginTop: 4, lineHeight: 1.5 }}>
-                  Our master plumber will call you within 5 minutes to confirm your doorstep location.
+                <p style={{ color: '#757575', fontSize: '0.8rem', marginTop: 4, lineHeight: 1.4 }}>
+                  Our service coordinator will call you within 5 minutes to confirm your doorstep location.
                 </p>
                 <a
                   href={`tel:${PHONE_NUMBER}`}
@@ -263,27 +238,27 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 6,
-                    marginTop: 16,
-                    backgroundColor: '#7c3aed',
+                    marginTop: 12,
+                    backgroundColor: 'var(--orange)',
                     color: '#FFFFFF',
                     textDecoration: 'none',
-                    padding: '10px 18px',
-                    borderRadius: 10,
+                    padding: '8px 14px',
+                    borderRadius: 8,
                     fontWeight: 800,
-                    fontSize: '0.85rem',
+                    fontSize: '0.8rem',
                   }}
                 >
-                  <Phone size={16} /> Need help? Call us
+                  <Phone size={14} /> Need help? Call us
                 </a>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate style={{ padding: 16 }}>
+              <form onSubmit={handleSubmit} noValidate style={{ padding: 12 }}>
                 {/* Service Selection */}
-                <div style={{ marginBottom: 12 }}>
+                <div style={{ marginBottom: 8 }}>
                   <label style={fieldLabelStyle}>
-                    Select Services (Choose one or multiple) *
+                    Select Services *
                   </label>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 5, maxHeight: 180, overflowY: 'auto', border: '1px solid #D0D5DD', padding: 8, borderRadius: 8, backgroundColor: '#FAFAFA' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 4, maxHeight: 110, overflowY: 'auto', border: '1px solid #D0D5DD', padding: 6, borderRadius: 8, backgroundColor: '#FAFAFA' }}>
                     {allServicesList.map((s) => {
                       const selected = form.services.includes(s.name);
                       return (
@@ -295,32 +270,32 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            padding: '7px 9px',
+                            padding: '5px 7px',
                             borderRadius: 6,
-                            border: selected ? '2px solid #7c3aed' : '1px solid #E0E0E0',
-                            backgroundColor: selected ? '#F5F3FF' : '#FFFFFF',
+                            border: selected ? '1.5px solid var(--orange)' : '1px solid #E0E0E0',
+                            backgroundColor: selected ? '#FFF7ED' : '#FFFFFF',
                             textAlign: 'left',
                             cursor: 'pointer',
-                            fontSize: '0.78rem',
+                            fontSize: '0.72rem',
                             fontWeight: selected ? 800 : 600,
-                            color: selected ? '#7c3aed' : '#424242',
+                            color: selected ? 'var(--orange)' : '#424242',
                           }}
                         >
-                          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <Wrench size={12} style={{ flexShrink: 0, opacity: 0.7 }} />
+                          <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                            <Wrench size={10} style={{ flexShrink: 0, opacity: 0.7 }} />
                             <span>{s.name}</span>
                           </span>
-                          <span style={{ width: 17, height: 17, borderRadius: 4, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? '#7c3aed' : '#FFFFFF', borderColor: selected ? '#7c3aed' : '#BDBDBD', flexShrink: 0 }}>
-                            {selected && <Check size={11} color="#FFFFFF" />}
+                          <span style={{ width: 14, height: 14, borderRadius: 3, border: '1.5px solid #BDBDBD', display: 'grid', placeItems: 'center', backgroundColor: selected ? 'var(--orange)' : '#FFFFFF', borderColor: selected ? 'var(--orange)' : '#BDBDBD', flexShrink: 0 }}>
+                            {selected && <Check size={9} color="#FFFFFF" />}
                           </span>
                         </button>
                       );
                     })}
                   </div>
-                  {errors.services && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.services}</span>}
+                  {errors.services && <span style={{ fontSize: '0.68rem', color: '#E11D48', marginTop: 2, display: 'block' }}>{errors.services}</span>}
                 </div>
 
-                <div style={{ marginBottom: 10 }}>
+                <div style={{ marginBottom: 8 }}>
                   <label htmlFor="name" style={fieldLabelStyle}>
                     Your Full Name *
                   </label>
@@ -333,10 +308,10 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     style={inputStyle(errors.name)}
                   />
-                  {errors.name && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.name}</span>}
+                  {errors.name && <span style={{ fontSize: '0.68rem', color: '#E11D48', marginTop: 2, display: 'block' }}>{errors.name}</span>}
                 </div>
 
-                <div style={{ marginBottom: 10 }}>
+                <div style={{ marginBottom: 8 }}>
                   <label htmlFor="phone" style={fieldLabelStyle}>
                     Phone Number *
                   </label>
@@ -351,12 +326,12 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, '') })}
                     style={inputStyle(errors.phone)}
                   />
-                  {errors.phone && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.phone}</span>}
+                  {errors.phone && <span style={{ fontSize: '0.68rem', color: '#E11D48', marginTop: 2, display: 'block' }}>{errors.phone}</span>}
                 </div>
 
-                <div style={{ marginBottom: 10 }}>
+                <div style={{ marginBottom: 8 }}>
                   <label htmlFor="address" style={fieldLabelStyle}>
-                    Complete Address / Flat No. *
+                    Complete Locality / Address *
                   </label>
                   <input
                     id="address"
@@ -367,53 +342,22 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     onChange={(e) => setForm({ ...form, address: e.target.value })}
                     style={inputStyle(errors.address)}
                   />
-                  {errors.address && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.address}</span>}
-                </div>
-
-                {/* Manual date & time */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 12 }}>
-                  <div>
-                    <label htmlFor="date" style={fieldLabelStyle}>
-                      Date *
-                    </label>
-                    <input
-                      id="date"
-                      type="date"
-                      min={todayISO}
-                      value={form.date}
-                      onChange={(e) => setForm({ ...form, date: e.target.value })}
-                      style={inputStyle(errors.date)}
-                    />
-                    {errors.date && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.date}</span>}
-                  </div>
-                  <div>
-                    <label htmlFor="time" style={fieldLabelStyle}>
-                      Time *
-                    </label>
-                    <input
-                      id="time"
-                      type="time"
-                      value={form.time}
-                      onChange={(e) => setForm({ ...form, time: e.target.value })}
-                      style={inputStyle(errors.time)}
-                    />
-                    {errors.time && <span style={{ fontSize: '0.72rem', color: '#E11D48', marginTop: 3, display: 'block' }}>{errors.time}</span>}
-                  </div>
+                  {errors.address && <span style={{ fontSize: '0.68rem', color: '#E11D48', marginTop: 2, display: 'block' }}>{errors.address}</span>}
                 </div>
 
                 <button
                   type="submit"
                   style={{
                     width: '100%',
-                    backgroundColor: '#7c3aed',
+                    backgroundColor: 'var(--orange)',
                     color: '#FFFFFF',
                     border: 'none',
-                    padding: '12px',
-                    borderRadius: 10,
+                    padding: '9px',
+                    borderRadius: 8,
                     fontWeight: 900,
-                    fontSize: '0.88rem',
+                    fontSize: '0.8rem',
                     cursor: 'pointer',
-                    boxShadow: '0 4px 14px rgba(124, 58, 237, 0.4)',
+                    boxShadow: '0 4px 14px rgba(249, 115, 22, 0.3)',
                   }}
                 >
                   CONFIRM INSTANT BOOKING
@@ -426,18 +370,18 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: 8,
-                    marginTop: 8,
+                    gap: 6,
+                    marginTop: 6,
                     backgroundColor: '#101010',
                     color: '#FFFFFF',
                     textDecoration: 'none',
-                    padding: '11px',
-                    borderRadius: 10,
+                    padding: '8px',
+                    borderRadius: 8,
                     fontWeight: 800,
-                    fontSize: '0.85rem',
+                    fontSize: '0.78rem',
                   }}
                 >
-                  <Phone size={16} /> CALL NOW — {PHONE_DISPLAY}
+                  <Phone size={14} /> CALL NOW — {PHONE_DISPLAY}
                 </a>
               </form>
             )}
@@ -447,3 +391,4 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
     </AnimatePresence>
   );
 }
+
