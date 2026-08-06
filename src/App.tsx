@@ -9,7 +9,6 @@ import {
   ShieldCheck,
   Sparkles,
   Timer,
-  Wrench,
   X,
 } from 'lucide-react';
 import { WhatsAppIcon } from './components/WhatsAppIcon';
@@ -65,7 +64,14 @@ export function App() {
   if (loading) {
     return (
       <div className="page-loader" role="status" aria-label="Loading Narayan Plumbing Services">
-        <div className="loader-mark"><Wrench size={30} /><span>N</span></div>
+        <img src="/logo-emblem-new.webp" width={96} height={96} className="loader-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
+          const el = e.target as HTMLImageElement;
+          if (!el.src.endsWith('logo.webp')) {
+            el.src = '/logo.webp';
+          } else {
+            el.style.display = 'none';
+          }
+        }} />
         <strong>NARAYAN <em>PLUMBING SERVICES</em></strong>
         <div className="loader-line"><span /></div>
       </div>
