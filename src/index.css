@@ -2074,6 +2074,7 @@ img { display: block; max-width: 100%; }
   text-decoration: none;
   color: #cbd5e1;
   transition: color 0.2s ease;
+  min-width: 0;
 }
 .footer-contact-link:hover {
   color: #f97316;
@@ -2100,15 +2101,18 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   text-align: left;
+  min-width: 0;
 }
 .contact-text-box strong {
   font-size: 0.9rem;
   color: #ffffff;
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
 .contact-text-box span {
   font-size: 0.72rem;
   color: #94a3b8;
+  overflow-wrap: anywhere;
 }
 
 .footer-need-help-card {

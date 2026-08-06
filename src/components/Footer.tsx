@@ -96,7 +96,7 @@ export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
                 <Phone size={16} />
               </div>
               <div className="contact-text-box">
-                <strong>+91 {PHONE_DISPLAY}</strong>
+                <strong>{PHONE_DISPLAY}</strong>
                 <span>Call or WhatsApp</span>
               </div>
             </a>
