@@ -5,7 +5,6 @@ import {
   Home,
   LayoutGrid,
   Menu,
-  MessageCircle,
   Phone,
   ShieldCheck,
   Sparkles,
@@ -13,6 +12,7 @@ import {
   Wrench,
   X,
 } from 'lucide-react';
+import { WhatsAppIcon } from './components/WhatsAppIcon';
 import BookingModal from './BookingModal';
 import {
   CORE_SERVICES,
@@ -189,13 +189,13 @@ export function App() {
           <CalendarCheck size={22} /><span>Book</span>
         </button>
         <a
-          className="bottom-nav-item"
+          className="bottom-nav-item whatsapp-nav-item"
           href={`https://wa.me/91${PHONE_NUMBER}?text=${encodeURIComponent('Hi Narayan Plumbing Services, I need plumbing service.')}`}
           target="_blank"
           rel="noreferrer"
           aria-label="WhatsApp"
         >
-          <MessageCircle size={22} /><span>WhatsApp</span>
+          <WhatsAppIcon size={22} /><span>WhatsApp</span>
         </a>
       </nav>
 
