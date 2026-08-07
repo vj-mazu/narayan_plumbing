@@ -33,7 +33,7 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
           return (
             <div
               key={service.id}
-              className="service-framed-card"
+              className={`service-framed-card card-${service.id}`}
               onClick={() => onBookNow(service.name)}
             >
               <div className="service-framed-image-box">
@@ -52,7 +52,7 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
                     else if (service.id === 'painting') target.src = '/service-icons/painting.webp';
                     else if (service.id === 'tiles') target.src = '/service-icons/tiles.webp';
                     else if (service.id === 'civil') target.src = '/service-icons/civil.webp';
-                    else if (service.id === 'cleaning') target.src = '/hero-cleaning.webp';
+                    else if (service.id === 'cleaning') target.src = '/service-icons/civil.webp';
                     else if (service.id === 'home-renovation') target.src = '/work-interior-living.webp';
                     else if (service.id === 'home-maintenance') target.src = '/hero/banner-1.webp';
                     else target.src = '/service-icons/construction.webp';

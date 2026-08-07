@@ -1146,22 +1146,31 @@ img { display: block; max-width: 100%; }
   justify-content: center;
 }
 .service-framed-image-box img {
-  width: 120%;
-  height: 120%;
+  width: 124%;
+  height: 124%;
   max-width: none;
   object-fit: cover;
   display: block;
   pointer-events: none;
 }
+.card-painting .service-framed-image-box img {
+  object-position: center 20%;
+}
+.card-tiles .service-framed-image-box img {
+  object-position: center 20%;
+}
+.card-home-maintenance .service-framed-image-box img {
+  object-position: center top;
+}
 
 .service-framed-label-banner {
   background: #0a1840;
   padding: 14px 16px;
-  text-align: left;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
   border-top: 4px solid #f97316;
 }
@@ -1173,6 +1182,7 @@ img { display: block; max-width: 100%; }
   line-height: 1.2;
   letter-spacing: 0.02em;
   width: 100%;
+  text-align: center;
 }
 .service-framed-sub {
   display: block;
@@ -1229,35 +1239,53 @@ img { display: block; max-width: 100%; }
   }
   .service-framed-card {
     border-width: 2px;
-    border-radius: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   }
   .service-framed-image-box {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1.25 / 1;
+    overflow: hidden;
+  }
+  .service-framed-image-box img {
+    width: 132%;
+    height: 132%;
+    object-fit: cover;
+  }
+  .card-painting .service-framed-image-box img {
+    object-position: center 20%;
+  }
+  .card-tiles .service-framed-image-box img {
+    object-position: center 20%;
+  }
+  .card-home-maintenance .service-framed-image-box img {
+    object-position: center top;
   }
   .service-framed-label-banner {
-    padding: 10px 8px;
+    padding: 6px 4px 8px;
     border-top-width: 2px;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 8px;
+    gap: 4px;
   }
   .service-framed-title {
-    font-size: 0.68rem;
+    font-size: 0.58rem;
     letter-spacing: 0.01em;
-    line-height: 1.2;
+    line-height: 1.15;
     white-space: normal;
     text-align: center;
   }
   .service-framed-sub {
     display: block;
     margin-left: 0;
-    font-size: 0.95em;
+    margin-top: 1px;
+    font-size: 0.85em;
   }
   .service-book-btn {
-    padding: 4px 10px;
-    font-size: 0.58rem;
+    padding: 3px 8px;
+    font-size: 0.52rem;
     width: auto;
+    margin-top: 2px;
   }
   .quick-help-carousel .services-scroll-prev {
     left: 2px;
