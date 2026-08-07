@@ -47,10 +47,10 @@ const QUICK_SERVICES = [
   {
     id: 'cleaning',
     label: 'Cleaning Services',
-    image: '/service-card-cleaning.png',
+    image: '/service-card-cleaning.webp',
     width: 900,
     height: 900,
-    fallbackImg: '/service-card-cleaning.png',
+    fallbackImg: '/service-card-cleaning.webp',
     icon: Sparkles
   },
   {

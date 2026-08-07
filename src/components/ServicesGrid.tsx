@@ -92,7 +92,7 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
                     else if (service.id === 'painting') target.src = '/service-icons/painting.webp';
                     else if (service.id === 'tiles') target.src = '/service-icons/tiles.webp';
                     else if (service.id === 'civil') target.src = '/service-icons/civil.webp';
-                    else if (service.id === 'cleaning') target.src = '/service-card-cleaning.png';
+                    else if (service.id === 'cleaning') target.src = '/service-card-cleaning.webp';
                     else if (service.id === 'home-renovation') target.src = '/work-interior-living.webp';
                     else if (service.id === 'home-maintenance') target.src = '/hero/banner-1.webp';
                     else target.src = '/service-icons/construction.webp';
