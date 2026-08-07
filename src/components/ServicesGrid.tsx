@@ -79,8 +79,8 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
               <div className="service-framed-image-box">
                 <img
                   src={service.icon}
-                  width={900}
-                  height={900}
+                  width={360}
+                  height={360}
                   alt={service.name}
                   loading="lazy"
                   decoding="async"
