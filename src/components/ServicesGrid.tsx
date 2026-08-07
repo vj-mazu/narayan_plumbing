@@ -108,7 +108,15 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
                 {/* Floating Round Service Icon */}
                 <div className="service-floating-circle-icon">
                   <div className="circle-icon-inner">
-                    <IconComponent size={20} color="#ffffff" strokeWidth={2.5} />
+                    {service.id === 'ceiling' ? (
+                      <img 
+                        src="/service-icons/icons8-ceiling-light-50-2.png" 
+                        alt="Ceiling Light Icon" 
+                        style={{ width: '22px', height: '22px', filter: 'brightness(0) invert(1)' }} 
+                      />
+                    ) : (
+                      <IconComponent size={20} color="#ffffff" strokeWidth={2.5} />
+                    )}
                   </div>
                 </div>
 
