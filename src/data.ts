@@ -12,7 +12,7 @@ export const CORE_SERVICES: Service[] = [
   { id: 'electrical', name: 'Electrical Work', icon: '/service-card-electrical.webp', desc: 'WORK' },
   { id: 'ceiling', name: 'False Ceiling Work', icon: '/service-card-ceiling.webp', desc: 'WORK' },
   { id: 'construction', name: 'Construction Work', icon: '/service-card-construction.webp', desc: 'WORK' },
-  { id: 'interior', name: 'Interior Design', icon: '/service-card-interior.webp', desc: 'WORK' },
+  { id: 'interior', name: 'Interior Design', icon: '/service-card-interior.webp', desc: 'DESIGN' },
   { id: 'home-renovation', name: 'Home Renovation', icon: '/service-card-home-renovation.webp', desc: 'RENOVATION' },
   { id: 'carpenter', name: 'Carpenter Work', icon: '/service-card-carpenter.webp', desc: 'WORK' },
   { id: 'home-maintenance', name: 'Home Maintenance', icon: '/service-card-home-maintenance.webp', desc: 'MAINTENANCE' },

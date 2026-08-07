@@ -1,4 +1,18 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { 
+  ChevronLeft, 
+  ChevronRight,
+  Wrench,
+  HardHat,
+  Bath,
+  Sparkles,
+  Paintbrush,
+  Layers,
+  Zap,
+  Compass,
+  Building,
+  Home,
+  Hammer
+} from 'lucide-react';
 import { PHONE_NUMBER } from '../types';
 import { useHorizontalScroll } from '../hooks/useHorizontalScroll';
 
@@ -10,6 +24,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 1599,
     fallbackImg: '/hero/banner-2.webp',
+    icon: Wrench
   },
   {
     id: 'civil',
@@ -18,6 +33,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 900,
     fallbackImg: '/service-icons/civil.webp',
+    icon: HardHat
   },
   {
     id: 'bathroom',
@@ -26,14 +42,16 @@ const QUICK_SERVICES = [
     width: 900,
     height: 1350,
     fallbackImg: '/hero/banner-1.webp',
+    icon: Bath
   },
   {
     id: 'cleaning',
     label: 'Cleaning Services',
-    image: '/service-card-cleaning.webp',
+    image: '/service-card-cleaning.png',
     width: 900,
     height: 900,
-    fallbackImg: '/hero-cleaning.webp',
+    fallbackImg: '/service-card-cleaning.png',
+    icon: Sparkles
   },
   {
     id: 'painting',
@@ -42,6 +60,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 1599,
     fallbackImg: '/hero/banner-1.webp',
+    icon: Paintbrush
   },
   {
     id: 'tiles',
@@ -50,6 +69,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 900,
     fallbackImg: '/service-icons/tiles.webp',
+    icon: Layers
   },
   {
     id: 'electrical',
@@ -58,6 +78,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 900,
     fallbackImg: '/service-icons/construction.webp',
+    icon: Zap
   },
   {
     id: 'ceiling',
@@ -66,6 +87,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 900,
     fallbackImg: '/service-icons/construction.webp',
+    icon: Compass
   },
   {
     id: 'construction',
@@ -74,6 +96,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 900,
     fallbackImg: '/service-icons/construction.webp',
+    icon: Building
   },
   {
     id: 'interior',
@@ -82,6 +105,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 1352,
     fallbackImg: '/hero/banner-1.webp',
+    icon: Home
   },
   {
     id: 'home-renovation',
@@ -90,6 +114,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 900,
     fallbackImg: '/work-interior-living.webp',
+    icon: Sparkles
   },
   {
     id: 'carpenter',
@@ -98,14 +123,7 @@ const QUICK_SERVICES = [
     width: 900,
     height: 900,
     fallbackImg: '/work-ceiling-cove.webp',
-  },
-  {
-    id: 'home-maintenance',
-    label: 'Home Maintenance',
-    image: '/service-card-home-maintenance.webp',
-    width: 900,
-    height: 900,
-    fallbackImg: '/hero/banner-1.webp',
+    icon: Hammer
   },
 ];
 
@@ -147,34 +165,37 @@ export function QuickHelpSection() {
           onPointerCancel={endDrag}
           onPointerLeave={endDrag}
         >
-          {QUICK_SERVICES.map((s) => (
-            <button
-              key={s.id}
-              className="quick-help-photo-card"
-              onClick={() => {
-                if (wasDragged()) return;
-                openCall(s.label);
-              }}
-              type="button"
-              aria-label={`Get help with ${s.label}`}
-            >
-              <div className="quick-help-image-wrapper">
-                <img
-                  src={s.image}
-                  width={s.width}
-                  height={s.height}
-                  alt={s.label}
-                  loading="lazy"
-                  decoding="async"
-                  draggable={false}
-                  onError={(e) => {
-                    e.currentTarget.src = s.fallbackImg;
-                  }}
-                />
-              </div>
-              <span className="quick-help-card-label">{s.label}</span>
-            </button>
-          ))}
+          {QUICK_SERVICES.map((s) => {
+            const IconComponent = s.icon;
+            return (
+              <button
+                key={s.id}
+                className="quick-help-photo-card"
+                onClick={() => {
+                  if (wasDragged()) return;
+                  openCall(s.label);
+                }}
+                type="button"
+                aria-label={`Get help with ${s.label}`}
+              >
+                <div className="quick-help-image-wrapper">
+                  <img
+                    src={s.image}
+                    width={s.width}
+                    height={s.height}
+                    alt={s.label}
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                    onError={(e) => {
+                      e.currentTarget.src = s.fallbackImg;
+                    }}
+                  />
+                </div>
+                <span className="quick-help-card-label">{s.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         <button

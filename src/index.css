@@ -1004,6 +1004,38 @@ img { display: block; max-width: 100%; }
   display: block;
 }
 
+/* Quick help card floating icon overlay */
+.quick-help-floating-icon {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #061443;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+.quick-help-circle-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Rating badge alignment specific to quick help */
+.quick-help-rating {
+  top: 6px !important;
+  right: 6px !important;
+  padding: 2px 5px !important;
+  font-size: 0.55rem !important;
+  border-radius: 4px !important;
+}
+
 .quick-help-card-label {
   font-size: 0.88rem;
   font-weight: 800;
@@ -1043,6 +1075,22 @@ img { display: block; max-width: 100%; }
     -webkit-box-orient: vertical;
     overflow: hidden;
     min-height: 0.99em;
+  }
+  .quick-help-floating-icon {
+    width: 20px;
+    height: 20px;
+    border-width: 1.5px;
+  }
+  .quick-help-floating-icon svg {
+    width: 10px;
+    height: 10px;
+  }
+  .quick-help-rating {
+    top: 3px !important;
+    right: 3px !important;
+    padding: 1px 3px !important;
+    font-size: 0.38rem !important;
+    border-radius: 2px !important;
   }
 }
 .services-grid-section {
@@ -1115,35 +1163,57 @@ img { display: block; max-width: 100%; }
 }
 
 .service-framed-card {
-  /* Single clean orange frame — no more navy+orange double border */
-  border: 4px solid #f97316;
-  background: #f97316;
-  border-radius: 24px;
+  border: 4px solid #ffffff;
+  background: #ffffff;
+  border-radius: 28px;
   outline: none;
   padding: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  text-align: left;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 12px 28px rgba(10, 25, 78, 0.12);
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   position: relative;
   cursor: pointer;
   width: 100%;
 }
 .service-framed-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(249, 115, 22, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Rating badge overlay on top right */
+.service-rating-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background: rgba(10, 25, 78, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+.service-rating-badge .star-icon {
+  color: #f59e0b;
 }
 
 .service-framed-image-box {
   width: 100%;
-  aspect-ratio: 1.1 / 1;
+  aspect-ratio: 1.15 / 1;
   overflow: hidden;
-  background: transparent;
+  background: #f8fafc;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .service-framed-image-box img {
   width: 124%;
@@ -1159,38 +1229,86 @@ img { display: block; max-width: 100%; }
 .card-tiles .service-framed-image-box img {
   object-position: center 20%;
 }
-.card-home-maintenance .service-framed-image-box img {
+.card-cleaning .service-framed-image-box img {
+  object-position: center top;
+}
+.card-home-renovation .service-framed-image-box img {
   object-position: center top;
 }
 
+/* Styled Banner Container with dynamic wave/curve separation */
 .service-framed-label-banner {
-  background: #0a1840;
-  padding: 14px 16px;
+  padding: 38px 16px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  border-top: 4px solid #f97316;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  margin-top: -1px;
 }
+
+/* Curve separator styling */
+.service-banner-curve {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  width: 100%;
+  height: 26px;
+  background: inherit;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  z-index: 1;
+}
+
+/* Floating Round Service Icon */
+.service-floating-circle-icon {
+  position: absolute;
+  top: -46px;
+  left: 18px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: inherit;
+  border: 4px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.circle-icon-inner {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .service-framed-title {
   margin: 0;
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-size: 1.05rem;
   font-weight: 900;
   color: #ffffff;
-  line-height: 1.2;
+  line-height: 1.15;
   letter-spacing: 0.02em;
   width: 100%;
   text-align: center;
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .service-framed-sub {
   display: block;
   margin-left: 0;
-  margin-top: 4px;
-  font-size: 0.85em;
-  font-weight: 800;
-  color: #f97316;
+  margin-top: 2px;
+  font-size: 0.72em;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1;
   letter-spacing: 0.04em;
   font-style: normal;
@@ -1202,19 +1320,131 @@ img { display: block; max-width: 100%; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 18px;
+  padding: 6px 20px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #fb923c, #f97316);
-  color: #ffffff;
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
   line-height: 1;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
   cursor: pointer;
   transition: all 0.2s ease;
-  width: 100%;
+  width: auto;
   border: none;
+  margin-top: 6px;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+.service-book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Color Theme Modifications for cards */
+.card-plumbing .service-framed-label-banner,
+.card-plumbing .service-floating-circle-icon {
+  background: linear-gradient(135deg, #093175 0%, #001a4e 100%);
+  border-color: #ffffff;
+}
+.card-plumbing .service-rating-badge {
+  background: rgba(9, 49, 117, 0.85);
+}
+
+.card-civil .service-framed-label-banner,
+.card-civil .service-floating-circle-icon {
+  background: linear-gradient(135deg, #cc7000 0%, #994c00 100%);
+}
+.card-civil .service-rating-badge {
+  background: rgba(204, 112, 0, 0.85);
+}
+
+.card-bathroom .service-framed-label-banner,
+.card-bathroom .service-floating-circle-icon {
+  background: linear-gradient(135deg, #581c87 0%, #3b0764 100%);
+}
+.card-bathroom .service-rating-badge {
+  background: rgba(88, 28, 135, 0.85);
+}
+
+.card-cleaning .service-framed-label-banner,
+.card-cleaning .service-floating-circle-icon {
+  background: linear-gradient(135deg, #15803d 0%, #14532d 100%);
+}
+.card-cleaning .service-rating-badge {
+  background: rgba(21, 128, 61, 0.85);
+}
+
+.card-painting .service-framed-label-banner,
+.card-painting .service-floating-circle-icon {
+  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+}
+.card-painting .service-rating-badge {
+  background: rgba(185, 28, 28, 0.85);
+}
+
+.card-tiles .service-framed-label-banner,
+.card-tiles .service-floating-circle-icon {
+  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+}
+.card-tiles .service-rating-badge {
+  background: rgba(15, 118, 110, 0.85);
+}
+
+.card-electrical .service-framed-label-banner,
+.card-electrical .service-floating-circle-icon {
+  background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+}
+.card-electrical .service-rating-badge {
+  background: rgba(30, 58, 138, 0.85);
+}
+
+.card-ceiling .service-framed-label-banner,
+.card-ceiling .service-floating-circle-icon {
+  background: linear-gradient(135deg, #6b21a8 0%, #581c87 100%);
+}
+.card-ceiling .service-rating-badge {
+  background: rgba(107, 33, 168, 0.85);
+}
+
+.card-construction .service-framed-label-banner,
+.card-construction .service-floating-circle-icon {
+  background: linear-gradient(135deg, #c2410c 0%, #7c2d12 100%);
+}
+.card-construction .service-rating-badge {
+  background: rgba(194, 65, 12, 0.85);
+}
+
+.card-interior .service-framed-label-banner,
+.card-interior .service-floating-circle-icon {
+  background: linear-gradient(135deg, #a16207 0%, #713f12 100%);
+}
+.card-interior .service-rating-badge {
+  background: rgba(161, 98, 7, 0.85);
+}
+
+.card-home-renovation .service-framed-label-banner,
+.card-home-renovation .service-floating-circle-icon {
+  background: linear-gradient(135deg, #166534 0%, #14532d 100%);
+}
+.card-home-renovation .service-rating-badge {
+  background: rgba(22, 101, 52, 0.85);
+}
+
+.card-carpenter .service-framed-label-banner,
+.card-carpenter .service-floating-circle-icon {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+}
+.card-carpenter .service-rating-badge {
+  background: rgba(3, 105, 161, 0.85);
+}
+
+.card-home-maintenance .service-framed-label-banner,
+.card-home-maintenance .service-floating-circle-icon {
+  background: linear-gradient(135deg, #0a194e 0%, #061033 100%);
+}
+.card-home-maintenance .service-rating-badge {
+  background: rgba(10, 25, 78, 0.85);
 }
 .service-book-btn:hover {
   transform: translateY(-2px);
@@ -1252,24 +1482,54 @@ img { display: block; max-width: 100%; }
     object-fit: cover;
   }
   .card-painting .service-framed-image-box img {
-    object-position: center 20%;
+    object-position: center 36%;
   }
   .card-tiles .service-framed-image-box img {
-    object-position: center 20%;
+    object-position: center 38%;
   }
-  .card-home-maintenance .service-framed-image-box img {
+  .card-electrical .service-framed-image-box img {
+    object-position: center 30%;
+  }
+  .card-construction .service-framed-image-box img {
     object-position: center top;
   }
+  .card-cleaning .service-framed-image-box img {
+    object-position: center top;
+  }
+  .card-home-renovation .service-framed-image-box img {
+    object-position: center top;
+  }
+  .service-rating-badge {
+    top: 6px;
+    left: 6px;
+    right: auto;
+    padding: 2px 5px;
+    font-size: 0.52rem;
+    border-radius: 4px;
+  }
   .service-framed-label-banner {
-    padding: 6px 4px 8px;
-    border-top-width: 2px;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 4px;
+    padding: 16px 4px 10px;
+    border-top-width: 0;
+    gap: 2px;
+  }
+  .service-banner-curve {
+    top: -12px;
+    height: 14px;
+  }
+  .service-floating-circle-icon {
+    top: -24px;
+    left: 8px;
+    width: 28px;
+    height: 28px;
+    border-width: 2px;
+  }
+  .circle-icon-inner {
+    width: 12px;
+    height: 12px;
+    border-width: 1px;
   }
   .service-framed-title {
-    font-size: 0.58rem;
+    font-size: 0.52rem;
     letter-spacing: 0.01em;
     line-height: 1.15;
     white-space: normal;
@@ -1279,13 +1539,13 @@ img { display: block; max-width: 100%; }
     display: block;
     margin-left: 0;
     margin-top: 1px;
-    font-size: 0.85em;
+    font-size: 0.72em;
   }
   .service-book-btn {
-    padding: 3px 8px;
-    font-size: 0.52rem;
+    padding: 3px 10px;
+    font-size: 0.48rem;
     width: auto;
-    margin-top: 2px;
+    margin-top: 4px;
   }
   .quick-help-carousel .services-scroll-prev {
     left: 2px;
