@@ -1235,6 +1235,11 @@ img { display: block; max-width: 100%; }
 .card-home-renovation .service-framed-image-box img {
   object-position: center top;
 }
+.card-home-maintenance .service-framed-image-box img {
+  width: 100%;
+  height: 100%;
+  object-position: center top;
+}
 
 /* Styled Banner Container with dynamic wave/curve separation */
 .service-framed-label-banner {
@@ -1497,6 +1502,11 @@ img { display: block; max-width: 100%; }
     object-position: center top;
   }
   .card-home-renovation .service-framed-image-box img {
+    object-position: center top;
+  }
+  .card-home-maintenance .service-framed-image-box img {
+    width: 100%;
+    height: 100%;
     object-position: center top;
   }
   .service-rating-badge {
