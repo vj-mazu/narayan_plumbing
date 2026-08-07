@@ -1500,12 +1500,7 @@ img { display: block; max-width: 100%; }
     object-position: center top;
   }
   .service-rating-badge {
-    top: 6px;
-    left: 6px;
-    right: auto;
-    padding: 2px 5px;
-    font-size: 0.52rem;
-    border-radius: 4px;
+    display: none;
   }
   .service-framed-label-banner {
     padding: 16px 4px 10px;
@@ -1518,15 +1513,22 @@ img { display: block; max-width: 100%; }
   }
   .service-floating-circle-icon {
     top: -24px;
-    left: 8px;
-    width: 28px;
-    height: 28px;
-    border-width: 2px;
+    left: 14px;
+    width: 32px;
+    height: 32px;
+    border-width: 2.5px;
   }
   .circle-icon-inner {
+    width: 20px;
+    height: 20px;
+    border-width: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .circle-icon-inner svg {
     width: 12px;
     height: 12px;
-    border-width: 1px;
   }
   .service-framed-title {
     font-size: 0.52rem;
