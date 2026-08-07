@@ -85,17 +85,6 @@ export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
                 <span>Mon - Sun : Open 24 Hours</span>
               </div>
             </div>
-            
-            <div className="footer-need-help-card">
-              <div className="contact-icon-box orange-fill">
-                <Phone size={18} />
-              </div>
-              <div className="help-card-text">
-                <span className="help-tag">Need Immediate Help?</span>
-                <a href={`tel:${PHONE_NUMBER}`} className="help-phone">{PHONE_DISPLAY}</a>
-                <span className="help-tag">We're Available 24x7</span>
-              </div>
-            </div>
           </div>
         </div>
 
