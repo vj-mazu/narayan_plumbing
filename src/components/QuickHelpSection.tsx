@@ -1,130 +1,25 @@
-import { 
-  ChevronLeft, 
+import {
+  ChevronLeft,
   ChevronRight,
-  Wrench,
-  HardHat,
-  Bath,
-  Sparkles,
-  Paintbrush,
-  Layers,
-  Zap,
-  Compass,
-  Building,
-  Home,
-  Hammer
 } from 'lucide-react';
 import { PHONE_NUMBER } from '../types';
 import { useHorizontalScroll } from '../hooks/useHorizontalScroll';
 
+// Order MUST match CORE_SERVICES in src/data.ts (same sequence as the “Our Services” grid)
 const QUICK_SERVICES = [
-  {
-    id: 'plumbing',
-    label: 'Plumbing Services',
-    image: '/hero-plumbing.webp',
-    width: 900,
-    height: 1599,
-    fallbackImg: '/hero/banner-2.webp',
-    icon: Wrench
-  },
-  {
-    id: 'civil',
-    label: 'Civil Work',
-    image: '/service-card-civil.webp',
-    width: 900,
-    height: 900,
-    fallbackImg: '/service-icons/civil.webp',
-    icon: HardHat
-  },
-  {
-    id: 'bathroom',
-    label: 'Bathroom Renovation',
-    image: '/hero-bathroom.webp',
-    width: 900,
-    height: 1350,
-    fallbackImg: '/hero/banner-1.webp',
-    icon: Bath
-  },
-  {
-    id: 'cleaning',
-    label: 'Cleaning Services',
-    image: '/service-card-cleaning.webp',
-    width: 900,
-    height: 900,
-    fallbackImg: '/service-card-cleaning.webp',
-    icon: Sparkles
-  },
-  {
-    id: 'painting',
-    label: 'Painting Services',
-    image: '/hero-painting.webp',
-    width: 900,
-    height: 1599,
-    fallbackImg: '/hero/banner-1.webp',
-    icon: Paintbrush
-  },
-  {
-    id: 'tiles',
-    label: 'Tiles & Granite Works',
-    image: '/service-card-tiles.webp',
-    width: 900,
-    height: 900,
-    fallbackImg: '/service-icons/tiles.webp',
-    icon: Layers
-  },
-  {
-    id: 'electrical',
-    label: 'Electrical Work',
-    image: '/service-card-electrical.webp',
-    width: 900,
-    height: 900,
-    fallbackImg: '/service-icons/construction.webp',
-    icon: Zap
-  },
-  {
-    id: 'ceiling',
-    label: 'False Ceiling Work',
-    image: '/service-card-ceiling.webp',
-    width: 900,
-    height: 900,
-    fallbackImg: '/service-icons/construction.webp',
-    icon: Compass
-  },
-  {
-    id: 'construction',
-    label: 'Construction Work',
-    image: '/service-card-construction.webp',
-    width: 900,
-    height: 900,
-    fallbackImg: '/service-icons/construction.webp',
-    icon: Building
-  },
-  {
-    id: 'interior',
-    label: 'Interior Design',
-    image: '/hero-interior.webp',
-    width: 900,
-    height: 1352,
-    fallbackImg: '/hero/banner-1.webp',
-    icon: Home
-  },
-  {
-    id: 'home-renovation',
-    label: 'Home Renovation',
-    image: '/service-card-home-renovation.webp',
-    width: 900,
-    height: 900,
-    fallbackImg: '/work-interior-living.webp',
-    icon: Sparkles
-  },
-  {
-    id: 'carpenter',
-    label: 'Carpenter Work',
-    image: '/service-card-carpenter.webp',
-    width: 900,
-    height: 900,
-    fallbackImg: '/work-ceiling-cove.webp',
-    icon: Hammer
-  },
+  { id: 'plumbing', label: 'Plumbing Services', image: '/quick-help/plumbing.webp', width: 480, height: 480 },
+  { id: 'civil', label: 'Civil Work', image: '/quick-help/civil.webp', width: 480, height: 480 },
+  { id: 'bathroom', label: 'Bathroom Renovation', image: '/quick-help/bathroom.webp', width: 480, height: 480 },
+  { id: 'cleaning', label: 'Cleaning Services', image: '/quick-help/cleaning.webp', width: 480, height: 480 },
+  { id: 'painting', label: 'Painting Services', image: '/quick-help/painting.webp', width: 480, height: 480 },
+  { id: 'tiles', label: 'Tiles & Granite Works', image: '/quick-help/tiles.webp', width: 480, height: 480 },
+  { id: 'electrical', label: 'Electrical Work', image: '/quick-help/electrical.webp', width: 480, height: 480 },
+  { id: 'ceiling', label: 'False Ceiling Work', image: '/quick-help/ceiling.webp', width: 480, height: 480 },
+  { id: 'construction', label: 'Construction Work', image: '/quick-help/construction.webp', width: 480, height: 480 },
+  { id: 'interior', label: 'Interior Design', image: '/quick-help/interior.webp', width: 480, height: 480 },
+  { id: 'home-renovation', label: 'Home Renovation', image: '/quick-help/home-renovation.webp', width: 480, height: 480 },
+  { id: 'carpenter', label: 'Carpenter Work', image: '/quick-help/carpenter.webp', width: 480, height: 480 },
+  { id: 'home-maintenance', label: 'Home Maintenance', image: '/quick-help/home-maintenance.webp', width: 480, height: 480 },
 ];
 
 export function QuickHelpSection() {
@@ -165,37 +60,31 @@ export function QuickHelpSection() {
           onPointerCancel={endDrag}
           onPointerLeave={endDrag}
         >
-          {QUICK_SERVICES.map((s) => {
-            const IconComponent = s.icon;
-            return (
-              <button
-                key={s.id}
-                className="quick-help-photo-card"
-                onClick={() => {
-                  if (wasDragged()) return;
-                  openCall(s.label);
-                }}
-                type="button"
-                aria-label={`Get help with ${s.label}`}
-              >
-                <div className="quick-help-image-wrapper">
-                  <img
-                    src={s.image}
-                    width={s.width}
-                    height={s.height}
-                    alt={s.label}
-                    loading="lazy"
-                    decoding="async"
-                    draggable={false}
-                    onError={(e) => {
-                      e.currentTarget.src = s.fallbackImg;
-                    }}
-                  />
-                </div>
-                <span className="quick-help-card-label">{s.label}</span>
-              </button>
-            );
-          })}
+          {QUICK_SERVICES.map((s) => (
+            <button
+              key={s.id}
+              className="quick-help-photo-card"
+              onClick={() => {
+                if (wasDragged()) return;
+                openCall(s.label);
+              }}
+              type="button"
+              aria-label={`Get help with ${s.label}`}
+            >
+              <div className="quick-help-image-wrapper">
+                <img
+                  src={s.image}
+                  width={s.width}
+                  height={s.height}
+                  alt={s.label}
+                  loading="lazy"
+                  decoding="async"
+                  draggable={false}
+                />
+              </div>
+              <span className="quick-help-card-label">{s.label}</span>
+            </button>
+          ))}
         </div>
 
         <button
