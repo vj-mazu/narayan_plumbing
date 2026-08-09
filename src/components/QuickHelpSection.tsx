@@ -26,13 +26,45 @@ const QUICK_SERVICES = [
 export function QuickHelpSection() {
   const { trackRef, scrollBy, onPointerDown, onPointerMove, endDrag, wasDragged } = useHorizontalScroll();
   const autoScrollTimer = useRef<number | null>(null);
+  const rafRef = useRef<number | null>(null);
+
+  const cancelAnimation = useCallback(() => {
+    if (rafRef.current != null) {
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+  }, []);
 
   const stopAutoScroll = useCallback(() => {
+    cancelAnimation();
     if (autoScrollTimer.current != null) {
       window.clearInterval(autoScrollTimer.current);
       autoScrollTimer.current = null;
     }
-  }, []);
+  }, [cancelAnimation]);
+
+  // Manually animate scrollLeft with requestAnimationFrame. Native
+  // scrollBy({ behavior: 'smooth' }) is unreliable inside a scroll-snap
+  // container on real mobile browsers (esp. iOS Safari), so we drive the
+  // scroll position ourselves frame-by-frame — works everywhere.
+  const animateTo = useCallback((el: HTMLElement, target: number, duration = 600) => {
+    cancelAnimation();
+    const start = el.scrollLeft;
+    const diff = target - start;
+    if (Math.abs(diff) < 1) return;
+    const t0 = performance.now();
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+    const tick = (now: number) => {
+      const p = Math.min((now - t0) / duration, 1);
+      el.scrollLeft = start + diff * easeOut(p);
+      if (p < 1) {
+        rafRef.current = window.requestAnimationFrame(tick);
+      } else {
+        rafRef.current = null;
+      }
+    };
+    rafRef.current = window.requestAnimationFrame(tick);
+  }, [cancelAnimation]);
 
   // On mobile the arrow buttons are hidden, so the carousel moves by itself.
   // The viewport check runs on every tick so resizing/rotating also works.
@@ -49,12 +81,12 @@ export function QuickHelpSection() {
       const maxScroll = track.scrollWidth - track.clientWidth;
       if (maxScroll <= 0) return;
       if (track.scrollLeft >= maxScroll - 4) {
-        track.scrollTo({ left: 0, behavior: 'smooth' });
+        animateTo(track, 0);
       } else {
-        track.scrollBy({ left: step, behavior: 'smooth' });
+        animateTo(track, Math.min(track.scrollLeft + step, maxScroll));
       }
-    }, 1700);
-  }, [stopAutoScroll]);
+    }, 2100);
+  }, [stopAutoScroll, animateTo]);
 
   useEffect(() => {
     startAutoScroll();
