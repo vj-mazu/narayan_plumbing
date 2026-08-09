@@ -2047,7 +2047,7 @@ img { display: block; max-width: 100%; }
   } .brand-lockup strong {
     font-size: 0.72rem;
   } .brand-lockup b {
-    display: none;
+    display: block;
     font-size: 0.58rem;
   } .brand-lockup small {
     font-size: 0.55rem;
