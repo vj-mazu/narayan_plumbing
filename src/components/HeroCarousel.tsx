@@ -262,6 +262,8 @@ export function HeroCarousel({ onBookNow, autoRotateInterval = 7000 }: HeroCarou
               <img
                 key={s.id}
                 src={s.image}
+                srcSet={`${s.image.replace('.webp', '-320.webp')} 320w, ${s.image.replace('.webp', '-640.webp')} 640w, ${s.image} 900w`}
+                sizes="(max-width: 768px) 148px, 600px"
                 width={s.imageWidth}
                 height={s.imageHeight}
                 alt={s.imageAlt}

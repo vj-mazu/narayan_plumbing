@@ -70,6 +70,8 @@ export function RecentlyCompletedProjects() {
               <div className="project-photo-box">
                 <img
                   src={project.src}
+                  srcSet={`${project.src.replace('.webp', '-360.webp')} 360w, ${project.src} 900w`}
+                  sizes="(max-width: 576px) 50vw, 280px"
                   width={900}
                   height={720}
                   alt={project.title}

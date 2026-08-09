@@ -30,6 +30,8 @@ export function ServicesGrid({ services, onBookNow }: ServicesGridProps) {
             <div className="service-framed-image-box">
               <img
                 src={service.icon}
+                srcSet={`${service.icon.replace('.webp', '-240.webp')} 240w, ${service.icon.replace('.webp', '-480.webp')} 480w, ${service.icon} 700w`}
+                sizes="(max-width: 640px) 33vw, 380px"
                 width={700}
                 height={997}
                 alt={service.name}

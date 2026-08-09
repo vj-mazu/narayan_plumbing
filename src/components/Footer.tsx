@@ -222,7 +222,7 @@ export function Footer({ onScrollTo, onBook, onLegal }: FooterProps) {
       <div className="footer-middle-block">
         <div className="footer-brand-info">
           <div className="footer-brand-header">
-            <img src="/logo.webp" width={900} height={451} alt="Narayan Plumbing Services Logo" className="footer-brand-logo-img" loading="lazy" decoding="async" onError={(e) => {
+            <img src="/logo-360.webp" srcSet="/logo-360.webp 360w, /logo.webp 900w" sizes="(max-width: 768px) 240px, 360px" width={900} height={451} alt="Narayan Plumbing Services Logo" className="footer-brand-logo-img" loading="lazy" decoding="async" onError={(e) => {
               e.currentTarget.style.display = 'none';
               const textFallback = e.currentTarget.nextElementSibling as HTMLElement;
               if (textFallback) textFallback.style.display = 'block';

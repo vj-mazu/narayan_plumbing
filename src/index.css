@@ -150,7 +150,7 @@ img { display: block; max-width: 100%; }
 .brand-logo-text b {
   font-size: 0.74rem;
   font-weight: 800;
-  color: #f97316;
+  color: #c2410c;
   letter-spacing: 0.06em;
 }
 .desktop-site-nav {
@@ -357,7 +357,7 @@ img { display: block; max-width: 100%; }
   align-items: center;
   gap: 6px;
   background: #fff7ed;
-  color: #ea580c;
+  color: #c2410c;
   border: 1px solid #ffedd5;
   padding: 6px 14px;
   border-radius: 99px;
@@ -701,6 +701,7 @@ img { display: block; max-width: 100%; }
   }
   .brand-logo-text b {
     font-size: 0.6rem;
+    color: #c2410c;
   }
 }
 .hero-booking-section {
@@ -1093,6 +1094,11 @@ img { display: block; max-width: 100%; }
   .quick-help-carousel .services-scroll-prev,
   .quick-help-carousel .services-scroll-next {
     display: none;
+  }
+  /* Continuous marquee mode: disable scroll-snap so the rAF-driven
+     seamless loop glides smoothly instead of fighting the snap points. */
+  .quick-help-track {
+    scroll-snap-type: none;
   }
   .quick-help-grid {
     gap: 8px;

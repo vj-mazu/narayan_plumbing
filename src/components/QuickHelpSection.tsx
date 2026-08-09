@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
@@ -23,83 +23,107 @@ const QUICK_SERVICES = [
   { id: 'home-maintenance', label: 'Home Maintenance', image: '/quick-help/home-maintenance.webp', width: 480, height: 480 },
 ];
 
+// How fast the carousel glides on mobile (px per second). Deliberately slow and
+// smooth so it feels like the reviews marquee, not a quick jump.
+const MARQUEE_SPEED = 26;
+
 export function QuickHelpSection() {
   const { trackRef, scrollBy, onPointerDown, onPointerMove, endDrag, wasDragged } = useHorizontalScroll();
-  const autoScrollTimer = useRef<number | null>(null);
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 768px)').matches);
   const rafRef = useRef<number | null>(null);
+  const lastTimeRef = useRef<number>(0);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const isVisibleRef = useRef(true);
 
-  const cancelAnimation = useCallback(() => {
+  // Keep the duplicated-list / marquee mode in sync with the viewport.
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  const stopAutoScroll = useCallback(() => {
     if (rafRef.current != null) {
       window.cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
     }
   }, []);
 
-  const stopAutoScroll = useCallback(() => {
-    cancelAnimation();
-    if (autoScrollTimer.current != null) {
-      window.clearInterval(autoScrollTimer.current);
-      autoScrollTimer.current = null;
-    }
-  }, [cancelAnimation]);
-
-  // Manually animate scrollLeft with requestAnimationFrame. Native
-  // scrollBy({ behavior: 'smooth' }) is unreliable inside a scroll-snap
-  // container on real mobile browsers (esp. iOS Safari), so we drive the
-  // scroll position ourselves frame-by-frame — works everywhere.
-  const animateTo = useCallback((el: HTMLElement, target: number, duration = 600) => {
-    cancelAnimation();
-    const start = el.scrollLeft;
-    const diff = target - start;
-    if (Math.abs(diff) < 1) return;
-    const t0 = performance.now();
-    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
-    const tick = (now: number) => {
-      const p = Math.min((now - t0) / duration, 1);
-      el.scrollLeft = start + diff * easeOut(p);
-      if (p < 1) {
-        rafRef.current = window.requestAnimationFrame(tick);
-      } else {
-        rafRef.current = null;
-      }
-    };
-    rafRef.current = window.requestAnimationFrame(tick);
-  }, [cancelAnimation]);
-
-  // On mobile the arrow buttons are hidden, so the carousel moves by itself.
-  // The viewport check runs on every tick so resizing/rotating also works.
+  // Continuous marquee on mobile: the service cards are rendered twice, so the
+  // track can glide forever and wrap back to the start seamlessly — same feel
+  // as the reviews section. Uses manual scrollLeft (rAF) so it works on every
+  // mobile browser (native smooth scrollBy is unreliable inside scroll-snap).
   const startAutoScroll = useCallback(() => {
-    if (autoScrollTimer.current != null) return;
-    autoScrollTimer.current = window.setInterval(() => {
+    if (rafRef.current != null) return;
+    lastTimeRef.current = performance.now();
+    const tick = (now: number) => {
       const track = trackRef.current;
       if (!track || !window.matchMedia('(max-width: 768px)').matches) {
         stopAutoScroll();
         return;
       }
-      const card = track.querySelector<HTMLElement>('.quick-help-photo-card');
-      const step = (card?.offsetWidth ?? 68) + 8;
+      // Pure time-based movement (no dt cap): total distance = speed × elapsed
+      // time, so the marquee covers the same ground even when the frame rate is
+      // throttled (background tab, low-power mode, headless).
+      const dt = (now - lastTimeRef.current) / 1000;
+      lastTimeRef.current = now;
       const maxScroll = track.scrollWidth - track.clientWidth;
-      if (maxScroll <= 0) return;
-      if (track.scrollLeft >= maxScroll - 4) {
-        animateTo(track, 0);
-      } else {
-        animateTo(track, Math.min(track.scrollLeft + step, maxScroll));
+      if (maxScroll > 0) {
+        track.scrollLeft += MARQUEE_SPEED * dt;
+        // We are at the end of the FIRST copy of the list — jump back by one
+        // full copy width. Because the content is duplicated identically, this
+        // looks like a seamless infinite loop.
+        const oneCopy = track.scrollWidth / 2;
+        if (track.scrollLeft >= oneCopy) {
+          track.scrollLeft -= oneCopy;
+        }
       }
-    }, 2100);
-  }, [stopAutoScroll, animateTo]);
+      rafRef.current = window.requestAnimationFrame(tick);
+    };
+    rafRef.current = window.requestAnimationFrame(tick);
+  }, [stopAutoScroll]);
 
+  // Start the marquee only on mobile, and (re)start it whenever the viewport
+  // switches to mobile (initial phone load, device rotation, or resizing). This
+  // also fixes the case where the page first renders at desktop width and is
+  // then resized to mobile — the loop would otherwise stop forever.
   useEffect(() => {
-    startAutoScroll();
+    if (isMobile) {
+      startAutoScroll();
+    } else {
+      stopAutoScroll();
+    }
     return () => stopAutoScroll();
-  }, [startAutoScroll, stopAutoScroll]);
+  }, [isMobile, startAutoScroll, stopAutoScroll]);
+
+  // Pause the rAF marquee when the section is off-screen: keeps the main
+  // thread idle for long tasks (better TBT) and saves battery on mobile.
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver((entries) => {
+      isVisibleRef.current = entries[0]?.isIntersecting ?? true;
+      if (!isVisibleRef.current) {
+        stopAutoScroll();
+      } else if (isMobile) {
+        startAutoScroll();
+      }
+    }, { rootMargin: '100px' });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isMobile, startAutoScroll, stopAutoScroll]);
 
   const openCall = (label: string) => {
     const msg = encodeURIComponent(`Hi Narayan Services, I need help with: ${label}`);
     window.open(`https://wa.me/91${PHONE_NUMBER}?text=${msg}`, '_blank');
   };
 
+  // On mobile render the list twice so the marquee loops seamlessly.
+  const displayServices = isMobile ? [...QUICK_SERVICES, ...QUICK_SERVICES] : QUICK_SERVICES;
+
   return (
-    <section className="quick-help-section">
+    <section ref={sectionRef} className="quick-help-section">
       <div className="quick-help-header">
         <h2 className="quick-help-title">How can we help you?</h2>
         <a
@@ -140,9 +164,9 @@ export function QuickHelpSection() {
             startAutoScroll();
           }}
         >
-          {QUICK_SERVICES.map((s) => (
+          {displayServices.map((s, idx) => (
             <button
-              key={s.id}
+              key={`${s.id}-${idx}`}
               className="quick-help-photo-card"
               onClick={() => {
                 if (wasDragged()) return;
@@ -154,6 +178,8 @@ export function QuickHelpSection() {
               <div className="quick-help-image-wrapper">
                 <img
                   src={s.image}
+                  srcSet={`${s.image.replace('.webp', '-160.webp')} 160w, ${s.image.replace('.webp', '-240.webp')} 240w, ${s.image} 480w`}
+                  sizes="(max-width: 768px) 68px, 195px"
                   width={s.width}
                   height={s.height}
                   alt={s.label}

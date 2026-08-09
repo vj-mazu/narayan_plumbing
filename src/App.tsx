@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import {
   BadgeCheck,
   CalendarCheck,
@@ -12,7 +12,7 @@ import {
   X,
 } from 'lucide-react';
 import { WhatsAppIcon } from './components/WhatsAppIcon';
-import BookingModal from './BookingModal';
+const BookingModal = lazy(() => import('./BookingModal'));
 import {
   CORE_SERVICES,
   TESTIMONIALS,
@@ -72,7 +72,7 @@ export function App() {
   if (loading) {
     return (
       <div className="page-loader" role="status" aria-label="Loading Narayan Plumbing Services">
-        <img src="/logo-emblem-new.webp" width={96} height={96} className="loader-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
+        <img src="/logo-emblem-new.webp" srcSet="/logo-emblem-new-144.webp 144w, /logo-emblem-new.webp 480w" sizes="96px" width={96} height={96} className="loader-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
           const el = e.target as HTMLImageElement;
           if (!el.src.endsWith('logo.webp')) {
             el.src = '/logo.webp';
@@ -109,7 +109,7 @@ export function App() {
             {menuOpen ? <X size={24} /> : <Menu size={26} />}
           </button>
           <button className="brand-lockup" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <img src="/logo-emblem-new.webp" width={96} height={96} className="brand-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
+            <img src="/logo-emblem-new.webp" srcSet="/logo-emblem-new-144.webp 144w, /logo-emblem-new.webp 480w" sizes="64px" width={96} height={96} className="brand-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
               const el = e.target as HTMLImageElement;
               // Try the full logo if the emblem is missing
               if (!el.src.endsWith('logo.webp')) {
@@ -214,7 +214,9 @@ export function App() {
         </a>
       </nav>
 
-      <BookingModal open={bookingOpen} preselectedService={preselectedService} onClose={() => setBookingOpen(false)} />
+      <Suspense fallback={null}>
+        <BookingModal open={bookingOpen} preselectedService={preselectedService} onClose={() => setBookingOpen(false)} />
+      </Suspense>
     </div>
   );
 }
