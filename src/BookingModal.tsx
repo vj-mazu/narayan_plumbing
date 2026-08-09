@@ -131,7 +131,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
       service: form.services.join(', '),
       date: new Date().toLocaleDateString('en-IN'),
       dateISO: new Date().toISOString().split('T')[0],
-      timeSlot: 'ASAP / Doorstep in 30 mins',
+      timeSlot: 'ASAP / Doorstep in 90 mins',
     });
 
     const whatsappMessage = [
@@ -203,7 +203,7 @@ export default function BookingModal({ open, preselectedService, onClose }: Book
             <div style={{ background: 'linear-gradient(135deg, var(--orange) 0%, #d95a00 100%)', color: '#FFFFFF', padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2 }}>
               <div>
                 <h3 style={{ fontSize: '0.95rem', fontWeight: 900, margin: 0 }}>Book a Service</h3>
-                <p style={{ fontSize: '0.65rem', color: '#FFFFFF', margin: '1px 0 0 0', opacity: 0.95 }}>Technician arrives at your doorstep in 30 mins</p>
+                <p style={{ fontSize: '0.65rem', color: '#FFFFFF', margin: '1px 0 0 0', opacity: 0.95 }}>Technician arrives at your doorstep in 90 mins</p>
               </div>
               <button
                 type="button"

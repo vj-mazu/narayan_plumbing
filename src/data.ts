@@ -32,7 +32,7 @@ export const TESTIMONIALS: Testimonial[] = [
     id: '1',
     customerName: 'Ramesh K.',
     location: 'Whitefield',
-    reviewText: 'Plumber arrived within 30 minutes for a bathroom pipe leak. Clean work and price exactly as quoted.',
+    reviewText: 'Plumber arrived within 90 minutes for a bathroom pipe leak. Clean work and price exactly as quoted.',
     rating: 5,
   },
   {

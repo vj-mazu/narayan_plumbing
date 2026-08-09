@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
@@ -24,6 +25,41 @@ const QUICK_SERVICES = [
 
 export function QuickHelpSection() {
   const { trackRef, scrollBy, onPointerDown, onPointerMove, endDrag, wasDragged } = useHorizontalScroll();
+  const autoScrollTimer = useRef<number | null>(null);
+
+  const stopAutoScroll = useCallback(() => {
+    if (autoScrollTimer.current != null) {
+      window.clearInterval(autoScrollTimer.current);
+      autoScrollTimer.current = null;
+    }
+  }, []);
+
+  // On mobile the arrow buttons are hidden, so the carousel moves by itself.
+  // The viewport check runs on every tick so resizing/rotating also works.
+  const startAutoScroll = useCallback(() => {
+    if (autoScrollTimer.current != null) return;
+    autoScrollTimer.current = window.setInterval(() => {
+      const track = trackRef.current;
+      if (!track || !window.matchMedia('(max-width: 768px)').matches) {
+        stopAutoScroll();
+        return;
+      }
+      const card = track.querySelector<HTMLElement>('.quick-help-photo-card');
+      const step = (card?.offsetWidth ?? 68) + 8;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (maxScroll <= 0) return;
+      if (track.scrollLeft >= maxScroll - 4) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    }, 1700);
+  }, [stopAutoScroll]);
+
+  useEffect(() => {
+    startAutoScroll();
+    return () => stopAutoScroll();
+  }, [startAutoScroll, stopAutoScroll]);
 
   const openCall = (label: string) => {
     const msg = encodeURIComponent(`Hi Narayan Services, I need help with: ${label}`);
@@ -54,11 +90,23 @@ export function QuickHelpSection() {
         <div
           ref={trackRef}
           className="quick-help-grid quick-help-track"
-          onPointerDown={onPointerDown}
+          onPointerDown={(e) => {
+            stopAutoScroll();
+            onPointerDown(e);
+          }}
           onPointerMove={onPointerMove}
-          onPointerUp={endDrag}
-          onPointerCancel={endDrag}
-          onPointerLeave={endDrag}
+          onPointerUp={(e) => {
+            endDrag(e);
+            startAutoScroll();
+          }}
+          onPointerCancel={(e) => {
+            endDrag(e);
+            startAutoScroll();
+          }}
+          onPointerLeave={(e) => {
+            endDrag(e);
+            startAutoScroll();
+          }}
         >
           {QUICK_SERVICES.map((s) => (
             <button

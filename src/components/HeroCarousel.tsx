@@ -60,7 +60,7 @@ const HERO_SLIDES: HeroSlide[] = [
   },
   {
     id: 'plumbing',
-    badgeTag: '30 Mins Arrival',
+    badgeTag: '90 Mins Arrival',
     titlePrefix: 'Professional',
     titleHighlight: 'Plumbing',
     titleSuffix: 'Services',

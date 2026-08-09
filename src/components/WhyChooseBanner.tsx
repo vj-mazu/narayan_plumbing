@@ -37,7 +37,7 @@ export function WhyChooseBanner() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
           <span className="why-choose-kicker">
-            <Sparkles size={13} /> Why Narayan Plumbing?
+            <Sparkles size={13} /> Why Trust Us?
           </span>
           <h2 className="why-choose-title">WHY CHOOSE US</h2>
           <p className="why-choose-sub">

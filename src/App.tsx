@@ -32,7 +32,7 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { Footer } from './components/Footer';
 
 const trustItems = [
-  { label: '30 Min Doorstep Service', icon: Timer },
+  { label: '90 Min Doorstep Service', icon: Timer },
   { label: 'Verified & Experienced Plumbers', icon: ShieldCheck },
   { label: 'Upfront Pricing', icon: BadgeCheck },
   { label: 'No Hidden Charges', icon: Sparkles },
@@ -59,6 +59,14 @@ export function App() {
   const scrollTo = (id: string) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Give customers a tactile “vibration” buzz when they tap the call button,
+  // then the tel: link opens the dialer so they connect right away.
+  const callWithVibration = () => {
+    if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+      navigator.vibrate(80);
+    }
   };
 
   if (loading) {
@@ -120,10 +128,10 @@ export function App() {
             <button type="button" onClick={() => scrollTo('trending')}>Trending</button>
             <button type="button" onClick={() => scrollTo('reviews')}>Reviews</button>
           </nav>
-          <a className="call-block" href={`tel:${PHONE_NUMBER}`} aria-label="Call Us Now">
+          <a className="call-block" href={`tel:${PHONE_NUMBER}`} onClick={callWithVibration} aria-label="Call Now">
             <span className="call-block-phone"><Phone size={20} /></span>
             <span className="call-block-text">
-              <small>Call Us Now</small>
+              <small>Call Now</small>
               <strong>{PHONE_DISPLAY}</strong>
             </span>
           </a>
@@ -181,6 +189,7 @@ export function App() {
         <a
           className="call-float"
           href={`tel:${PHONE_NUMBER}`}
+          onClick={callWithVibration}
           aria-label="Call Now"
         >
           <Phone size={26} />
