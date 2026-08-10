@@ -51,8 +51,8 @@ export function WhyChooseBanner() {
             <motion.img
               key={src}
               className="why-choose-banner-img"
-              src={src}
-              srcSet={`${src.replace('.webp', '-700.webp')} 700w, ${src} 900w`}
+              src={src.replace('.webp', '-700.webp')}
+              srcSet={`${src.replace('.webp', '-700.webp')} 700w`}
               sizes="(max-width: 640px) 100vw, 1200px"
               width={width}
               height={height}

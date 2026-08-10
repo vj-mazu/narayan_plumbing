@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import {
   BadgeCheck,
   CalendarCheck,
@@ -19,17 +19,20 @@ import {
 } from './data';
 import { PHONE_DISPLAY, PHONE_NUMBER } from './types';
 import { HeroCarousel } from './components/HeroCarousel';
-import { HeroBookingSection } from './components/HeroBookingSection';
-import { StatsBar } from './components/StatsBar';
-import { TrendingServicesSection } from './components/TrendingServicesSection';
 import { ServicesGrid } from './components/ServicesGrid';
-import { HowItWorksSection } from './components/HowItWorksSection';
 import { QuickHelpSection } from './components/QuickHelpSection';
-import { WhyChooseBanner } from './components/WhyChooseBanner';
-import { RecentlyCompletedProjects } from './components/RecentlyCompletedProjects';
 import { FloatingContactBar } from './components/FloatingContactBar';
-import { TestimonialsSection } from './components/TestimonialsSection';
-import { Footer } from './components/Footer';
+
+// Below-the-fold sections are lazy-loaded so framer-motion & their code
+// stay OUT of the critical-path bundle (keeps FCP/LCP fast on mobile).
+const HowItWorksSection = lazy(() => import('./components/HowItWorksSection').then((m) => ({ default: m.HowItWorksSection })));
+const StatsBar = lazy(() => import('./components/StatsBar').then((m) => ({ default: m.StatsBar })));
+const TrendingServicesSection = lazy(() => import('./components/TrendingServicesSection').then((m) => ({ default: m.TrendingServicesSection })));
+const WhyChooseBanner = lazy(() => import('./components/WhyChooseBanner').then((m) => ({ default: m.WhyChooseBanner })));
+const HeroBookingSection = lazy(() => import('./components/HeroBookingSection').then((m) => ({ default: m.HeroBookingSection })));
+const RecentlyCompletedProjects = lazy(() => import('./components/RecentlyCompletedProjects').then((m) => ({ default: m.RecentlyCompletedProjects })));
+const TestimonialsSection = lazy(() => import('./components/TestimonialsSection').then((m) => ({ default: m.TestimonialsSection })));
+const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })));
 
 const trustItems = [
   { label: '90 Min Doorstep Service', icon: Timer },
@@ -42,14 +45,8 @@ export function App() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [preselectedService, setPreselectedService] = useState<string | undefined>();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(false);
   const [legalPage, setLegalPage] = useState<'privacy' | 'terms' | 'refund' | null>(null);
-
-  useEffect(() => {
-    // Keep the splash extremely short so the LCP hero image renders ASAP.
-    const timer = window.setTimeout(() => setLoading(false), 200);
-    return () => window.clearTimeout(timer);
-  }, []);
 
   const openBooking = (service?: string) => {
     setPreselectedService(service);
@@ -155,16 +152,18 @@ export function App() {
         <HeroCarousel onBookNow={() => openBooking()} />
         <QuickHelpSection />
         <ServicesGrid services={CORE_SERVICES} onBookNow={openBooking} />
-        <HowItWorksSection />
-        <StatsBar />
-        <TrendingServicesSection />
-        <WhyChooseBanner />
-        <HeroBookingSection onOpenBooking={openBooking} />
-        <RecentlyCompletedProjects />
-        <FloatingContactBar />
-        <TestimonialsSection testimonials={TESTIMONIALS} />
+        <Suspense fallback={null}>
+          <HowItWorksSection />
+          <StatsBar />
+          <TrendingServicesSection />
+          <WhyChooseBanner />
+          <HeroBookingSection onOpenBooking={openBooking} />
+          <RecentlyCompletedProjects />
+          <FloatingContactBar />
+          <TestimonialsSection testimonials={TESTIMONIALS} />
 
-        <Footer onScrollTo={scrollTo} onBook={openBooking} onLegal={setLegalPage} />
+          <Footer onScrollTo={scrollTo} onBook={openBooking} onLegal={setLegalPage} />
+        </Suspense>
       </main>
 
       {legalPage && (

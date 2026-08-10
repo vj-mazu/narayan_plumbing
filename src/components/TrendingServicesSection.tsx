@@ -99,8 +99,8 @@ export function TrendingServicesSection() {
               aria-hidden={index !== active}
             >
               <img 
-                src={s.src} 
-                srcSet={`${s.src.replace('.webp', '-700.webp')} 700w, ${s.src} 1100w`}
+                src={s.src.replace('.webp', '-700.webp')} 
+                srcSet={`${s.src.replace('.webp', '-700.webp')} 700w`}
                 sizes="(max-width: 640px) 100vw, 1000px"
                 alt={s.alt} 
                 width={s.width} 
