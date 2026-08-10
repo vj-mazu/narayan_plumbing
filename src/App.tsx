@@ -46,7 +46,8 @@ export function App() {
   const [legalPage, setLegalPage] = useState<'privacy' | 'terms' | 'refund' | null>(null);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setLoading(false), 500);
+    // Keep the splash extremely short so the LCP hero image renders ASAP.
+    const timer = window.setTimeout(() => setLoading(false), 200);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -72,7 +73,7 @@ export function App() {
   if (loading) {
     return (
       <div className="page-loader" role="status" aria-label="Loading Narayan Plumbing Services">
-        <img src="/logo-emblem-new.webp" srcSet="/logo-emblem-new-144.webp 144w, /logo-emblem-new.webp 480w" sizes="96px" width={96} height={96} className="loader-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
+        <img src="/logo-emblem-new-144.webp" srcSet="/logo-emblem-new-144.webp 144w, /logo-emblem-new-192.webp 192w" sizes="96px" width={96} height={96} className="loader-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
           const el = e.target as HTMLImageElement;
           if (!el.src.endsWith('logo.webp')) {
             el.src = '/logo.webp';
@@ -109,7 +110,7 @@ export function App() {
             {menuOpen ? <X size={24} /> : <Menu size={26} />}
           </button>
           <button className="brand-lockup" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <img src="/logo-emblem-new.webp" srcSet="/logo-emblem-new-144.webp 144w, /logo-emblem-new.webp 480w" sizes="64px" width={96} height={96} className="brand-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
+            <img src="/logo-emblem-new-144.webp" srcSet="/logo-emblem-new-144.webp 144w, /logo-emblem-new-192.webp 192w" sizes="64px" width={96} height={96} className="brand-logo-img" alt="Narayan Plumbing Services Logo" loading="eager" decoding="async" onError={(e) => {
               const el = e.target as HTMLImageElement;
               // Try the full logo if the emblem is missing
               if (!el.src.endsWith('logo.webp')) {
@@ -215,7 +216,9 @@ export function App() {
       </nav>
 
       <Suspense fallback={null}>
-        <BookingModal open={bookingOpen} preselectedService={preselectedService} onClose={() => setBookingOpen(false)} />
+        {bookingOpen && (
+          <BookingModal open={bookingOpen} preselectedService={preselectedService} onClose={() => setBookingOpen(false)} />
+        )}
       </Suspense>
     </div>
   );
