@@ -43,6 +43,20 @@ export function QuickHelpSection() {
     return () => mq.removeEventListener('change', onChange);
   }, []);
 
+  // Cached track measurements. Reading scrollWidth/clientWidth on every
+  // animation frame forces a layout reflow — cache them and refresh only on
+  // mount / resize so the marquee loop stays reflow-free.
+  const dimsRef = useRef({ maxScroll: 0, oneCopy: 0 });
+
+  const measureTrack = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    dimsRef.current = {
+      maxScroll: track.scrollWidth - track.clientWidth,
+      oneCopy: track.scrollWidth / 2,
+    };
+  }, []);
+
   const stopAutoScroll = useCallback(() => {
     if (rafRef.current != null) {
       window.cancelAnimationFrame(rafRef.current);
@@ -54,6 +68,8 @@ export function QuickHelpSection() {
   // track can glide forever and wrap back to the start seamlessly — same feel
   // as the reviews section. Uses manual scrollLeft (rAF) so it works on every
   // mobile browser (native smooth scrollBy is unreliable inside scroll-snap).
+  // Layout properties are read from the cached dimsRef (see measureTrack) so
+  // no forced reflow happens inside the animation loop.
   const startAutoScroll = useCallback(() => {
     if (rafRef.current != null) return;
     lastTimeRef.current = performance.now();
@@ -68,13 +84,12 @@ export function QuickHelpSection() {
       // throttled (background tab, low-power mode, headless).
       const dt = (now - lastTimeRef.current) / 1000;
       lastTimeRef.current = now;
-      const maxScroll = track.scrollWidth - track.clientWidth;
+      const { maxScroll, oneCopy } = dimsRef.current;
       if (maxScroll > 0) {
         track.scrollLeft += MARQUEE_SPEED * dt;
         // We are at the end of the FIRST copy of the list — jump back by one
         // full copy width. Because the content is duplicated identically, this
         // looks like a seamless infinite loop.
-        const oneCopy = track.scrollWidth / 2;
         if (track.scrollLeft >= oneCopy) {
           track.scrollLeft -= oneCopy;
         }
@@ -89,13 +104,21 @@ export function QuickHelpSection() {
   // also fixes the case where the page first renders at desktop width and is
   // then resized to mobile — the loop would otherwise stop forever.
   useEffect(() => {
+    measureTrack();
     if (isMobile) {
       startAutoScroll();
     } else {
       stopAutoScroll();
     }
     return () => stopAutoScroll();
-  }, [isMobile, startAutoScroll, stopAutoScroll]);
+  }, [isMobile, measureTrack, startAutoScroll, stopAutoScroll]);
+
+  // Keep the cached measurements fresh when the viewport size changes.
+  useEffect(() => {
+    const onResize = () => measureTrack();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [measureTrack]);
 
   // Pause the rAF marquee when the section is off-screen: keeps the main
   // thread idle for long tasks (better TBT) and saves battery on mobile.

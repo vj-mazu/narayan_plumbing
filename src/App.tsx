@@ -12,6 +12,7 @@ import {
   X,
 } from 'lucide-react';
 import { WhatsAppIcon } from './components/WhatsAppIcon';
+import { Deferred } from './components/Deferred';
 const BookingModal = lazy(() => import('./BookingModal'));
 import {
   CORE_SERVICES,
@@ -21,16 +22,18 @@ import { PHONE_DISPLAY, PHONE_NUMBER } from './types';
 import { HeroCarousel } from './components/HeroCarousel';
 import { ServicesGrid } from './components/ServicesGrid';
 import { QuickHelpSection } from './components/QuickHelpSection';
-import { FloatingContactBar } from './components/FloatingContactBar';
 
 // Below-the-fold sections are lazy-loaded so framer-motion & their code
 // stay OUT of the critical-path bundle (keeps FCP/LCP fast on mobile).
+// They are ALSO deferred until the user scrolls near them (Deferred), so the
+// chunks are not even fetched until they are about to become visible.
 const HowItWorksSection = lazy(() => import('./components/HowItWorksSection').then((m) => ({ default: m.HowItWorksSection })));
 const StatsBar = lazy(() => import('./components/StatsBar').then((m) => ({ default: m.StatsBar })));
 const TrendingServicesSection = lazy(() => import('./components/TrendingServicesSection').then((m) => ({ default: m.TrendingServicesSection })));
 const WhyChooseBanner = lazy(() => import('./components/WhyChooseBanner').then((m) => ({ default: m.WhyChooseBanner })));
 const HeroBookingSection = lazy(() => import('./components/HeroBookingSection').then((m) => ({ default: m.HeroBookingSection })));
 const RecentlyCompletedProjects = lazy(() => import('./components/RecentlyCompletedProjects').then((m) => ({ default: m.RecentlyCompletedProjects })));
+const FloatingContactBar = lazy(() => import('./components/FloatingContactBar').then((m) => ({ default: m.FloatingContactBar })));
 const TestimonialsSection = lazy(() => import('./components/TestimonialsSection').then((m) => ({ default: m.TestimonialsSection })));
 const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })));
 
@@ -41,12 +44,17 @@ const trustItems = [
   { label: 'No Hidden Charges', icon: Sparkles },
 ];
 
+// Sections reachable via in-page navigation (scrollTo). When one of these is
+// still deferred, we force-mount it before scrolling so the target exists.
+const NAV_TARGETS = ['services', 'trending', 'reviews'] as const;
+
 export function App() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [preselectedService, setPreselectedService] = useState<string | undefined>();
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading] = useState(false);
   const [legalPage, setLegalPage] = useState<'privacy' | 'terms' | 'refund' | null>(null);
+  const [forcedSections, setForcedSections] = useState<Set<string>>(() => new Set());
 
   const openBooking = (service?: string) => {
     setPreselectedService(service);
@@ -54,8 +62,28 @@ export function App() {
     setBookingOpen(true);
   };
 
+  // Force-mount a deferred section (nav links) and scroll to it once ready.
   const scrollTo = (id: string) => {
     setMenuOpen(false);
+    if (NAV_TARGETS.includes(id as (typeof NAV_TARGETS)[number])) {
+      setForcedSections((prev) => {
+        if (prev.has(id)) return prev;
+        const next = new Set(prev);
+        next.add(id);
+        return next;
+      });
+      // The lazy chunk may still be loading, so retry until the element exists.
+      const tryScroll = (attempt = 0) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (attempt < 40) {
+          window.setTimeout(() => tryScroll(attempt + 1), 100);
+        }
+      };
+      tryScroll();
+      return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
@@ -153,16 +181,33 @@ export function App() {
         <QuickHelpSection />
         <ServicesGrid services={CORE_SERVICES} onBookNow={openBooking} />
         <Suspense fallback={null}>
-          <HowItWorksSection />
-          <StatsBar />
-          <TrendingServicesSection />
-          <WhyChooseBanner />
-          <HeroBookingSection onOpenBooking={openBooking} />
-          <RecentlyCompletedProjects />
-          <FloatingContactBar />
-          <TestimonialsSection testimonials={TESTIMONIALS} />
-
-          <Footer onScrollTo={scrollTo} onBook={openBooking} onLegal={setLegalPage} />
+          <Deferred forceMount={forcedSections.has('how-it-works')}>
+            <HowItWorksSection />
+          </Deferred>
+          <Deferred forceMount={forcedSections.has('stats')}>
+            <StatsBar />
+          </Deferred>
+          <Deferred forceMount={forcedSections.has('trending')}>
+            <TrendingServicesSection />
+          </Deferred>
+          <Deferred forceMount={forcedSections.has('why-choose')}>
+            <WhyChooseBanner />
+          </Deferred>
+          <Deferred forceMount={forcedSections.has('hero-booking')}>
+            <HeroBookingSection onOpenBooking={openBooking} />
+          </Deferred>
+          <Deferred forceMount={forcedSections.has('projects')}>
+            <RecentlyCompletedProjects />
+          </Deferred>
+          <Deferred forceMount={forcedSections.has('contact-bar')}>
+            <FloatingContactBar />
+          </Deferred>
+          <Deferred forceMount={forcedSections.has('reviews')}>
+            <TestimonialsSection testimonials={TESTIMONIALS} />
+          </Deferred>
+          <Deferred forceMount={forcedSections.has('footer')}>
+            <Footer onScrollTo={scrollTo} onBook={openBooking} onLegal={setLegalPage} />
+          </Deferred>
         </Suspense>
       </main>
 
@@ -224,4 +269,3 @@ export function App() {
 }
 
 export default App;
-
